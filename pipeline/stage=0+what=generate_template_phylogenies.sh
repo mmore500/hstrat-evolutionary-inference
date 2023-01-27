@@ -35,7 +35,7 @@ pwd
 echo "$(python3 -c "${PYSCRIPT}")"
 
 SETUP_PRODUCTION_DEPENDENCIES_SNIPPET="$(
-  cat setup_production_dependencies.sh | sed 's/^/  /'
+  cat snippets/setup_production_dependencies.sh | sed 's/^/  /'
 )"
 echo "SETUP_PRODUCTION_DEPENDENCIES_SNIPPET ${SETUP_PRODUCTION_DEPENDENCIES_SNIPPET}"
 
