@@ -3,6 +3,8 @@
 # REVISION shouldd be set in script sourcing this one
 echo "REVISION ${REVISION}"
 
+module purge; module load GCCcore/10.2.0 Python/3.8.10 || :
+
 VENV_PATH="$(mktemp -d)"
 echo "VENV_PATH ${VENV_PATH}"
 
