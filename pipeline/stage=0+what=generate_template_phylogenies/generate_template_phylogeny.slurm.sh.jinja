@@ -64,10 +64,11 @@ config_dict["mut_distn"] = eval(config_dict["mut_distn"])
 
 hstrat_aux.seed_random(config_dict["index"])
 del config_dict["index"]
+del config_dict["replicate"]
 
 epoch_iter = hstrat.evolve_fitness_trait_population(
   iter_epochs = True,
-  **{k: v for k, v in config_dict.items() if k != "replicate"},
+  **config_dict,
   progress_wrap=tqdm,
 )
 
