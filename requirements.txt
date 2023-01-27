@@ -24,8 +24,10 @@ interval-search==0.2.0
     # via hstrat
 iterpop==0.4.1
     # via hstrat
-jinja2==3.1.2
+j2cli==0.3.10
     # via -r requirements.in
+jinja2==3.1.2
+    # via j2cli
 keyname==0.4.1
     # via
     #   -r requirements.in
