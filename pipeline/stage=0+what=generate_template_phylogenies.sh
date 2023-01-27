@@ -59,4 +59,4 @@ chmod +x "${SBATCH_SCRIPT_PATH}"
 
 done <<< "$(python3 -c "${PYSCRIPT}")"
 
-ls "${SBATCH_SCRIPT_DIRECTORY_PATH}" | python3 -m qspool
+find "${SBATCH_SCRIPT_DIRECTORY_PATH}" -type f | python3 -m qspool
