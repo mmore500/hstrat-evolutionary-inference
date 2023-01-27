@@ -2,5 +2,6 @@ hstrat==1.3.2
 j2cli==0.3.10
 keyname==0.4.1
 pandas==1.3.5
+pyyaml==6.0
 qspool==0.3.3
 tqdm==4.64.1
