@@ -13,8 +13,8 @@ echo "REVISION ${REVISION}"
 BATCH="date=$(date +%Y-%m-%d)+time=$(date +%H-%M-%S)+revision=${REVISION}+uuid=$(uuidgen)"
 echo "BATCH ${BATCH}"
 
-source setup_instrumentation.sh
-source setup_production_dependencies.sh
+source snippets/setup_instrumentation.sh
+source snippets/setup_production_dependencies.sh
 
 PYSCRIPT=$(cat << 'HEREDOC'
 from pylib import specify_template_phylogeny_generation_replicates
