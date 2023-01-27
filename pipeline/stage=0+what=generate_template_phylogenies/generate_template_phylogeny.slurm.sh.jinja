@@ -74,8 +74,10 @@ epoch_iter = hstrat.evolve_fitness_trait_population(
 
 for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter)):
 
+  outattr_dict = eval(config_dict_str)
+  del outattr_dict["index"]
   out_filename = kn.pack({
-    **eval(config_dict_str),
+    **outattr_dict,
     **{
       "epoch" : epoch,
       "generation" : config_dict["num_generations"] * (epoch + 1),
