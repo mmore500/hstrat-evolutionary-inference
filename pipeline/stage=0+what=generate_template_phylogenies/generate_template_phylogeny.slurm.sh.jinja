@@ -34,7 +34,7 @@ echo "BATCH_PATH ${BATCH_PATH}"
 
 mkdir -p "${BATCH_PATH}"
 
-ln -s "${BATCH_PATH}" "${STAGE_PATH}/latest"
+ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest"
 
 PYSCRIPT=$(cat << HEREDOC
 import os
