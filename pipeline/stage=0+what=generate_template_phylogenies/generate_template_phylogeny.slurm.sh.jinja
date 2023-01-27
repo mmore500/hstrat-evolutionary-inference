@@ -1,0 +1,97 @@
+#!/bin/bash -login
+########## Define Resources Needed with SBATCH Lines ##########
+#SBATCH --time=4:00:00
+#SBATCH --job-name generate_template_phylogeny
+#SBATCH --account=devolab
+#SBATCH --output="/mnt/scratch/%u/slurmlogs/a=generate_template_phylogeny+job=%j+ext.log"
+#SBATCH --mem=8G
+#SBATCH --ntasks 1
+#SBATCH --cpus-per-task 1
+#SBATCH --mail-type=FAIL
+# No --mail-user, the default value is the submitting user
+#SBATCH --exclude=csn-002,amr-250
+# Send interrupt when within 5 minutes of end time.
+#SBATCH --signal=SIGINT@300
+# Job may be requeued after node failure.
+#SBATCH --requeue
+
+BATCH="{{ batch }}"
+echo "BATCH ${BATCH}"
+
+RUNMODE="{{ runmode }}"
+echo "RUNMODE ${RUNMODE}"
+
+REVISION="{{ revision }}"
+echo "REVISION ${REVISION}"
+
+{{ setup_production_dependencies }}
+
+STAGE_PATH=~/outdata/hstrat-evolutionary-inference/runmode={{ runmode }}/ stage=0+what=generate_template_phylogenies/
+echo "STAGE_PATH ${STAGE_PATH}"
+
+BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
+echo "BATCH_PATH ${BATCH_PATH}"
+
+mkdir -p "${BATCH_PATH}"
+
+ln -s "${BATCH_PATH}" "${STAGE_PATH}/latest"
+
+PYSCRIPT=$(cat << HEREDOC
+import os
+from pathlib import Path
+import signal
+import sys
+
+from hstrat import _auxiliary_lib as hstrat_aux
+from hstrat import hstrat
+from keyname import keyname as kn
+import numpy as np
+from tqdm import tqdm
+
+
+def sigint_handler(signal, frame):
+  print("sigint")
+  sys.exit(0)
+
+signal.signal(signal.SIGINT, sigint_handler)
+
+
+config_dict_str = "\n".join(sys.stdin.readlines())
+print(f"{config_dict_str=}")
+
+config_dict = eval(config_dict_str)
+config_dict["mut_distn"] = eval(config_dict["mut_distn"])
+
+hstrat_aux.seed_random(config_dict["index"])
+del config_dict["index"]
+
+epoch_iter = hstrat.evolve_fitness_trait_population(
+  iter_epochs = True,
+  **{k: v for k, v in config_dict.items() if k != "replicate"},
+  progress_wrap=tqdm,
+)
+
+for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter)):
+
+  out_filename = kn.pack({
+    **eval(config_dict_str),
+    **{
+      "epoch" : epoch,
+      "generation" : config_dict["num_generations"] * (epoch + 1),
+      "ext" : ".csv.gz",
+    }
+  })
+
+  Path(f"${BATCH_PATH}/epoch={epoch}").mkdir(parents=True, exist_ok=True)
+
+  alife_phylogeny_df.to_csv(
+    f"${BATCH_PATH}/epoch={epoch}/{out_filename}",
+    index=False,
+  )
+
+HEREDOC
+)
+
+echo "CONFIG_DICT_STR {{ config_dict_str }}"
+
+echo "{{ config_dict_str }}" | python3 -c "${PYSCRIPT}"

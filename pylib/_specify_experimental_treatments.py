@@ -14,6 +14,7 @@ base_params = types.MappingProxyType(
         "p_island_migration": 0.01,
         "tournament_size": 2,
         "num_islands": 1,
+        "num_generations": 10000,
     }
 )
 nonecological_base_params = types.MappingProxyType(
