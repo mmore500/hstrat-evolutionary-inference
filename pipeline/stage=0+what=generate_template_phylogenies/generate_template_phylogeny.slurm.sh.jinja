@@ -97,4 +97,4 @@ HEREDOC
 
 echo "CONFIG_DICT_STR {{ config_dict_str }}"
 
-echo "{{ config_dict_str }}" | python3 -O -c "${PYSCRIPT}"
+echo "{{ config_dict_str }}" | python3 {% if 'production' == runmode %} -O {% endif %} -c "${PYSCRIPT}"
