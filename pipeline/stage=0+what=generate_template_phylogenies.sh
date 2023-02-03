@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -o nounset
 
 cd "$(dirname "$0")"
 
