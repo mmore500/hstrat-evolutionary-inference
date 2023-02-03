@@ -26,7 +26,7 @@ echo "REVISION ${REVISION}"
 
 {{ setup_production_dependencies }}
 
-STAGE_PATH=~/outdata/hstrat-evolutionary-inference/runmode={{ runmode }}/ stage=0+what=generate_template_phylogenies/
+STAGE_PATH="${HOME}/outdata/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=0+what=generate_template_phylogenies/"
 echo "STAGE_PATH ${STAGE_PATH}"
 
 BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
@@ -36,9 +36,27 @@ mkdir -p "${BATCH_PATH}"
 
 ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest"
 
+PROVLOG_FILE="$(mktemp)"
+echo "PROVLOG_FILE ${PROVLOG_FILE}"
+
+tee -a "${PROVLOG_FILE}" << HEREDOC
+-
+  batch: {{ batch }}
+  date: $(date)
+  hostname: $(hostname)
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 0
+  stage 0 batch path: $(readlink -f "${BATCH_PATH}")
+HEREDOC
+
 PYSCRIPT=$(cat << HEREDOC
 import os
 from pathlib import Path
+import shutil
 import signal
 import sys
 
@@ -87,10 +105,14 @@ for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter)):
 
   Path(f"${BATCH_PATH}/epoch={epoch}").mkdir(parents=True, exist_ok=True)
 
+  out_path = f"${BATCH_PATH}/epoch={epoch}/{out_filename}"
+
   alife_phylogeny_df.to_csv(
-    f"${BATCH_PATH}/epoch={epoch}/{out_filename}",
+    out_path,
     index=False,
   )
+
+  shutil.copy("${PROVLOG_FILE}", f"{out_path}.provlog.yaml")
 
 HEREDOC
 )
