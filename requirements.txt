@@ -91,7 +91,7 @@ pytz==2022.7.1
     # via pandas
 pyyaml==6.0
     # via -r requirements.in
-qspool==0.3.3
+qspool==0.4.0
     # via -r requirements.in
 safe-assert==0.4.0
     # via hstrat

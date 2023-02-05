@@ -4,5 +4,5 @@ keyname==0.5.1
 numpyencoder==0.3.0
 pandas==1.3.5
 pyyaml==6.0
-qspool==0.3.3
+qspool==0.4.0
 tqdm==4.64.1
