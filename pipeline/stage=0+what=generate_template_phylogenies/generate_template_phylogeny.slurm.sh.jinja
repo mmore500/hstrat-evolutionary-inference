@@ -34,15 +34,26 @@ echo "STAGE_PATH ${STAGE_PATH}"
 BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
 echo "BATCH_PATH ${BATCH_PATH}"
 
-mkdir -p "${BATCH_PATH}"
+for try in {0..9}; do
+  mkdir -p "${BATCH_PATH}" && break
+  echo "mkdir -p ${BATCH_PATH} failed (try ${try})"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
 
-ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest"
+for try in {0..9}; do
+  ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
+  echo "ln -sfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
+  echo "removing ${STAGE_PATH}/latest"
+  rm -rf "${STAGE_PATH}/latest"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
 
 PYSCRIPT=$(cat << HEREDOC
 import functools
-import os
-from pathlib import Path
-import shutil
 import signal
 import sys
 
