@@ -15,3 +15,5 @@ echo "venv created"
 source "${VENV_PATH}/bin/activate"
 
 python3 -m pip install -r "https://raw.githubusercontent.com/mmore500/hstrat-evolutionary-inference/${REVISION}/requirements.txt"
+
+python3 -c "import hstrat; print('hstrat version', hstrat.__version__)"
