@@ -1,0 +1,242 @@
+#!/bin/bash -login
+########## Define Resources Needed with SBATCH Lines ##########
+#SBATCH --time=4:00:00
+#SBATCH --job-name descend_template_phylogeny
+#SBATCH --account=devolab
+#SBATCH --output="/mnt/home/%u/slurm_job_log/a=descend_template_phylogeny+slurm_job_id=%j+ext.txt"
+#SBATCH --mem=48G
+#SBATCH --ntasks 1
+#SBATCH --cpus-per-task 24
+#SBATCH --mail-type=FAIL
+# No --mail-user, the default value is the submitting user
+#SBATCH --exclude=csn-002,amr-250
+# Send interrupt when within 5 minutes of end time.
+# Job may be requeued after node failure.
+#SBATCH --requeue
+
+{{ setup_instrumentation }}
+
+BATCH="{{ batch }}"
+echo "BATCH ${BATCH}"
+
+RUNMODE="{{ runmode }}"
+echo "RUNMODE ${RUNMODE}"
+
+REVISION="{{ revision }}"
+echo "REVISION ${REVISION}"
+
+{{ setup_production_dependencies }}
+
+PREV_STAGE_PATH="${HOME}/outdata/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=0+what=generate_template_phylogenies/"
+echo "PREV_STAGE_PATH ${PREV_STAGE_PATH}"
+
+STAGE_PATH="${HOME}/outdata/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=1+what=descend_template_phylogenies/"
+echo "STAGE_PATH ${STAGE_PATH}"
+
+BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
+echo "BATCH_PATH ${BATCH_PATH}"
+
+mkdir -p "${BATCH_PATH}"
+
+ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest"
+
+NPROC="${SLURM_CPUS_ON_NODE-4}"
+echo "NPROC ${NPROC}"
+
+PYSCRIPT=$(cat << HEREDOC
+import functools
+import gzip
+import io
+import json
+import logging
+from pathlib import Path
+import random
+import signal
+import shutil
+import sys
+
+from hstrat import _auxiliary_lib as hstrat_aux
+from hstrat import hstrat
+from keyname import keyname as kn
+import numpy as np
+from numpyencoder import NumpyEncoder
+import pandas as pd
+from tqdm import tqdm
+
+
+logging.basicConfig(
+    format="\n%(asctime)s %(levelname)-8s %(message)s\n",
+    level=logging.INFO,
+    datefmt=">>> %Y-%m-%d %H:%M:%S",
+)
+
+__, template_path, recency_proportional_resolution = sys.argv
+
+template_df = pd.read_csv(template_path)
+assert hstrat_aux.alifestd_validate(template_df)
+assert hstrat_aux.alifestd_has_contiguous_ids(template_df)
+assert hstrat_aux.alifestd_is_topologically_sorted(template_df)
+
+collapsed_df = hstrat_aux.alifestd_collapse_unifurcations(
+  template_df,
+  mutate=True,
+)
+
+collapsed_filename = kn.pack({
+  **kn.unpack(kn.rejoin(template_path)),
+  **{
+    "a" : "collapsed-phylogeny",
+  },
+})
+
+collapsed_path = kn.chop(f"${BATCH_PATH}/{collapsed_filename}", mkdir=True)
+collapsed_df.to_csv(collapsed_path)
+
+provlog_path = f"{collapsed_path}.provlog.yaml"
+shutil.copy(f"{template_path}.provlog.yaml", provlog_path)
+with open(provlog_path, "w+") as provlog_file:
+  provlog_file.write(
+f"""-
+a: {provlog_path}
+batch: {{ batch }}
+date: $(date --iso-8601=seconds)
+hostname: $(hostname)
+revision: {{ revision }}
+runmode: {{ runmode }}
+user: $(whoami)
+uuid: $(uuidgen)
+slurm_job_id: ${SLURM_JOB_ID-none}
+stage: 1
+stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+stage 1 batch path: $(readlink -f "${BATCH_PATH}")
+template_path: {template_path}
+"""
+  )
+
+logging.info(f"wrote collapsed phylogeny to {collapsed_path}")
+
+attrs = kn.unpack(kn.rejoin(template_path))
+hstrat_aux.seed_random( random.Random(
+  f"{ attrs['_generation'] } "
+  f"{ attrs['_index'] } "
+  "{{ recency_proportional_resolution }} "
+).randrange(2**32) )
+
+seed_column=hstrat.HereditaryStratigraphicColumn(
+  hstrat.recency_proportional_resolution_algo.Policy(
+    int(recency_proportional_resolution)
+  ),
+  stratum_differentia_bit_width=8,
+)
+extant_population = hstrat.descend_template_phylogeny_alifestd(
+  collapsed_df,
+  seed_column,
+  progress_wrap=functools.partial(
+    tqdm,
+    desc="descend_template_phylogeny_alifestd",
+  ),
+)
+
+out_filename=kn.pack({
+  **kn.unpack(kn.rejoin(template_path)),
+  **{
+    "a" : "extant-annotations",
+    "resolution" : recency_proportional_resolution,
+    "ext" : ".json.gz",
+  },
+})
+out_path = kn.chop(f"${BATCH_PATH}/{out_filename}", mkdir=True)
+out_records = hstrat.pop_to_records(
+  tqdm(extant_population, desc="pop_to_records")
+)
+with open(out_path, "wb") as out_file:
+  with gzip.GzipFile(mode="wb", fileobj=out_file) as out_gz:
+    json.dump(
+      out_records,
+      io.TextIOWrapper(out_gz),
+      cls=NumpyEncoder,
+    )
+
+provlog_path = f"{out_path}.provlog.yaml"
+shutil.copy(f"{template_path}.provlog.yaml", provlog_path)
+with open(provlog_path, "w+") as provlog_file:
+  provlog_file.write(
+f"""-
+a: {provlog_path}
+batch: {{ batch }}
+date: $(date --iso-8601=seconds)
+hostname: $(hostname)
+recency_proportional_resolution: {recency_proportional_resolution}
+revision: {{ revision }}
+runmode: {{ runmode }}
+user: $(whoami)
+uuid: $(uuidgen)
+slurm_job_id: ${SLURM_JOB_ID-none}
+stage: 1
+stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+stage 1 batch path: $(readlink -f "${BATCH_PATH}")
+template_path: {template_path}
+"""
+  )
+
+logging.info(f"wrote extant annotations to {out_path}")
+HEREDOC
+)
+
+NUM_PHYLOGENY_FILES="$(ls "${PREV_STAGE_PATH}"/latest/epoch=*/**/*.csv.gz | wc -l)"
+echo "NUM_PHYLOGENY_FILES ${NUM_PHYLOGENY_FILES}"
+
+MAX_COMPLETIONS="None"
+echo "epoch_paths" "${PREV_STAGE_PATH}/latest/"*
+MAX_COMPLETIONS=$(for epoch_path in "${PREV_STAGE_PATH}/latest/"*; do
+  ls -1 "${epoch_path}" | wc -l
+done | sort | tail -n 1)
+echo "MAX_COMPLETIONS ${MAX_COMPLETIONS}"
+
+MAX_COMMON_EPOCH=$(for epoch_path in "${PREV_STAGE_PATH}/latest/"*; do
+  ls -1 "${epoch_path}" | wc -l | grep -q "^${MAX_COMPLETIONS}$" && echo "${epoch_path}" || :
+done | sort | tail -n 1 | xargs basename)
+echo "MAX_COMMON_EPOCH ${MAX_COMMON_EPOCH}"
+
+echo "target_epoch {{ target_epoch }}"
+echo '`target_epoch` {{ target_epoch }}'
+echo "recency_proportional_resolution {{ recency_proportional_resolution }}"
+
+recency_proportional_resolution={{ recency_proportional_resolution }}
+echo "recency_proportional_resolution ${recency_proportional_resolution}"
+target_epoch={{ target_epoch }}
+echo "target_epoch ${target_epoch}"
+phylogeny_files=$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/**/*.csv.gz)
+echo "phylogeny_files ${phylogeny_files}"
+for phylogeny_file in $(echo ${phylogeny_files}); do
+
+  python3 \
+    {% if 'production' == runmode %} -O {% endif %} \
+    -c "${PYSCRIPT}" \
+    "${phylogeny_file}" "${recency_proportional_resolution}" \
+    & pids+=($!)
+  echo "progress step"
+  # limit to n concurrent jobs
+  while (( $(jobs -p | wc -l) > NPROC )); do sleep 1; done
+done >> >(tqdm \
+  --total "$(echo "${phylogeny_files}" | wc -l)" \
+  --desc "phylogeny file workers completion" \
+    >> /dev/null \
+)
+
+echo "forked all file worker jobs"
+echo "waiting on ${pids}"
+jobs
+
+# wait on all forked jobs
+for pid in "${pids[@]}"; do
+  # if child process fails, we fail
+  wait "${pid}"
+  echo "progress step"
+done >> >(tqdm --desc "wait on forked workers" >> /dev/null)
+unset pids
+
+echo "all file worker jobs completed"
+# while $(jobs -p | grep "^" -q); do sleep 1; done
+
+echo "fin ${0}"

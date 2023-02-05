@@ -1,6 +1,6 @@
 #!/bin/bash -login
 ########## Define Resources Needed with SBATCH Lines ##########
-#SBATCH --time=4:00:00
+#SBATCH --time={%if 'production' == runmode%}4:00:00{%else%}1:00:00{%endif%}
 #SBATCH --job-name generate_template_phylogeny
 #SBATCH --account=devolab
 #SBATCH --output="/mnt/home/%u/slurm_job_log/a=generate_template_phylogeny+slurm_job_id=%j+ext.txt"
@@ -14,6 +14,8 @@
 #SBATCH --signal=SIGINT@300
 # Job may be requeued after node failure.
 #SBATCH --requeue
+
+{{ setup_instrumentation }}
 
 BATCH="{{ batch }}"
 echo "BATCH ${BATCH}"
@@ -36,24 +38,8 @@ mkdir -p "${BATCH_PATH}"
 
 ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest"
 
-PROVLOG_FILE="$(mktemp)"
-echo "PROVLOG_FILE ${PROVLOG_FILE}"
-
-tee -a "${PROVLOG_FILE}" << HEREDOC
--
-  batch: {{ batch }}
-  date: $(date)
-  hostname: $(hostname)
-  revision: {{ revision }}
-  runmode: {{ runmode }}
-  user: $(whoami)
-  uuid: $(uuidgen)
-  slurm_job_id: ${SLURM_JOB_ID-none}
-  stage: 0
-  stage 0 batch path: $(readlink -f "${BATCH_PATH}")
-HEREDOC
-
 PYSCRIPT=$(cat << HEREDOC
+import functools
 import os
 from pathlib import Path
 import shutil
@@ -87,32 +73,60 @@ del config_dict["replicate"]
 epoch_iter = hstrat.evolve_fitness_trait_population(
   iter_epochs = True,
   **config_dict,
-  progress_wrap=tqdm,
+  progress_wrap=functools.partial(
+    tqdm,
+    desc="evolve_fitness_trait_population",
+  ),
 )
 
-for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter)):
+for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter), desc="epoch_iter"):
 
   outattr_dict = eval(config_dict_str)
-  del outattr_dict["index"]
+  outattr_dict["_index"] = outattr_dict.pop("index")
   out_filename = kn.pack({
     **outattr_dict,
     **{
-      "epoch" : epoch,
-      "generation" : config_dict["num_generations"] * (epoch + 1),
+      "a" : "perfect-phylogeny",
+      "epoch" : f"{epoch:05}",
+      "_generation" : config_dict["num_generations"] * (epoch + 1),
       "ext" : ".csv.gz",
     }
   })
 
-  Path(f"${BATCH_PATH}/epoch={epoch}").mkdir(parents=True, exist_ok=True)
-
-  out_path = f"${BATCH_PATH}/epoch={epoch}/{out_filename}"
+  out_path = kn.chop(
+    f"${BATCH_PATH}/epoch={epoch:05}/{out_filename}",
+    mkdir=True
+  )
 
   alife_phylogeny_df.to_csv(
     out_path,
     index=False,
   )
 
-  shutil.copy("${PROVLOG_FILE}", f"{out_path}.provlog.yaml")
+  provlog_path = f"{out_path}.provlog.yaml"
+  with open(provlog_path, "w+") as provlog_file:
+    provlog_file.write(
+f"""-
+  a: {provlog_path}
+  batch: {{ batch }}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 0
+  stage 0 batch path: $(readlink -f "${BATCH_PATH}")
+"""
+    )
+    provlog_file.write(
+"""  config_dict_str: |
+{{ config_dict_str | indent(4, true) }}
+"""
+    )
+
+  print(f"phylogeny dumped to {out_path}")
 
 HEREDOC
 )

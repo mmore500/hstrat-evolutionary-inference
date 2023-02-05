@@ -15,24 +15,6 @@ echo "BATCH ${BATCH}"
 
 source snippets/setup_production_dependencies.sh
 
-PYSCRIPT=$(cat << 'HEREDOC'
-from pylib import specify_template_phylogeny_generation_replicates
-
-replicates_df = specify_template_phylogeny_generation_replicates()
-
-for idx, row in replicates_df.iterrows():
-  payload_dict = row.to_dict()
-  payload_dict["index"] = idx
-  payload_str = str(payload_dict).replace("\n", " ")
-  print(payload_str)
-
-HEREDOC
-)
-
-pwd
-
-echo "$(python3 -c "${PYSCRIPT}")"
-
 SETUP_INSTRUMENTATION_SNIPPET="$(
   cat snippets/setup_instrumentation.sh | sed 's/^/  /'
 )"
@@ -44,26 +26,25 @@ SBATCH_SCRIPT_DIRECTORY_PATH="$(mktemp -d)"
 echo "SBATCH_SCRIPT_DIRECTORY_PATH ${SBATCH_SCRIPT_DIRECTORY_PATH}"
 
 # adapted from https://superuser.com/a/284226
-while IFS= read -r PAYLOAD; do
-  SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
-  echo "SBATCH_SCRIPT_PATH ${SBATCH_SCRIPT_PATH}"
-  j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=0+what=generate_template_phylogenies/generate_template_phylogeny.slurm.sh.jinja" << J2_HEREDOC_EOF
+for target_epoch in "epoch=00000" "epoch=00002" "epoch=00009" '${MAX_COMMON_EPOCH}'; do
+for recency_proportional_resolution in 3 10 30 100; do
+SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
+echo "recency_proportional_resolution ${recency_proportional_resolution}"
+echo "target_epoch ${target_epoch}"
+echo "SBATCH_SCRIPT_PATH ${SBATCH_SCRIPT_PATH}"
+j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=1+what=descend_template_phylogenies/descend_template_phylogeny.slurm.sh.jinja" << J2_HEREDOC_EOF
 batch: ${BATCH}
-config_dict_str: |-
-  ${PAYLOAD}
+recency_proportional_resolution: ${recency_proportional_resolution}
 revision: ${REVISION}
 runmode: ${RUNMODE}
 setup_instrumentation: |
 ${SETUP_INSTRUMENTATION_SNIPPET}
 setup_production_dependencies: |
 ${SETUP_PRODUCTION_DEPENDENCIES_SNIPPET}
+target_epoch: ${target_epoch}
 J2_HEREDOC_EOF
 chmod +x "${SBATCH_SCRIPT_PATH}"
-
-done \
-  <<< "$(python3 -c "${PYSCRIPT}")" \
-  | tqdm \
-    --desc "instantiate slurm scripts" \
-    --total "$(python3 -c "${PYSCRIPT}" | wc -l)"
+done
+done
 
 find "${SBATCH_SCRIPT_DIRECTORY_PATH}" -type f | python3 -m qspool
