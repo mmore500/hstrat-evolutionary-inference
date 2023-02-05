@@ -8,6 +8,8 @@ anytree==2.8.0
     # via hstrat
 biopython==1.80
     # via hstrat
+bitarray==2.6.2
+    # via hstrat
 bitstring==4.0.1
     # via hstrat
 click==8.1.3
@@ -18,7 +20,7 @@ dendropy==4.5.2
     # via hstrat
 fonttools==4.38.0
     # via matplotlib
-hstrat==1.5.2
+hstrat==1.5.4
     # via -r requirements.in
 importlib-metadata==6.0.0
     # via

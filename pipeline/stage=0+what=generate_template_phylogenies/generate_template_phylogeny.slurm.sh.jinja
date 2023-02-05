@@ -77,6 +77,7 @@ epoch_iter = hstrat.evolve_fitness_trait_population(
     tqdm,
     desc="evolve_fitness_trait_population",
   ),
+  tracker_buffer_size=8192 * config_dict['population_size']
 )
 
 for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter), desc="epoch_iter"):
