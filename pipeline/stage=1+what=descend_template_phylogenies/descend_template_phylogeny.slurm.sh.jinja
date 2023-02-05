@@ -36,9 +36,23 @@ echo "STAGE_PATH ${STAGE_PATH}"
 BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
 echo "BATCH_PATH ${BATCH_PATH}"
 
-mkdir -p "${BATCH_PATH}"
+for try in {0..9}; do
+  mkdir -p "${BATCH_PATH}" && break
+  echo "mkdir -p ${BATCH_PATH} failed (try ${try})"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
 
-ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest"
+for try in {0..9}; do
+  ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
+  echo "ln -sfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
+  echo "removing ${STAGE_PATH}/latest"
+  rm -rf "${STAGE_PATH}/latest"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
 
 NPROC="${SLURM_CPUS_ON_NODE-4}"
 echo "NPROC ${NPROC}"
@@ -59,6 +73,7 @@ from keyname import keyname as kn
 import numpy as np
 from numpyencoder import NumpyEncoder
 import pandas as pd
+from retry import retry
 from tqdm import tqdm
 
 
@@ -67,6 +82,10 @@ logging.basicConfig(
     level=logging.INFO,
     datefmt=">>> %Y-%m-%d %H:%M:%S",
 )
+
+open_retry = retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(open)
 
 __, template_path, recency_proportional_resolution = sys.argv
 
@@ -87,12 +106,20 @@ collapsed_filename = kn.pack({
   },
 })
 
-collapsed_path = kn.chop(f"${BATCH_PATH}/{collapsed_filename}", mkdir=True)
-collapsed_df.to_csv(collapsed_path)
+collapsed_path = kn.chop(
+  f"${BATCH_PATH}/{collapsed_filename}", mkdir=True, logger=logging
+)
+retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(
+  lambda: collapsed_df.to_csv(collapsed_path)
+)()
 
 provlog_path = f"{collapsed_path}.provlog.yaml"
-shutil.copy(f"{template_path}.provlog.yaml", provlog_path)
-with open(provlog_path, "w+") as provlog_file:
+retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(shutil.copy)(f"{template_path}.provlog.yaml", provlog_path)
+with open_retry(provlog_path, "w+") as provlog_file:
   provlog_file.write(
 f"""-
 a: {provlog_path}
@@ -143,11 +170,11 @@ out_filename=kn.pack({
     "ext" : ".json.gz",
   },
 })
-out_path = kn.chop(f"${BATCH_PATH}/{out_filename}", mkdir=True)
+out_path = kn.chop(f"${BATCH_PATH}/{out_filename}", mkdir=True, logger=logging)
 out_records = hstrat.pop_to_records(
   tqdm(extant_population, desc="pop_to_records")
 )
-with open(out_path, "wb") as out_file:
+with open_retry(out_path, "wb") as out_file:
   with gzip.GzipFile(mode="wb", fileobj=out_file) as out_gz:
     json.dump(
       out_records,
@@ -157,7 +184,7 @@ with open(out_path, "wb") as out_file:
 
 provlog_path = f"{out_path}.provlog.yaml"
 shutil.copy(f"{template_path}.provlog.yaml", provlog_path)
-with open(provlog_path, "w+") as provlog_file:
+with open_retry(provlog_path, "w+") as provlog_file:
   provlog_file.write(
 f"""-
 a: {provlog_path}

@@ -54,6 +54,7 @@ done
 
 PYSCRIPT=$(cat << HEREDOC
 import functools
+import logging
 import signal
 import sys
 
@@ -61,14 +62,24 @@ from hstrat import _auxiliary_lib as hstrat_aux
 from hstrat import hstrat
 from keyname import keyname as kn
 import numpy as np
+from retry import retry
 from tqdm import tqdm
 
+logging.basicConfig(
+    format="\n%(asctime)s %(levelname)-8s %(message)s\n",
+    level=logging.INFO,
+    datefmt=">>> %Y-%m-%d %H:%M:%S",
+)
 
 def sigint_handler(signal, frame):
   print("sigint")
   sys.exit(0)
 
 signal.signal(signal.SIGINT, sigint_handler)
+
+open_retry = retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(open)
 
 
 config_dict_str = "\n".join(sys.stdin.readlines())
@@ -107,16 +118,18 @@ for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter), desc="epoch_iter"):
 
   out_path = kn.chop(
     f"${BATCH_PATH}/epoch={epoch:05}/{out_filename}",
-    mkdir=True
+    mkdir=True,
+    logger=logging,
   )
 
-  alife_phylogeny_df.to_csv(
-    out_path,
-    index=False,
-  )
+  retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )(
+    lambda: alife_phylogeny_df.to_csv(out_path, index=False)
+  )()
 
   provlog_path = f"{out_path}.provlog.yaml"
-  with open(provlog_path, "w+") as provlog_file:
+  with open_retry(provlog_path, "w+") as provlog_file:
     provlog_file.write(
 f"""-
   a: {provlog_path}
