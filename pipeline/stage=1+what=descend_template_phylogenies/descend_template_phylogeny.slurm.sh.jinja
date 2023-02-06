@@ -154,7 +154,7 @@ attrs = kn.unpack(kn.rejoin(template_path))
 hstrat_aux.seed_random( random.Random(
   f"{ attrs['_generation'] } "
   f"{ attrs['_index'] } "
-  "{{ recency_proportional_resolution }} "
+  f"{ recency_proportional_resolution } "
 ).randrange(2**32) )
 
 seed_column=hstrat.HereditaryStratigraphicColumn(
