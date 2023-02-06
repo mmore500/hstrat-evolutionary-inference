@@ -5,9 +5,9 @@
 #SBATCH --account=devolab
 #SBATCH --output="/mnt/home/%u/slurm_job_log/a=descend_template_phylogeny+slurm_job_id=%j+ext.txt"
 #SBATCH --mem=48G
-#SBATCH --ntasks 1
+#SBATCH --ntasks=1
 #SBATCH --nnodes=1
-#SBATCH --cpus-per-task 24
+#SBATCH --cpus-per-task=24
 #SBATCH --mail-type=FAIL
 # No --mail-user, the default value is the submitting user
 #SBATCH --exclude=csn-002,amr-250
