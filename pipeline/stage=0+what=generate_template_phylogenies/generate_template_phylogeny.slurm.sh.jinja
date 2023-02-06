@@ -129,12 +129,17 @@ for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter), desc="epoch_iter"):
   retry(
     tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
   )(
-    lambda: alife_phylogeny_df.to_csv(out_path, index=False)
-  )()
+    alife_phylogeny_df.to_csv
+  )(out_path, index=False)
 
   provlog_path = f"{out_path}.provlog.yaml"
-  with open_retry(provlog_path, "w+") as provlog_file:
-    provlog_file.write(
+
+  @retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )
+  def do_save():
+    with open_retry(provlog_path, "w+") as provlog_file:
+      provlog_file.write(
 f"""-
   a: {provlog_path}
   batch: {{ batch }}
@@ -148,12 +153,14 @@ f"""-
   stage: 0
   stage 0 batch path: $(readlink -f "${BATCH_PATH}")
 """
-    )
-    provlog_file.write(
+      )
+      provlog_file.write(
 """  config_dict_str: |
 {{ config_dict_str | indent(4, true) }}
 """
-    )
+      )
+
+  do_save()
 
   print(f"phylogeny dumped to {out_path}")
 

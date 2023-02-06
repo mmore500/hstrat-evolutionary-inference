@@ -94,7 +94,11 @@ __, template_path, recency_proportional_resolution = sys.argv
 epoch = int(kn.unpack(kn.rejoin(template_path))["epoch"])
 treatment = kn.unpack(kn.rejoin(template_path))["treatment"]
 
-template_df = pd.read_csv(template_path)
+template_df = retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(
+  pd.read_csv
+)(template_path)
 assert hstrat_aux.alifestd_validate(template_df)
 assert hstrat_aux.alifestd_has_contiguous_ids(template_df)
 assert hstrat_aux.alifestd_is_topologically_sorted(template_df)
@@ -121,16 +125,19 @@ collapsed_path = kn.chop(
 )
 retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
-)(
-  lambda: collapsed_df.to_csv(collapsed_path)
-)()
+)(collapsed_df.to_csv)(collapsed_path, index=False)
 
 provlog_path = f"{collapsed_path}.provlog.yaml"
 retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
 )(shutil.copy)(f"{template_path}.provlog.yaml", provlog_path)
-with open_retry(provlog_path, "w+") as provlog_file:
-  provlog_file.write(
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def do_save():
+  with open_retry(provlog_path, "w+") as provlog_file:
+    provlog_file.write(
 f"""-
 a: {provlog_path}
 batch: {{ batch }}
@@ -146,7 +153,9 @@ stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
 stage 1 batch path: $(readlink -f "${BATCH_PATH}")
 template_path: {template_path}
 """
-  )
+    )
+
+do_save()
 
 logging.info(f"wrote collapsed phylogeny to {collapsed_path}")
 
@@ -191,18 +200,32 @@ out_path = kn.chop(
 out_records = hstrat.pop_to_records(
   tqdm(extant_population, desc="pop_to_records")
 )
-with open_retry(out_path, "wb") as out_file:
-  with gzip.GzipFile(mode="wb", fileobj=out_file) as out_gz:
-    json.dump(
-      out_records,
-      io.TextIOWrapper(out_gz),
-      cls=NumpyEncoder,
-    )
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def do_save():
+  with open_retry(out_path, "wb") as out_file:
+    with gzip.GzipFile(mode="wb", fileobj=out_file) as out_gz:
+      json.dump(
+        out_records,
+        io.TextIOWrapper(out_gz),
+        cls=NumpyEncoder,
+      )
+
+do_save()
 
 provlog_path = f"{out_path}.provlog.yaml"
-shutil.copy(f"{template_path}.provlog.yaml", provlog_path)
-with open_retry(provlog_path, "w+") as provlog_file:
-  provlog_file.write(
+retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(shutil.copy)(f"{template_path}.provlog.yaml", provlog_path)
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def do_save():
+  with open_retry(provlog_path, "w+") as provlog_file:
+    provlog_file.write(
 f"""-
 a: {provlog_path}
 batch: {{ batch }}
@@ -219,7 +242,9 @@ stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
 stage 1 batch path: $(readlink -f "${BATCH_PATH}")
 template_path: {template_path}
 """
-  )
+    )
+
+do_save()
 
 logging.info(f"wrote extant annotations to {out_path}")
 HEREDOC
