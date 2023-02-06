@@ -29,10 +29,10 @@ echo "REVISION ${REVISION}"
 
 {{ setup_production_dependencies }}
 
-PREV_STAGE_PATH="${HOME}/outdata/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=0+what=generate_template_phylogenies/"
+PREV_STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=0+what=generate_template_phylogenies/"
 echo "PREV_STAGE_PATH ${PREV_STAGE_PATH}"
 
-STAGE_PATH="${HOME}/outdata/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=1+what=descend_template_phylogenies/"
+STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=1+what=descend_template_phylogenies/"
 echo "STAGE_PATH ${STAGE_PATH}"
 
 BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
