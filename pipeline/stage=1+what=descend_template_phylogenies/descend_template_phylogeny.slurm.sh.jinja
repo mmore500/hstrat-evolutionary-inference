@@ -4,14 +4,15 @@
 #SBATCH --job-name descend_template_phylogeny
 #SBATCH --account=devolab
 #SBATCH --output="/mnt/home/%u/slurm_job_log/a=descend_template_phylogeny+slurm_job_id=%j+ext.txt"
-#SBATCH --mem=48G
+#SBATCH --mem=80G
 #SBATCH --ntasks=1
-#SBATCH --nodes=1-1
-#SBATCH --cpus-per-task=24
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=20
+#SBATCH --mincpus=20
+#SBATCH --nodes=1
 #SBATCH --mail-type=FAIL
 # No --mail-user, the default value is the submitting user
 #SBATCH --exclude=csn-002,amr-250
-# Send interrupt when within 5 minutes of end time.
 # Job may be requeued after node failure.
 #SBATCH --requeue
 
