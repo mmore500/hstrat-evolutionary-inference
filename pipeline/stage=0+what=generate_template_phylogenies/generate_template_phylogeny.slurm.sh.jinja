@@ -91,6 +91,7 @@ config_dict["mut_distn"] = eval(config_dict["mut_distn"])
 hstrat_aux.seed_random(config_dict["index"])
 del config_dict["index"]
 del config_dict["replicate"]
+del config_dict["treatment"]
 
 epoch_iter = hstrat.evolve_fitness_trait_population(
   iter_epochs = True,
@@ -117,7 +118,10 @@ for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter), desc="epoch_iter"):
   })
 
   out_path = kn.chop(
-    f"${BATCH_PATH}/epoch={epoch:05}/{out_filename}",
+    "${BATCH_PATH}/"
+    f"epoch={epoch:05}/"
+    f"treatment={outattr_dict['treatment']}/"
+    f"{out_filename}",
     mkdir=True,
     logger=logging,
   )

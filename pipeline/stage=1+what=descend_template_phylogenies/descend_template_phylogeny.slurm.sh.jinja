@@ -91,6 +91,9 @@ open_retry = retry(
 
 __, template_path, recency_proportional_resolution = sys.argv
 
+epoch = int(kn.unpack(kn.rejoin(template_path))["epoch"])
+treatment = kn.unpack(kn.rejoin(template_path))["treatment"]
+
 template_df = pd.read_csv(template_path)
 assert hstrat_aux.alifestd_validate(template_df)
 assert hstrat_aux.alifestd_has_contiguous_ids(template_df)
@@ -109,7 +112,12 @@ collapsed_filename = kn.pack({
 })
 
 collapsed_path = kn.chop(
-  f"${BATCH_PATH}/{collapsed_filename}", mkdir=True, logger=logging
+  f"${BATCH_PATH}/"
+  f"epoch={epoch}+resolution={recency_proportional_resolution}"
+  f"+treatment={treatment}/"
+  f"{collapsed_filename}",
+  mkdir=True,
+  logger=logging
 )
 retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
@@ -172,7 +180,14 @@ out_filename=kn.pack({
     "ext" : ".json.gz",
   },
 })
-out_path = kn.chop(f"${BATCH_PATH}/{out_filename}", mkdir=True, logger=logging)
+out_path = kn.chop(
+  f"${BATCH_PATH}/"
+  f"epoch={epoch}+resolution={recency_proportional_resolution}"
+  f"+treatment={treatment}/"
+  f"{out_filename}",
+  mkdir=True,
+  logger=logging
+)
 out_records = hstrat.pop_to_records(
   tqdm(extant_population, desc="pop_to_records")
 )
