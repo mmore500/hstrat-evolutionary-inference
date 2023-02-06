@@ -304,6 +304,5 @@ done >> >(tqdm --desc "wait on forked workers" >> /dev/null)
 unset pids
 
 echo "all file worker jobs completed"
-# while $(jobs -p | grep "^" -q); do sleep 1; done
 
 echo "fin ${0}"
