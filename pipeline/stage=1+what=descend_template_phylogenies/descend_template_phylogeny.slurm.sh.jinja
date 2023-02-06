@@ -47,8 +47,8 @@ for try in {0..9}; do
 done
 
 for try in {0..9}; do
-  ln -sfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
-  echo "ln -sfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
+  ln -srfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
+  echo "ln -srfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
   echo "removing ${STAGE_PATH}/latest"
   rm -rf "${STAGE_PATH}/latest"
   SLEEP_DURATION="$((RANDOM % 10 + 1))"
