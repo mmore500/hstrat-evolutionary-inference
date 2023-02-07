@@ -43,7 +43,7 @@ SETUP_PRODUCTION_DEPENDENCIES_SNIPPET="$(
 SBATCH_SCRIPT_DIRECTORY_PATH="$(mktemp -d)"
 echo "SBATCH_SCRIPT_DIRECTORY_PATH ${SBATCH_SCRIPT_DIRECTORY_PATH}"
 
-NUM_JOBS=$(python3 -c "${PYSCRIPT}" | wc -l)
+NUM_JOBS="$(python3 -c "${PYSCRIPT}" | wc -l)"
 echo "NUM_JOBS ${NUM_JOBS}"
 
 # adapted from https://superuser.com/a/284226
