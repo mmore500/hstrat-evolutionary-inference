@@ -178,6 +178,7 @@ extant_population = hstrat.descend_template_phylogeny_alifestd(
   progress_wrap=functools.partial(
     tqdm,
     desc="descend_template_phylogeny_alifestd",
+    mininterval=10,
   ),
 )
 
@@ -198,7 +199,7 @@ out_path = kn.chop(
   logger=logging
 )
 out_records = hstrat.pop_to_records(
-  tqdm(extant_population, desc="pop_to_records")
+  tqdm(extant_population, desc="pop_to_records", mininterval=10)
 )
 
 @retry(
@@ -288,6 +289,7 @@ for phylogeny_file in $(echo ${phylogeny_files}); do
 done >> >(tqdm \
   --total "$(echo "${phylogeny_files}" | wc -l)" \
   --desc "phylogeny file workers completion" \
+  --mininterval 10 \
     >> /dev/null \
 )
 
@@ -300,7 +302,7 @@ for pid in "${pids[@]}"; do
   # if child process fails, we fail
   wait "${pid}"
   echo "progress step"
-done >> >(tqdm --desc "wait on forked workers" >> /dev/null)
+done >> >(tqdm --desc "wait on forked workers" --mininterval 10 >> /dev/null)
 unset pids
 
 echo "all file worker jobs completed"

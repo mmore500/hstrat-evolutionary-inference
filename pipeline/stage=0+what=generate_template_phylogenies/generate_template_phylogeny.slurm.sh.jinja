@@ -97,11 +97,16 @@ epoch_iter = hstrat.evolve_fitness_trait_population(
   progress_wrap=functools.partial(
     tqdm,
     desc="evolve_fitness_trait_population",
+    mininterval=10,
   ),
   tracker_buffer_size=8192 * config_dict['population_size']
 )
 
-for epoch, alife_phylogeny_df in tqdm(enumerate(epoch_iter), desc="epoch_iter"):
+for epoch, alife_phylogeny_df in tqdm(
+  enumerate(epoch_iter),
+  desc="epoch_iter",
+  mininterval=10,
+):
 
   outattr_dict = eval(config_dict_str)
   outattr_dict["_index"] = outattr_dict.pop("index")
