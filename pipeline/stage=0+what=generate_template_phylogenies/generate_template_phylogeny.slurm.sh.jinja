@@ -12,6 +12,8 @@
 #SBATCH --exclude=csn-002,amr-250
 # Send interrupt when within 2 minutes of end time.
 #SBATCH --signal=SIGINT@120
+# Job may be requeued after node failure.
+#SBATCH --requeue
 
 {{ setup_instrumentation }}
 
