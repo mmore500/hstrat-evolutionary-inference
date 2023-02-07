@@ -95,7 +95,4 @@ def specify_experimental_treatments() -> pd.DataFrame:
         }
         records.append(record)
 
-    for idx, record in enumerate(records):
-        record["treatment"] = idx
-
     return pd.DataFrame.from_records(records)
