@@ -25,11 +25,16 @@ SETUP_PRODUCTION_DEPENDENCIES_SNIPPET="$(
 SBATCH_SCRIPT_DIRECTORY_PATH="$(mktemp -d)"
 echo "SBATCH_SCRIPT_DIRECTORY_PATH ${SBATCH_SCRIPT_DIRECTORY_PATH}"
 
+NUM_TREATMENTS="$(python3 -c "from pylib import specify_template_phylogeny_generation_replicates; print(len(specify_template_phylogeny_generation_replicates()['treatment'].unique()))")"
+echo "NUM_TREATMENTS ${NUM_TREATMENTS}"
+
 # adapted from https://superuser.com/a/284226
-for target_epoch in "epoch=00000" "epoch=00002" "epoch=00009" '${MAX_COMMON_EPOCH}'; do
+for ((target_treatment=0; target_treatment < NUM_TREATMENTS; ++target_treatment)); do
+for target_epoch in "epoch=00000" "epoch=00002" "epoch=00019" '${MAX_COMMON_EPOCH}'; do
 for recency_proportional_resolution in 3 10 30 100; do
 SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
 echo "recency_proportional_resolution ${recency_proportional_resolution}"
+echo "target_treatment ${target_treatment}"
 echo "target_epoch ${target_epoch}"
 echo "SBATCH_SCRIPT_PATH ${SBATCH_SCRIPT_PATH}"
 j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=1+what=descend_template_phylogenies/descend_template_phylogeny.slurm.sh.jinja" << J2_HEREDOC_EOF
@@ -42,8 +47,10 @@ ${SETUP_INSTRUMENTATION_SNIPPET}
 setup_production_dependencies: |
 ${SETUP_PRODUCTION_DEPENDENCIES_SNIPPET}
 target_epoch: ${target_epoch}
+target_treatment: ${target_treatment}
 J2_HEREDOC_EOF
 chmod +x "${SBATCH_SCRIPT_PATH}"
+done
 done
 done
 

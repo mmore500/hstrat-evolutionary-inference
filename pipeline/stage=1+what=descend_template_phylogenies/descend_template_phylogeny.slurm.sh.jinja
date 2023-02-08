@@ -4,11 +4,11 @@
 #SBATCH --job-name descend_template_phylogeny
 #SBATCH --account=devolab
 #SBATCH --output="/mnt/home/%u/slurm_job_log/a=descend_template_phylogeny+slurm_job_id=%j+ext.txt"
-#SBATCH --mem=96G
+#SBATCH --mem=24G
 #SBATCH --ntasks=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=28
-#SBATCH --mincpus=28
+#SBATCH --cpus-per-task=4
+#SBATCH --mincpus=4
 #SBATCH --nodes=1
 #SBATCH --mail-type=FAIL
 # No --mail-user, the default value is the submitting user
@@ -274,7 +274,9 @@ recency_proportional_resolution={{ recency_proportional_resolution }}
 echo "recency_proportional_resolution ${recency_proportional_resolution}"
 target_epoch={{ target_epoch }}
 echo "target_epoch ${target_epoch}"
-phylogeny_files=$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/**/*.csv.gz)
+target_treatment={{ target_treatment }}
+echo "target_treatment ${target_treatment}"
+phylogeny_files=$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/treatment=${target_treatment}/**/*.csv.gz)
 echo "phylogeny_files ${phylogeny_files}"
 for phylogeny_file in $(echo ${phylogeny_files}); do
 
