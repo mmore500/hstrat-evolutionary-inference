@@ -251,8 +251,8 @@ logging.info(f"wrote extant annotations to {out_path}")
 HEREDOC
 )
 
-NUM_PHYLOGENY_FILES="$(ls "${PREV_STAGE_PATH}"/latest/epoch=*/**/*.csv.gz | wc -l)"
-echo "NUM_PHYLOGENY_FILES ${NUM_PHYLOGENY_FILES}"
+TOTAL_PHYLOGENY_FILES="$(ls -1 "${PREV_STAGE_PATH}"/latest/epoch=*/**/*.csv.gz | wc -l)"
+echo "TOTAL_PHYLOGENY_FILES ${TOTAL_PHYLOGENY_FILES}"
 
 MAX_COMPLETIONS="None"
 echo "epoch_paths" "${PREV_STAGE_PATH}/latest/"*
@@ -276,6 +276,8 @@ target_epoch={{ target_epoch }}
 echo "target_epoch ${target_epoch}"
 target_treatment={{ target_treatment }}
 echo "target_treatment ${target_treatment}"
+NUM_PHYLOGENY_FILES="$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/treatment=${target_treatment}/**/*.csv.gz | wc -l)"
+echo "NUM_PHYLOGENY_FILES ${NUM_PHYLOGENY_FILES}"
 phylogeny_files=$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/treatment=${target_treatment}/**/*.csv.gz)
 echo "phylogeny_files ${phylogeny_files}"
 for phylogeny_file in $(echo ${phylogeny_files}); do
