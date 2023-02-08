@@ -31,7 +31,7 @@ echo "NUM_TREATMENTS ${NUM_TREATMENTS}"
 # adapted from https://superuser.com/a/284226
 for ((target_treatment=0; target_treatment < NUM_TREATMENTS; ++target_treatment)); do
 # excluding '${MAX_COMMON_EPOCH}'
-for target_epoch in "epoch=00000" "epoch=00002" "epoch=0007"'; do
+for target_epoch in "epoch=00000" "epoch=00002" "epoch=0007"; do
 for recency_proportional_resolution in 3 10 30 100; do
 SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
 echo "recency_proportional_resolution ${recency_proportional_resolution}"
