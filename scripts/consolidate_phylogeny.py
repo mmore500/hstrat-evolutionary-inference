@@ -1,6 +1,6 @@
-import sys
-import math
 import ALifeStdDev.phylogeny as phylodev
+import math
+import sys
 
 if len(sys.argv) < 5:
     print("Usage: python consolidate_phylogeny.py [phylogeny_file] [output_file_name] [maximum_trait_value] [resolution]")
