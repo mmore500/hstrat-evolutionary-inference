@@ -24,6 +24,8 @@ def specify_template_phylogeny_generation_replicates() -> pd.DataFrame:
         .reset_index(drop=True)
     )
 
+    df_unique["treatment"] = df_unique.index
+
     # replicate configurations
     df_replicates = pd.concat(
         [

@@ -1,0 +1,181 @@
+#!/bin/bash -login
+########## Define Resources Needed with SBATCH Lines ##########
+#SBATCH --time={%if 'production' == runmode%}4:00:00{%else%}1:00:00{%endif%}
+#SBATCH --job-name generate_template_phylogeny
+#SBATCH --account=devolab
+#SBATCH --output="/mnt/home/%u/slurm_job_log/a=generate_template_phylogeny+slurm_job_id=%j+ext.txt"
+#SBATCH --mem=24G
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mail-type=FAIL
+# No --mail-user, the default value is the submitting user
+#SBATCH --exclude=csn-002,amr-250
+# Send interrupt when within 2 minutes of end time.
+#SBATCH --signal=SIGINT@120
+# Job may be requeued after node failure.
+#SBATCH --requeue
+
+{{ setup_instrumentation }}
+
+BATCH="{{ batch }}"
+echo "BATCH ${BATCH}"
+
+RUNMODE="{{ runmode }}"
+echo "RUNMODE ${RUNMODE}"
+
+REVISION="{{ revision }}"
+echo "REVISION ${REVISION}"
+
+{{ setup_production_dependencies }}
+
+STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=0+what=generate_template_phylogenies/"
+echo "STAGE_PATH ${STAGE_PATH}"
+
+BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
+echo "BATCH_PATH ${BATCH_PATH}"
+
+for try in {0..9}; do
+  mkdir -p "${BATCH_PATH}" && break
+  echo "mkdir -p ${BATCH_PATH} failed (try ${try})"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+for try in {0..9}; do
+  ln -srfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
+  echo "ln -srfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
+  echo "removing ${STAGE_PATH}/latest"
+  rm -rf "${STAGE_PATH}/latest"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+PYSCRIPT=$(cat << HEREDOC
+import functools
+import logging
+import signal
+import sys
+
+from hstrat import _auxiliary_lib as hstrat_aux
+from hstrat import hstrat
+from keyname import keyname as kn
+import numpy as np
+from retry import retry
+from tqdm import tqdm
+
+logging.basicConfig(
+    format="\n%(asctime)s %(levelname)-8s %(message)s\n",
+    level=logging.INFO,
+    datefmt=">>> %Y-%m-%d %H:%M:%S",
+)
+
+def sigint_handler(signal, frame):
+  print("sigint")
+  sys.exit(0)
+
+signal.signal(signal.SIGINT, sigint_handler)
+
+open_retry = retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(open)
+
+
+config_dict_str = "\n".join(sys.stdin.readlines())
+print(f"{config_dict_str=}")
+
+config_dict = eval(config_dict_str)
+config_dict["mut_distn"] = eval(config_dict["mut_distn"])
+
+hstrat_aux.seed_random(config_dict["index"])
+del config_dict["index"]
+del config_dict["replicate"]
+del config_dict["treatment"]
+
+epoch_iter = hstrat.evolve_fitness_trait_population(
+  iter_epochs = True,
+  **config_dict,
+  progress_wrap=functools.partial(
+    tqdm,
+    desc="evolve_fitness_trait_population",
+    mininterval=10,
+  ),
+  tracker_buffer_size=8192 * config_dict['population_size']
+)
+
+for epoch, alife_phylogeny_df in tqdm(
+  enumerate(epoch_iter),
+  desc="epoch_iter",
+  mininterval=10,
+):
+
+  outattr_dict = eval(config_dict_str)
+  outattr_dict["_index"] = outattr_dict.pop("index")
+  out_filename = kn.pack({
+    **outattr_dict,
+    **{
+      "a" : "perfect-phylogeny",
+      "epoch" : f"{epoch:05}",
+      "_generation" : config_dict["num_generations"] * (epoch + 1),
+      "ext" : ".csv.gz",
+    }
+  })
+
+  out_path = kn.chop(
+    "${BATCH_PATH}/"
+    f"epoch={epoch:05}/"
+    f"treatment={outattr_dict['treatment']}/"
+    f"{out_filename}",
+    mkdir=True,
+    logger=logging,
+  )
+
+  retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )(
+    alife_phylogeny_df.to_csv
+  )(out_path, index=False)
+
+  provlog_path = f"{out_path}.provlog.yaml"
+
+  @retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )
+  def do_save():
+    with open_retry(provlog_path, "w+") as provlog_file:
+      provlog_file.write(
+f"""-
+  a: {provlog_path}
+  batch: {{ batch }}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 0
+  stage 0 batch path: $(readlink -f "${BATCH_PATH}")
+"""
+      )
+      provlog_file.write(
+"""  config_dict_str: |
+{{ config_dict_str | indent(4, true) }}
+"""
+      )
+
+  do_save()
+
+  print(f"phylogeny dumped to {out_path}")
+
+HEREDOC
+)
+
+echo "CONFIG_DICT_STR {{ config_dict_str }}"
+
+TIMEOUT_SECONDS="$(({% if 'production' == runmode %} 4 * {% endif %} 60 * 60 - SECONDS - 300))"
+echo "TIMEOUT_SECONDS ${TIMEOUT_SECONDS}"
+echo "{{ config_dict_str }}" | timeout --foreground "${TIMEOUT_SECONDS}" python3 {% if 'production' == runmode %} -O {% endif %} -c "${PYSCRIPT}" || [[ $? -eq 124 ]]
+
+echo "fin ${0}"
