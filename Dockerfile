@@ -16,6 +16,11 @@ RUN \
   echo "installed python dependencies"
 
 RUN \
+  python3 -m pip install -r /opt/hstrat-evolutionary-inference/docs/requirements.txt \
+    && \
+  echo "installed docs dependencies"
+
+RUN \
   apt-get update -q --allow-unauthenticated \
     && \
   apt-get install -qy --no-install-recommends \
