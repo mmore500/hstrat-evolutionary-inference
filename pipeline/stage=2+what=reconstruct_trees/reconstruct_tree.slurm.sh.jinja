@@ -1,0 +1,333 @@
+#!/bin/bash -login
+########## Define Resources Needed with SBATCH Lines ##########
+#SBATCH --time=4:00:00
+#SBATCH --job-name reconstruct_phylogeny
+#SBATCH --account=devolab
+#SBATCH --output="/mnt/home/%u/slurm_job_log/a=descend_template_phylogeny+slurm_job_id=%j+ext.txt"
+#SBATCH --mem=24G
+#SBATCH --ntasks=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mincpus=4
+#SBATCH --nodes=1
+#SBATCH --mail-type=FAIL
+# No --mail-user, the default value is the submitting user
+#SBATCH --exclude=csn-002,amr-250
+# Job may be requeued after node failure.
+#SBATCH --requeue
+
+{{ setup_instrumentation }}
+
+BATCH="{{ batch }}"
+echo "BATCH ${BATCH}"
+
+RUNMODE="{{ runmode }}"
+echo "RUNMODE ${RUNMODE}"
+
+REVISION="{{ revision }}"
+echo "REVISION ${REVISION}"
+
+{{ setup_production_dependencies }}
+
+PREV_STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=1+what=descend_template_phylogenies/"
+echo "PREV_STAGE_PATH ${PREV_STAGE_PATH}"
+
+STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=2+what=reconstruct_phylogenies/"
+echo "STAGE_PATH ${STAGE_PATH}"
+
+BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
+echo "BATCH_PATH ${BATCH_PATH}"
+
+for try in {0..9}; do
+  mkdir -p "${BATCH_PATH}" && break
+  echo "mkdir -p ${BATCH_PATH} failed (try ${try})"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+for try in {0..9}; do
+  ln -srfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
+  echo "ln -srfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
+  echo "removing ${STAGE_PATH}/latest"
+  rm -rf "${STAGE_PATH}/latest"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+NPROC="${SLURM_CPUS_ON_NODE-4}"
+echo "NPROC ${NPROC}"
+
+PYSCRIPT=$(cat << HEREDOC
+import functools
+import gzip
+import io
+import json
+import logging
+import random
+import shutil
+import sys
+
+from hstrat import _auxiliary_lib as hstrat_aux
+from hstrat import hstrat
+from keyname import keyname as kn
+import numpy as np
+from numpyencoder import NumpyEncoder
+import pandas as pd
+from retry import retry
+from tqdm import tqdm
+
+
+logging.basicConfig(
+    format="\n%(asctime)s %(levelname)-8s %(message)s\n",
+    level=logging.INFO,
+    datefmt=">>> %Y-%m-%d %H:%M:%S",
+)
+
+open_retry = retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(open)
+
+__, hstrat_artifact_path, subsampling_fraction = sys.argv
+
+logging.info(f"hstrat_artifact_path {hstrat_artifact_path}")
+logging.info(f"subsampling_fraction {subsampling_fraction}")
+
+subsampling_fraction = float(subsampling_fraction)
+
+attrs = kn.unpack(kn.rejoin(hstrat_artifact_path))
+hstrat_aux.seed_random( random.Random(
+  f"{ attrs['_generation'] } "
+  f"{ attrs['_index'] } "
+  f"{ subsampling_fraction } "
+).randrange(2**32) )
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def do_load_artifact_records():
+  with open_retry(hstrat_artifact_path, "rb") as in_file:
+    with gzip.GzipFile(mode="rb", fileobj=in_file) as in_gz:
+      return json.load(io.TextIOWrapper(in_gz))
+
+artifact_records = do_load_artifact_records()
+logging.info(f"artifact records loaded from {hstrat_artifact_path}")
+
+artifact_unassemblage = hstrat.unassemblage_from_records(
+  artifact_records,
+  progress_wrap=functools.partial(
+    tqdm,
+    desc="unassemblage_from_records",
+    mininterval=10,
+  ),
+)
+logging.info(f"unassemblage deserialized from records")
+artifact_unassemblage_size = len(artifact_unassemblage)
+logging.info(f"unassemblage has size {artifact_unassemblage_size}")
+
+num_to_sample = int(artifact_unassemblage_size * subsampling_fraction)
+logging.info(f"""sampling fraction {
+  subsampling_fraction
+} will yield {
+  num_to_sample
+} artifacts""")
+subsampled_artifact_unassemblage = random.sample(
+  artifact_unassemblage, num_to_sample
+)
+logging.info(f"""subsampled unassemblage has size {
+  len(subsampled_artifact_unassemblage)
+}""")
+
+
+reconstruction_postprocesses = ("naive", "expected", "rollback")
+tree_ensemble = hstrat.build_tree_trie_ensemble(
+    subsampled_artifact_unassemblage,
+    trie_postprocessors=[
+        # naive
+        hstrat.CompoundTriePostprocessor(
+            postprocessors=[
+                hstrat.AssignOriginTimeNaiveTriePostprocessor(),
+                hstrat.AssignDestructionTimeYoungestPlusOneTriePostprocessor(),
+            ],
+        ),
+        # expected
+        hstrat.CompoundTriePostprocessor(
+            postprocessors=[
+                hstrat.PeelBackConjoinedLeavesTriePostprocessor(),
+                hstrat.AssignOriginTimeExpectedValueTriePostprocessor(
+                    prior=hstrat.ArbitraryPrior()
+                ),
+                hstrat.AssignDestructionTimeYoungestPlusOneTriePostprocessor(),
+            ],
+        ),
+        # rollback
+        hstrat.CompoundTriePostprocessor(
+            postprocessors=[
+                hstrat.SampleAncestralRollbacksTriePostprocessor(),
+                hstrat.AssignOriginTimeNaiveTriePostprocessor(),
+                hstrat.AssignDestructionTimeYoungestPlusOneTriePostprocessor(),
+            ],
+        ),
+    ],
+    progress_wrap=functools.partial(
+      tqdm,
+      desc="build_tree_trie_ensemble",
+      mininterval=10,
+    ),
+)
+logging.info(f"tree_ensemble has size {len(tree_ensemble)}")
+
+reconstruction_dfs = [*map(
+    functools.partial(
+        hstrat_aux.alifestd_assign_root_ancestor_token,
+        root_ancestor_token="None",
+    ),
+    tree_ensemble,
+)]
+logging.info(f"reconstruction_dfs has size {len(reconstruction_dfs)}")
+
+# check data validity
+for postprocess, reconstruction_df in zip(
+  reconstruction_postprocesses, reconstruction_dfs
+):
+  assert hstrat_aux.alifestd_validate(reconstruction_df), postprocess
+
+reconstruction_filenames = [*map(
+  lambda postprocess: kn.pack({
+    **kn.unpack(kn.rejoin(hstrat_artifact_path)),
+    **{
+      "a" : "reconstructed-tree",
+      "trie-postprocess" : postprocess,
+      "subsampling-fraction" : subsampling_fraction,
+      "ext" : ".csv.gz",
+    },
+  }),
+  reconstruction_postprocesses,
+)]
+logging.info(f"""reconstruction_filenames has size {
+  len(reconstruction_filenames)
+}""")
+
+def setup_reconstruction_paths():
+  return [
+    kn.chop(
+      f"${BATCH_PATH}/"
+      f"""epoch={
+          kn.unpack(kn.rejoin(hstrat_artifact_path))["epoch"]
+      }+resolution={
+        kn.unpack(kn.rejoin(hstrat_artifact_path))["resolution"]
+      }+subsampling_fraction={
+        subsampling_fraction
+      }+treatment={
+        kn.unpack(kn.rejoin(hstrat_artifact_path))["treatment"]
+      }/"""
+      f"{reconstruction_filename}",
+      mkdir=True,
+      logger=logging
+    )
+    for reconstruction_filename in reconstruction_filenames
+  ]
+reconstruction_paths = retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(setup_reconstruction_paths)()
+logging.info(f"""reconstruction_paths has size {
+  len(reconstruction_paths)
+}""")
+
+
+for reconstruction_path, reconstruction_df in zip(
+  reconstruction_paths, reconstruction_dfs
+):
+  retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )(reconstruction_df.to_csv)(reconstruction_path, index=False)
+  logging.info(f"wrote reconstructed tree to {reconstruction_path}")
+
+  provlog_path = f"{reconstruction_path}.provlog.yaml"
+  retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )(shutil.copy)(f"{hstrat_artifact_path}.provlog.yaml", provlog_path)
+
+  @retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )
+  def do_save():
+    with open_retry(provlog_path, "a+") as provlog_file:
+      provlog_file.write(
+f"""-
+  a: {provlog_path}
+  batch: {{ batch }}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 2
+  stage 1 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+  stage 2 batch path: $(readlink -f "${BATCH_PATH}")
+  hstrat_artifact_path: {hstrat_artifact_path}
+"""
+      )
+  do_save()
+
+  logging.info("PYSCRIPT complete")
+HEREDOC
+)
+
+echo "target_epoch {{ target_epoch }}"
+echo "recency_proportional_resolution {{ recency_proportional_resolution }}"
+echo "subsampling_fractions {{ subsampling_fractions }}"
+
+recency_proportional_resolution={{ recency_proportional_resolution }}
+echo "recency_proportional_resolution ${recency_proportional_resolution}"
+subsampling_fractions="{{ subsampling_fractions }}"
+echo "subsampling_fractions ${subsampling_fractions}"
+NUM_SUBSAMPLING_FRACTIONS="$(echo ${subsampling_fractions} | wc -w)"
+echo "NUM_SUBSAMPLING_FRACTIONS ${NUM_SUBSAMPLING_FRACTIONS}"
+target_epoch={{ target_epoch }}
+echo "target_epoch ${target_epoch}"
+target_treatment={{ target_treatment }}
+echo "target_treatment ${target_treatment}"
+NUM_HSTRAT_ARTIFACT_FILES="$(ls -1 "${PREV_STAGE_PATH}/latest/epoch=${target_epoch}+resolution=${recency_proportional_resolution}+treatment=${target_treatment}"/**/*.json.gz | wc -l)"
+echo "NUM_HSTRAT_ARTIFACT_FILES ${NUM_HSTRAT_ARTIFACT_FILES}"
+hstrat_artifact_files=$(ls -1 "${PREV_STAGE_PATH}/latest/epoch=${target_epoch}+resolution=${recency_proportional_resolution}+treatment=${target_treatment}"/**/*.json.gz)
+echo "hstrat_artifact_files ${hstrat_artifact_files}"
+
+for subsampling_fraction in ${subsampling_fractions}; do
+for hstrat_artifact_file in $(echo ${hstrat_artifact_files}); do
+  echo "subsampling_fraction ${subsampling_fraction}"
+  echo "hstrat_artifact_file ${hstrat_artifact_file}"
+  python3 \
+    {% if 'production' == runmode %} -O {% endif %} \
+    -c "${PYSCRIPT}" \
+    "${hstrat_artifact_file}" "${subsampling_fraction}" \
+    & pids+=($!)
+  echo "progress step"
+  # limit to n concurrent jobs
+  while (( $(jobs -p | wc -l) > NPROC )); do sleep 1; done
+done
+done >> >(tqdm \
+  --total "$((NUM_SUBSAMPLING_FRACTIONS * NUM_HSTRAT_ARTIFACT_FILES))" \
+  --desc "file workers completion" \
+  --mininterval 10 \
+    >> /dev/null \
+)
+
+echo "forked all file worker jobs"
+echo "waiting on ${pids}"
+jobs
+
+# wait on all forked jobs
+for pid in "${pids[@]}"; do
+  # if child process fails, we fail
+  wait "${pid}"
+  echo "progress step"
+done >> >(tqdm --desc "wait on forked workers" --mininterval 10 >> /dev/null)
+unset pids
+
+echo "all file worker jobs completed"
+
+echo "fin ${0}"
