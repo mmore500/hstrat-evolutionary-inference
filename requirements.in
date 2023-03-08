@@ -1,5 +1,5 @@
 ALifeStdDev==0.2.1
-git+https://github.com/mmore500/hstrat.git@17a725ea45c7ffa7efa522ade2f7bda93b9eb916
+git+https://github.com/mmore500/hstrat.git@aa0d5d8c9d8a675daaa0807f83692e62ec3dcf4c
 j2cli==0.3.10
 jinja2==3.0.0
 keyname==0.5.2
