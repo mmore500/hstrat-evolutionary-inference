@@ -216,8 +216,8 @@ for phylogeny_file in $(echo ${phylogeny_files}); do
   python3 \
     {% if 'production' == runmode %} -O {% endif %} \
     -c "${PYSCRIPT}" \
-    "${phylogeny_file}" "${num_trait_bins}" #\
-    # & pids+=($!)
+    "${phylogeny_file}" "${num_trait_bins}" \
+    & pids+=($!)
   echo "progress step"
   # limit to n concurrent jobs
   while (( $(jobs -p | wc -l) > NPROC )); do sleep 1; done
