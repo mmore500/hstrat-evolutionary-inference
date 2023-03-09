@@ -42,7 +42,7 @@ gitdb==4.0.10
     # via gitpython
 gitpython==3.1.31
     # via lyncs-setuptools
-hstrat @ git+https://github.com/mmore500/hstrat.git@aa0d5d8c9d8a675daaa0807f83692e62ec3dcf4c
+hstrat @ git+https://github.com/mmore500/hstrat.git@a9543c176911df01fd50c43d622cc096ca5c6a1c
     # via -r requirements.in
 interval-search==0.3.1
     # via hstrat
