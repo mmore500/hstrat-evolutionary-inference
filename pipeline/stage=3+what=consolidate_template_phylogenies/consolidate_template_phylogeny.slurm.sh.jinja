@@ -1,0 +1,245 @@
+#!/bin/bash -login
+########## Define Resources Needed with SBATCH Lines ##########
+#SBATCH --time=4:00:00
+#SBATCH --job-name descend_template_phylogeny
+#SBATCH --account=devolab
+#SBATCH --output="/mnt/home/%u/slurm_job_log/a=descend_template_phylogeny+slurm_job_id=%j+ext.txt"
+#SBATCH --mem=24G
+#SBATCH --ntasks=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mincpus=4
+#SBATCH --nodes=1
+#SBATCH --mail-type=FAIL
+# No --mail-user, the default value is the submitting user
+#SBATCH --exclude=csn-002,amr-250
+# Job may be requeued after node failure.
+#SBATCH --requeue
+
+{{ setup_instrumentation }}
+
+BATCH="{{ batch }}"
+echo "BATCH ${BATCH}"
+
+RUNMODE="{{ runmode }}"
+echo "RUNMODE ${RUNMODE}"
+
+REVISION="{{ revision }}"
+echo "REVISION ${REVISION}"
+
+{{ setup_production_dependencies }}
+
+PREV_STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=0+what=generate_template_phylogenies/"
+echo "PREV_STAGE_PATH ${PREV_STAGE_PATH}"
+
+STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=3+what=consolidate_template_phylogenies/"
+echo "STAGE_PATH ${STAGE_PATH}"
+
+BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
+echo "BATCH_PATH ${BATCH_PATH}"
+
+for try in {0..9}; do
+  mkdir -p "${BATCH_PATH}" && break
+  echo "mkdir -p ${BATCH_PATH} failed (try ${try})"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+for try in {0..9}; do
+  ln -srfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
+  echo "ln -srfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
+  echo "removing ${STAGE_PATH}/latest"
+  rm -rf "${STAGE_PATH}/latest"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+NPROC="${SLURM_CPUS_ON_NODE-4}"
+echo "NPROC ${NPROC}"
+
+PYSCRIPT=$(cat << HEREDOC
+import functools
+import gzip
+import io
+import json
+import logging
+import math
+import random
+import shutil
+import sys
+
+import ALifeStdDev.phylogeny as phylodev
+from hstrat import _auxiliary_lib as hstrat_aux
+from hstrat import hstrat
+from keyname import keyname as kn
+import numpy as np
+from numpyencoder import NumpyEncoder
+import pandas as pd
+from retry import retry
+from tqdm import tqdm
+
+
+logging.basicConfig(
+    format="\n%(asctime)s %(levelname)-8s %(message)s\n",
+    level=logging.INFO,
+    datefmt=">>> %Y-%m-%d %H:%M:%S",
+)
+
+__, source_phylogeny_path, num_trait_bins = sys.argv
+logging.info(f"source_phylogeny_path {source_phylogeny_path}")
+logging.info(f"num_trait_bins {num_trait_bins}")
+
+num_trait_bins = int(num_trait_bins)
+
+epoch = kn.unpack(kn.rejoin(source_phylogeny_path))["epoch"]
+treatment = kn.unpack(kn.rejoin(source_phylogeny_path))["treatment"]
+
+source_phylogeny_df = retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(
+  phylodev.load_phylogeny_to_pandas_df
+)(source_phylogeny_path)
+if "id" not in source_phylogeny_df:
+  source_phylogeny_df["id"] = source_phylogeny_df.index
+assert hstrat_aux.alifestd_is_asexual(source_phylogeny_df), "asexual"
+assert hstrat_aux.alifestd_validate(source_phylogeny_df), "validate"
+logging.info(f"loaded source_phylogeny_df from {source_phylogeny_path}")
+
+min_val = source_phylogeny_df["trait"].fillna(0).min()
+max_val = source_phylogeny_df["trait"].fillna(0).max()
+num_bins = num_trait_bins
+bin_width = (max_val - min_val)/num_bins
+
+source_phylogeny_df["Bin"] = source_phylogeny_df["trait"].fillna(
+  0,  # shim root trait is NaN
+).apply(
+  lambda x: math.floor((num_bins - 1) * (x - min_val)/max_val),
+)
+
+g = phylodev.pandas_df_to_networkx(source_phylogeny_df)
+
+abstract_g = phylodev.abstract_asexual_phylogeny(g, ["Bin"])
+collapsed_df = phylodev.networkx_to_pandas_df(
+  abstract_g,
+  {"trait": "Bin", "origin_time": "origin_time"},
+)
+
+collapsed_filename = kn.pack({
+  **kn.unpack(kn.rejoin(source_phylogeny_path)),
+  **{
+    "a" : "collapsed-phylogeny",
+  },
+})
+consolidated_path = kn.chop(
+  f"${BATCH_PATH}/"
+  f"""epoch={
+    epoch
+  }+treatment={treatment}/"""
+  f"""num_trait_bins={
+    num_trait_bins
+  }+treatment={treatment}/"""
+  f"{collapsed_filename}",
+  mkdir=True,
+  logger=logging,
+)
+retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(collapsed_df.to_csv)(consolidated_path, index=False)
+
+provlog_path = f"{consolidated_path}.provlog.yaml"
+retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(shutil.copy)(f"{source_phylogeny_path}.provlog.yaml", provlog_path)
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def do_save():
+  with open(provlog_path, "w+") as provlog_file:
+    provlog_file.write(
+f"""-
+a: {provlog_path}
+batch: {{ batch }}
+date: $(date --iso-8601=seconds)
+hostname: $(hostname)
+revision: {{ revision }}
+runmode: {{ runmode }}
+user: $(whoami)
+uuid: $(uuidgen)
+slurm_job_id: ${SLURM_JOB_ID-none}
+stage: 1
+stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+stage 1 batch path: $(readlink -f "${BATCH_PATH}")
+source_phylogeny_path: {source_phylogeny_path}
+"""
+    )
+
+do_save()
+
+logging.info(f"wrote collapsed phylogeny to {consolidated_path}")
+HEREDOC
+)
+
+TOTAL_PHYLOGENY_FILES="$(ls -1 "${PREV_STAGE_PATH}"/latest/epoch=*/**/*.csv.gz | wc -l)"
+echo "TOTAL_PHYLOGENY_FILES ${TOTAL_PHYLOGENY_FILES}"
+
+MAX_COMPLETIONS="None"
+echo "epoch_paths" "${PREV_STAGE_PATH}/latest/"*
+MAX_COMPLETIONS=$(for epoch_path in "${PREV_STAGE_PATH}/latest/"*; do
+  ls -1 "${epoch_path}" | wc -l
+done | sort | tail -n 1)
+echo "MAX_COMPLETIONS ${MAX_COMPLETIONS}"
+
+MAX_COMMON_EPOCH=$(for epoch_path in "${PREV_STAGE_PATH}/latest/"*; do
+  ls -1 "${epoch_path}" | wc -l | grep -q "^${MAX_COMPLETIONS}$" && echo "${epoch_path}" || :
+done | sort | tail -n 1 | xargs basename)
+echo "MAX_COMMON_EPOCH ${MAX_COMMON_EPOCH}"
+
+echo "target_epoch {{ target_epoch }}"
+echo '`target_epoch` {{ target_epoch }}'
+echo "num_trait_bins {{ num_trait_bins }}"
+
+num_trait_bins={{ num_trait_bins }}
+echo "num_trait_bins ${num_trait_bins}"
+target_epoch={{ target_epoch }}
+echo "target_epoch ${target_epoch}"
+target_treatment={{ target_treatment }}
+echo "target_treatment ${target_treatment}"
+NUM_PHYLOGENY_FILES="$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/treatment=${target_treatment}/**/*.csv.gz | wc -l)"
+echo "NUM_PHYLOGENY_FILES ${NUM_PHYLOGENY_FILES}"
+phylogeny_files=$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/treatment=${target_treatment}/**/*.csv.gz)
+echo "phylogeny_files ${phylogeny_files}"
+for phylogeny_file in $(echo ${phylogeny_files}); do
+
+  python3 \
+    {% if 'production' == runmode %} -O {% endif %} \
+    -c "${PYSCRIPT}" \
+    "${phylogeny_file}" "${num_trait_bins}" #\
+    # & pids+=($!)
+  echo "progress step"
+  # limit to n concurrent jobs
+  while (( $(jobs -p | wc -l) > NPROC )); do sleep 1; done
+done >> >(tqdm \
+  --total "$(echo "${phylogeny_files}" | wc -l)" \
+  --desc "phylogeny file workers completion" \
+  --mininterval 10 \
+    >> /dev/null \
+)
+
+echo "forked all file worker jobs"
+echo "waiting on ${pids}"
+jobs
+
+# wait on all forked jobs
+for pid in "${pids[@]}"; do
+  # if child process fails, we fail
+  wait "${pid}"
+  echo "progress step"
+done >> >(tqdm --desc "wait on forked workers" --mininterval 10 >> /dev/null)
+unset pids
+
+echo "all file worker jobs completed"
+
+echo "fin ${0}"
