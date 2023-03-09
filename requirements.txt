@@ -6,7 +6,7 @@
 #
 alifedata-phyloinformatics-convert==0.10.0
     # via hstrat
-alifestddev==0.2.1
+alifestddev==0.2.4
     # via -r requirements.in
 anytree==2.8.0
     # via
