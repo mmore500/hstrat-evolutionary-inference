@@ -121,15 +121,15 @@ source_phylogeny_df["Bin"] = source_phylogeny_df["trait"].fillna(
 g = phylodev.pandas_df_to_networkx(source_phylogeny_df)
 
 abstract_g = phylodev.abstract_asexual_phylogeny(g, ["Bin"])
-collapsed_df = phylodev.networkx_to_pandas_df(
+consolidated_df = phylodev.networkx_to_pandas_df(
   abstract_g,
   {"trait": "Bin", "origin_time": "origin_time"},
 )
 
-collapsed_filename = kn.pack({
+consolidated_filename = kn.pack({
   **kn.unpack(kn.rejoin(source_phylogeny_path)),
   **{
-    "a" : "collapsed-phylogeny",
+    "a" : "consolidated-phylogeny",
   },
 })
 consolidated_path = kn.chop(
@@ -140,13 +140,13 @@ consolidated_path = kn.chop(
   f"""num_trait_bins={
     num_trait_bins
   }+treatment={treatment}/"""
-  f"{collapsed_filename}",
+  f"{consolidated_filename}",
   mkdir=True,
   logger=logging,
 )
 retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
-)(collapsed_df.to_csv)(consolidated_path, index=False)
+)(consolidated_df.to_csv)(consolidated_path, index=False)
 
 provlog_path = f"{consolidated_path}.provlog.yaml"
 retry(
@@ -178,7 +178,7 @@ source_phylogeny_path: {source_phylogeny_path}
 
 do_save()
 
-logging.info(f"wrote collapsed phylogeny to {consolidated_path}")
+logging.info(f"wrote consolidated phylogeny to {consolidated_path}")
 HEREDOC
 )
 
