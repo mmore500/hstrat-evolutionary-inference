@@ -7,8 +7,7 @@
 #SBATCH --mem=48G
 #SBATCH --ntasks=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mincpus=4
+#SBATCH --cpus-per-task=1
 #SBATCH --nodes=1
 #SBATCH --mail-type=FAIL
 # No --mail-user, the default value is the submitting user
@@ -206,49 +205,26 @@ MAX_COMMON_EPOCH=$(for epoch_path in "${PREV_STAGE_PATH}/latest/"*; do
 done | sort | tail -n 1 | xargs basename)
 echo "MAX_COMMON_EPOCH ${MAX_COMMON_EPOCH}"
 
-echo "target_epoch {{ target_epoch }}"
-echo '`target_epoch` {{ target_epoch }}'
-echo "num_trait_bins {{ num_trait_bins }}"
-
-num_trait_bins={{ num_trait_bins }}
+num_trait_bins="{{ num_trait_bins }}"
 echo "num_trait_bins ${num_trait_bins}"
-target_epoch={{ target_epoch }}
-echo "target_epoch ${target_epoch}"
-target_treatment={{ target_treatment }}
-echo "target_treatment ${target_treatment}"
-NUM_PHYLOGENY_FILES="$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/treatment=${target_treatment}/**/*.csv.gz | wc -l)"
-echo "NUM_PHYLOGENY_FILES ${NUM_PHYLOGENY_FILES}"
-phylogeny_files=$(ls -1 "${PREV_STAGE_PATH}"/latest/${target_epoch}/treatment=${target_treatment}/**/*.csv.gz)
-echo "phylogeny_files ${phylogeny_files}"
-for phylogeny_file in $(echo ${phylogeny_files}); do
 
+target_phylogeny_files='{{ target_phylogeny_files }}'
+echo "target_phylogeny_files ${target_phylogeny_files}"
+
+NUM_PHYLOGENY_FILES="$(echo ${target_phylogeny_files} | wc -w)"
+echo "NUM_PHYLOGENY_FILES ${NUM_PHYLOGENY_FILES}"
+
+for phylogeny_file in $(echo ${target_phylogeny_files}); do
   python3 \
     {% if 'production' == runmode %} -O {% endif %} \
     -c "${PYSCRIPT}" \
-    "${phylogeny_file}" "${num_trait_bins}" \
-    & pids+=($!)
+    "${phylogeny_file}" "${num_trait_bins}"
   echo "progress step"
-  # limit to n concurrent jobs
-  while (( $(jobs -p | wc -l) > NPROC )); do sleep 1; done
 done >> >(tqdm \
-  --total "$(echo "${phylogeny_files}" | wc -l)" \
+  --total "$NUM_PHYLOGENY_FILES" \
   --desc "phylogeny file workers completion" \
   --mininterval 10 \
     >> /dev/null \
 )
-
-echo "forked all file worker jobs"
-echo "waiting on ${pids}"
-jobs
-
-# wait on all forked jobs
-for pid in "${pids[@]}"; do
-  # if child process fails, we fail
-  wait "${pid}"
-  echo "progress step"
-done >> >(tqdm --desc "wait on forked workers" --mininterval 10 >> /dev/null)
-unset pids
-
-echo "all file worker jobs completed"
 
 echo "fin ${0}"

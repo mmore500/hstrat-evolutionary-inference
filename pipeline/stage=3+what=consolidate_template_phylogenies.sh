@@ -25,19 +25,27 @@ SETUP_PRODUCTION_DEPENDENCIES_SNIPPET="$(
 SBATCH_SCRIPT_DIRECTORY_PATH="$(mktemp -d)"
 echo "SBATCH_SCRIPT_DIRECTORY_PATH ${SBATCH_SCRIPT_DIRECTORY_PATH}"
 
-NUM_TREATMENTS="$(python3 -c "from pylib import specify_template_phylogeny_generation_replicates; print(len(specify_template_phylogeny_generation_replicates()['treatment'].unique()))")"
-echo "NUM_TREATMENTS ${NUM_TREATMENTS}"
-
 NUM_TRAIT_BINS=1000
 echo "NUM_TRAIT_BINS ${NUM_TRAIT_BINS}"
 
-# adapted from https://superuser.com/a/284226
-for ((target_treatment=0; target_treatment < NUM_TREATMENTS; ++target_treatment)); do
-# excluding '${MAX_COMMON_EPOCH}'
-for target_epoch in "epoch=00000" "epoch=00002" "epoch=00007"; do
+all_phylogeny_files="$( \
+  find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=0+what=generate_template_phylogenies/latest/epoch=0000"{0,2,7}/ -type f  -path "*a=perfect-phylogeny+*" -name "*+ext=.csv.gz" \
+)"
+
+num_phylogeny_files="$(echo ${all_phylogeny_files} | wc -w)"
+echo "num_phylogeny_files ${num_phylogeny_files}"
+
+num_batches="$(((${num_phylogeny_files} + 3) / 4))"
+echo "num_batches ${num_batches}"
+
+# second sed strips leftover empty line at end
+echo ${all_phylogeny_files} \
+| tr '\n' ' ' \
+| sed -E 's/(\S+\s+){1,4}/&\n/g' \
+| sed '/^$/d'  \
+| while read target_phylogeny_files \
+; do
 SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
-echo "target_treatment ${target_treatment}"
-echo "target_epoch ${target_epoch}"
 echo "SBATCH_SCRIPT_PATH ${SBATCH_SCRIPT_PATH}"
 j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=3+what=consolidate_template_phylogenies/consolidate_template_phylogeny.slurm.sh.jinja" << J2_HEREDOC_EOF
 batch: ${BATCH}
@@ -48,11 +56,13 @@ setup_instrumentation: |
 ${SETUP_INSTRUMENTATION_SNIPPET}
 setup_production_dependencies: |
 ${SETUP_PRODUCTION_DEPENDENCIES_SNIPPET}
-target_epoch: ${target_epoch}
-target_treatment: ${target_treatment}
+target_phylogeny_files: ${target_phylogeny_files}
 J2_HEREDOC_EOF
 chmod +x "${SBATCH_SCRIPT_PATH}"
-done
-done
+done \
+  | tqdm \
+    --desc "instantiate slurm scripts" \
+    --total "${num_batches}"
 
+echo "$(ls -1 "${SBATCH_SCRIPT_DIRECTORY_PATH}" | wc -l) slurm scripts created"
 find "${SBATCH_SCRIPT_DIRECTORY_PATH}" -type f | python3 -m qspool
