@@ -58,4 +58,5 @@ done \
     --desc "instantiate slurm scripts" \
     --total 4
 
+echo "$(find "${SBATCH_SCRIPT_DIRECTORY_PATH}" | wc -l) slurm scripts created"
 find "${SBATCH_SCRIPT_DIRECTORY_PATH}" -type f | python3 -m qspool
