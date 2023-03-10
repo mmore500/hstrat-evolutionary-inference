@@ -35,11 +35,16 @@ all_phylogeny_files="$( \
   find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=3+what=consolidate_template_phylogenies/latest/"* -type f  -path "*a=consolidated-phylogeny+*" -name "*+ext=.csv.gz" \
 )"
 
-echo "${all_phylogeny_files}" \
-| sed '1~25{N;N;s/\n/ /g}' \
+num_batches="$((($(echo ${all_phylogeny_files} | wc -w) + 24) / 25))"
+echo "num_batches ${num_batches}"
+
+# second sed strips leftover empty line at end
+echo ${all_phylogeny_files} \
+| tr '\n' ' ' \
+| sed -E 's/(\S+\s+){1,25}/&\n/g' \
+| sed '/^$/d'  \
 | while read target_phylogeny_files \
 ; do
-  echo "target_phylogeny_files ${target_phylogeny_files}"
   SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
   echo "SBATCH_SCRIPT_PATH ${SBATCH_SCRIPT_PATH}"
   j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=4+what=compute_phylometrics/compute_phylometrics.slurm.sh.jinja" << J2_HEREDOC_EOF
@@ -56,7 +61,7 @@ chmod +x "${SBATCH_SCRIPT_PATH}"
 done \
   | tqdm \
     --desc "instantiate slurm scripts" \
-    --total 4
+    --total "${num_batches}"
 
-echo "$(find "${SBATCH_SCRIPT_DIRECTORY_PATH}" | wc -l) slurm scripts created"
+echo "$(ls -1 "${SBATCH_SCRIPT_DIRECTORY_PATH}" | wc -l) slurm scripts created"
 find "${SBATCH_SCRIPT_DIRECTORY_PATH}" -type f | python3 -m qspool
