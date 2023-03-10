@@ -90,6 +90,17 @@ sys = systematics.Systematics(lambda x: x)  # arg: fun_taxon
 @retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
 )
+def get_max_origin_time():
+  # fillna for synthetic common root
+  return pd.read_csv(phylogeny_path)["origin_time"].fillna(0).max()
+max_origin_time = get_max_origin_time()
+logging.info(
+  f"extracted max origin time {max_origin_time} from source phylogeny"
+)
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
 def do_load_from_file():
   with \
     gzip.open(phylogeny_path, "rb") as zipped_sourcefile, \
@@ -104,18 +115,16 @@ def do_load_from_file():
       True,  # assume_leaves_extant
     )
 do_load_from_file()
-logging.info(f"deserialized systematics from source phylogeny")
+logging.info("deserialized systematics from source phylogeny")
 
 phylometrics = dict()
 
-# phylotrackpy v0.1.12 segfaults
-# logging.info("calculating 'diversity'")
-# phylometrics["diversity"] = sys.calc_diversity()
+logging.info("calculating 'diversity'")
+phylometrics["diversity"] = sys.calc_diversity()
 
 logging.info("calculating 'colless_like_index'")
 phylometrics["colless_like_index"] = sys.colless_like_index()
 
-# phylotrackpy v0.1.12 segfaults
 logging.info("calculating 'average_depth'")
 phylometrics["average_depth"] = sys.get_ave_depth()
 
@@ -183,6 +192,28 @@ phylometrics["mrca_depth"] = sys.mrca_depth()
 
 logging.info("calculating 'sackin_index'")
 phylometrics["sackin_index"] = sys.sackin_index()
+
+logging.info("calculating mean_evolutionary_distinctiveness")
+phylometrics[
+  "mean_evolutionary_distinctiveness"
+] = sys.get_mean_evolutionary_distinctiveness(
+  max_origin_time,
+)
+
+logging.info("calculating sum_evolutionary_distinctiveness")
+phylometrics[
+  "sum_evolutionary_distinctiveness"
+] = sys.get_sum_evolutionary_distinctiveness(
+  max_origin_time,
+)
+
+logging.info("calculating variance_evolutionary_distinctiveness")
+phylometrics[
+  "variance_evolutionary_distinctiveness"
+] = sys.get_variance_evolutionary_distinctiveness(
+  max_origin_time,
+)
+
 
 logging.info("phylometric calculations complete")
 
