@@ -35,7 +35,10 @@ all_phylogeny_files="$( \
   find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=3+what=consolidate_template_phylogenies/latest/"* -type f  -path "*a=consolidated-phylogeny+*" -name "*+ext=.csv.gz" \
 )"
 
-num_batches="$((($(echo ${all_phylogeny_files} | wc -w) + 24) / 25))"
+num_phylogeny_files="$(echo ${all_phylogeny_files} | wc -w)"
+echo "num_phylogeny_files ${num_phylogeny_files}"
+
+num_batches="$(((${num_phylogeny_files} + 24) / 25))"
 echo "num_batches ${num_batches}"
 
 # second sed strips leftover empty line at end
