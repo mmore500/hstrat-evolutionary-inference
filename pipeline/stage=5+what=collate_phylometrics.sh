@@ -48,6 +48,7 @@ import glob
 
 import pandas as pd
 from retry import retry
+from tqdm import tqdm
 
 
 logging.basicConfig(
@@ -56,14 +57,18 @@ logging.basicConfig(
     datefmt=">>> %Y-%m-%d %H:%M:%S",
 )
 
-globbed_paths = [
+globbed_phylometrics_paths = [
     *glob.glob(
         "${PREV_STAGE_PATH}/latest/a=phylometrics*/**/*+ext=.csv",
         recursive=True,
     )
 ]
-logging.info(f"{len(globbed_paths)} phylometrics paths were globbed")
-logging.info(f"first globbed phylometrics path is {globbed_paths[0]}")
+logging.info(f"""{
+  len(globbed_phylometrics_paths)
+} phylometrics paths were globbed""")
+logging.info(f"""first globbed phylometrics path is {
+  globbed_phylometrics_paths[0]
+}""")
 
 read_csv_with_retry = retry(
     tries=10,
@@ -72,12 +77,19 @@ read_csv_with_retry = retry(
     backoff=2,
     jitter=(0, 4),
     logger=logging,
-)(pd.read_csv)
+)(
+  # wrap is workaround for retry compatibility
+  lambda *args, **kwargs: pd.read_csv(*args, **kwargs)
+)
 
 collated_phylometrics_df = pd.concat(
     (
         read_csv_with_retry(phylometrics_path)
-        for phylometrics_path in globbed_paths
+        for phylometrics_path in tqdm(
+          globbed_phylometrics_paths,
+          desc="phylometrics_paths",
+          mininterval=10,
+        )
     ),
     ignore_index=True,
     join="outer",
