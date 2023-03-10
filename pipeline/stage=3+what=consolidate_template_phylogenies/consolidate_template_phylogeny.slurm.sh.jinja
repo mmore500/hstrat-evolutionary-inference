@@ -152,7 +152,10 @@ consolidated_path = kn.chop(
 )
 retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
-)(consolidated_df.to_csv)(consolidated_path, index=False)
+)(
+  # retry compatibilty workaround
+  lambda *args, **kwargs: consolidated_df.to_csv(*args, **kwargs)
+)(consolidated_path, index=False)
 
 provlog_path = f"{consolidated_path}.provlog.yaml"
 retry(
