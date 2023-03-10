@@ -27,12 +27,19 @@ echo "SBATCH_SCRIPT_DIRECTORY_PATH ${SBATCH_SCRIPT_DIRECTORY_PATH}"
 
 # use collapsed phylogenies instead of reconstructed phylogenies
 # 'find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=0+what=generate_template_phylogenies/latest/epoch=0000"{0,2,7}/treatment=*/ -type f  -path "*a=perfect-phylogeny+*" -name "*+ext=.csv.gz"' \
-for targeting_command in \
-  'find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=1+what=descend_template_phylogenies/latest/"* -type f  -path "*a=collapsed-phylogeny+*" -name "*+ext=.csv.gz"' \
-  'find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=2+what=reconstruct_phylogenies/latest/"* -type f  -path "*a=reconstructed-tree+*" -name "*+ext=.csv.gz"' \
-  'find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=3+what=consolidate_template_phylogenies/latest/"* -type f  -path "*a=consolidated-phylogeny+*" -name "*+ext=.csv.gz"' \
+all_phylogeny_files="$( \
+  find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=1+what=descend_template_phylogenies/latest/"* -type f  -path "*a=collapsed-phylogeny+*" -name "*+ext=.csv.gz" \
+)$( \
+  find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=2+what=reconstruct_phylogenies/latest/"* -type f  -path "*a=reconstructed-tree+*" -name "*+ext=.csv.gz" \
+)$( \
+  find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=3+what=consolidate_template_phylogenies/latest/"* -type f  -path "*a=consolidated-phylogeny+*" -name "*+ext=.csv.gz" \
+)"
+
+echo "${all_phylogeny_files}" \
+| sed '1~25{N;N;s/\n/ /g}' \
+| while read target_phylogeny_files \
 ; do
-  echo "targeting_command ${targeting_command}"
+  echo "target_phylogeny_files ${target_phylogeny_files}"
   SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
   echo "SBATCH_SCRIPT_PATH ${SBATCH_SCRIPT_PATH}"
   j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=4+what=compute_phylometrics/compute_phylometrics.slurm.sh.jinja" << J2_HEREDOC_EOF
@@ -43,7 +50,7 @@ setup_instrumentation: |
 ${SETUP_INSTRUMENTATION_SNIPPET}
 setup_production_dependencies: |
 ${SETUP_PRODUCTION_DEPENDENCIES_SNIPPET}
-targeting_command: ${targeting_command}
+target_phylogeny_files: ${target_phylogeny_files}
 J2_HEREDOC_EOF
 chmod +x "${SBATCH_SCRIPT_PATH}"
 exit

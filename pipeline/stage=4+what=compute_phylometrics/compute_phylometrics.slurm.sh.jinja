@@ -255,19 +255,19 @@ logging.info(f"wrote phylometrics to {phylometrics_path}")
 HEREDOC
 )
 
-TARGETING_COMMAND='{{ targeting_command }}'
-echo "PHYLOGENY_FILES $(eval ${TARGETING_COMMAND})"
-NUM_PHYLOGENY_FILES="$(eval ${TARGETING_COMMAND} | wc -l)"
-echo "NUM_PHYLOGENY_FILES ${NUM_PHYLOGENY_FILES}"
+TARGET_PHYLOGENY_FILES='{{ target_phylogeny_files }}'
+echo "TARGET_PHYLOGENY_FILES ${TARGET_PHYLOGENY_FILES}"
+NUM_TARGET_PHYLOGENY_FILES="$(echo ${TARGET_PHYLOGENY_FILES} | wc -w)"
+echo "NUM_TARGET_PHYLOGENY_FILES ${NUM_TARGET_PHYLOGENY_FILES}"
 
-for phylogeny_file in $(eval ${TARGETING_COMMAND}); do
+for target_phylogeny_file in ${TARGET_PHYLOGENY_FILES}; do
   python3 \
     {% if 'production' == runmode %} -O {% endif %} \
     -c "${PYSCRIPT}" \
-    "${phylogeny_file}"
+    "${target_phylogeny_file}"
   echo "progress step"
 done >> >(tqdm \
-  --total "${NUM_PHYLOGENY_FILES}" \
+  --total "${NUM_TARGET_PHYLOGENY_FILES}" \
   --desc "phylogeny file phylometrics completion" \
   --mininterval 10 \
     >> /dev/null \
