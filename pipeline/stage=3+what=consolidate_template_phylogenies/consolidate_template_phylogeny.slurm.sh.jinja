@@ -122,11 +122,15 @@ source_phylogeny_df["Bin"] = source_phylogeny_df["trait"].fillna(
 
 g = phylodev.pandas_df_to_networkx(source_phylogeny_df)
 
+logging.info("phylogeny converted to networkx representation")
+
 abstract_g = phylodev.abstract_asexual_phylogeny(g, ["Bin"])
 consolidated_df = phylodev.networkx_to_pandas_df(
   abstract_g,
   {"trait": "Bin", "origin_time": "origin_time"},
 )
+
+logging.info("phylogeny abstraction complete")
 
 consolidated_filename = kn.pack({
   **kn.unpack(kn.rejoin(source_phylogeny_path)),
