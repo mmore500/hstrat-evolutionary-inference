@@ -116,7 +116,29 @@ retry(
 
 logging.info(f"collated phylometrics written to {collated_phylometrics_path}")
 
-# TODO provlog
+collated_provlog_path = collated_phylometrics_path + ".provlog.yaml"
+
+@retry(
+    tries=10,
+    delay=1,
+    max_delay=10,
+    backoff=2,
+    jitter=(0, 4),
+    logger=logging,
+)
+def do_collate_provlogs():
+  with open(collated_provlog_path, "wb") as f_out:
+      for phylometrics_path in tqdm(
+        globbed_phylometrics_paths,
+        desc="phylometrics_paths",
+        mininterval=10,
+      ):
+        provlog_path = phylometrics_path + ".provlog.yaml"
+        with open(provlog_path, "rb") as f_in:
+            f_out.write(f_in.read())
+do_collate_provlogs()
+
+logging.info(f"collated provlog written to {collated_provlog_path}")
 
 HEREDOC
 )
