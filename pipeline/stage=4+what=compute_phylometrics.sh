@@ -53,7 +53,6 @@ ${SETUP_PRODUCTION_DEPENDENCIES_SNIPPET}
 target_phylogeny_files: ${target_phylogeny_files}
 J2_HEREDOC_EOF
 chmod +x "${SBATCH_SCRIPT_PATH}"
-exit
 done \
   | tqdm \
     --desc "instantiate slurm scripts" \
