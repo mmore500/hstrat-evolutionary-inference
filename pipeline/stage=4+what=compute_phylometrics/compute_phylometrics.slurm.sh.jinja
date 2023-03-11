@@ -264,18 +264,18 @@ def do_save():
   with open(provlog_path, "a+") as provlog_file:
     provlog_file.write(
 f"""-
-a: {provlog_path}
-batch: {{ batch }}
-date: $(date --iso-8601=seconds)
-hostname: $(hostname)
-revision: {{ revision }}
-runmode: {{ runmode }}
-user: $(whoami)
-uuid: $(uuidgen)
-slurm_job_id: ${SLURM_JOB_ID-none}
-stage: 4
-stage 4 batch path: $(readlink -f "${BATCH_PATH}")
-phylogeny_path: {phylogeny_path}
+  a: {provlog_path}
+  batch: {{ batch }}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 4
+  stage 4 batch path: $(readlink -f "${BATCH_PATH}")
+  phylogeny_path: {phylogeny_path}
 """,
     )
 
