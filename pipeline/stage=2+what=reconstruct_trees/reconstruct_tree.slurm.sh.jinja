@@ -65,6 +65,7 @@ import gzip
 import io
 import json
 import logging
+import math
 import random
 import shutil
 import sys
@@ -126,18 +127,24 @@ logging.info(f"unassemblage deserialized from records")
 artifact_unassemblage_size = len(artifact_unassemblage)
 logging.info(f"unassemblage has size {artifact_unassemblage_size}")
 
-num_to_sample = int(artifact_unassemblage_size * subsampling_fraction)
-logging.info(f"""sampling fraction {
-  subsampling_fraction
-} will yield {
-  num_to_sample
-} artifacts""")
-subsampled_artifact_unassemblage = random.sample(
-  artifact_unassemblage, num_to_sample
-)
-logging.info(f"""subsampled unassemblage has size {
-  len(subsampled_artifact_unassemblage)
-}""")
+if math.isclose(subsampling_fraction, 1.0):
+  logging.info(
+    f"sampling fraction is {subsampling_fraction}, skipping subsampling"
+  )
+  subsampled_artifact_unassemblage = artifact_unassemblage
+else:
+  num_to_sample = int(artifact_unassemblage_size * subsampling_fraction)
+  logging.info(f"""sampling fraction {
+    subsampling_fraction
+  } will yield {
+    num_to_sample
+  } artifacts""")
+  subsampled_artifact_unassemblage = random.sample(
+    artifact_unassemblage, num_to_sample
+  )
+  logging.info(f"""subsampled unassemblage has size {
+    len(subsampled_artifact_unassemblage)
+  }""")
 
 
 reconstruction_postprocesses = ("naive", "expected", "rollback")
