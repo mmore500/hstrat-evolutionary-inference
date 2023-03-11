@@ -1,3 +1,4 @@
+alifedata_phyloinformatics_convert==0.10.0
 ALifeStdDev==0.2.4
 git+https://github.com/mmore500/hstrat.git@a9543c176911df01fd50c43d622cc096ca5c6a1c
 j2cli==0.3.10
@@ -9,4 +10,5 @@ phylotrackpy==0.1.13
 pyyaml==6.0
 qspool==0.4.2
 retry==0.9.2
+tqdist==1.0
 tqdm==4.64.1
