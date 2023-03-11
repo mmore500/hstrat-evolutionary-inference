@@ -1,6 +1,6 @@
 alifedata_phyloinformatics_convert==0.10.0
 ALifeStdDev==0.2.4
-git+https://github.com/mmore500/hstrat.git@a9543c176911df01fd50c43d622cc096ca5c6a1c#egg=hstrat
+git+https://github.com/mmore500/hstrat.git@a9543c176911df01fd50c43d622cc096ca5c6a1c
 j2cli==0.3.10
 jinja2==3.0.0
 keyname==0.5.2
