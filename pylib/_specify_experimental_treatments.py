@@ -52,6 +52,11 @@ def specify_experimental_treatments() -> pd.DataFrame:
                 nonecological_base_params,
                 apply_selection_pressure_dynamic,
             ),
+            (
+                "Selection Drift",
+                nonecological_base_params,
+                apply_selection_drift_dynamic,
+            ),
             ("Niche Count", ecological_base_params, apply_niche_count_dynamic),
             (
                 "Niche Stability",
