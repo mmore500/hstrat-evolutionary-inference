@@ -139,19 +139,19 @@ def do_save():
   with open_retry(provlog_path, "w+") as provlog_file:
     provlog_file.write(
 f"""-
-a: {provlog_path}
-batch: {{ batch }}
-date: $(date --iso-8601=seconds)
-hostname: $(hostname)
-revision: {{ revision }}
-runmode: {{ runmode }}
-user: $(whoami)
-uuid: $(uuidgen)
-slurm_job_id: ${SLURM_JOB_ID-none}
-stage: 1
-stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
-stage 1 batch path: $(readlink -f "${BATCH_PATH}")
-template_path: {template_path}
+  a: {provlog_path}
+  batch: {{ batch }}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 1
+  stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+  stage 1 batch path: $(readlink -f "${BATCH_PATH}")
+  template_path: {template_path}
 """
     )
 
@@ -225,23 +225,23 @@ retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
 )
 def do_save():
-  with open_retry(provlog_path, "w+") as provlog_file:
+  with open_retry(provlog_path, "a+") as provlog_file:
     provlog_file.write(
 f"""-
-a: {provlog_path}
-batch: {{ batch }}
-date: $(date --iso-8601=seconds)
-hostname: $(hostname)
-recency_proportional_resolution: {recency_proportional_resolution}
-revision: {{ revision }}
-runmode: {{ runmode }}
-user: $(whoami)
-uuid: $(uuidgen)
-slurm_job_id: ${SLURM_JOB_ID-none}
-stage: 1
-stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
-stage 1 batch path: $(readlink -f "${BATCH_PATH}")
-template_path: {template_path}
+  a: {provlog_path}
+  batch: {{ batch }}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  recency_proportional_resolution: {recency_proportional_resolution}
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 1
+  stage 0 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+  stage 1 batch path: $(readlink -f "${BATCH_PATH}")
+  template_path: {template_path}
 """
     )
 
