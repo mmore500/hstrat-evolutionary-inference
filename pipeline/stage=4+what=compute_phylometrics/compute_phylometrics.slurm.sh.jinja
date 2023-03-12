@@ -1,0 +1,307 @@
+#!/bin/bash -login
+########## Define Resources Needed with SBATCH Lines ##########
+#SBATCH --time=4:00:00
+#SBATCH --job-name compute_phylometrics
+#SBATCH --account=devolab
+#SBATCH --output="/mnt/home/%u/slurm_job_log/a=compute_phylometrics+slurm_job_id=%j+ext.txt"
+#SBATCH --mem=48G
+#SBATCH --ntasks=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=1
+#SBATCH --nodes=1
+#SBATCH --mail-type=FAIL
+# No --mail-user, the default value is the submitting user
+#SBATCH --exclude=csn-002,amr-250
+# Job may be requeued after node failure.
+#SBATCH --requeue
+
+{{ setup_instrumentation }}
+
+BATCH="{{ batch }}"
+echo "BATCH ${BATCH}"
+
+RUNMODE="{{ runmode }}"
+echo "RUNMODE ${RUNMODE}"
+
+REVISION="{{ revision }}"
+echo "REVISION ${REVISION}"
+
+{{ setup_production_dependencies }}
+
+STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode={{ runmode }}/stage=4+what=compute_phylometrics/"
+echo "STAGE_PATH ${STAGE_PATH}"
+
+BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
+echo "BATCH_PATH ${BATCH_PATH}"
+
+for try in {0..9}; do
+  mkdir -p "${BATCH_PATH}" && break
+  echo "mkdir -p ${BATCH_PATH} failed (try ${try})"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+for try in {0..9}; do
+  ln -srfT "${BATCH_PATH}" "${STAGE_PATH}/latest" && break
+  echo "ln -srfT ${BATCH_PATH} ${STAGE_PATH}/latest failed (try ${try})"
+  echo "removing ${STAGE_PATH}/latest"
+  rm -rf "${STAGE_PATH}/latest"
+  SLEEP_DURATION="$((RANDOM % 10 + 1))"
+  echo "sleeping ${SLEEP_DURATION} then retrying"
+  sleep "${SLEEP_DURATION}"
+done
+
+PYSCRIPT=$(cat << HEREDOC
+import functools
+import gzip
+import io
+import json
+import logging
+import random
+import shutil
+import sys
+import tempfile
+
+from hstrat import _auxiliary_lib as hstrat_aux
+from hstrat import hstrat
+from keyname import keyname as kn
+import numpy as np
+from numpyencoder import NumpyEncoder
+import pandas as pd
+from phylotrackpy import systematics
+from retry import retry
+
+from tqdm import tqdm
+
+
+logging.basicConfig(
+    format="\n%(asctime)s %(levelname)-8s %(message)s\n",
+    level=logging.INFO,
+    datefmt=">>> %Y-%m-%d %H:%M:%S",
+)
+
+__, phylogeny_path = sys.argv
+
+logging.info(f"phylogeny_path {phylogeny_path}")
+
+sys = systematics.Systematics(lambda x: x)  # arg: fun_taxon
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def get_max_origin_time():
+  # fillna for synthetic common root
+  return pd.read_csv(phylogeny_path)["origin_time"].fillna(0).max()
+max_origin_time = get_max_origin_time()
+logging.info(
+  f"extracted max origin time {max_origin_time} from source phylogeny"
+)
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def do_load_from_file():
+  with \
+    gzip.open(phylogeny_path, "rb") as zipped_sourcefile, \
+    tempfile.NamedTemporaryFile("wb") as unzipped_tempfile \
+  :
+    logging.info(f"unzipping to tempfile {unzipped_tempfile.name}")
+    unzipped_tempfile.write(zipped_sourcefile.read())
+    logging.info(f"loading systematics from tempfile {unzipped_tempfile.name}")
+    sys.load_from_file(
+      unzipped_tempfile.name,
+      "id",  # info_col
+      True,  # assume_leaves_extant
+    )
+do_load_from_file()
+logging.info("deserialized systematics from source phylogeny")
+
+phylometrics = dict()
+
+logging.info("calculating 'diversity'")
+phylometrics["diversity"] = sys.calc_diversity()
+
+logging.info("calculating 'colless_like_index'")
+phylometrics["colless_like_index"] = sys.colless_like_index()
+
+logging.info("calculating 'average_depth'")
+phylometrics["average_depth"] = sys.get_ave_depth()
+
+logging.info("calculating 'average_origin_time'")
+phylometrics["average_origin_time"] = sys.get_average_origin_time(False)
+
+logging.info("calculating 'average_origin_time_normalized'")
+phylometrics["average_origin_time_normalized"] = (
+  sys.get_average_origin_time(True)
+)
+
+logging.info("calculating 'max_depth'")
+phylometrics["max_depth"] = sys.get_max_depth()
+
+logging.info("calculating 'mean_pairwise_distance'")
+phylometrics["mean_pairwise_distance"] = sys.get_mean_pairwise_distance(False)
+
+logging.info("calculating 'mean_pairwise_distance_branch_only'")
+phylometrics["mean_pairwise_distance_branch_only"] = (
+  sys.get_mean_pairwise_distance(True)
+)
+
+logging.info("calculating 'num_active'")
+phylometrics["num_active"] = sys.get_num_active()
+
+logging.info("calculating 'num_ancestors'")
+phylometrics["num_ancestors"] = sys.get_num_ancestors()
+
+logging.info("calculating 'num_outside'")
+phylometrics["num_outside"] = sys.get_num_outside()
+
+logging.info("calculating 'num_roots'")
+phylometrics["num_roots"] = sys.get_num_roots()
+
+logging.info("calculating 'num_taxa'")
+phylometrics["num_taxa"] = sys.get_num_taxa()
+
+logging.info("calculating 'phylogenetic_diversity'")
+phylometrics["phylogenetic_diversity"] = sys.get_phylogenetic_diversity()
+
+logging.info("calculating 'sum_pairwise_distance'")
+phylometrics["sum_pairwise_distance"] = sys.get_sum_pairwise_distance(False)
+
+logging.info("calculating 'sum_pairwise_distance_branch_only'")
+phylometrics["sum_pairwise_distance_branch_only"] = sys.get_sum_pairwise_distance(True)
+
+logging.info("calculating 'total_orgs'")
+phylometrics["total_orgs"] = sys.get_total_orgs()
+
+logging.info("calculating 'tree_size'")
+phylometrics["tree_size"] = sys.get_tree_size()
+
+logging.info("calculating 'variance_pairwise_distance'")
+phylometrics["variance_pairwise_distance"] = (
+  sys.get_variance_pairwise_distance(False)
+)
+
+logging.info("calculating 'variance_pairwise_distance_branch_only'")
+phylometrics["variance_pairwise_distance_branch_only"] = (
+  sys.get_variance_pairwise_distance(True)
+)
+
+logging.info("calculating 'mrca_depth'")
+phylometrics["mrca_depth"] = sys.mrca_depth()
+
+logging.info("calculating 'sackin_index'")
+phylometrics["sackin_index"] = sys.sackin_index()
+
+logging.info("calculating mean_evolutionary_distinctiveness")
+phylometrics[
+  "mean_evolutionary_distinctiveness"
+] = sys.get_mean_evolutionary_distinctiveness(
+  max_origin_time,
+)
+
+logging.info("calculating sum_evolutionary_distinctiveness")
+phylometrics[
+  "sum_evolutionary_distinctiveness"
+] = sys.get_sum_evolutionary_distinctiveness(
+  max_origin_time,
+)
+
+logging.info("calculating variance_evolutionary_distinctiveness")
+phylometrics[
+  "variance_evolutionary_distinctiveness"
+] = sys.get_variance_evolutionary_distinctiveness(
+  max_origin_time,
+)
+
+
+logging.info("phylometric calculations complete")
+
+
+phylometrics_records = [
+  {
+    **kn.unpack(kn.rejoin(phylogeny_path)),
+    **phylometrics,
+  }
+]
+logging.info("phylometrics_records")
+logging.info(str(phylometrics_records))
+
+phylometrics_df = pd.DataFrame.from_records(phylometrics_records)
+logging.info("phylometrics_df")
+logging.info(str(phylometrics_df))
+
+phylometrics_filename = kn.pack({
+  **kn.unpack(kn.rejoin(phylogeny_path)),
+  **{
+    "a" : "phylometrics",
+    "a_" : kn.unpack(kn.rejoin(phylogeny_path))["a"],
+    "ext" : ".csv",
+  },
+})
+phylometrics_path = kn.chop(
+  f"${BATCH_PATH}/"
+  f"{phylometrics_filename}",
+  mkdir=True,
+  logger=logging,
+)
+retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(
+  # retry workaround
+  lambda *args, **kwargs: phylometrics_df.to_csv(*args, **kwargs),
+)(phylometrics_path, index=False)
+
+provlog_path = f"{phylometrics_path}.provlog.yaml"
+retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)(shutil.copy)(f"{phylogeny_path}.provlog.yaml", provlog_path)
+
+@retry(
+  tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+)
+def do_save():
+  with open(provlog_path, "a+") as provlog_file:
+    provlog_file.write(
+f"""-
+  a: {provlog_path}
+  batch: {{ batch }}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: {{ revision }}
+  runmode: {{ runmode }}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 4
+  stage 4 batch path: $(readlink -f "${BATCH_PATH}")
+  phylogeny_path: {phylogeny_path}
+""",
+    )
+
+do_save()
+
+logging.info(f"wrote phylometrics to {phylometrics_path}")
+
+HEREDOC
+)
+
+TARGET_PHYLOGENY_FILES='{{ target_phylogeny_files }}'
+echo "TARGET_PHYLOGENY_FILES ${TARGET_PHYLOGENY_FILES}"
+NUM_TARGET_PHYLOGENY_FILES="$(echo ${TARGET_PHYLOGENY_FILES} | wc -w)"
+echo "NUM_TARGET_PHYLOGENY_FILES ${NUM_TARGET_PHYLOGENY_FILES}"
+
+for target_phylogeny_file in ${TARGET_PHYLOGENY_FILES}; do
+  python3 \
+    {% if 'production' == runmode %} -O {% endif %} \
+    -c "${PYSCRIPT}" \
+    "${target_phylogeny_file}"
+  echo "progress step"
+done >> >(tqdm \
+  --total "${NUM_TARGET_PHYLOGENY_FILES}" \
+  --desc "phylogeny file phylometrics completion" \
+  --mininterval 10 \
+    >> /dev/null \
+)
+
+echo "fin ${0}"
