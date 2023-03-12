@@ -11,8 +11,6 @@ RUN \
   echo "installed npm dependencies"
 
 RUN \
-  python3 -m pip install pip==23.0.1 --upgrade \
-    && \
   python3 -m pip install -r /opt/hstrat-evolutionary-inference/requirements.txt \
     && \
   echo "installed python dependencies"
