@@ -151,8 +151,8 @@ def do_collate_provlogs():
     contents = [*pool.imap(
       read_file_bytes,
       (
-        f"{phylometrics_path}.provlog.yaml"
-        for phylometrics_path in tqdm(
+        f"{audit_path}.provlog.yaml"
+        for audit_path in tqdm(
           globbed_audit_paths,
           desc="provlog_files",
           mininterval=10,
