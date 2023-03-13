@@ -46,6 +46,7 @@ for try in {0..9}; do
 done
 
 PYSCRIPT=$(cat << HEREDOC
+import gc
 import glob
 import logging
 import os
@@ -119,6 +120,10 @@ retry(
 )(collated_audit_path, index=False)
 
 logging.info(f"collated audit written to {collated_audit_path}")
+
+del collated_audit_df
+gc.collect()
+logging.info(f"collated_audit_df cleared from memory")
 
 collated_provlog_path = collated_audit_path + ".provlog.yaml"
 
