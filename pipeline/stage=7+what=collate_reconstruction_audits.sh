@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SCRIPT_PATH="$(realpath "$0")"
+echo "SCRIPT_PATH ${SCRIPT_PATH}"
+
 cd "$(dirname "$0")"
 
 source snippets/setup_instrumentation.sh
@@ -43,8 +46,11 @@ for try in {0..9}; do
 done
 
 PYSCRIPT=$(cat << HEREDOC
-import logging
+import gc
 import glob
+import logging
+import multiprocessing
+import os
 
 import pandas as pd
 from retry import retry
@@ -116,7 +122,21 @@ retry(
 
 logging.info(f"collated audit written to {collated_audit_path}")
 
+del collated_audit_df
+gc.collect()
+logging.info(f"collated_audit_df cleared from memory")
+
 collated_provlog_path = collated_audit_path + ".provlog.yaml"
+
+# adapted from https://stackoverflow.com/a/74214157
+def read_file_bytes(path: str, size: int = -1) -> bytes:
+    fd = os.open(path, os.O_RDONLY)
+    try:
+        if size == -1:
+            size = os.fstat(fd).st_size
+        return os.read(fd, size)
+    finally:
+        os.close(fd)
 
 @retry(
     tries=10,
@@ -127,18 +147,33 @@ collated_provlog_path = collated_audit_path + ".provlog.yaml"
     logger=logging,
 )
 def do_collate_provlogs():
+  with multiprocessing.Pool(processes=None) as pool:
+    contents = [*pool.imap(
+      read_file_bytes,
+      (
+        f"{audit_path}.provlog.yaml"
+        for audit_path in tqdm(
+          globbed_audit_paths,
+          desc="provlog_files",
+          mininterval=10,
+        )
+      ),
+    )]
+  logging.info("contents read in from provlogs")
+
   with open(collated_provlog_path, "wb") as f_out:
-      for audit_path in tqdm(
-        globbed_audit_paths,
-        desc="audit_paths",
+    f_out.writelines(
+      tqdm(
+        contents,
+        desc="provlog_contents",
         mininterval=10,
-      ):
-        provlog_path = audit_path + ".provlog.yaml"
-        with open(provlog_path, "rb") as f_in:
-            f_out.write(f_in.read())
+      ),
+    )
 do_collate_provlogs()
 
 logging.info(f"collated provlog written to {collated_provlog_path}")
+
+logging.info("PYSCRIPT complete")
 
 HEREDOC
 )
@@ -146,5 +181,31 @@ HEREDOC
 pwd
 
 python3 -c "${PYSCRIPT}"
+
+PROVLOG_PATH="${STAGE_PATH}/latest/a=collated-reconstruction-audits+ext=.csv.provlog.yaml"
+echo "PROVLOG_PATH ${PROVLOG_PATH}"
+
+cat << HEREDOC >> "${PROVLOG_PATH}"
+-
+  a: ${PROVLOG_PATH}
+  batch: ${BATCH}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: ${REVISION}
+  runmode: ${RUNMODE}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 7
+  stage 6 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+  stage 7 batch path: $(readlink -f "${BATCH_PATH}")
+  script path: ${SCRIPT_PATH}
+HEREDOC
+
+echo "appended new entry to ${PROVLOG_PATH}"
+
+gzip "${PROVLOG_PATH}"
+
+echo "gzipped ${PROVLOG_PATH}"
 
 echo "fin ${0}"
