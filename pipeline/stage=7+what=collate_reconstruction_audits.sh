@@ -49,6 +49,7 @@ PYSCRIPT=$(cat << HEREDOC
 import gc
 import glob
 import logging
+import multiprocessing
 import os
 
 import pandas as pd
@@ -146,14 +147,19 @@ def read_file_bytes(path: str, size: int = -1) -> bytes:
     logger=logging,
 )
 def do_collate_provlogs():
-  contents_list = []
-  for phylometrics_path in tqdm(
-    globbed_audit_paths,
-    desc="provlog_files",
-    mininterval=10,
-  ):
-    provlog_path = phylometrics_path + ".provlog.yaml"
-    contents_list.append(read_file_bytes(provlog_path, -1))
+  contents_list =  multiprocessing.Pool(
+    processes=None
+  ).map(
+    read_file_bytes,
+    (
+      f"{phylometrics_path}.provlog.yaml"
+      for phylometrics_path in tqdm(
+        globbed_audit_paths,
+        desc="provlog_files",
+        mininterval=10,
+      )
+    ),
+  )
 
   with open(collated_provlog_path, "wb") as f_out:
     f_out.writelines(
