@@ -1,3 +1,40 @@
 \section{Introduction} \label{sec:introduction}
 
+The utility of artificial life systems as an experimental platform to study evolution hinges on the ability to observe and interpret underlying evolutionary dynamics.
+As systems get more complex this problem gets more difficult.
+
+Phylogenetic analyses help with this problem by providing a window that generalizes across systems.
+These tools are commonly used to interpret evolutionary trajectories and stepping stones (Avida flame graphs, lalejini plasticity).
+This is important for understanding how evolutionary processes navigate the genetic search space.
+Although less common, phylogenetic analyses have great potential to be used to characterize evolutionary dynamics such as selection pressure (i.e., ongoing adaptation) and ecological dynamics.
+These are of core interest to artificial life, particularly with respect to OEE.
+
+Some groundwork has been done in the fields of conservation biology and cancer biology, as well as in artificial life (cite ``tape of life''?) to understand how evolutionary dynamics affect phylogenetic structure (and the fingerprints of evolutionary dynamics on phylogenetic structure) but this is still a rapidly emerging field (be sure to hedge here).
+In particular, existing work has shown x, y and z.
+
+One major difference between digital study systems and biological study systems is the availability of perfect data.
+In biology, rely on reconstructions to estimate phylogenetic history; the effect of estimation error on phylometrics is poorly understood.
+As digital evolution systems scale, issues of data loss and decentralization will make perfect tracking at best inefficient and at worst untenable.
+So, it seems likely that some systems will need to adopt a decentralized, reconstruction-based approach similar to biological data.
+Decentralization will also likely introduce an aspect of spatial structure (i.e., populations will no longer be ``well-mixed'') which will further complicate phylogenetic analyses.
+(maybe briefly cite/mention effect of spatial structure on phylogenies)
+
+The recently-developed ``hereditary stratigraphy'' approach demonstrated a lightweight annotation scheme that can give tunably precise information about the phylogenetic history between any two extant organisms
+In order to put hereditary stratigraphy into practice to better observe digital evolution systems will require an understanding of how ecology and selection pressure manifest in phylogenetic structure and also how potentially confounding factors of estimation uncertainty and spatial structure manifest.
+Indeed, as artificial life systems scale they are becoming more reminsicent of biological systems and these findings will be applicable to phylogenetics work in biology outside of artificial life.
+
+In this paper, we focus on methodological and theoretical foundations that will be needed to use phylogenetic analyses to observe evolutionary dynamics in complex, distributed artificial life systems.
+\begin{enumerate}
+    \item need to be able to do fast, accurate tree reconstructions for very large distributed populations
+    \item need to understand the relationship between evolutionary dynamics and phylogenetic metrics 
+    \item distributed computation introduces a spatial structure nuissance factor, need to understand effect of that on phylogenetic structure
+    \item reconstruction introduces estimation error, need to understand effects of that on phylogenetic structure
+    \begin{enumerate}
+        \item how much precision is required for accurate phylogenetic metrics?
+        \item if bias is introduced, what type of bias (so could still detect "conservatively")
+    \end{enumerate}
+    \end{enumerate}
+
+this paper does those things (maybe make each of those points a subsection and then within those subsections describe what is done in this paper for those?)
+
 example \citep{gagliardi2019international}

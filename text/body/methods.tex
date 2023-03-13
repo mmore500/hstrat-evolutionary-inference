@@ -1,1 +1,47 @@
 \section{Methods} \label{sec:methods}
+
+\subsection{Model System}
+
+genomes (float ``fitness'' value), mutation, and population size
+
+tournament selection
+
+island structure
+
+niche structure
+
+define evolutionary regimes (table?)
+
+sensitivity analysis variables:
+mutation distribution
+num generations elapsed
+... sensitivity analyses are included in the supplement and had generally similar results (I assume, check this) to the main results presented here
+
+we performed 50 replicates of each evolutionary ``regime''
+
+\subsection{Hereditary Stratigraphic Annotations}
+
+the perfect phylogenies were used to generate annotations and then reconstructions so each replicate of the perfect data has directly corresponding replicates of the reconstruction data
+
+be sure to mention recency-proportional resolution, and that 1-byte strata were used (mention how big the annotations are at the end of the runs)
+
+\subsection{Agglomerative, Trie-based Reconstruction}
+
+\subsection{Phylometrics}
+\begin{itemize}
+    \item Colless-like Index \citep{mirSoundCollesslikeBalance2018}
+    \item Mean Pairwise Distance
+    \item Num Ancestors
+    \item Mean Evolutioanry Distinctiveness \citep{isaacMammalsEDGEConservation2007}
+\end{itemize}
+
+\subsection{Software and Data Availability}
+
+Example phylogeny-generation, annotation implementation, and reconstruction tools are available in a Production-ready Python package published on PyPi (cite JOSS) A C++ annotation system that will interoperate fully with the Python package is under active development and will be released imminently.
+Very explicitly say that we want people to use this software in their own projects?
+
+materials and scripts for these experiments are available at \url{https://github.com/mmore500/hstrat-evolutionary-inference/}. Cite software used (look through requirements.txt dependencies)
+
+how long did phylogeny generation take? how long did reconstruction take?
+
+Data is available via OSF (give link and cite) \url{https://osf.io/vtxwd/}

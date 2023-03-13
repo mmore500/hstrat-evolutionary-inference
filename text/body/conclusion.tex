@@ -1,1 +1,30 @@
 \section{Conclusion} \label{sec:conclusion}
+
+recap motivation
+\begin{itemize}
+    \item phylogenetic analysis has great potential to shed light on evolutionary dynamics
+    \item however, understanding of the relationship between selection pressure and ecology and phylogenetic structure is nascent
+    \item   and the potentialy confounding impact of spatial structure and reconstruction error is not well understood
+\end{itemize}
+
+recap work and findings
+In this paper, we focus on methodological and theoretical foundations that will be needed to use phylogenetic analyses to observe evolutionary dynamics in complex, distributed artificial life systems.
+\begin{enumerate}
+    \item need to be able to do fast, accurate tree reconstructions for very large distributed populations
+    \item need to understand the relationship between evolutionary dynamics and phylogenetic metrics 
+    \item distributed computation introduces a spatial structure nuissance factor, need to understand effect of that on phylogenetic structure
+    \item reconstruction introduces estimation error, need to understand effects of that on phylogenetic structure
+    \begin{enumerate}
+        \item how much precision is required for accurate phylogenetic metrics?
+        \item if bias is introduced, what type of bias (so could still detect "conservatively")
+    \end{enumerate}
+    \end{enumerate}
+
+future work:
+\begin{itemize}
+    \item better theory and methodology for null models; in this work we performed comparisons between replicates with different system parameterizations; in many contexts, this might not be practical or possible
+    \item  incorporate information about ancestral state through ``fossils'' and see how well/accurately they can be tied into the tree of extant organisms (initial signs are good; unit tests with reconstructions from organisms sampled from different phylogenetic depths)
+    \item  understanding complications of sexual recombinaton
+\end{itemize}
+
+closing point: we want to develop tools that are applicable across alife systems; software is available and is ready to be used in production; we hope that this can play a role in further developing large-scale (parallel and distributed) artificial life systems as an experimental tool
