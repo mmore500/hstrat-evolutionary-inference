@@ -193,4 +193,8 @@ HEREDOC
 
 echo "appended new entry to ${PROVLOG_PATH}"
 
+gzip "${PROVLOG_PATH}"
+
+echo "gzipped ${PROVLOG_PATH}"
+
 echo "fin ${0}"
