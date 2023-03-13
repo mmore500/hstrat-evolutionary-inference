@@ -46,8 +46,9 @@ for try in {0..9}; do
 done
 
 PYSCRIPT=$(cat << HEREDOC
-import logging
 import glob
+import logging
+import os
 
 import pandas as pd
 from retry import retry
@@ -119,6 +120,48 @@ retry(
 
 logging.info(f"collated audit written to {collated_audit_path}")
 
+collated_provlog_path = collated_audit_path + ".provlog.yaml"
+
+# adapted from https://stackoverflow.com/a/74214157
+def read_file_bytes(path: str, size: int = -1) -> bytes:
+    fd = os.open(path, os.O_RDONLY)
+    try:
+        if size == -1:
+            size = os.fstat(fd).st_size
+        return os.read(fd, size)
+    finally:
+        os.close(fd)
+
+@retry(
+    tries=10,
+    delay=1,
+    max_delay=10,
+    backoff=2,
+    jitter=(0, 4),
+    logger=logging,
+)
+def do_collate_provlogs():
+  contents_list = []
+  for phylometrics_path in tqdm(
+    globbed_audit_paths,
+    desc="provlog_files",
+    mininterval=10,
+  ):
+    provlog_path = phylometrics_path + ".provlog.yaml"
+    contents_list.append(read_file_bytes(provlog_path, -1))
+
+  with open(collated_provlog_path, "wb") as f_out:
+    f_out.writelines(
+      tqdm(
+        contents_list,
+        desc="provlog_contents",
+        mininterval=10,
+      ),
+    )
+do_collate_provlogs()
+
+logging.info(f"collated provlog written to {collated_provlog_path}")
+
 logging.info("PYSCRIPT complete")
 
 HEREDOC
@@ -130,13 +173,6 @@ python3 -c "${PYSCRIPT}"
 
 PROVLOG_PATH="${STAGE_PATH}/latest/a=collated-reconstruction-audits+ext=.csv.provlog.yaml"
 echo "PROVLOG_PATH ${PROVLOG_PATH}"
-
-# adapted from https://stackoverflow.com/a/26739957
-find "${PREV_STAGE_PATH}/latest/" \
-  -type f -name "*+ext=.csv.provlog.yaml" -exec cat {} + \
-  >> "${PROVLOG_PATH}"
-
-echo "colated provlog files to ${PROVLOG_PATH}"
 
 cat << HEREDOC >> "${PROVLOG_PATH}"
 -
