@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SCRIPT_PATH="$(realpath "$0")"
+echo "SCRIPT_PATH ${SCRIPT_PATH}"
+
 cd "$(dirname "$0")"
 
 source snippets/setup_instrumentation.sh
@@ -116,29 +119,7 @@ retry(
 
 logging.info(f"collated phylometrics written to {collated_phylometrics_path}")
 
-collated_provlog_path = collated_phylometrics_path + ".provlog.yaml"
-
-@retry(
-    tries=10,
-    delay=1,
-    max_delay=10,
-    backoff=2,
-    jitter=(0, 4),
-    logger=logging,
-)
-def do_collate_provlogs():
-  with open(collated_provlog_path, "wb") as f_out:
-      for phylometrics_path in tqdm(
-        globbed_phylometrics_paths,
-        desc="phylometrics_paths",
-        mininterval=10,
-      ):
-        provlog_path = phylometrics_path + ".provlog.yaml"
-        with open(provlog_path, "rb") as f_in:
-            f_out.write(f_in.read())
-do_collate_provlogs()
-
-logging.info(f"collated provlog written to {collated_provlog_path}")
+logging.info("PYSCRIPT complete")
 
 HEREDOC
 )
@@ -146,5 +127,34 @@ HEREDOC
 pwd
 
 python3 -c "${PYSCRIPT}"
+
+PROVLOG_PATH="${STAGE_PATH}/latest/a=collated-phylometrics+ext=.csv.provlog.yaml"
+echo "PROVLOG_PATH ${PROVLOG_PATH}"
+
+# adapted from https://stackoverflow.com/a/26739957
+find "${PREV_STAGE_PATH}/latest/" \
+  -type f -name "*+ext=.csv.provlog.yaml" -exec cat {} + \
+  >> "${PROVLOG_PATH}"
+
+echo "colated provlog files to ${PROVLOG_PATH}"
+
+cat << HEREDOC >> "${PROVLOG_PATH}"
+-
+  a: ${PROVLOG_PATH}
+  batch: ${BATCH}
+  date: $(date --iso-8601=seconds)
+  hostname: $(hostname)
+  revision: ${REVISION}
+  runmode: ${RUNMODE}
+  user: $(whoami)
+  uuid: $(uuidgen)
+  slurm_job_id: ${SLURM_JOB_ID-none}
+  stage: 5
+  stage 4 batch path: $(readlink -f "${PREV_STAGE_PATH}")
+  stage 5 batch path: $(readlink -f "${BATCH_PATH}")
+  script path: ${SCRIPT_PATH}
+HEREDOC
+
+echo "appended new entry to ${PROVLOG_PATH}"
 
 echo "fin ${0}"
