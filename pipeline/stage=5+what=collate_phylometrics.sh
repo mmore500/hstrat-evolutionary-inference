@@ -119,6 +119,39 @@ retry(
 
 logging.info(f"collated phylometrics written to {collated_phylometrics_path}")
 
+collated_provlog_path = collated_phylometrics_path + ".provlog.yaml"
+
+@retry(
+    tries=10,
+    delay=1,
+    max_delay=10,
+    backoff=2,
+    jitter=(0, 4),
+    logger=logging,
+)
+def do_collate_provlogs():
+  contents_list = []
+  for phylometrics_path in tqdm(
+    globbed_phylometrics_paths,
+    desc="provlog_files",
+    mininterval=10,
+  ):
+    provlog_path = phylometrics_path + ".provlog.yaml"
+    with open(provlog_path, "rb") as f_in:
+      contents_list.append(f_in.read(-1))
+
+  with open(collated_provlog_path, "wb") as f_out:
+    f_out.writelines(
+      tqdm(
+        contents_list,
+        desc="provlog_contents",
+        mininterval=10,
+      ),
+    )
+do_collate_provlogs()
+
+logging.info(f"collated provlog written to {collated_provlog_path}")
+
 logging.info("PYSCRIPT complete")
 
 HEREDOC
@@ -129,13 +162,7 @@ pwd
 python3 -c "${PYSCRIPT}"
 
 PROVLOG_PATH="${STAGE_PATH}/latest/a=collated-phylometrics+ext=.csv.provlog.yaml"
-
-# adapted from https://stackoverflow.com/a/26739957
-find "${PREV_STAGE_PATH}/latest/" \
-  -type f -name "*+ext=.csv.provlog.yaml" -exec cat {} + \
-  >> "${PROVLOG_PATH}"
-
-echo "colated provlog files to ${PROVLOG_PATH}"
+echo "PROVLOG_PATH ${PROVLOG_PATH}"
 
 cat << HEREDOC >> "${PROVLOG_PATH}"
 -
