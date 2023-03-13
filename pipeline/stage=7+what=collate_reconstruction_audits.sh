@@ -147,24 +147,24 @@ def read_file_bytes(path: str, size: int = -1) -> bytes:
     logger=logging,
 )
 def do_collate_provlogs():
-  contents_list =  multiprocessing.Pool(
-    processes=None
-  ).map(
-    read_file_bytes,
-    (
-      f"{phylometrics_path}.provlog.yaml"
-      for phylometrics_path in tqdm(
-        globbed_audit_paths,
-        desc="provlog_files",
-        mininterval=10,
-      )
-    ),
-  )
+  with multiprocessing.Pool(processes=None) as pool:
+    contents = [*pool.imap(
+      read_file_bytes,
+      (
+        f"{phylometrics_path}.provlog.yaml"
+        for phylometrics_path in tqdm(
+          globbed_audit_paths,
+          desc="provlog_files",
+          mininterval=10,
+        )
+      ),
+    )]
+  logging.info("contents read in from provlogs")
 
   with open(collated_provlog_path, "wb") as f_out:
     f_out.writelines(
       tqdm(
-        contents_list,
+        contents,
         desc="provlog_contents",
         mininterval=10,
       ),
