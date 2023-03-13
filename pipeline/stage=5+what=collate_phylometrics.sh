@@ -46,8 +46,9 @@ for try in {0..9}; do
 done
 
 PYSCRIPT=$(cat << HEREDOC
-import logging
 import glob
+import logging
+import os
 
 import pandas as pd
 from retry import retry
@@ -120,6 +121,16 @@ retry(
 logging.info(f"collated phylometrics written to {collated_phylometrics_path}")
 
 collated_provlog_path = collated_phylometrics_path + ".provlog.yaml"
+
+# adapted from https://stackoverflow.com/a/74214157
+def read_file_bytes(path: str, size: int = -1) -> str:
+    fd = os.open(path, os.O_RDONLY)
+    try:
+        if size == -1:
+            size = os.fstat(fd).st_size
+        return os.read(fd, size).decode()
+    finally:
+        os.close(fd)
 
 @retry(
     tries=10,
