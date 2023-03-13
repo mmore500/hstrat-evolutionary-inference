@@ -50,6 +50,7 @@ interval-search==0.3.1
     # via hstrat
 iterpop==0.4.1
     # via
+    #   -r requirements.in
     #   alifedata-phyloinformatics-convert
     #   hstrat
 j2cli==0.3.10
@@ -95,6 +96,7 @@ networkx==3.0
     #   hstrat
 numpy==1.21.6
     # via
+    #   -r requirements.in
     #   alifedata-phyloinformatics-convert
     #   biopython
     #   hstrat
@@ -102,6 +104,7 @@ numpy==1.21.6
     #   numpyencoder
     #   pandas
     #   pandera
+    #   scipy
     #   seaborn
 numpyencoder==0.3.0
     # via -r requirements.in
@@ -157,6 +160,8 @@ retry==0.9.2
     #   keyname
 safe-assert==0.4.0
     # via hstrat
+scipy==1.7.3
+    # via -r requirements.in
 seaborn==0.12.2
     # via hstrat
 six==1.16.0
