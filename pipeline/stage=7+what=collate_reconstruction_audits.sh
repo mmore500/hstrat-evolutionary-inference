@@ -129,7 +129,6 @@ pwd
 python3 -c "${PYSCRIPT}"
 
 PROVLOG_PATH="${STAGE_PATH}/latest/a=collated-reconstruction-audits+ext=.csv.provlog.yaml"
-echo "PROVLOG_PATH ${PROVLOG_PATH}"
 
 # adapted from https://stackoverflow.com/a/26739957
 find "${PREV_STAGE_PATH}/latest/" \
