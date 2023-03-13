@@ -123,12 +123,12 @@ logging.info(f"collated phylometrics written to {collated_phylometrics_path}")
 collated_provlog_path = collated_phylometrics_path + ".provlog.yaml"
 
 # adapted from https://stackoverflow.com/a/74214157
-def read_file_bytes(path: str, size: int = -1) -> str:
+def read_file_bytes(path: str, size: int = -1) -> bytes:
     fd = os.open(path, os.O_RDONLY)
     try:
         if size == -1:
             size = os.fstat(fd).st_size
-        return os.read(fd, size).decode()
+        return os.read(fd, size)
     finally:
         os.close(fd)
 
@@ -148,8 +148,7 @@ def do_collate_provlogs():
     mininterval=10,
   ):
     provlog_path = phylometrics_path + ".provlog.yaml"
-    with open(provlog_path, "rb") as f_in:
-      contents_list.append(f_in.read(-1))
+    contents_list.append(read_file_bytes(provlog_path, -1))
 
   with open(collated_provlog_path, "wb") as f_out:
     f_out.writelines(
