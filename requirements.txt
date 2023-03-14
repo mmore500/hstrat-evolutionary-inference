@@ -184,6 +184,7 @@ scipy==1.7.3
     #   seaborn
 seaborn==0.11.0
     # via
+    #   -r requirements.in
     #   hstrat
     #   ptitprince
 six==1.16.0
