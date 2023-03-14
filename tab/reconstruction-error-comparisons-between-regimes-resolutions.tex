@@ -1,0 +1,106 @@
+\input{lib/importpath.tex}
+
+% adapted from https://www.overleaf.com/learn/latex/Commands
+\providecommand{\dissertationelse}[2]{%
+% adapted from https://tex.stackexchange.com/a/33577
+\ifdefined\DISSERTATION
+#1
+\else
+#2
+\fi
+}
+
+
+% adapted from https://tex.stackexchange.com/a/8620
+\def\replacesinglequote#1{%
+  \IfSubStr{#1}{'}{%
+    \StrSubstitute{#1}{'}{\,}}{#1}}
+    
+\providecommand\rotcol[1]{ \multicolumn{1}{@{}@{}}{} \adjustbox{angle=60,lap=\width}{\rule{0.4\textwidth}{0.8pt}} \hfill \makebox[3ex]{\adjustbox{angle=60,lap=\width}{\bfseries \hspace{1ex} #1}} \hfill }
+
+{
+  \onecolumn
+
+  \begin{landscape}
+  \dissertationelse{\fontsize{8}{9}\selectfont}{\footnotesize}
+  \csvstyle{myTableStyle}{
+    longtable=@{\hspace{-.5\arrayrulewidth}}c@{\hspace{-.5\arrayrulewidth}}|l|l|l|l|l|l|l|l|l|l|l|l|l|l|,
+    table head=\caption{
+      Full \regression{} results of quality of service metrics against against categorically coded treatment for faulty hardware experiment (Section \ref{sec:with-lac-417-vs-sans-lac-417}).
+      Significance level $p < 0.05$ used.
+      Inf or NaN values may occur due to multicollinearity or due to inf or NaN observations.
+    }\label{tab:with-lac-417-vs-sans-lac-417-\regressionslug} \\
+      \toprule%
+      \multicolumn{1}{@{\hspace{-.5\arrayrulewidth}}l@{\hspace{-.5\arrayrulewidth}}}{} &%
+      \rotcol{ Metric } &%
+      \rotcol{ Statistic } &%
+      \rotcol{ Significant Effect Sign } &%
+      \rotcol{ Cpus Per Node } &%
+      \rotcol{ Num Simels Per Cpu} &%
+      \rotcol{ Num Processes} &%
+      \rotcol{ Absolute Effect Size} &%
+      \rotcol{ Absolute Effect Size 95\% CI Lower Bound} &%
+      \rotcol{ Absolute Effect Size 95\% CI Upper Bound} &%
+      \rotcol{ Relative Effect Size} &%
+      \rotcol{ Relative Effect Size 95\% CI Lower Bound} &%
+      \rotcol{ Relative Effect Size 95\% CI Upper Bound} &%
+      \rotcol{$\mathbf{n}$} & %
+      \rotcol{$\mathbf{p}$} %
+      \vspace{-1ex} \\ \midrule\endfirsthead
+      \caption*{\tablename{} \thetable{} (cont'd)} \\
+      \toprule%
+      \multicolumn{1}{@{\hspace{-.5\arrayrulewidth}}l@{\hspace{-.5\arrayrulewidth}}}{} &%
+      \rotcol{ Metric } &%
+      \rotcol{ Statistic } &%
+      \rotcol{ Significant Effect Sign } &%
+      \rotcol{ Cpus Per Node } &%
+      \rotcol{ Num Simels Per Cpu} &%
+      \rotcol{ Num Processes} &%
+      \rotcol{ Absolute Effect Size} &%
+      \rotcol{ Absolute Effect Size 95\% CI Lower Bound} &%
+      \rotcol{ Absolute Effect Size 95\% CI Upper Bound} &%
+      \rotcol{ Relative Effect Size} &%
+      \rotcol{ Relative Effect Size 95\% CI Lower Bound} &%
+      \rotcol{ Relative Effect Size 95\% CI Upper Bound} &%
+      \rotcol{$\mathbf{n}$} & %
+      \rotcol{$\mathbf{p}$} %
+      \vspace{-1ex} \\ \midrule\endhead
+      \bottomrule\endfoot,
+    late after line=\\\hline,
+    late after last line=\\\bottomrule,
+    head to column names,
+    filter=\equal{\csuse{RegressionModelSlug}}{\regressionslug},
+  }
+
+  % pass an arbitrary filename, potentially with unsafe characters
+  % adapted from https://tex.stackexchange.com/a/36178
+  \catcode`\%=12
+  \providecommand\filename{}
+  \renewcommand\filename{\detokenize{binder/binder/outdata/a=reconstruction-error-comparisons-between-resolutions+ext=.csv}}
+  \catcode`\%=14
+
+  \csvreader[myTableStyle]{\importpath\filename}{}%
+  { %
+    &%
+    \csuse{DependentVariable} &%
+    \csuse{Statistic} &%
+    \ifthenelse{\equal{\csuse{SignificantEffectSign}}{-}}{\cellcolor{red!25}}{}%
+    \ifthenelse{\equal{\csuse{SignificantEffectSign}}{+}}{\cellcolor{green!25}}{}%
+    \ifthenelse{\equal{\csuse{SignificantEffectSign}}{0}}{\cellcolor{gray!25}}{}%
+    \csuse{SignificantEffectSign} &%
+    \replacesinglequote{\csuse{CpusPerNode}} &%
+    \replacesinglequote{\csuse{NumSimelsPerCpu}} &%
+    \replacesinglequote{\csuse{NumProcessesPrettyprint}} &%
+    \replacesinglequote{\csuse{AbsoluteEffectSize}} &%
+    \replacesinglequote{\csuse{AbsoluteEffectSize95CILowerBound}} &%
+    \replacesinglequote{\csuse{AbsoluteEffectSize95CIUpperBound}} &%
+    \replacesinglequote{\csuse{RelativeEffectSize}} &%
+    \replacesinglequote{\csuse{RelativeEffectSize95CILowerBound}} &%
+    \replacesinglequote{\csuse{RelativeEffectSize95CIUpperBound}} &%
+    \replacesinglequote{\csuse{n}} &%
+    \replacesinglequote{\csuse{p}} %
+  }
+
+  \end{landscape}
+
+  }
