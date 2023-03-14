@@ -25,23 +25,39 @@ the perfect phylogenies were used to generate annotations and then reconstructio
 
 be sure to mention recency-proportional resolution, and that 1-byte strata were used (mention how big the annotations are at the end of the runs)
 
+33\% resolution -> 68 strata after $2^{15} \times 8$ generations (0.068kb)
+10\% resolution -> 170 strata after $2^{15} \times 8$ generations (0.17kb)
+3\% resolution -> 435 strata after $2^{15} \times 8$ generations (0.435kb)
+1\% resolution -> 1239 strata after $2^{15} \times 8$ generations (1.239kb)
+
+
 \subsection{Agglomerative, Trie-based Reconstruction}
 
 \subsection{Phylometrics}
-\begin{itemize}
-    \item Colless-like Index \citep{mirSoundCollesslikeBalance2018}
-    \item Mean Pairwise Distance
-    \item Num Ancestors
-    \item Mean Evolutionary Distinctiveness \citep{isaacMammalsEDGEConservation2007}
-\end{itemize}
+
+A wide range of metrics exist for quantifying the topology of a phylogeny. Tucker et. al showed that these metrics can be classified into the following three dimensions: richness, divergence, and regularity \citep{tuckerGuidePhylogeneticMetrics2017}. 
+Richness metrics quantify the amount of phylogenetic diversity/evolutionary history represented by a phylogeny. Divergence metrics metrics quantify how different the units of the phylogeny are from each other. Regularity metrics quantify the variance of other properties (i.e. how consistent they are across the phylogeny). Here, we focus on four metrics spread across these categories:
+
+\textbf{Number of Internal Nodes:} This measurement simply counts the number of non-extant taxa in the phylogeny (i.e. the number of non-leaf nodes). Because the reconstructed trees do not contain any internal nodes not associated with a branching point (i.e. unifurcations), we strip such nodes out of the reference trees as well. It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}, the primary differences being that the number of internal nodes is unaffected by branch lengths and the number of leaf nodes. Consequently, we would expect it to be increased by the presence of ecology or spatial structure, as both these factors increase diversity.
+
+\textbf{Colless-like Index:} The original Colless Index \citep{collessReviewPhylogeneticsTheory1982}, also often referred to as $I_c$ \citep{shaoTreeBalance1990}, is a measure of tree imbalance (i.e. it gets higher as the tree gets less balanced). In the context of Tucker et. al's framework, it is a regularity metric. However, the traditional Colless Index only works for strictly bifurcating trees. As our trees have multifurcations, we instead use the Colles-like Index, which is an extension of the Colless Index to multifurcating trees \citep{mirSoundCollesslikeBalance2018}. Tree imbalance is thought to be associated with varying ecological pressures \citep{chamberlainPhylogeneticTreeShape2014, burressEcologicalOpportunityAlters} and has also been observed to increase in the presence of spatial structure \citep{scottInferringTumorProliferative2020}.
+
+\textbf{Mean Pairwise Distance:} This metric is calculated by computing the shortest distance between all pairs of leaf nodes and taking the mean of these values \citep{webbExploringPhylogeneticStructure2000}. Note that these distances are measured in terms of the number of nodes in between the pair, not in terms of branch lengths. Mean pairwise distance is a metric of evolutionary divergence \citep{tuckerGuidePhylogeneticMetrics2017}. Mean pairwise distance should be increased by scenarios that promote the long-term maintenance of distinct phylogenetic branches, such as ecology. Conversely, factors that act to reduce diversity should also reduce mean pairwise distance.
+
+\textbf{Mean Evolutionary Distinctiveness:} Evolutionary distinctiveness is a metric that can be calculated for individual taxa to quantify how evolutionarily different that taxon is from all other taxa in the phylogeny \citep{isaacMammalsEDGEConservation2007}. To get mean evolutionary distinctiveness, we average this value across all extant taxa in the tree. Like mean pairwise distance, mean evolutionary distinctiveness is a metric of evolutionary divergence. However, it is known to capture substantially different information than mean pairwise distance \citep{tuckerGuidePhylogeneticMetrics2017}. Unlike our other metrics, evolutionary distinctiveness is heavily influenced by branch length. We generally expect mean evolutionary distinctiveness to be increased by similar factors to mean pairwise distance.
+
 
 \subsection{Software and Data Availability}
 
 Example phylogeny-generation, annotation implementation, and reconstruction tools are available in a Production-ready Python package published on PyPi (cite JOSS) A C++ annotation system that will interoperate fully with the Python package is under active development and will be released imminently.
 Very explicitly say that we want people to use this software in their own projects?
 
+Cite phylotrackpy for metric calculations
+
 materials and scripts for these experiments are available at \url{https://github.com/mmore500/hstrat-evolutionary-inference/}. Cite software used (look through requirements.txt dependencies)
 
 how long did phylogeny generation take? how long did reconstruction take?
 
-Data is available via OSF (give link and cite) \url{https://osf.io/vtxwd/}
+Data is available via OSF (give link and cite) 
+\url{https://osf.io/vtxwd/?view_only=4dd2cd7ee24b450d96358f891a41414f}
+% \url{https://osf.io/vtxwd/}
