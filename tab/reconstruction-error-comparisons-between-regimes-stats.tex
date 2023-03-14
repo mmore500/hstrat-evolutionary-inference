@@ -1,16 +1,56 @@
-\begin{table}[h!]
-  \centering
-  \begin{tabular}{||c c c c||}
-   \hline
-   Col1 & Col2 & Col2 & Col3 \\ [0.5ex]
-   \hline\hline
-   1 & 6 & 87837 & 787 \\
-   2 & 7 & 78 & 5415 \\
-   3 & 545 & 778 & 7507 \\
-   4 & 545 & 18744 & 7560 \\
-   5 & 88 & 788 & 6344 \\ [1ex]
-   \hline
-  \end{tabular}
-  \caption{This is the caption for the first table.}
-  \label{reconstruction-error-comparisons-between-regimes-stats:1}
-\end{table}
+\begin{longtable}{||c c c c c c c c||}\small
+    \centering
+     n & N & phylometric & statistic & p & quality & epoch & mut\_distn \\  [0.5ex]
+     \hline
+         50 & 7 & quartet\_distance & 219.55907594627615 & 1.2920428677438234e-44 & 1\% resolution & 0 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 203.95078485958493 & 2.736072793119307e-41 & 10\% resolution & 0 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 212.82948376068384 & 3.5139876420813058e-43 & 3\% resolution & 0 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 212.39438534798524 & 4.350306421449404e-43 & 33\% resolution & 0 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 205.81266520146528 & 1.0980999192103203e-41 & 1\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 194.00096507936496 & 3.5867188973838946e-39 & 10\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 206.17668376068355 & 9.185784249944943e-42 & 3\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 210.97092454212452 & 8.746509232443025e-43 & 33\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 124.53493919413904 & 1.815603332575493e-24 & 1\% resolution & 2 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 116.08906080586098 & 1.079032801260482e-22 & 10\% resolution & 2 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 111.69167472527465 & 9.01493733717463e-22 & 3\% resolution & 2 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 107.46173577533591 & 6.927239490354188e-21 & 33\% resolution & 2 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 117.88159609279614 & 4.538084250352261e-23 & 1\% resolution & 2 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 111.82967716727717 & 8.434303366671717e-22 & 10\% resolution & 2 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 116.20715995116007 & 1.0191960308328227e-22 & 3\% resolution & 2 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 126.4321406593408 & 7.243896684766159e-25 & 33\% resolution & 2 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 15.220032234432438 & 0.018612689378312158 & 1\% resolution & 7 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 19.70708473748482 & 0.0031220877670887323 & 10\% resolution & 7 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 20.313830525030426 & 0.0024346752583249863 & 3\% resolution & 7 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 39.48849621489626 & 5.740575781026434e-07 & 33\% resolution & 7 & np.random.exponential \\
+         50 & 7 & quartet\_distance & 44.08680244200241 & 7.104814914052081e-08 & 1\% resolution & 7 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 45.72160000000008 & 3.363433540659619e-08 & 10\% resolution & 7 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 42.02127472527468 & 1.821071029067775e-07 & 3\% resolution & 7 & np.random.standard\_normal \\
+         50 & 7 & quartet\_distance & 41.11610451770457 & 2.7470961247175667e-07 & 33\% resolution & 7 & np.random.standard\_normal \\
+         50 & 7 & triplet\_distance & 219.83138852258844 & 1.1303470793240844e-44 & 1\% resolution & 0 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 205.053515018315 & 1.5933482718201433e-41 & 10\% resolution & 0 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 213.7715848595849 & 2.213227108213196e-43 & 3\% resolution & 0 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 221.1279785103784 & 5.980294004441288e-45 & 33\% resolution & 0 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 205.68952576312563 & 1.166450897122868e-41 & 1\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & triplet\_distance & 194.4756004884007 & 2.842707552114955e-39 & 10\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & triplet\_distance & 205.9855550671548 & 1.0088382917621928e-41 & 3\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & triplet\_distance & 213.51245128205142 & 2.513346940803161e-43 & 33\% resolution & 0 & np.random.standard\_normal \\
+         50 & 7 & triplet\_distance & 124.53493919413904 & 1.815603332575493e-24 & 1\% resolution & 2 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 117.85589059829067 & 4.5948169778277324e-23 & 10\% resolution & 2 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 112.24245372405358 & 6.911288099011626e-22 & 3\% resolution & 2 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 115.0902388278389 & 1.74803556305814e-22 & 33\% resolution & 2 & np.random.exponential \\
+         50 & 7 & triplet\_distance & 118.35508669108663 & 3.609759728587748e-23 & 1\% resolution & 2 & np.random.standard\_normal \\
+         50 & 7 & triplet\_distance & 111.57347789987784 & 9.543894483853064e-22 & 10\% resolution & 2 & np.random.standard\_normal \\
+         50 & 7 & triplet\_distance & 116.63100561660576 & 8.304792347561794e-23 & 3\% resolution & 2 & np.random.standard\_normal \\
+        50 & 7 & triplet\_distance & 134.33480048840033 & 1.5695878494445357e-26 & 33\% resolution & 2 & np.random.standard\_normal \\
+        50 & 7 & triplet\_distance & 15.220032234432438 & 0.018612689378312158 & 1\% resolution & 7 & np.random.exponential \\
+        50 & 7 & triplet\_distance & 19.70708473748482 & 0.0031220877670887323 & 10\% resolution & 7 & np.random.exponential \\
+        50 & 7 & triplet\_distance & 20.313830525030426 & 0.0024346752583249863 & 3\% resolution & 7 & np.random.exponential \\
+        50 & 7 & triplet\_distance & 42.853052014651894 & 1.2471958009628182e-07 & 33\% resolution & 7 & np.random.exponential \\
+        50 & 7 & triplet\_distance & 44.08680244200241 & 7.104814914052081e-08 & 1\% resolution & 7 & np.random.standard\_normal \\
+        50 & 7 & triplet\_distance & 45.72160000000008 & 3.363433540659619e-08 & 10\% resolution & 7 & np.random.standard\_normal \\
+        50 & 7 & triplet\_distance & 42.02127472527468 & 1.821071029067775e-07 & 3\% resolution & 7 & np.random.standard\_normal \\
+        50 & 7 & triplet\_distance & 44.293770940170816 & 6.463902686281808e-08 & 33\% resolution & 7 & np.random.standard\_normal  \\ [1ex]
+     \hline
+    \caption{This is the caption for the first table.}
+    \label{reconstruction-error-comparisons-between-regimes-stats:1}
+  \end{longtable}
