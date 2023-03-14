@@ -198,36 +198,36 @@ Supplementary Figure \ref{reconstructed-tree-phylometrics} provides a full compa
 We performed additional analyses with additional spatially structured ecological evolutionary regimes, over an alternate exponential mutation operator, and at earlier phylogeny sampling timepoints.
 These yielded generally similar findings for the relationship between reconstruction error and phylometric bias (Supplementary Figures \ref{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis}; \ref{fig:reconstructed-tree-phylometrics-error-spatial-nuisance}, and \ref{fig:reconstructed-tree-phylometrics-with-spatial-nuisance};  Table \ref{reconstructed-tree-phylometrics-error-wilcox}).
 
-\subsection{Tree Reconstruction Quality}
-
-\input{fig/plain-perfect-and-reconstruction-phylogenies.tex}
-
-mean/std/max
-plain	1% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10425894221959E-14	1.50722607904943E-16	-2.08295182385988E-14
-plain	10% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10469692847644E-14	1.55963069867711E-16	-2.08314605325639E-14
-plain	3% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10620443554657E-14	1.51986960038139E-16	-2.08462322970661E-14
-plain	33% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10637937229546E-14	1.4397013470276E-16	-2.08299428020224E-14
+% \subsection{Tree Reconstruction Quality}
 
 
-spatial structure	1% resolution	epoch=7+mut_distn=np.random.standard_normal	7.81849234344143E-07	4.14508890707294E-06	2.82106734844714E-05
-spatial structure	10% resolution	epoch=7+mut_distn=np.random.standard_normal	0.00275016417111772	0.0106125775395443	0.0533132541036293
-spatial structure	3% resolution	epoch=7+mut_distn=np.random.standard_normal	0.000857215705953448	0.00540569979603497	0.0380983817532154
-spatial structure	33% resolution	epoch=7+mut_distn=np.random.standard_normal	0.00763527603510759	0.0149106058655545	0.0584668625701303
 
-mean, std, and max quartet error summary statistics for each reconstruction regime/resolution are provided in Supplementary Table TODO
+% mean/std/max
+% plain	1% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10425894221959E-14	1.50722607904943E-16	-2.08295182385988E-14
+% plain	10% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10469692847644E-14	1.55963069867711E-16	-2.08314605325639E-14
+% plain	3% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10620443554657E-14	1.51986960038139E-16	-2.08462322970661E-14
+% plain	33% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10637937229546E-14	1.4397013470276E-16	-2.08299428020224E-14
 
 
-KRUSKAL WALLIS by resolution
-% 38 	50 	4 	quartet_distance 	17.612788 	5.285933e-04 	spatial structure 	7 	np.random.standard_normal
-%
-% 31 	50 	4 	quartet_distance 	11.319749 	1.011675e-02 	spatial structure 	7 	np.random.exponential
-%
-% 23 	50 	4 	quartet_distance 	9.640107 	2.188663e-02 	plain 	2 	np.random.standard_normal
-% 24 	50 	4 	quartet_distance 	148.020119 	7.044412e-32 	spatial structure 	2
-% np.random.standard_normal
-%
-% 50 	4 	quartet_distance 	100.829421 	1.030737e-21 	weak selection 	0 	np.random.standard_normal
+% spatial structure	1% resolution	epoch=7+mut_distn=np.random.standard_normal	7.81849234344143E-07	4.14508890707294E-06	2.82106734844714E-05
+% spatial structure	10% resolution	epoch=7+mut_distn=np.random.standard_normal	0.00275016417111772	0.0106125775395443	0.0533132541036293
+% spatial structure	3% resolution	epoch=7+mut_distn=np.random.standard_normal	0.000857215705953448	0.00540569979603497	0.0380983817532154
+% spatial structure	33% resolution	epoch=7+mut_distn=np.random.standard_normal	0.00763527603510759	0.0149106058655545	0.0584668625701303
 
-Full statistical results are in Supplementary Table TODO
+% mean, std, and max quartet error summary statistics for each reconstruction regime/resolution are provided in Supplementary Table TODO
+
+
+% KRUSKAL WALLIS by resolution
+% % 38 	50 	4 	quartet_distance 	17.612788 	5.285933e-04 	spatial structure 	7 	np.random.standard_normal
+% %
+% % 31 	50 	4 	quartet_distance 	11.319749 	1.011675e-02 	spatial structure 	7 	np.random.exponential
+% %
+% % 23 	50 	4 	quartet_distance 	9.640107 	2.188663e-02 	plain 	2 	np.random.standard_normal
+% % 24 	50 	4 	quartet_distance 	148.020119 	7.044412e-32 	spatial structure 	2
+% % np.random.standard_normal
+% %
+% % 50 	4 	quartet_distance 	100.829421 	1.030737e-21 	weak selection 	0 	np.random.standard_normal
+
+% Full statistical results are in Supplementary Table TODO
 
 
