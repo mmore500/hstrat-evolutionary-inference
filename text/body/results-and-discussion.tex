@@ -4,6 +4,39 @@
 
 \input{fig/plain-perfect-and-reconstruction-phylogenies.tex}
 
+mean/std/max
+plain	1% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10425894221959E-14	1.50722607904943E-16	-2.08295182385988E-14
+plain	10% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10469692847644E-14	1.55963069867711E-16	-2.08314605325639E-14
+plain	3% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10620443554657E-14	1.51986960038139E-16	-2.08462322970661E-14
+plain	33% resolution	epoch=7+mut_distn=np.random.standard_normal	-2.10637937229546E-14	1.4397013470276E-16	-2.08299428020224E-14
+
+
+spatial structure	1% resolution	epoch=7+mut_distn=np.random.standard_normal	7.81849234344143E-07	4.14508890707294E-06	2.82106734844714E-05
+spatial structure	10% resolution	epoch=7+mut_distn=np.random.standard_normal	0.00275016417111772	0.0106125775395443	0.0533132541036293
+spatial structure	3% resolution	epoch=7+mut_distn=np.random.standard_normal	0.000857215705953448	0.00540569979603497	0.0380983817532154
+spatial structure	33% resolution	epoch=7+mut_distn=np.random.standard_normal	0.00763527603510759	0.0149106058655545	0.0584668625701303
+
+mean, std, and max quartet error summary statistics for each reconstruction regime/resolution are provided in Supplementary Table TODO
+
+
+KRUSKAL_WALLIS by resolution
+38 	50 	4 	quartet_distance 	17.612788 	5.285933e-04 	spatial structure 	7 	np.random.standard_normal
+
+31 	50 	4 	quartet_distance 	11.319749 	1.011675e-02 	spatial structure 	7 	np.random.exponential
+
+23 	50 	4 	quartet_distance 	9.640107 	2.188663e-02 	plain 	2 	np.random.standard_normal
+24 	50 	4 	quartet_distance 	148.020119 	7.044412e-32 	spatial structure 	2 	
+np.random.standard_normal
+
+50 	4 	quartet_distance 	100.829421 	1.030737e-21 	weak selection 	0 	np.random.standard_normal
+
+Full statistical results are in Supplementary Table TODO
+
+KRUSKAL WALLIS by regime for each resolution
+
+SIGNIFICANT $p < 0.02$ over all regimes for all resolutions and all sensitivity analysis variables
+
+
 \subsection{Phylometrics by Evolutionary Regime}
 
 figure: boxplot
@@ -14,8 +47,119 @@ Supplementary Figure \ref{fig:perfect-tree-phylometrics-sensitivity-analysis}
 \input{fig/perfect-tree-phylometrics-heatmap.tex}
 
 statistics
+We first tested whether each phylometric showed significant variance among the seven tested regimes. For all variables across all sensitivity analysis conditions, we found very strong evidence that this was the case (Kruskal-Wallis tests; all $p < 1\times10^{-50}$; $n=50$ per condition for all 7 conditions; Supplementary Table TODO).
 
+Next, we performed an all-pairs comparison between the seven surveyed evolutionary regimes for all phylometrics (Wilcoxon test with Bonferoni correction; corrected significance threshold $1.49 \times 10^{-4}$; $n=50$ per condition; 84 comparisons per sensitivity analysis condition; 336 comparisons total). We found significant differences for all metrics except
+
+results at epoch 7
+    \begin{itemize}
+        \item plain	4 niche ecology	50	mean_pairwise_distance
+        \item plain	4 niche ecology	50	num_ancestors
+        \item plain	8 niche ecology	50
+        \item mean_pairwise_distance
+        \item plain	8 niche ecology	50	num_ancestors
+        \item strong selection	8 niche ecology	50
+        \item colless_like_index
+        \item strong selection	spatial structure	50	mean_pairwise_distance
+        \item weak 4 niche ecology	4 niche ecology	50	colless_like_index
+        \item weak 4 niche ecology	4 niche ecology	50	mean_pairwise_distance
+        \item weak 4 niche ecology	4 niche ecology	50	num_ancestors
+        \item weak 4 niche ecology	8 niche ecology	50	num_ancestors
+        \item weak 4 niche ecology	plain	50	mean_pairwise_distance
+        \item weak 4 niche ecology	plain	50	num_ancestors
+        \item weak selection	strong selection	50	colless_like_index
+    \end{itemize}
+
+results at epoch 0
+\begin{itemize}
+\item 4 niche ecology	weak 4 niche ecology	50	colless_like_index
+\item 4 niche ecology	weak 4 niche ecology	50	mean_pairwise_distance
+\item 4 niche ecology	weak 4 niche ecology	50	num_ancestors
+\item 8 niche ecology	4 niche ecology	50	num_ancestors
+\item 8 niche ecology	weak 4 niche ecology	50	num_ancestors
+\item plain	4 niche ecology	50	mean_pairwise_distance
+\item plain	4 niche ecology	50	num_ancestors
+\item plain	8 niche ecology	50
+\item mean_pairwise_distance
+\item plain	8 niche ecology	50	num_ancestors
+\item plain	weak 4 niche ecology	50	mean_pairwise_distance
+\item plain	weak 4 niche ecology	50	num_ancestors
+\item spatial structure	weak selection	50	mean_evolutionary_distinctiveness
+\item strong selection	4 niche ecology	50	colless_like_index
+\item strong selection	8 niche ecology	50	colless_like_index
+
+\end{itemize}
+
+results at epoch 2 
+\begin{itemize}
+    \item 8 niche ecology	4 niche ecology	50	num_ancestors
+    \item 8 niche ecology	weak 4 niche ecology	50	num_ancestors
+    \item plain	4 niche ecology	50	mean_pairwise_distance
+    \item plain	4 niche ecology	50	num_ancestors
+    \item plain	8 niche ecology	50	mean_pairwise_distance
+    \item plain	weak 4 niche ecology	50	mean_pairwise_distance
+    \item plain	weak 4 niche ecology	50	num_ancestors
+    \item strong selection	8 niche ecology	50	colless_like_index
+\item strong selection	spatial structure	50	mean_pairwise_distance
+\item weak 4 niche ecology	4 niche ecology	50	colless_like_index
+\item weak 4 niche ecology	4 niche ecology	50	mean_pairwise_distance
+\item weak 4 niche ecology	4 niche ecology	50	num_ancestors
+\item weak selection	strong selection	50	colless_like_index
+
+\end{itemize}
+
+results at epoch 7, exponential
+    \begin{itemize}
+        \item 4 niche ecology	8 niche ecology	50	colless_like_index
+        \item 4 niche ecology	8 niche ecology	50	num_ancestors
+        \item 4 niche ecology	weak 4 niche ecology	50	colless_like_index
+        \item 4 niche ecology	weak 4 niche ecology	50	mean_pairwise_distance
+        \item 4 niche ecology	weak 4 niche ecology	50	num_ancestors
+        \item plain	4 niche ecology	50	mean_pairwise_distance
+        \item plain	4 niche ecology	50	num_ancestors
+        \item plain	8 niche ecology	50	mean_pairwise_distance
+        \item plain	weak 4 niche ecology	50	mean_pairwise_distance
+        \item plain	weak 4 niche ecology	50	num_ancestors
+        \item weak 4 niche ecology	8 niche ecology	50	num_ancestors
+        \item weak selection	4 niche ecology	50	colless_like_index
+        \item weak selection	8 niche ecology	50	colless_like_index
+        \item weak selection	8 niche ecology	50	mean_pairwise_distance
+        \item weak selection	plain	50	mean_pairwise_distance
+        \item 4 niche ecology	8 niche ecology	50	num_ancestors
+
+    \end{itemize}
 \subsection{Phylometrics with Spatial Structure Nuisance}
+
+We first tested whether each phylometric showed significant variance among the four tested regimes. For all variables across all sensitivity analysis conditions, we found very strong evidence that this was the case (Kruskal-Wallis tests; all $p < 1\times10^{-20}$; $n=50$ per condition for all 4 conditions; Supplementary Table TODO).
+
+Next, we performed an all-pairs comparison between the seven surveyed evolutionary regimes for all phylometrics (Wilcoxon test with Bonferoni correction; corrected significance threshold $5.26 \times 10^{-4}$; $n=50$ per condition; 24 comparisons per sensitivity analysis condition; 96 comparisons total). We found significant differences for all metrics except
+
+epoch 7
+\begin{itemize}
+    \item 4 niche ecology	plain	49	colless_like_index
+\item weak 4 niche ecology	4 niche ecology	49	num_ancestors
+\end{itemize}
+
+epoch 0
+\begin{itemize}
+
+\item plain	weak 4 niche ecology	50	colless_like_index
+\item plain	weak 4 niche ecology	50	mean_pairwise_distance
+\item weak 4 niche ecology	4 niche ecology	50	num_ancestors
+
+\end{itemize}
+
+epoch 2
+\begin{itemize}
+    \item weak 4 niche ecology	4 niche ecology	50	num_ancestors
+\end{itemize}
+
+exponential
+\begin{itemize}
+    \item 4 niche ecology	plain	50	colless_like_index
+    \item 4 niche ecology	plain	50	mean_pairwise_distance
+    \item 4 niche ecology	weak 4 niche ecology	50	num_ancestors
+\end{itemize}
 
 figure boxplot
 \input{fig/perfect-tree-phylometrics-with-spatial-nuisance.tex}
@@ -26,7 +170,21 @@ figure boxplot
 
 figure facet boxplot
 
+STATISTICS: do phylometrics vary by resolution for each regime?
+TODO
+
+epoch 7
+\begin{itemize}
+    \item mean evolutionary distinctiveness not significantly affected by reconstruction error
+    \item num ancestors significantly affected at 33\% resolution, not at 10\% and better
+    \item mean pairwise distance significantly 
+    \item 
+\end{itemize}
+
 \subsection{Phylometrics with Spatial Structure and Reconstruction Error Nuisances}
 
 figure facet boxplot
 \input{fig/reconstructed-tree-phylometrics-with-spatial-nuisance.tex}
+
+STATISTICS: do phylometrics vary by resolution for each regime?
+TODO
