@@ -325,13 +325,21 @@
   organization={MIT Press}
 }
 
-@inproceedings{moreno2022hereditary,
-  title={Hereditary stratigraphy: genome annotations to enable phylogenetic inference over distributed populations},
-  author={Moreno, Matthew Andres and Dolson, Emily and Ofria, Charles},
-  booktitle={Proceedings of the Genetic and Evolutionary Computation Conference Companion},
-  pages={65--66},
-  year={2022}
+
+@inproceedings{morenoHereditaryStratigraphyGenome2022,
+	title = {Hereditary Stratigraphy: Genome Annotations to Enable Phylogenetic Inference over Distributed Populations},
+	url = {https://direct.mit.edu/isal/proceedings-abstract/isal/34/112297},
+	doi = {10.1162/isal_a_00550},
+	shorttitle = {Hereditary Stratigraphy},
+	abstract = {Abstract. Phylogenies provide direct accounts of the evolutionary trajectories behind evolved artifacts in genetic algorithm and artificial life systems. Phylogenetic analyses can also enable insight into evolutionary and ecological dynamics such as selection pressure and frequency-dependent selection. Traditionally, digital evolution systems have recorded data for phylogenetic analyses through perfect tracking where each birth event is recorded in a centralized data structure. This approach, however, does not easily scale to distributed computing environments where evolutionary individuals may migrate between a large number of disjoint processing elements. To provide for phylogenetic analyses in these environments, we propose an approach to enable phylogenies to be inferred via heritable genetic annotations rather than directly tracked. We introduce a “hereditary stratigraphy” algorithm that enables efficient, accurate phylogenetic reconstruction with tunable, explicit trade-offs between annotation memory footprint and reconstruction accuracy. In particular, we demonstrate an approach that enables estimation of the most recent common ancestor ({MRCA}) between two individuals with fixed relative accuracy irrespective of lineage depth while only requiring logarithmic annotation space complexity with respect to lineage depth. This approach can estimate, for example, {MRCA} generation of two genomes within 10\% relative error with 95\% confidence up to a depth of a trillion generations with genome annotations smaller than a kilobyte. We also simulate inference over known lineages, recovering up to 85.70\% of the information contained in the original tree using 64-bit annotations.},
+	eventtitle = {{ALIFE} 2022: The 2022 Conference on Artificial Life},
+	publisher = {{MIT} Press},
+	author = {Moreno, Matthew Andres and Dolson, Emily and Ofria, Charles},
+	urldate = {2023-03-14},
+	date = {2022-07-18},
+	langid = {english}
 }
+
 
 @article{moreno2022hstrat,
   title={hstrat: a Python Package for phylogenetic inference on distributed digital evolution populations},
