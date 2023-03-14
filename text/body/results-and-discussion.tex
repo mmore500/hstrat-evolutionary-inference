@@ -174,36 +174,29 @@ We found the effects of evolutionary conditions on phylometrics to be generally 
 Shifting from perfect phylogenetic tracking to approxmate phylogentic reconstruction will facilitate efficiency and robust digital evolution simulations at scale, but introduces a complicating factor into phylogenetic analyses: tree reconstruction error.
 A clear understanding of the impact of these errors on the computed phylometrics will be necessary to ensure accurate phylogenetic analyses.
 
-To explore this question, we compared phylometrics computed on reconstructed trees to corresponding true reference trees (Wilcoxon tests; $n=50$ per condition).
+To explore this question, we compared phylometrics computed on reconstructed trees to corresponding true reference trees (Wilcoxon tests; $n=50$ per condition; Table \ref{reconstructed-tree-phylometrics-error-wilcox}).
 To err towards conservatism in detecting phylometric biases, we did not correct for multiple comparisons.
 Reconstructions were performed across a range of precisions, ranging from 1\% relative resolution for MRCA estimates (most precise) to 33\% relative resolution for MRCA estimates (least precise).
 Precision was manipulated by adjusting the information content of underlying hereditary stratigraphic genome annotations used to perform phylogenetic reconstruction \citep{moreno2022hereditary}.
 
 \input{fig/reconstructed-tree-phylometrics-error.tex}
 
-For each phylometric, we sought to determine the minimum resolution required to achieve statistical non-detection (i.e., $p > 0.05$) of bias between reconstructions and their corresponding references. Figure \ref{fig:reconstructed-tree-phylometrics-error} summarizes these results across evolutionary regimes. For most phylometrics, 3\% precision was sufficient to , bias from 
+For each phylometric, we sought to determine the minimum resolution required to achieve statistical non-detection (i.e., $p > 0.05$) of bias between reconstructions and their corresponding references. 
+For most phylometrics, 3\% reconstruction resolution was sufficient to achieve statistical indistinguishability between reference and reconstruction.
+Mean evolutionary distinctiveness was particularly robust to reconstruction error, showing no detectable bias even at only 33\% reconstruction resolution. 
+Ancestor count was highly sensitive to reconstruction error; in nearly all cases bias was still detectable at 1\% reconstruction resolution.
+This may be due to overabundance of polytomies in reconstructed trees due to aggregation of ancestors that cannot be resolved due to estimation uncertainty.
+In future work, postprocessing reconstructed trees to break polytomies into arbitrary sets of bifurcations may reduce this metric's sensitivity to reconstruction.
 
-\input{fig/reconstructed-tree-phylometrics.tex}
+Phylometric sensitivity to reconstruction error was broadly consistent across evolutionary regimes.
+Figure \ref{fig:reconstructed-tree-phylometrics-error} summarizes these results.
 
-Figure \ref{fig:reconstructed-tree-phylometrics} provides .
+Where detectable, estimation uncertainty bias decreased all surveyed phylometrics' numerical value.
+So, when testing for expected increases in phylometric values, the potential for systematic false positives due to reconstruction error can be discounted. 
+Supplementary Figure \ref{reconstructed-tree-phylometrics} provides a full comparison the distribution of phylometric estimates on reference trees with the distributions of phylometric estimates for reconstructed trees across reconstruction resolutions.
 
-STATISTICS: do phylometrics vary by resolution for each regime?
-TODO
-
-
-
-Supplementary Figure \ref{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis}.
-
-\subsection{Phylometrics with Spatial Structure and Reconstruction Error Nuisances}
-
-figure facet boxplot
-\input{fig/reconstructed-tree-phylometrics-with-spatial-nuisance.tex}
-
-STATISTICS: do phylometrics vary by resolution for each regime?
-TODO
-
-\input{fig/reconstructed-tree-phylometrics-error-spatial-nuisance.tex}
-
+We performed additional analyses with additional spatially structured ecological evolutionary regimes, over an alternate exponential mutation operator, and at earlier phylogeny sampling timepoints.
+These yielded generally similar findings for the relationship between reconstruction error and phylometric bias (Supplementary Figures \ref{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis}; \ref{fig:reconstructed-tree-phylometrics-error-spatial-nuisance}, and \ref{fig:reconstructed-tree-phylometrics-with-spatial-nuisance};  Table \ref{reconstructed-tree-phylometrics-error-wilcox}).
 
 \subsection{Tree Reconstruction Quality}
 
