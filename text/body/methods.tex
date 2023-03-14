@@ -13,6 +13,7 @@ Selection was performed using tournament selection with synchronous generations.
 Treatments' selection pressure was controlled via tournament size. 
 Mutation was applied selection, with a value drawn from a unit Gaussian distribution added to all genomes.
 Evolutionary runs were ended after 262,144 ($2^{18}$) generations.
+Each run required around 4 hours of compute time.
 
 Treatments incorporating spatial structure used a simple island model.
 In spatially structured treatments, individuals were evenly divided among 1,024 islands and only competed in selection tournaments against sympatric population members.
@@ -27,48 +28,81 @@ Every generation, individuals swapped niches with probability $3.0517578125 \tim
 
 For our main experiments, we defined the following ``regimes'' of evolutionary conditions
 \begin{itemize}
-    \item plain: tournament size 2 with no niching and no islands,
-    \item weak selection: tournament size 1 with no niching and no islands,
-    \item strong selection: tournament size 4 with no niching and no islands,
-    \item spatial structure: tournament size 2 with no niching and 1,024 islands,
-    \item weak 4 niche ecology: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,\item  \item 4 niche ecology: tournament size 2 with 4 niches, and
-    \item 8 niche ecology: tournament size 8 with 4 niches.
+    \item \textit{plain}: tournament size 2 with no niching and no islands,
+    \item \textit{weak selection}: tournament size 1 with no niching and no islands,
+    \item \textit{strong selection}: tournament size 4 with no niching and no islands,
+    \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands,
+    \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
+    \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
+    \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
 \end{itemize}
 
 In follow-up experiments testing ecological dynamics with a spatial background, we defined the following additional evolutionary ``regimes:''
 \begin{itemize}
-    \item plain: tournament size 2 with no niching over 1,024 islands,
-    \item weak 4 niche ecology: tournament size 2 with 4 niches and niche swap probability increased 100$\times$ over 1,024 islands,    
-    \item 4 niche ecology: tournament size 2 with 4 niches over 1,024 islands, and
-    \item 8 niche ecology: tournament size 8 with 4 niches over 1,024 islands.
+    \item \textit{plain}: tournament size 2 with no niching over 1,024 islands,
+    \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$ over 1,024 islands,    
+    \item \textit{4 niche ecology}: tournament size 2 with 4 niches over 1,024 islands, and
+    \item \textit{8 niche ecology}: tournament size 8 with 4 niches over 1,024 islands.
 \end{itemize}
 
-Finally, to foster generalizability of findings, all experiments were performed with two alternate ``sensitivity'' varibles: evolutionary length in generations and mutation operator.
+Finally, to foster generalizability of findings, all experiments were performed with two alternate ``sensitivity'' variables: evolutionary length in generations and mutation operator.
 Shorter runs of 32,768 and 98,304 generations were tested in addition to the full-length runs. 
 We refer to full-length runs as completing ``epoch 7'' and the shorter runs as completing ``epoch 0'' and ``epoch 2'' respectively.
-One additional mutation operator was tested in addition to the unit Gaussian distribution: the unit exponential distribution.
+One additional mutation operator was tested to contrast the unit Gaussian distribution: the unit exponential distribution.
 Under this distribution, deleterious mutations are not possible and large-effect mutations are more likely.
 
 Across all experiments, each treatment comprised 50 replicates.
 
-\subsection{Hereditary Stratigraphic Annotations}
+\subsection{Hereditary Stratigraphic Annotations and Tree Reconstruction}
 
-the perfect phylogenies were used to generate annotations and then reconstructions so each replicate of the perfect data has directly corresponding replicates of the reconstruction data
+Experiments testing the impact of phylogenetic inference error on phylometrics employ the recently-developed ``hereditary stratigraphy'' technique to BLAH. 
+This technique works by attaching a heritable annotations to individual digital genomes.
+Every generation, a new random ``fingerprint'' is generated and appended to the individuals' inherited annotations.
+To reconstruct phylogenetic history, fingerprints from extant organisms' annotations can be compared.
+Where two organisms share identical fingerprints along the record, they likely shared common ancestry.
+Mismatching fingerprints indicate a split in compared organisms' ancestry.
 
-be sure to mention recency-proportional resolution, and that 1-byte strata were used (mention how big the annotations are at the end of the runs)
+Hereditary stratigraphy enables a tuneable trade-off between annotation size and estimation accuracy.
+Fingerprints may be discarded to decrease annotation size at the cost of reduced density of reference points to test for common (or divergent) ancestry along organisms' generational histories.
 
-33\% resolution -> 68 strata after $2^{15} \times 8$ generations (0.068kb)
-10\% resolution -> 170 strata after $2^{15} \times 8$ generations (0.17kb)
-3\% resolution -> 435 strata after $2^{15} \times 8$ generations (0.435kb)
-1\% resolution -> 1239 strata after $2^{15} \times 8$ generations (1.239kb)
+We test four levels of fingerprint retention.
+Each level is described as a $p\%$ ``resolution''  meaning that the generational distance between reference points any number of generations $k$ back is less than $p\% \times  k$.
+So, a high percentage $p$ indicates coarse resolution and a low percentage $p$ indicates fine resolution.
+In detail, at the conclusion of 262,144 generation evolutionary runs,
+\begin{itemize}
+    \item at 33\% resolution 68 fingerprints are retained per genome,
+    \item at 10\% resolution 170 fingerprints are retained per genome,
+    \item at 3\% resolution 435 fingerprints are retained per genome , and
+    \item at 1\% resolution 1,239 fingerprints are retained per genome.
+\end{itemize}
 
+This work uses 1 byte fingerprints, which collide with probability $1/256$. 
+Greater space efficiency could be achieved using 1 bit fingerprints.
+However, this would require careful accounting for ubiquitous generation of  identical fingerprints by chance and is left to future work. 
 
-\subsection{Agglomerative, Trie-based Reconstruction}
+Previous work with hereditary stratigraphy used UPGMA distance-based reconstruction techniques \citep{moreno2022hereditary}.
+Large-scale reconstructions required for these experiments necessitated development of a more efficient technique that did not require all pairs (i.e., $O(n^2)$ distance comparison.
+To accomplish this, we devised an agglomerative tree building algorithm that works by successively adding leaf organism annotations and percolating them down from the tree root along the tree path of internal nodes consistent with their fingerprint sequence then affixing them where common ancestry ends.
+This new tree-building approach reduced compute time from multiple hours to around 5 minutes in most cases. 
+Implementation materials providing the full details of this approach are included in Listing \ref{lst:build_tree_trie}.
+
+To assess the efficacy of the new agglomerative tree-building approach, we calculated all reconstructed trees' quartet distance to  their respective reference.
+Quartet distance ranges from 0 (between identical trees) to 0.75 (between random trees)
+providing in this case a measure of reconstruction error.
+As expected, this measure of reconstruction error varied significantly with resolution for trees across all evolutionary regimes (Kruskal-Wallis tests; all $p < 0.02$ ).
+In all cases, mean reconstruction error was less than 0.05.
+For 3\% and 1\% resolutions, mean reconstruction error was less than 0.01 in all cases.
+
+To generate reconstructed trees in experiments, we simulated the inheritance of hereditary stratigraphic annotations along a reference phylogeny to yield the set of annotations that would be attached to extant population members at the end of a run then used our agglomerative tree building technique to infer. 
+Thus, each reconstruction replicate has a directly-corresponding reference tree from a perfect-tree treatment replicate.
 
 \subsection{Phylometrics}
 
 A wide range of metrics exist for quantifying the topology of a phylogeny. Tucker et. al showed that these metrics can be classified into the following three dimensions: richness, divergence, and regularity \citep{tuckerGuidePhylogeneticMetrics2017}. 
-Richness metrics quantify the amount of phylogenetic diversity/evolutionary history represented by a phylogeny. Divergence metrics metrics quantify how different the units of the phylogeny are from each other. Regularity metrics quantify the variance of other properties (i.e. how consistent they are across the phylogeny). Here, we focus on four metrics spread across these categories:
+Richness metrics quantify the amount of phylogenetic diversity/evolutionary history represented by a phylogeny. 
+Divergence metrics metrics quantify how different the units of the phylogeny are from each other. 
+Regularity metrics quantify the variance of other properties (i.e. how consistent they are across the phylogeny). 
+Here, we focus on four metrics spread across these categories:
 
 \textbf{Number of Internal Nodes:} This measurement simply counts the number of non-extant taxa in the phylogeny (i.e. the number of non-leaf nodes). Because the reconstructed trees do not contain any internal nodes not associated with a branching point (i.e. unifurcations), we strip such nodes out of the reference trees as well. It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}, the primary differences being that the number of internal nodes is unaffected by branch lengths and the number of leaf nodes. Consequently, we would expect it to be increased by the presence of ecology or spatial structure, as both these factors increase diversity.
 
@@ -81,15 +115,15 @@ Richness metrics quantify the amount of phylogenetic diversity/evolutionary hist
 
 \subsection{Software and Data Availability}
 
-Example phylogeny-generation, annotation implementation, and reconstruction tools are available in a Production-ready Python package published on PyPi (cite JOSS) A C++ annotation system that will interoperate fully with the Python package is under active development and will be released imminently.
-Very explicitly say that we want people to use this software in their own projects?
+Software, configuration files, and executable notebooks for this work are available at \url{https://github.com/anony4review/hstrat-evolutionary-inference}.
+Data and supplemental materials are availabile via the Open Science Framework \url{https://osf.io/vtxwd/?view_only=4dd2cd7ee24b450d96358f891a41414f} \citep{foster2017open}/
 
-Cite phylotrackpy for metric calculations
+All hereditary stratigraph annotation, reference phylogeny generation, and phylogenetic reconstruction tools used in this work are published in the \texttt{hstrat} Python package  \citep{moreno2022hstrat}. 
+This project can be visited at \url{https://github.com/mmore500/hstrat}.
 
-materials and scripts for these experiments are available at \url{https://github.com/mmore500/hstrat-evolutionary-inference/}. Cite software used (look through requirements.txt dependencies)
+This project uses data formats and tools associated with the ALife Data Standards project \citep{lalejini2019data} and benefited from many pieces of open-source scientific software \cite{ofria2020empirical,sand2014tqdist,2020SciPy-NMeth,harris2020array,reback2020pandas,mckinney-proc-scipy-2010,sukumaran2010dendropy,cock2009biopython}.
 
-how long did phylogeny generation take? how long did reconstruction take?
 
-Data is available via OSF (give link and cite) 
-\url{https://osf.io/vtxwd/?view_only=4dd2cd7ee24b450d96358f891a41414f}
-% \url{https://osf.io/vtxwd/}
+
+
+
