@@ -1,0 +1,4 @@
+[submodule "hstrat"]
+	path = hstrat
+	url = https://github.com/mmore500/hstrat.git
+	branch = tree-reconstruction
