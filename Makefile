@@ -2,7 +2,7 @@ SHELL=/bin/bash
 
 # get the basename of the containing directory
 # this will be used to name othe output document
-BUILD_DIR := $(shell basename $(abspath $(dir $(lastword $(MAKEFILE_LIST)))/..))
+BUILD_DIR := $(shell basename $(abspath $(dir $(lastword $(MAKEFILE_LIST)))))
 
 DRAFT_SUPPLEMENT_PAGE = $(shell pdftk ${BUILD_DIR}-draft.pdf dump_data_utf8 | pcregrep -M -o1 '^BookmarkBegin\nBookmarkTitle: Supplemental Material\nBookmarkLevel: 1\nBookmarkPageNumber: ([0-9]+)$$')
 
