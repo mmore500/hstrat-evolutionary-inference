@@ -1,0 +1,8 @@
+[submodule "hstrat"]
+	path = hstrat
+	url = https://github.com/mmore500/hstrat.git
+	branch = master
+[submodule "binder"]
+	path = binder
+	url = https://github.com/mmore500/hstrat-evolutionary-inference.git
+	branch = binder

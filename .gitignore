@@ -30,3 +30,15 @@ coverage_include/
 
 cpp/
 tex/
+
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+
+binder/
+
+*.bak

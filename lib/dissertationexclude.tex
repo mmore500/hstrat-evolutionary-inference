@@ -2,9 +2,9 @@
 
 % adapted from https://www.overleaf.com/learn/latex/Commands
 \newcommand{\dissertationexclude}[1]{%
-% adapted from https://tex.stackexchange.com/a/33577
-\ifdefined\DISSERTATION
-\else
-#1
-\fi
+  % adapted from https://tex.stackexchange.com/a/33577
+  \ifdefined\DISSERTATION
+  \else
+    #1
+  \fi
 }

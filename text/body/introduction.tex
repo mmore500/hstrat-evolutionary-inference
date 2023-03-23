@@ -1,10 +1,13 @@
-\section{Introduction} \label{sec:introduction}
+\section{Introduction}
+\label{sec:introduction}
 
 Artificial life systems are a powerful technique for studying evolution, and have yielded many important insights \citep{wilkeEvolutionDigitalOrganisms2001, zamanCoevolutionDrivesEmergence2014, goldsbyEvolutionaryOriginSomatic2014}.
-Much of this power derives from the fact that these systems provide the ability to perfectly observe evolutionary dynamics. 
+Much of this power derives from the fact that these systems provide the ability to perfectly observe evolutionary dynamics.
 In particular, research advances have often been made possible by analyzing phylogenetic data on the evolutionary trajectories that lead to a given outcome \citep{lenskiEvolutionaryOriginComplex2003, lalejiniEvolutionaryOriginsPhenotypic2016, johnsonEndosymbiosisBustInfluence2022a}.
 
-While these analyses are powerful, phylogenetic data can quickly become large and unwieldy. Thus, as artificial life systems and the questions we posit become more complex, better tools are in need. These come in two forms: 1) evolutionary summary statistics that can be used to draw abstract insights from lineages and phylogenies \citep{dolsonInterpretingTapeLife2020}, and 2) algorithmic techniques for efficiently collecting phylogenetic data at scale \citep{morenoHereditaryStratigraphyGenome2022} Given that phylogenies are an abstraction that generalizes across all evolutionary contexts, they facilitate drawing conclusions that scale across different artificial life systems and biology. 
+While these analyses are powerful, phylogenetic data can quickly become large and unwieldy.
+Thus, as artificial life systems and the questions we posit become more complex, better tools are in need.
+These come in two forms: 1) evolutionary summary statistics that can be used to draw abstract insights from lineages and phylogenies \citep{dolsonInterpretingTapeLife2020}, and 2) algorithmic techniques for efficiently collecting phylogenetic data at scale \citep{morenoHereditaryStratigraphyGenome2022} Given that phylogenies are an abstraction that generalizes across all evolutionary contexts, they facilitate drawing conclusions that scale across different artificial life systems and biology.
 
 %The utility of artificial life systems as an experimental platform to study evolution hinges on the ability to observe and interpret underlying evolutionary dynamics.
 %As systems get more complex this problem gets more difficult.
@@ -15,9 +18,14 @@ While these analyses are powerful, phylogenetic data can quickly become large an
 %Although less common, phylogenetic analyses have great potential to be used to characterize evolutionary dynamics such as selection pressure (i.e., ongoing adaptation) and ecological dynamics.
 %These are of core interest to artificial life, particularly with respect to OEE.
 
-Indeed, phylogeny-based metrics have already been used for such varied purposes as identifying hallmarks of open-ended evolution \citep{dolsonMODESToolboxMeasurements2019}, predicting which runs of evolutionary computation will be successful \citep{hernandezWhatCanPhylogenetic2022a, shahbandeganUntanglingPhylogeneticDiversity2022a}, quantifying patterns of tumor evolution \citep{scottInferringTumorProliferative2020, lewinsohnStatedependentEvolutionaryModels2023}, and identifying priorities for conservation \citep{forestPreservingEvolutionaryPotential2007}. Much of the early work on quantifying phylogenetic properties has its origins in conservation biology and paleontology literature, as researchers in these fields attempted to draw inferences about the past from limited data. More recently, medical researchers have embraced measuring phylogenies in real time in an effort to understand the evolution of pathogens and cancer.  % TODO: cite?
+Indeed, phylogeny-based metrics have already been used for such varied purposes as identifying hallmarks of open-ended evolution \citep{dolsonMODESToolboxMeasurements2019}, predicting which runs of evolutionary computation will be successful \citep{hernandezWhatCanPhylogenetic2022a, shahbandeganUntanglingPhylogeneticDiversity2022a}, quantifying patterns of tumor evolution \citep{scottInferringTumorProliferative2020, lewinsohnStatedependentEvolutionaryModels2023}, and identifying priorities for conservation \citep{forestPreservingEvolutionaryPotential2007}.
+Much of the early work on quantifying phylogenetic properties has its origins in conservation biology and paleontology literature, as researchers in these fields attempted to draw inferences about the past from limited data.
+More recently, medical researchers have embraced measuring phylogenies in real time in an effort to understand the evolution of pathogens and cancer.
+% TODO: cite?
 
-Consequently, researchers across many fields have an interest in inferring the processes that shaped a phylogeny by quantifying its topology. Currently, most research on this topic is either very abstract (e.g. the presence of negative-frequency dependent selection increases phylogenetic diversity) or very specific (e.g. phylogenetic structure can be used to infer cell division rates in solid tumors \citep{lewinsohnStatedependentEvolutionaryModels2023}). Here, we lay groundwork for identifying the fingerprints left on phylogenetic structure by a larger range of evolutionary dynamics in a scalable and robust manner. 
+Consequently, researchers across many fields have an interest in inferring the processes that shaped a phylogeny by quantifying its topology.
+Currently, most research on this topic is either very abstract (e.g. the presence of negative-frequency dependent selection increases phylogenetic diversity) or very specific (e.g. phylogenetic structure can be used to infer cell division rates in solid tumors \citep{lewinsohnStatedependentEvolutionaryModels2023}).
+Here, we lay groundwork for identifying the fingerprints left on phylogenetic structure by a larger range of evolutionary dynamics in a scalable and robust manner.
 
 %Some groundwork has been done in the fields of conservation biology and cancer biology, as well as in artificial life (cite ``tape of life''?) to understand how evolutionary dynamics affect phylogenetic structure (and the fingerprints of evolutionary dynamics on phylogenetic structure) but this is still a rapidly emerging field (be sure to hedge here).
 %In particular, existing work has shown x, y and z.
@@ -28,7 +36,7 @@ Historically, digital evolution systems have had the advantage of providing perf
 However, as digital evolution systems scale, issues of data loss and decentralization will make perfect tracking at best inefficient and at worst untenable.
 Thus, some systems will likely need to adopt a decentralized, reconstruction-based approach similar to biological data.
 %Decentralization will also likely introduce an aspect of spatial structure (i.e., populations will no longer be ``well-mixed'') which will further complicate phylogenetic analyses.
-Consequently, if our goal is to use phylogenetic metrics to increase the scalability of our data analysis, we must also understand how robust they are to inaccuracies introduced by reconstruction. 
+Consequently, if our goal is to use phylogenetic metrics to increase the scalability of our data analysis, we must also understand how robust they are to inaccuracies introduced by reconstruction.
 % (maybe briefly cite/mention effect of spatial structure on phylogenies)
 Phylogenetic reconstructions in artificial life can be achieved through the recently-developed ``hereditary stratigraphy'' approach, a lightweight annotation scheme that can give tunably-precise information about the phylogenetic history between any two extant organisms.
 %In order to put hereditary stratigraphy into practice to better observe digital evolution systems will require an understanding of how ecology and selection pressure manifest in phylogenetic structure and also how potentially confounding factors of estimation uncertainty and spatial structure manifest.
@@ -36,15 +44,12 @@ Phylogenetic reconstructions in artificial life can be achieved through the rece
 
 In this paper, we build the following methodological and theoretical foundations that will be needed to use phylogenetic analyses to observe evolutionary dynamics in complex, distributed artificial life systems:
 \begin{enumerate}
-    \item the ability to perform fast, accurate tree reconstructions for very large distributed populations
-    \item understanding of the relationship between evolutionary dynamics and phylogenetic metrics 
-    \item quantification of the effects of reconstruction-induced estimation error on phylogenetic structure, both in terms of the amount of precision required for accuracy and the amount of bias introduced by inadequate precision
-    \item quantification of the phylogenetic effects of spatial structure, as distributed computation does not support well-mixed populations.
-    % \begin{enumerate}
-    %     \item how much precision is required for accurate phylogenetic metrics?
-    %     \item if bias is introduced, what type of bias (so could still detect "conservatively")
-    % \end{enumerate}
-    \end{enumerate}
+  \item the ability to perform fast, accurate tree reconstructions for very large distributed populations \item understanding of the relationship between evolutionary dynamics and phylogenetic metrics \item quantification of the effects of reconstruction-induced estimation error on phylogenetic structure, both in terms of the amount of precision required for accuracy and the amount of bias introduced by inadequate precision \item quantification of the phylogenetic effects of spatial structure, as distributed computation does not support well-mixed populations.
+        % \begin{enumerate}
+        % \item how much precision is required for accurate phylogenetic metrics?
+        % \item if bias is introduced, what type of bias (so could still detect "conservatively")
+        % \end{enumerate}
+\end{enumerate}
 
 %this paper does those things (maybe make each of those points a subsection and then within those subsections describe what is done in this paper for those?)
 
