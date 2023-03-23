@@ -27,6 +27,13 @@
 \clearpage
 \newpage
 
+\setcounter{secnumdepth}{2}
+\makeatletter
+\renewcommand \thesection{S\@arabic\c@section}
+% \renewcommand\thetable{S\@arabic\c@table}
+% \renewcommand \thefigure{S\@arabic\c@figure}
+\makeatother
+
 \begin{bibunit}
 
   \input{text/supplement.tex}
