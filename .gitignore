@@ -40,3 +40,5 @@ tex/
 *.pdf
 
 binder/
+
+*.bak
