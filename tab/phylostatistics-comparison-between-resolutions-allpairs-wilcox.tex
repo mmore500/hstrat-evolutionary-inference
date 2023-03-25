@@ -1,0 +1,18 @@
+\begin{landscape}
+\csvstyle{myTableStyle}{
+  longtable=c c c c c c c c,
+  before reading=\footnotesize,
+  table head=\toprule Reconstruction Fidelity & $n$ & Phylometric & Statistic & $p$ & Evolutionary Regime & Epoch & Mutation Distribution\\ \midrule\endhead\bottomrule\\[-1em]
+  \caption{%
+    TODOTODO
+    % Two-sided Wilcoxon signed-rank test of a given phylometric between original trees and reconstructed trees at a given evolutionary regime.
+    % A regime is defined to be the type of ecology, number of islands, number of niches, tournament size, and probability of niche invasion.
+    % Each treatment comprised 50 replicates.
+  }
+  \label{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox}\endfoot,
+  head to column names,
+  respect all,
+}
+
+\csvreader[myTableStyle]{binder/binder/outdata/a=phylostatistics-comparison-between-resolutions-allpairs-wilcox+ext=.csv}{}{\csvlinetotablerow}
+\end{landscape}
