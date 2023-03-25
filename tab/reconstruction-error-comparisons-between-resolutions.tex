@@ -1,12 +1,14 @@
 \csvstyle{myTableStyle}{
   longtable=c c c c c c c c,
-  before reading=\footnotesize,
-  table head=\toprule $n$ & $N$ & Phylometric & Statistic & $p$ & Quality & Epoch & Mutation Distance\\ \midrule\endhead\bottomrule\\[-1em]
+  before reading=\scriptsize,
+  table head=\toprule $n$ & $N$ & Tree Distance Metric & Statistic & $p$ & Evolutionary Regime & Epoch & Mutation Distribution\\ \midrule\endhead\bottomrule\\[-1em]
   \caption{%
-    Two-sided Wilcoxon signed-rank test of a given phylometric between original trees and reconstructed trees at a given resolution.
-    Each treatment comprised 50 replicates.
+    Kruskal-Wallis one-way analysis of variance tests for nonequivalence of reconstruction error distributions among reconstruction fidelities.
+    Comparisons were performed independently within each sensitivity anlaysis condition and evolutionary regime.
+    Error reported as both quartet and triplet distance between reconstructed tree and corresponding reference tree.
+    Sample size $n=50$ for each population, with $N=4$ populations (i.e., reconstruction fidelities) compared within each sensitivity analysis condition.
   }
-  \label{tab:reconstruction-error-comparisons-between-resolutions-stats}\endfoot,
+  \label{tab:reconstruction-error-comparisons-between-resolutions}\endfoot,
   head to column names,
   respect all,
 }
