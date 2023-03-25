@@ -1,14 +1,21 @@
+\providecommand{\thecaption}{
+  Kruskal-Wallis one-way analysis of variance tests for nonequivalence of reconstruction error distributions among reconstruction fidelities.
+  Comparisons were performed independently within each sensitivity analysis condition and evolutionary regime.
+  Error reported as both quartet and triplet distance between reconstructed tree and corresponding reference tree.
+  Sample size $n=50$ for each population, with $N=4$ populations (i.e., reconstruction fidelities) compared within each sensitivity analysis condition.
+}
+
 \csvstyle{myTableStyle}{
   longtable=c c c c c c c c,
   before reading=\scriptsize,
   table head=\toprule $n$ & $N$ & Tree Distance Metric & Statistic & $p$ & Evolutionary Regime & Epoch & Mutation Distribution\\ \midrule\endhead\bottomrule\\[-1em]
   \caption{%
-    Kruskal-Wallis one-way analysis of variance tests for nonequivalence of reconstruction error distributions among reconstruction fidelities.
-    Comparisons were performed independently within each sensitivity analysis condition and evolutionary regime.
-    Error reported as both quartet and triplet distance between reconstructed tree and corresponding reference tree.
-    Sample size $n=50$ for each population, with $N=4$ populations (i.e., reconstruction fidelities) compared within each sensitivity analysis condition.
+    \thecaption
+  }\endfoot\bottomrule\\[-1em]
+  \caption{%
+    \thecaption
   }
-  \label{tab:reconstruction-error-comparisons-between-resolutions}\endfoot,
+  \label{tab:reconstruction-error-comparisons-between-resolutions}\endlastfoot,
   head to column names,
   respect all,
 }
