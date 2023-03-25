@@ -1,15 +1,15 @@
 \begin{landscape}
-\csvstyle{myTableStyle}{
-  longtable=c c c c c c c c,
-  before reading=\scriptsize,
-  table head=\toprule evolutionary regime & reconstruction quality & sensitivity analysis conditions & quartet dist mean & quartet dist median & quartet dist std & quartet dist max\\ \midrule\endhead\bottomrule\\[-1em]
-  \caption{%
-    Summary statistics for reconstruction error across reconstruction fidelity levels and evolutionary conditions, measured as quartet distance between reconstructions and corresponding reference trees.
+  \csvstyle{myTableStyle}{
+    longtable=c c c c c c c c,
+    before reading=\scriptsize,
+    table head=\toprule evolutionary regime & reconstruction quality & sensitivity analysis conditions & quartet dist mean & quartet dist median & quartet dist std & quartet dist max\\ \midrule\endhead\bottomrule\\[-1em]
+    \caption{%
+      Summary statistics for reconstruction error across reconstruction fidelity levels and evolutionary conditions, measured as quartet distance between reconstructions and corresponding reference trees.
+    }
+    \label{tab:tree-reconstruction-quality-quartet-summary-statistics}\endfoot,
+    head to column names,
+    respect all,
   }
-  \label{tab:tree-reconstruction-quality-quartet-summary-statistics}\endfoot,
-  head to column names,
-  respect all,
-}
 
-\csvreader[myTableStyle]{binder/binder/outdata/a=tree-reconstruction-quality-quartet-summary-statistics.csv}{}{\csvlinetotablerow}
+  \csvreader[myTableStyle]{binder/binder/outdata/a=tree-reconstruction-quality-quartet-summary-statistics.csv}{}{\csvlinetotablerow}
 \end{landscape}
