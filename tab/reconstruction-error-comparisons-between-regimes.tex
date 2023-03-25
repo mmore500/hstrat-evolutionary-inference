@@ -1,11 +1,11 @@
 \csvstyle{myTableStyle}{
   longtable=c c c c c c c c,
   before reading=\footnotesize,
-  table head=\toprule $n$ & $N$ & Phylometric & Statistic & $p$ & Quality & Epoch & Mutation Distance\\ \midrule\endhead\bottomrule\\[-1em]
+  table head=\toprule $n$ & $N$ & Phylometric & Statistic & $p$ & Reconstruction Fidelity & Epoch & Mutation Distance\\ \midrule\endhead\bottomrule\\[-1em]
   \caption{%
-    Two-sided Wilcoxon signed-rank test of a given phylometric between original trees and reconstructed trees at a given evolutionary regime.
-    A regime is defined to be the type of ecology, number of islands, number of niches, tournament size, and probability of niche invasion.
-    Each treatment comprised 50 replicates.
+    Kruskal-Wallis one-way analysis of variance tests for nonequivalence of reconstruction error distributions among surveyed evolutionary regimes.
+    Comparisons were performed independently within each sensitivity anlaysis condition and reconstruction fidelities.
+    Sample size $n=50$ for each population, with $N=7$ populations (i.e., evolutionary regimes) compared within each sensitivity analysis condition.
   }
   \label{tab:reconstruction-error-comparisons-between-regimes-stats}\endfoot,
   head to column names,
