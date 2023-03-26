@@ -8,9 +8,9 @@
 The feasibility of harnessing phylogenetic analysis to characterize evolutionary dynamics in digital evolution systems hinges on the premise that these dynamics induce detectable structure within the phylogenetic record.
 In order to explore this tenet, we compared distributions of phylogenetic metrics yielded across replicate runs under different sets of evolutionary conditions.
 Figure \ref{fig:perfect-tree-phylometrics} summarizes these distributions.
-Indeed, statistical tests confirmed that each phylometric exhibited significant variation among surveyed evolutionary conditions (Kruskal-Wallis tests; all $p < 1\times10^{-50}$; $n=50$ per condition; Supplementary Table tab:perfect-tree-phylometrics-kruskal).
+Indeed, statistical tests confirmed that each phylometric exhibited significant variation among surveyed evolutionary conditions (Kruskal-Wallis tests; all $p < 1\times10^{-50}$; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-regimes-kwallis}).
 
-To better understand, we performed an all-pairs comparison of each phylometric among the seven surveyed evolutionary regimes (Wilcoxon tests with Bonferoni correction; corrected significance thresh $1.49 \times 10^{-4}$; $n=50$ per condition; 84 comparisons per sensitivity analysis configuration; 336 comparisons total; Supplementary Table tab:perfect-tree-phylometrics-wilcox).
+To better understand, we performed an all-pairs comparison of each phylometric among the seven surveyed evolutionary regimes (Wilcoxon tests with Bonferroni correction; corrected significance threshold $1.49 \times 10^{-4}$; $n=50$ per condition; 84 comparisons per sensitivity analysis configuration; 336 comparisons total; Supplementary Table \ref{tab:phylostatistics-comparison-between-regimes-allpairs-wilcox}).
 
 The Colless-like index is significantly depressed under all evolutionary regimes compared to the plain regime with no spatial structure, no ecology, and moderate selection pressure.
 Reduction in this statistic indicates that all deviations from baseline conditions increased regularity in generated phylogenies.
@@ -41,20 +41,20 @@ Ancestor count and mean pairwise distance may play a role in identifying ecologi
 Alternately, in future work it may be possible to develop phylometrics that respond more strongly --- and more exclusively --- to ecological dynamics.
 
 We performed a sensitivity analysis over an alternate exponential mutation operator and earlier phylogeny sampling timepoints.
-We found the effects of evolutionary conditions on phylometrics to be generally consistent across surveyed conditions (Supplementary Figures \ref{fig:perfect-tree-phylometrics-sensitivity-analysis} and \ref{fig:perfect-tree-phylometrics-heatmap-sensitivity-analysis}; Supplementary Tables tab:perfect-tree-phylometrics-kruskal and tab:perfect-tree- 
+We found the effects of evolutionary conditions on phylometrics to be generally consistent across surveyed conditions (Supplementary Figures \labelcref{fig:perfect-tree-phylometrics-sensitivity-analysis,fig:perfect-tree-phylometrics-heatmap-sensitivity-analysis}; Supplementary Tables \labelcref{tab:phylostatistics-comparison-between-regimes-allpairs-wilcox,tab:phylostatistics-comparison-between-regimes-kwallis}).
 
-\subsection{Phylometric Signatures of Ecological Dynamics in Spatially Structured Populations} 
+\subsection{Phylometric Signatures of Ecological Dynamics in Spatially Structured Populations}
 
-\input{fig/perfect-tree-phylometrics-with-spatial-nuisance} 
+\input{fig/perfect-tree-phylometrics-with-spatial-nuisance}
 
 At large scale, digital evolution populations will almost inevitably integrate spatial structure due to practical limitations of distributed computing hardware \citep{ackley2014indefinitely}.
 Therefore, understanding the background effects of spatial structure on the phylogenetic signatures of other evolutionary dynamics will be essential to applications of phylogenetic inference in such applications.
 For this analysis, we chose to focus on ecological dynamics due to interest in how their relatively weak phylometric signatures would respond to the relatively strong influence of spatial structure.
 
 Figure \ref{fig:perfect-tree-phylometrics-with-spatial-nuisance} summarizes the distribution of surveyed phylometrics under the three surveyed ecological regimes and the control non-ecological regime, all with spatial population structure.
-Statistical tests confirmed that each phylometric exhibited significant variation among these evolutionary regimes (Kruskal-Wallis tests; all $p < 1\times10^{-20}$; $n=50$ per condition; Supplementary Table perfect-tree-phylometrics-with-spatial-nuisance-kruskal).
+Statistical tests confirmed that each phylometric exhibited significant variation among these evolutionary regimes (Kruskal-Wallis tests; all $p < 1\times10^{-20}$; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis}).
 
-To explore the nature of this variation, we performed all-pairs comparisons for each phylometric among the four surveyed regimes (Wilcoxon tests with Bonferoni correction; corrected significance threshold $5.26 \times 10^{-4}$; $n=50$ per condition; 24 comparisons per sensitivity analysis configuration; 96 comparisons total; Supplementary Table perfect-tree-phylometrics-with-spatial-nuisance-wilcox).
+To explore the nature of this variation, we performed all-pairs comparisons for each phylometric among the four surveyed regimes (Wilcoxon tests with Bonferroni correction; corrected significance threshold $5.26 \times 10^{-4}$; $n=50$ per condition; 24 comparisons per sensitivity analysis configuration; 96 comparisons total; Supplementary Table \ref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox-spatial-nuisance}).
 Like under the spatially unstructured background, ecology drove significant increases and mean evolutionary distinctiveness.
 Unlike the spatially unstructured background, though, ancestor count under ecological conditions sharply exceeded ancestor count under non-ecological conditions.
 Ancestor count significantly increased between the 4 niche ecological regimes and the 8 niche ecological regime, as well.
@@ -66,15 +66,15 @@ However, spatial structure mutes the effects of ecology on the Colless-like inde
 Only the 8 niche regime significantly decreased this phylometric.
 
 For these experiments, we again performed a sensitivity analysis over an alternate exponential mutation operator and earlier phylogeny sampling timepoints.
-We found the effects of evolutionary conditions on phylometrics to be generally consistent across surveyed conditions (Supplementary Figure \ref{fig:perfect-tree-phylometrics-sensitivity-analysis-with-spatial-nuisance} and Supplementary Tables tab:perfect-tree-phylometrics-with-spatial-nuisance-kruskal and tab:perfect-tree-phylometrics-with-spatial-nuisance-wilcox).
+We found the effects of evolutionary conditions on phylometrics to be generally consistent across surveyed conditions (Supplementary Figure \ref{fig:perfect-tree-phylometrics-with-spatial-nuisance-sensitivity-analysis} and Supplementary Tables \labelcref{tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis,tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox-spatial-nuisance}).
 
 \subsection{Phylometric Bias of Reconstruction Error}
 \label{sec:phylometric-bias-reconstruction-error}
 
-Shifting from perfect phylogenetic tracking to approxmate phylogentic reconstruction will facilitate efficiency and robust digital evolution simulations at scale, but introduces a complicating factor into phylogenetic analyses: tree reconstruction error.
+Shifting from perfect phylogenetic tracking to approximate phylogentic reconstruction will facilitate efficiency and robust digital evolution simulations at scale, but introduces a complicating factor into phylogenetic analyses: tree reconstruction error.
 A clear understanding of the impact of these errors on the computed phylometrics will be necessary to ensure accurate phylogenetic analyses.
 
-To explore this question, we compared phylometrics computed on reconstructed trees to corresponding true reference trees (Wilcoxon tests; $n=50$ per condition; Table \ref{reconstructed-tree-phylometrics-error-wilcox}).
+To explore this question, we compared phylometrics computed on reconstructed trees to corresponding true reference trees (Wilcoxon tests; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox}).
 To err towards conservatism in detecting phylometric biases, we did not correct for multiple comparisons.
 Reconstructions were performed across a range of precisions, ranging from 1\% relative resolution for MRCA estimates (most precise) to 33\% relative resolution for MRCA estimates (least precise).
 Precision was manipulated by adjusting the information content of underlying hereditary stratigraphic genome annotations used to perform phylogenetic reconstruction \citep{moreno2022hereditary}.
@@ -93,7 +93,7 @@ Figure \ref{fig:reconstructed-tree-phylometrics-error} summarizes these results.
 
 Where detectable, estimation uncertainty bias decreased all surveyed phylometrics' numerical value.
 So, when testing for expected increases in phylometric values, the potential for systematic false positives due to reconstruction error can be discounted.
-Supplementary Figure \ref{reconstructed-tree-phylometrics} provides a full comparison the distribution of phylometric estimates on reference trees with the distributions of phylometric estimates for reconstructed trees across reconstruction resolutions.
+Supplementary Figure \ref{fig:reconstructed-tree-phylometrics} provides a full comparison the distribution of phylometric estimates on reference trees with the distributions of phylometric estimates for reconstructed trees across reconstruction resolutions.
 
 We performed additional analyses with additional spatially structured ecological evolutionary regimes, over an alternate exponential mutation operator, and at earlier phylogeny sampling timepoints.
-These yielded generally similar findings for the relationship between reconstruction error and phylometric bias (Supplementary Figures \ref{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis}; \ref{fig:reconstructed-tree-phylometrics-error-spatial-nuisance}, and \ref{fig:reconstructed-tree-phylometrics-with-spatial-nuisance}; Table \ref{reconstructed-tree-phylometrics-error-wilcox}).
+These yielded generally similar findings for the relationship between reconstruction error and phylometric bias (Supplementary Figures \ref{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis}; \ref{fig:reconstructed-tree-phylometrics-error-spatial-nuisance}, and \ref{fig:reconstructed-tree-phylometrics-with-spatial-nuisance}; Supplementary Table \labelcref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox,tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox-spatial-nuisance}).

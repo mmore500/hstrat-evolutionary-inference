@@ -1,0 +1,23 @@
+\providecommand{\thecaption}{
+  Summary statistics for reconstruction error across reconstruction fidelity levels and evolutionary conditions, measured as triplet distance between reconstructions and corresponding reference trees.
+}
+
+\begin{landscape}
+  \csvstyle{myTableStyle}{
+    longtable=c c c c c c c c,
+    before reading=\scriptsize,
+    table head=\toprule evolutionary regime & reconstruction quality & sensitivity analysis conditions & triplet dist mean & triplet dist median & triplet dist std & triplet dist max\\ \midrule\endhead\bottomrule\\[-1em]
+    \caption{%
+      \thecaption
+    }\endfoot\bottomrule\\[-1em]
+    \caption{%
+      \thecaption
+    }
+    \label{tab:tree-reconstruction-triplet-summary-statistics}\endlastfoot,
+    head to column names,
+    respect all,
+  }
+
+  \csvreader[myTableStyle]{binder/binder/outdata/a=tree-reconstruction-quality-triplet-summary-statistics.csv}{}{\csvlinetotablerow}
+
+\end{landscape}
