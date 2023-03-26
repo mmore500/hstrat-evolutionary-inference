@@ -2,6 +2,8 @@
 
 shopt -s globstar
 
+./script/bibtex-tidy.sh
+
 for file in **/*.tex; do
   echo "${file}"
   sed -i '/\\caption{[^%]/s/\\caption{/&%\n/' "${file}"
