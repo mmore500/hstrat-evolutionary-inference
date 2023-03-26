@@ -29,12 +29,21 @@ Every generation, individuals swapped niches with probability $3.0517578125 \tim
 
 For our main experiments, we defined the following ``regimes'' of evolutionary conditions
 \begin{itemize}
-  \item \textit{plain}: tournament size 2 with no niching and no islands, \item \textit{weak selection}: tournament size 1 with no niching and no islands, \item \textit{strong selection}: tournament size 4 with no niching and no islands, \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands, \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$, \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
+  \item \textit{plain}: tournament size 2 with no niching and no islands,
+  \item \textit{weak selection}: tournament size 1 with no niching and no islands,
+  \item \textit{strong selection}: tournament size 4 with no niching and no islands,
+  \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands,
+  \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
+  \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
+  \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
 \end{itemize}
 
 In follow-up experiments testing ecological dynamics with a spatial background, we defined the following additional evolutionary ``regimes:''
 \begin{itemize}
-  \item \textit{plain}: tournament size 2 with no niching over 1,024 islands, \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$ over 1,024 islands, \item \textit{4 niche ecology}: tournament size 2 with 4 niches over 1,024 islands, and \item \textit{8 niche ecology}: tournament size 8 with 4 niches over 1,024 islands.
+  \item \textit{plain}: tournament size 2 with no niching over 1,024 islands,
+  \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$ over 1,024 islands,
+  \item \textit{4 niche ecology}: tournament size 2 with 4 niches over 1,024 islands, and
+  \item \textit{8 niche ecology}: tournament size 8 with 4 niches over 1,024 islands.
 \end{itemize}
 
 Finally, to foster generalizability of findings, all experiments were performed with two alternate ``sensitivity'' variables: evolutionary length in generations and mutation operator.
@@ -62,7 +71,10 @@ Each level is described as a $p\%$ ``resolution'' meaning that the generational 
 So, a high percentage $p$ indicates coarse resolution and a low percentage $p$ indicates fine resolution.
 In detail, at the conclusion of 262,144 generation evolutionary runs,
 \begin{itemize}
-  \item at 33\% resolution 68 fingerprints are retained per genome, \item at 10\% resolution 170 fingerprints are retained per genome, \item at 3\% resolution 435 fingerprints are retained per genome , and \item at 1\% resolution 1,239 fingerprints are retained per genome.
+  \item at 33\% resolution 68 fingerprints are retained per genome,
+  \item at 10\% resolution 170 fingerprints are retained per genome,
+  \item at 3\% resolution 435 fingerprints are retained per genome , and
+  \item at 1\% resolution 1,239 fingerprints are retained per genome.
 \end{itemize}
 
 This work uses 1 byte fingerprints, which collide with probability $1/256$.

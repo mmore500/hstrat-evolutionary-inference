@@ -10,6 +10,7 @@ modifyLineBreaks:
     EndFinishesWithLineBreak: 1
   oneSentencePerLine:
     manipulateSentences: 1
+    removeSentenceLineBreaks: 0
     sentencesFollow:
       par: 1
       blankLine: 1
