@@ -141,6 +141,8 @@ logging.info(f"reconstructed_df loaded from {reconstructed_path}")
 reconstructed_tree = apc.alife_dataframe_to_dendropy_tree(
   reconstructed_df, setup_edge_lengths=True,
 )
+reconstructed_tree.suppress_unifurcations()
+reconstructed_tree.unassign_taxa(exclude_leaves=True)
 logging.info(f"reconstructed_tree set up")
 
 reconstructed_newick = reconstructed_tree.as_string(schema='newick').strip()
@@ -160,20 +162,27 @@ collapsed_df["taxon_label"] = collapsed_df["loc"]
 collapsed_tree = apc.alife_dataframe_to_dendropy_tree(
   collapsed_df, setup_edge_lengths=True,
 )
+collapsed_tree.suppress_unifurcations()
+collapsed_tree.unassign_taxa(exclude_leaves=True)
 logging.info(f"collapsed_tree set up")
 
 collapsed_newick = collapsed_tree.as_string(schema='newick').strip()
 logging.info(f"collapsed_newick prepared with len {len(collapsed_newick)}")
+
+triplet_distance = tqdist.triplet_distance(
+  reconstructed_newick, collapsed_newick
+)
+logging.info(f"triplet distance calculated as {triplet_distance}")
 
 quartet_distance = tqdist.quartet_distance(
   reconstructed_newick, collapsed_newick
 )
 logging.info(f"quartet distance calculated as {quartet_distance}")
 
-triplet_distance = tqdist.triplet_distance(
-  reconstructed_newick, collapsed_newick
-)
-logging.info(f"triplet distance calculated as {triplet_distance}")
+assert (
+  quartet_distance >= 0 or math.isclose(quartet_distance, 0)
+), quartet_distance
+assert not math.isinf(quartet_distance), quartet_distance
 
 reconstruction_audit_records = [
   {
