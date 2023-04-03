@@ -91,16 +91,17 @@ Implementation materials providing the full details of this approach are include
 
 To assess the efficacy of the new agglomerative tree-building approach, we calculated all reconstructed trees' quartet distance to their respective reference.
 Quartet distance ranges from 0 (between identical trees) to 0.75 (between random trees), providing in this case a measure of reconstruction error.
-As expected, this measure of reconstruction error varied significantly with resolution for trees across all evolutionary regimes (Kruskal-Wallis tests; all $p < 0.02$; Supplementary Table \ref{tab:reconstruction-error-comparisons-between-resolutions}).
-In all cases, mean reconstruction error was less than 0.05.
-TODOTODO
-For 3\% and 1\% resolutions, mean reconstruction error was less than 0.01 in all cases.
-Figure \ref{fig:plain-perfect-and-reconstruction-phylogenies} shows a reference tree and reconstructions performed using 1\%, 3\%, 10\%, and 33\% resolution hereditary stratigraph annotations.
+As expected, this measure of reconstruction error varied significantly with resolution for trees across all evolutionary regimes (Kruskal-Wallis tests; all $p < 10^{-20}$; Supplementary Table \ref{tab:reconstruction-error-comparisons-between-resolutions}).
+Reconstruction error also varied significantly with evolutionary regime for each reconstruction resolution level (Kruskal-Wallis tests; all $p < 1^{-8}$; Supplementary Table \ref{tab:reconstruction-error-comparisons-between-regimes}).
 
-Reconstruction error also varied significantly with evolutionary regime for each reconstruction resolution level (Kruskal-Wallis tests; all $p < 0.02$; Supplementary Table \ref{tab:reconstruction-error-comparisons-between-regimes}).
+For 3\% and 1\% resolutions, mean reconstruction error was less than 0.01 in all cases and at 10\% resolution mean reconstruction error was less than 0.05 in all cases.
+At 33\% resolution, mean reconstruction error was less than 0.12 in all cases.
+The largest reconstruction errors observed at 1\%, 3\%, 10\%, and 33\% resolutions were, respectively, 0.051 (weak selection regime), 0.093 (weak 4 niche ecology regime), 0.14 (plain evolutionary regime), and 0.45 (plain evolutionary regime).
+Supplementary Table \ref{tab:tree-reconstruction-quality-quartet-summary-statistics} reports mean, median, standard deviation, and maxima for reconstruction error across surveyed evolutionary conditions.
 
 To generate reconstructed trees in experiments, we simulated the inheritance of hereditary stratigraphic annotations along a reference phylogeny to yield the set of annotations that would be attached to extant population members at the end of a run, then used our agglomerative tree building technique to infer.
 Thus, each reconstruction replicate has a directly-corresponding reference tree from a perfect-tree treatment replicate.
+Figure \ref{fig:plain-perfect-and-reconstruction-phylogenies} shows a reference tree and corresponding reconstructions performed using 1\%, 3\%, 10\%, and 33\% resolution hereditary stratigraph annotations.
 
 \subsection{Phylometrics}
 
