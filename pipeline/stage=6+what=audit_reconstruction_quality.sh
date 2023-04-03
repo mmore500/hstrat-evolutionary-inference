@@ -26,7 +26,7 @@ SBATCH_SCRIPT_DIRECTORY_PATH="$(mktemp -d)"
 echo "SBATCH_SCRIPT_DIRECTORY_PATH ${SBATCH_SCRIPT_DIRECTORY_PATH}"
 
 all_phylogeny_files="$( \
-  find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=2+what=reconstruct_phylogenies/latest/"* -type f  -path "*a=reconstructed-tree+*" -name "*+ext=.csv.gz" \
+  find "${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=2+what=reconstruct_phylogenies/latest/"* -type f  -path "*a=reconstructed-tree+*" -path "*subsampling_fraction=1.0+*" -name "*+ext=.csv.gz" \
 )"
 
 num_phylogeny_files="$(echo ${all_phylogeny_files} | wc -w)"
