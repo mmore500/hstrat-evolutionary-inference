@@ -19,6 +19,9 @@ ${BUILD_DIR}.pdf: main.tex
     -jobname=${BUILD_DIR} \
     -pdflatex="pdflatex -interaction=nonstopmode" main.tex
 
+${BUILD_DIR}-distilled.pdf: ${BUILD_DIR}.pdf
+	./script/rasterize-images.sh ${BUILD_DIR}.pdf ${BUILD_DIR}-distilled.pdf
+
 ${BUILD_DIR}.tex: main.tex
 	./script/latexpand.pl main.tex > ${BUILD_DIR}.tex
 
@@ -30,8 +33,12 @@ ${BUILD_DIR}-supplement.pdf: ${BUILD_DIR}.pdf
 
 ${BUILD_DIR}-draft.pdf: main.tex
 	latexmk -pdf -silent \
+    --shell-escape \
     -jobname=${BUILD_DIR}-draft \
     -pdflatex="pdflatex -interaction=nonstopmode" draft.tex
+
+${BUILD_DIR}-draft-distilled.pdf: ${BUILD_DIR}-draft.pdf
+	./script/rasterize-images.sh ${BUILD_DIR}-draft.pdf ${BUILD_DIR}-draft-distilled.pdf
 
 ${BUILD_DIR}-draft.tex: main.tex
 	./script/latexpand.pl draft.tex > ${BUILD_DIR}-draft.tex
