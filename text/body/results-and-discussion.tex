@@ -3,12 +3,15 @@
 
 \subsection{Phylometric Signatures of Evolutionary Dynamics}
 
+\input{fig/perfect-tree-phylogenies-log}
 \input{fig/perfect-tree-phylometrics}
 
-The feasibility of harnessing phylogenetic analysis to characterize evolutionary dynamics in digital evolution systems hinges on the premise that these dynamics induce detectable structure within the phylogenetic record.
-In order to explore this tenet, we compared distributions of phylogenetic metrics yielded across replicate runs under different sets of evolutionary conditions.
-Figure \ref{fig:perfect-tree-phylometrics} summarizes these distributions.
-Indeed, statistical tests confirmed that each phylometric exhibited significant variation among surveyed evolutionary conditions (Kruskal-Wallis tests; all $p < 1\times10^{-50}$; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-regimes-kwallis}).
+The feasibility of harnessing phylogenetic analysis to detect evolutionary dynamics in digital evolution systems hinges on the premise that these dynamics induce detectable structure within the phylogenetic record.
+Indeed, as shown in Figure \ref{fig:perfect-tree-phylometrics}, dendrograms of phylogenetic histories from different evolutionary conditions exhibit striking differences.
+
+As a first step to characterizing the phylogenetic impact of spatial structure, ecology, and selection pressure, we first tested if surveyed evolutionary conditions exhibited detectable differences in evolutionary distinctiveness, Colless-like index, pairwise distance, and ancestor count.
+Figure \ref{fig:perfect-tree-phylometrics} summarizes the distributions of each metric across surveyed conditions.
+Statistical tests confirmed that each phylometric exhibited significant variation among surveyed evolutionary conditions (Kruskal-Wallis tests; all $p < 10^{-50}$; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-regimes-kwallis}).
 
 To better understand, we performed an all-pairs comparison of each phylometric among the seven surveyed evolutionary regimes (Wilcoxon tests with Bonferroni correction; corrected significance threshold $1.49 \times 10^{-4}$; $n=50$ per condition; 84 comparisons per sensitivity analysis configuration; 336 comparisons total; Supplementary Table \ref{tab:phylostatistics-comparison-between-regimes-allpairs-wilcox}).
 
