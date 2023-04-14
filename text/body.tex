@@ -15,5 +15,33 @@ First, we characterize the impact ecology, selection pressure, and spatial struc
 Second, we quantify the effects of reconstruction-induced estimation error on these phylogenetic metrics.
 Third, because distributed methods generally do not support well-mixed populations, we investigate the phylometric signature of interactions between  ecology and selection pressure with spatial structure.
 
-To effectively use phylogenetic metrics for scalable data analysis, it is crucial to understand their robustness in the face of inaccuracies introduced by reconstruction.
-n this paper, we aim to develop methodological and theoretical foundations for observing evolutionary dynamics in complex, distributed artificial life systems using phylogenetic analyses. These foundations include understanding the relationship between evolutionary dynamics and phylogenetic metrics, quantifying the effects of reconstruction-induced estimation error on phylogenetic structure, and quantifying the phylogenetic effects of spatial structure due to distributed computation and non-well-mixed populations.
+\section{Methods}
+
+Experiments testing the relationships between evolutionary dynamics, reconstruction error, and phylogenetic structure required a model system amenable to direct, interpretable tuning of ecology, spatial structure, and selection pressure.
+A parsimonious model system was devised to fulfill these objectives.
+Genomes in this system comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
+Experiments used the following parameterizations: compulsory unit Gaussian mutation, population size 32,768 ($2^{15}$), 262,144 ($2^{18}$) synchronous generations, and tournament selection.
+
+Treatments explored three evolutionary variables: selection pressure (controlled via tournament size), spatial structure (via an island model with 1D closed-ring topology and 1\% migration rate), ecology (via a simple niche model with either 4 or 8 niches and niche swap probability $3.0517578125 \times 10^{-8}$ so one niche swap would be expected every 1,000 generations).
+We combined these variables into seven ``regimes'' of evolutionary conditions:
+\begin{itemize}
+  \item \textit{plain}: tournament size 2 with no niching and no islands,
+  \item \textit{weak selection}: tournament size 1 with no niching and no islands,
+  \item \textit{strong selection}: tournament size 4 with no niching and no islands,
+  \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands,
+  \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
+  \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
+  \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
+\end{itemize}
+
+Sensitivity analysis to evolutionary duration (i.e., number generations) and mutation operator (via an alternate unit-exponential operator) support our findings' generalizability.
+
+Our phylogenetic analyses employ four metrics: (1) \textit{internal node count}, a measure of phylogenetic richness impacted by ecology and spatial structure; (2) \textit{Colless-like index}, an indicator of tree imbalance associated with varying ecological pressures and spatial structure; (3) \textit{mean pairwise distance}, a metric of evolutionary divergence affected by factors promoting long-term maintenance of distinct branches and factors promoting diversity; and (4) \textit{evolutionary distinctiveness}, another metric of evolutionary divergence calculated at the level of individual taxa --- known to behave differently than mean pairwise distance with a particularly strong relationship to branch length \citep{tuckerGuidePhylogeneticMetrics2017}.
+
+Experiments investigating the impact of phylogenetic inference error on phylometrics test four hereditary stratigraphy trade-off levels between resolution and annotation size.
+Each level is described as a $p\%$ ``resolution'' meaning that the generational distance between reference points any number of generations $k$ back is less than $(p / 100) \times k$.
+So, a high percentage $p$ indicates coarse resolution and a low percentage $p$ indicates fine resolution.
+Annotation size ranged from 68 1-byte fingerprints per genome at coarse 33\% resolution to 1,239 1-byte fingerprints at fine 1\% resolution.
+
+Supporting materials are available at \url{https://github.com/mmore500/hstrat-evolutionary-inference} and \url{https://osf.io/vtxwd/}.
+This project benefited from many pieces of open-source scientific software \citep{ofria2020empirical,moreno2022hstrat,lalejini2019data,sukumaran2010dendropy}.
