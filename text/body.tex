@@ -1,7 +1,15 @@
-\input{text/body/introduction.tex}
+\section{Introduction}
 
-\input{text/body/methods.tex}
+Phylogenies (i.e. ancestry trees) reveal how evolving populations move through a search space, which offers a powerful window into understanding the behavior of evolutionary algorithms.
+In existing work, phylogenetic analyses have diagnosed conditions stymying adaptive evolution, predicted future adaptive success of evolutionary runs, and revealed the step-by-step process by which an evolutionary algorithm solves a problem \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a,lalejiniEvolutionaryOriginsPhenotypic2016}.
+As evolutionary computation systems grow in complexity and computational scale  (i.e., parallel and distributed computing), observability enabled through phylogenetic analyses will become increasingly crucial.
 
-\input{text/body/results-and-discussion.tex}
+Existing phylogenetic methods in evolutionary computation assume a perfect-tracking model, where an exact parentage record enables direct analysis of the lineages without uncertainty or inaccuracy.
+Application of this model to large-scale systems, however, introduces difficulties: fragility to data loss and communication bottlenecks from record centralization.
+Phylogenetic analysis in evolutionary biology stem from an entirely different model: phylogenies are \textit{estimated} from the fossil record, phenotypic traits, and extant genetic information.
 
-\input{text/body/conclusion.tex}
+The recently-introduced "hereditary stratigraphy" method facilitates such an approach for efficient, robust phylogenetic analysis of distributed evolutionary computing systems.
+This technique works by attaching heritable annotations to individual digital genomes, and enables a tunable trade-off between annotation size and estimation accuracy \citep{moreno2022hstrat}.
+
+To effectively use phylogenetic metrics for scalable data analysis, it is crucial to understand their robustness in the face of inaccuracies introduced by reconstruction.
+n this paper, we aim to develop methodological and theoretical foundations for observing evolutionary dynamics in complex, distributed artificial life systems using phylogenetic analyses. These foundations include understanding the relationship between evolutionary dynamics and phylogenetic metrics, quantifying the effects of reconstruction-induced estimation error on phylogenetic structure, and quantifying the phylogenetic effects of spatial structure due to distributed computation and non-well-mixed populations.
