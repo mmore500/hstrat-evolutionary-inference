@@ -1,20 +1,20 @@
 \vspace{-1.5ex}
 \section{Introduction}
 
-Phylogenies (i.e. ancestry trees) reveal how evolving populations move through a search space, which offers a powerful window into understanding the behavior of evolutionary algorithms.
+Phylogenies (i.e., ancestry trees) reveal how evolving populations move through a search space, which offers a powerful window into understanding the behavior of evolutionary algorithms.
 In existing work, phylogenetic analyses have diagnosed conditions stymying adaptive evolution, predicted future adaptive success of evolutionary runs, and revealed the step-by-step process by which an evolutionary algorithm solves a problem \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a,lalejiniEvolutionaryOriginsPhenotypic2016}.
 As evolutionary computation (EC) systems grow in complexity and computational scale  (i.e., parallel and distributed computing), observability enabled through phylogenetic analyses will become increasingly crucial.
 
-Existing phylogenetic methods in EC assume a perfect-tracking model, where an exact parentage record enables direct analysis of the lineages without uncertainty or inaccuracy.
-Applying this model to large-scale systems, however, introduces difficulties: fragility to data loss and communication bottlenecks from record centralization.
-Evolutionary biology relies on an entirely different model: phylogenies are \textit{estimated} from extant information.
+Existing phylogenetic methods in EC assume a perfect-tracking model where an exact parentage record enables direct inspection of the lineages without uncertainty or inaccuracy.
+Applications to large-scale systems, however, face practical difficulties: communication overhead from record centralization and fragility to data loss.
+In contrast, work in biological phylogenetics \textit{estimates} history using extant information from a fully-distributed system.
+The recently-introduced ``hereditary stratigraphy'' method facilitates analogous reconstruction-based phylogenetic analysis of distributed EC systems.
+This technique works by attaching heritable annotations to individual digital genomes such that trade-off between annotation size and estimation accuracy can be directly tuned \citep{moreno2022hereditary}.
 
-The recently-introduced "hereditary stratigraphy" method facilitates such an approach for efficient, robust phylogenetic analysis of distributed EC systems.
-This technique works by attaching heritable annotations to individual digital genomes, and enables a tunable trade-off between annotation size and estimation accuracy \citep{moreno2022hereditary}.
-Here, we report on follow-up work developing methodological foundations necessary to apply hereditary stratigraphy to observe evolutionary dynamics in complex, distributed digital evolution systems using phylogenetic analyses.
-First, we characterize the impact ecology, selection pressure, and spatial structure induce on phylogenetic metrics.
+Here, we report follow-up work developing methodological foundations necessary to apply hereditary stratigraphy to observe evolutionary dynamics in complex, distributed digital evolution systems.
+First, we characterize the impact of ecology, selection pressure, and spatial structure on phylogenetic metrics.
 Second, we quantify the effects of reconstruction-induced estimation error on these phylogenetic metrics.
-Third, because distributed methods generally do not support well-mixed populations, we investigate the phylometric signature of interactions between  ecology and selection pressure with spatial structure.
+Third, because distributed methods generally do not support well-mixed populations, we investigate the phylometric signature of interactions of ecology and selection pressure with spatial structure.
 
 \vspace{-1.5ex}
 \section{Methods}
