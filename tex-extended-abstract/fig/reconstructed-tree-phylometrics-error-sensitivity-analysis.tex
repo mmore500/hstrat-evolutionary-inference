@@ -1,0 +1,37 @@
+\begin{figure*}
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    % \begin{noindent}
+    \centering
+    \includegraphics[width=\textwidth]{binder/binder/teeplots/epoch=0+hue=quality-threshold+mut_distn=np.random.standard_normal+viz=heatmap+x=regime+y=phylometric+ext=.pdf}
+    \caption{%
+      gaussian mutation distribution at epoch 0 (generation 32,768)}
+    \label{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis:epoch0}
+    % \end{noindent}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    % \begin{noindent}
+    \centering
+    \includegraphics[width=\textwidth]{binder/binder/teeplots/epoch=2+hue=quality-threshold+mut_distn=np.random.standard_normal+viz=heatmap+x=regime+y=phylometric+ext=.pdf}
+    \caption{%
+      gaussian mutation distribution at epoch 2 (generation 98,304)}
+    \label{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis:epoch2}
+    % \end{noindent}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    % \begin{noindent}
+    \centering
+    \includegraphics[width=\textwidth]{binder/binder/teeplots/epoch=7+hue=quality-threshold+mut_distn=np.random.exponential+viz=heatmap+x=regime+y=phylometric+ext=.pdf}
+    \caption{%
+      exponential mutation distribution}
+    \label{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis:exponential}
+    % \end{noindent}
+  \end{subfigure}
+  \caption{%
+    Sensitivity analysis results for reconstruction resolutions required to achieve statistical indistinguishability between reconstructions corresponding reference trees for each phylometric across surveyed evolutionary conditions.
+    Significance level $p<0.05$ under the Wilcoxon signed-rank test between samples of 50 replicates each is used as the threshold for statistical distinguishability.
+    Phylometrics with looser reconstruction resolution thresholds (i.e., higher resolution percentages) are less sensitive to reconstruction error.
+    White heat map tiles indicate that no surveyed reconstruction resolution threshold was sufficient to achieve indistinguishability from the reference tree with respect a particular phylometric.
+  }
+  \label{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis}
+\end{figure*}

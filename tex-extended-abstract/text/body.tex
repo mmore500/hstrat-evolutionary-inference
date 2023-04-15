@@ -1,0 +1,81 @@
+\vspace{-1.5ex}
+\section{Introduction}
+
+Phylogenies (i.e., ancestry trees) reveal how evolving populations move through a search space, which offers a powerful window into understanding the behavior of evolutionary algorithms.
+In existing work, phylogenetic analyses have diagnosed conditions stymying adaptive evolution, predicted future adaptive success of evolutionary runs, and revealed the step-by-step process by which an evolutionary algorithm solves a problem \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a,lalejiniEvolutionaryOriginsPhenotypic2016}.
+As evolutionary computation (EC) systems grow in complexity and computational scale  (i.e., parallel and distributed computing), observability enabled through phylogenetic analyses will become increasingly crucial.
+
+Existing phylogenetic methods in EC assume a perfect-tracking model where an exact parentage record enables direct inspection of the lineages without uncertainty or inaccuracy.
+Applications to large-scale systems, however, face practical difficulties: communication overhead from record centralization and fragility to data loss.
+In contrast, work in biological phylogenetics \textit{estimates} history using extant information from a fully-distributed system.
+The recently-introduced ``hereditary stratigraphy'' method facilitates analogous reconstruction-based phylogenetic analysis of distributed EC systems.
+This technique works by attaching heritable annotations to individual digital genomes such that trade-off between annotation size and estimation accuracy can be directly tuned \citep{moreno2022hereditary}.
+
+Here, we report follow-up work developing methodological foundations necessary to apply hereditary stratigraphy to observe evolutionary dynamics in complex, distributed digital evolution systems.
+First, we characterize the impact of ecology, selection pressure, and spatial structure on phylogenetic metrics.
+Second, we quantify the effects of reconstruction-induced estimation error on these phylogenetic metrics.
+Third, because distributed methods generally do not support well-mixed populations, we investigate the phylometric signature of interactions of ecology and selection pressure with spatial structure.
+
+\vspace{-1.5ex}
+\section{Methods}
+
+Experiments testing the relationships between evolutionary dynamics, reconstruction error, and phylogenetic structure required a model system amenable to direct, interpretable tuning of ecology, spatial structure, and selection pressure.
+A parsimonious model system was devised to fulfill these objectives.
+Genomes in this system comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
+Experiments used the following parameterizations: Gaussian mutation, population size 32,768 ($2^{15}$), 262,144 ($2^{18}$) synchronous generations, and tournament selection.
+
+Treatments explored three evolutionary variables: selection pressure (via tournament size), spatial structure (via an island model with 1D closed-ring topology and 1\% migration rate), ecology (via a simple niche model with niche swap probability $3 \times 10^{-8}$ so one niche swap would be expected every 1,000 generations).
+We combined these variables into seven ``regimes'' of evolutionary conditions:
+
+\begin{minipage}[t]{\columnwidth}
+\begin{itemize}
+  \item \textit{plain}: tournament size 2 with no niching and no islands,
+  \item \textit{weak selection}: tournament size 1 with no niching and no islands,
+  \item \textit{strong selection}: tournament size 4 with no niching and no islands,
+  \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands,
+  \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
+  \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
+  \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
+\end{itemize}
+\end{minipage}
+
+Sensitivity analysis to evolutionary duration (i.e., number generations) and mutation operator (via an alternate unit-exponential mutation distribution) support our findings' generalizability.
+
+Our phylogenetic analyses employ four metrics: (1) \textit{internal node count}, a measure of phylogenetic richness impacted by ecology and spatial structure; (2) \textit{Colless-like index}, an indicator of tree imbalance associated with varying ecological pressures and spatial structure; (3) \textit{mean pairwise distance}, a metric of evolutionary divergence affected by factors promoting long-term maintenance of distinct branches and factors promoting diversity; and (4) \textit{evolutionary distinctiveness}, another metric of evolutionary divergence calculated at the level of individual taxa --- known to behave differently than mean pairwise distance with a particularly strong relationship to branch length \citep{tuckerGuidePhylogeneticMetrics2017}.
+
+Experiments investigating the impact of phylogenetic inference error on phylometrics test four trade-off levels between resolution and genome annotation size.
+Each level is described as a $p\%$ ``resolution'' meaning that uncertainty (generational distance between reference points) $k$ generations back is less than $(p / 100) \times k$. So, a high percentage $p$ indicates coarse resolution and a low percentage $p$ indicates fine resolution.
+Annotation size ranged from 68 1-byte fingerprints per genome at coarse 33\% resolution to 1,239 1-byte fingerprints at fine 1\% resolution.
+
+Supporting materials are available at \url{https://osf.io/vtxwd/}.
+This project benefited from open-source scientific software \citep{ofria2020empirical,moreno2022hstrat,lalejini2019data,sukumaran2010dendropy}.
+
+\vspace{-1.5ex}
+\subsection{Summary of Results}
+
+Each of the four surveyed phylometrics exhibited significant variation between surveyed evolutionary conditions.
+Ecological dynamics had a significant but relatively weak influence on phylometrics, suggesting the need to carefully account for selection pressure and spatial structure to ensure accurate detection of ecology through phylogenetic analysis.
+The Colless-like index appeared to be less useful for distinguishing evolutionary dynamics: it decreased under all non-plain evolutionary conditions.
+Figure \ref{fig:perfect-tree-phylometrics} summarizes the distributions of each phylometric across surveyed evolutionary conditions.
+
+Follow-up experiments tested whether ecological dynamics could still be detected in the presence of spatial structure.
+We found this to be the case.
+Interestingly, spatial structure appeared to mediate some aspects of ecological phylogenetic structure, which did not appear in its absence.
+For instance, ecology had a much larger impact on ancestor count in the presence of spatial structure.
+However, spatial structure muted the effects of ecology on the Colless-like index.
+These findings highlight the background effects of spatial structure as key to interpretation of phylogenetic signatures of other evolutionary dynamics.
+
+Finally, we analyzed the impact of phylogenetic reconstruction error on phylogenetic analysis.
+At the coarsest reconstruction resolution, we detected a significant effect of reconstruction error on all phylometrics except mean evolutionary distinctivenes.
+Colless-like index and mean pairwise distance generally reached statistical indistinguishability (at $n=50$) at 3\% reconstruction resolution.
+Ancestor count, however, was highly sensitive to reconstruction error.
+Future work should investigate the possibility of reducing this sensitivity by resolving polytomies (overrepresented due to reconstruction uncertainty) into sets of bifurcations.
+Where detectable, estimation uncertainty bias decreased all surveyed phylometrics' numerical value.
+So, when testing for expected increases in phylometric values, the potential for systematic false positives due to reconstruction error can be discounted.
+
+\vspace{-1.5ex}
+\section{Conclusion}
+
+Phylogenetic analysis appears feasible means to anatomize complex, distributed evolutionary computing systems.
+This work characterizes the phylometric signatures of selection pressure, ecology, spatial population structure, and reconstruction error.
+These findings provide a practical, actionable basis for phylogenetic inference of evolutionary dynamics and serves as for starting point for development of a systematic methodology for such analyses.
