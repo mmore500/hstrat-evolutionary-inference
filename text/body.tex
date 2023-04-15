@@ -3,7 +3,7 @@
 
 Phylogenies (i.e., ancestry trees) reveal how evolving populations move through a search space, which offers a powerful window into understanding the behavior of evolutionary algorithms.
 In existing work, phylogenetic analyses have diagnosed conditions stymying adaptive evolution, predicted future adaptive success of evolutionary runs, and revealed the step-by-step process by which an evolutionary algorithm solves a problem \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a,lalejiniEvolutionaryOriginsPhenotypic2016}.
-As evolutionary computation (EC) systems grow in complexity and computational scale  (i.e., parallel and distributed computing), observability enabled through phylogenetic analyses will become increasingly crucial.
+As evolutionary computation (EC) systems grow in complexity and computational scale (i.e., parallel and distributed computing), observability enabled through phylogenetic analyses will become increasingly crucial.
 
 Existing phylogenetic methods in EC assume a perfect-tracking model where an exact parentage record enables direct inspection of the lineages without uncertainty or inaccuracy.
 Applications to large-scale systems, however, face practical difficulties: communication overhead from record centralization and fragility to data loss.
@@ -28,15 +28,15 @@ Treatments explored three evolutionary variables: selection pressure (via tourna
 We combined these variables into seven ``regimes'' of evolutionary conditions:
 
 \begin{minipage}[t]{\columnwidth}
-\begin{itemize}
-  \item \textit{plain}: tournament size 2 with no niching and no islands,
-  \item \textit{weak selection}: tournament size 1 with no niching and no islands,
-  \item \textit{strong selection}: tournament size 4 with no niching and no islands,
-  \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands,
-  \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
-  \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
-  \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
-\end{itemize}
+  \begin{itemize}
+    \item \textit{plain}: tournament size 2 with no niching and no islands,
+    \item \textit{weak selection}: tournament size 1 with no niching and no islands,
+    \item \textit{strong selection}: tournament size 4 with no niching and no islands,
+    \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands,
+    \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
+    \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
+    \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
+  \end{itemize}
 \end{minipage}
 
 Sensitivity analysis to evolutionary duration (i.e., number generations) and mutation operator (via an alternate unit-exponential mutation distribution) support our findings' generalizability.
@@ -44,7 +44,8 @@ Sensitivity analysis to evolutionary duration (i.e., number generations) and mut
 Our phylogenetic analyses employ four metrics: (1) \textit{internal node count}, a measure of phylogenetic richness impacted by ecology and spatial structure; (2) \textit{Colless-like index}, an indicator of tree imbalance associated with varying ecological pressures and spatial structure; (3) \textit{mean pairwise distance}, a metric of evolutionary divergence affected by factors promoting long-term maintenance of distinct branches and factors promoting diversity; and (4) \textit{evolutionary distinctiveness}, another metric of evolutionary divergence calculated at the level of individual taxa --- known to behave differently than mean pairwise distance with a particularly strong relationship to branch length \citep{tuckerGuidePhylogeneticMetrics2017}.
 
 Experiments investigating the impact of phylogenetic inference error on phylometrics test four trade-off levels between resolution and genome annotation size.
-Each level is described as a $p\%$ ``resolution'' meaning that uncertainty (generational distance between reference points) $k$ generations back is less than $(p / 100) \times k$. So, a high percentage $p$ indicates coarse resolution and a low percentage $p$ indicates fine resolution.
+Each level is described as a $p\%$ ``resolution'' meaning that uncertainty (generational distance between reference points) $k$ generations back is less than $(p / 100) \times k$.
+So, a high percentage $p$ indicates coarse resolution and a low percentage $p$ indicates fine resolution.
 Annotation size ranged from 68 1-byte fingerprints per genome at coarse 33\% resolution to 1,239 1-byte fingerprints at fine 1\% resolution.
 
 Supporting materials are available at \url{https://osf.io/vtxwd/}.
