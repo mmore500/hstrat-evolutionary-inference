@@ -6,3 +6,7 @@
 	path = tex
 	url = https://github.com/mmore500/hstrat-evolutionary-inference.git
 	branch = tex
+[submodule "tex-extended-abstract"]
+	path = tex-extended-abstract
+	url = https://github.com/mmore500/hstrat-evolutionary-inference.git
+	branch = tex-extended-abstract
