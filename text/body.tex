@@ -1,29 +1,33 @@
+\vspace{-1.5ex}
 \section{Introduction}
 
 Phylogenies (i.e. ancestry trees) reveal how evolving populations move through a search space, which offers a powerful window into understanding the behavior of evolutionary algorithms.
 In existing work, phylogenetic analyses have diagnosed conditions stymying adaptive evolution, predicted future adaptive success of evolutionary runs, and revealed the step-by-step process by which an evolutionary algorithm solves a problem \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a,lalejiniEvolutionaryOriginsPhenotypic2016}.
-As evolutionary computation systems grow in complexity and computational scale  (i.e., parallel and distributed computing), observability enabled through phylogenetic analyses will become increasingly crucial.
+As evolutionary computation (EC) systems grow in complexity and computational scale  (i.e., parallel and distributed computing), observability enabled through phylogenetic analyses will become increasingly crucial.
 
-Existing phylogenetic methods in evolutionary computation assume a perfect-tracking model, where an exact parentage record enables direct analysis of the lineages without uncertainty or inaccuracy.
-Application of this model to large-scale systems, however, introduces difficulties: fragility to data loss and communication bottlenecks from record centralization.
-Phylogenetic analysis in evolutionary biology stem from an entirely different model: phylogenies are \textit{estimated} from the fossil record, phenotypic traits, and extant genetic information.
+Existing phylogenetic methods in EC assume a perfect-tracking model, where an exact parentage record enables direct analysis of the lineages without uncertainty or inaccuracy.
+Applying this model to large-scale systems, however, introduces difficulties: fragility to data loss and communication bottlenecks from record centralization.
+Evolutionary biology relies on an entirely different model: phylogenies are \textit{estimated} from extant information.
 
-The recently-introduced "hereditary stratigraphy" method facilitates such an approach for efficient, robust phylogenetic analysis of distributed evolutionary computing systems.
-This technique works by attaching heritable annotations to individual digital genomes, and enables a tunable trade-off between annotation size and estimation accuracy \citep{moreno2022hstrat}.
+The recently-introduced "hereditary stratigraphy" method facilitates such an approach for efficient, robust phylogenetic analysis of distributed EC systems.
+This technique works by attaching heritable annotations to individual digital genomes, and enables a tunable trade-off between annotation size and estimation accuracy \citep{moreno2022hereditary}.
 Here, we report on follow-up work developing methodological foundations necessary to apply hereditary stratigraphy to observe evolutionary dynamics in complex, distributed digital evolution systems using phylogenetic analyses.
 First, we characterize the impact ecology, selection pressure, and spatial structure induce on phylogenetic metrics.
 Second, we quantify the effects of reconstruction-induced estimation error on these phylogenetic metrics.
 Third, because distributed methods generally do not support well-mixed populations, we investigate the phylometric signature of interactions between  ecology and selection pressure with spatial structure.
 
+\vspace{-1.5ex}
 \section{Methods}
 
 Experiments testing the relationships between evolutionary dynamics, reconstruction error, and phylogenetic structure required a model system amenable to direct, interpretable tuning of ecology, spatial structure, and selection pressure.
 A parsimonious model system was devised to fulfill these objectives.
 Genomes in this system comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
-Experiments used the following parameterizations: compulsory unit Gaussian mutation, population size 32,768 ($2^{15}$), 262,144 ($2^{18}$) synchronous generations, and tournament selection.
+Experiments used the following parameterizations: Gaussian mutation, population size 32,768 ($2^{15}$), 262,144 ($2^{18}$) synchronous generations, and tournament selection.
 
 Treatments explored three evolutionary variables: selection pressure (controlled via tournament size), spatial structure (via an island model with 1D closed-ring topology and 1\% migration rate), ecology (via a simple niche model with either 4 or 8 niches and niche swap probability $3.0517578125 \times 10^{-8}$ so one niche swap would be expected every 1,000 generations).
 We combined these variables into seven ``regimes'' of evolutionary conditions:
+
+\begin{minipage}[t]{\columnwidth}
 \begin{itemize}
   \item \textit{plain}: tournament size 2 with no niching and no islands,
   \item \textit{weak selection}: tournament size 1 with no niching and no islands,
@@ -33,6 +37,7 @@ We combined these variables into seven ``regimes'' of evolutionary conditions:
   \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
   \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
 \end{itemize}
+\end{minipage}
 
 Sensitivity analysis to evolutionary duration (i.e., number generations) and mutation operator (via an alternate unit-exponential operator) support our findings' generalizability.
 
@@ -43,5 +48,5 @@ Each level is described as a $p\%$ ``resolution'' meaning that the generational 
 So, a high percentage $p$ indicates coarse resolution and a low percentage $p$ indicates fine resolution.
 Annotation size ranged from 68 1-byte fingerprints per genome at coarse 33\% resolution to 1,239 1-byte fingerprints at fine 1\% resolution.
 
-Supporting materials are available at \url{https://github.com/mmore500/hstrat-evolutionary-inference} and \url{https://osf.io/vtxwd/}.
-This project benefited from many pieces of open-source scientific software \citep{ofria2020empirical,moreno2022hstrat,lalejini2019data,sukumaran2010dendropy}.
+Supporting materials are available at \url{https://osf.io/vtxwd/}.
+This project benefited from of open-source scientific software \citep{ofria2020empirical,moreno2022hstrat,lalejini2019data,sukumaran2010dendropy}.
