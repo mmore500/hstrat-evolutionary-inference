@@ -44,6 +44,7 @@ RUN \
     && \
   apt-get install -qy --no-install-recommends \
     bibtool \
+    ghostscript \
     git \
     make \
     moreutils \
