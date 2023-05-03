@@ -25,43 +25,18 @@
               </div>
               <div class="col">
                 <h4> Settings</h4>
-                <div class="input-group mb-3">
-                    <label for="example_phylogeny_select" class="input-group-text">Example phylogeny</label>                
-                    <select id="example_phylogeny_select" class="form-select" aria-label="Example phylogeny">
-                        <option value="random">Random</option>
-                        <option value="ecoea">Eco-EA</option>                        
-                        <option value="lexicase">Lexicase selection</option>
-                        <option value="sharing">Fitness Sharing</option>
-                        <option value="tournament">Tournament selection</option>                        
-                    </select>
-                </div>
                 <!-- <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy"> -->
                 <label for="exponent_slider" class="form-label">Scale exponent</label>
-                <input type="range" class="form-range" id="exponent_slider" min=".01" max="50" >
-                <div class="input-group mb-3">
-                    <label for="retention_policy_select" class="input-group-text">Retention Policy</label>
-                    <select id="retention_policy_select" class="form-select policy_control" aria-label="Retention policy">
-                        <option value="RecencyProportionalResolution">Recency Proportional</option>
-                        <option value="TaperedDepthProportionalResolution">Tapered Depth-Proportional</option>
-                    </select>
-                </div>
+                <input type="range" class="form-range" id="exponent_slider" min=".01" max="10" >
                 <br>
                 <div class="input-group mb-3">
-                    <label for="differentia_select" class="input-group-text">Differentia</label>
-                    <select id="differentia_select" class="form-select policy_control" aria-label="Differentia Bit Width">
-                        <option value="1">1</option>
-                        <option value="8">8</option>
-                        <option value="64">64</option>
-                    </select>
-                </div>
-                <br>
-                <div class="input-group mb-3">
-                    <label for="target_bits_select" class="input-group-text">Target bits</label>                
-                    <select id="target_bits_select" class="form-select policy_control" aria-label="Stratigraphic Column Target Retained Bits">
-                        <option value="64">64</option>
-                        <option value="512">512</option>
-                        <option value="4096">4096</option>
-                    </select>
+                    <label for="resolution_select" class="input-group-text">Resolution</label>
+                    <select id="resolution_select" class="form-select policy_control" aria-label="Resolution">
+                        <option value="3">3</option>
+                        <option value="10">10</option>
+                        <option value="30">30</option>
+                        <option value="100">100</option>
+                      </select>
                 </div>
 
             </div>

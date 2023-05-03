@@ -16,11 +16,9 @@ var axis_g_phylo;
 var axis_reconst;
 var axis_g_reconst;
 var scale_range;
-var estimate = "differentia=64+policy=RecencyProportionalResolution+target=4096";
 var reconstructed_file = "reconstruction_100.csv"
 var phylo_file = "reference.csv"
-// var reconstructed_file = "a=reconstructed_phylogenies+source=nk_lexicaseselection_seed110_pop165_mut.01_snapshot_500.csv";
-// var phylo_file = "nk_lexicaseselection_seed110_pop165_mut.01_snapshot_500.csv";                
+          
 
 var max_update = 262145;
 var min_update = 262030;
@@ -67,10 +65,8 @@ function update_reconst() {
 
     reconstruct_svg.selectAll("*").remove();
     
-    var filtered = d3.filter(all_reconstructions, function(d) {return d.treatment == estimate;});
-
     // console.log(pairwise_data);
-    reconst_root = Tree(filtered, {
+    reconst_root = Tree(all_reconstructions, {
         // id: function(d){return d.id},
         // parentId: function(d){
         //     if (d.ancestor_list == "[NONE]") {
@@ -99,10 +95,9 @@ function update_age_scale(exponent) {
 }
 
 function get_curr_policy() {
-    var pol = $('#retention_policy_select').val();
-    var diff = $('#differentia_select').val();
-    var target = $('#target_bits_select').val();
-    estimate = "differentia="+diff+"+policy=" + pol + "+target=" + target;
+    var resolution = $('#resolution_select').val();
+    reconstructed_file = "reconstruction_"+resolution+".csv"
+
 }
 
 get_curr_policy();
@@ -113,41 +108,11 @@ $("#exponent_slider").on("input change", function() {
 });
 
 $(".policy_control").on("input change", function() {
+    phylo_svg.selectAll("*").remove();   
+    reconstruct_svg.selectAll("*").remove();  
     get_curr_policy();
-    update_reconst();
-});
-
-
-function set_files() {
-    var choice = $('#example_phylogeny_select').val();
-    if (choice == "random") {
-        reconstructed_file = "https://raw.githubusercontent.com/mmore500/hereditary-stratigraph-concept/9b2720368c2310ab6c718da31fee49a873758a06/binder/phylogenetic-inference/a=reconstructed_phylogenies+source=nk_randomselection_seed7_pop100_mut.01_snapshot_5000.csv";
-        phylo_file = "nk_randomselection_seed7_pop100_mut.01_snapshot_5000.csv";                
-        max_update = 5000;
-    } else if (choice == "tournament") {
-        reconstructed_file = "https://raw.githubusercontent.com/mmore500/hereditary-stratigraph-concept/9b2720368c2310ab6c718da31fee49a873758a06/binder/phylogenetic-inference/a=reconstructed_phylogenies+source=nk_tournamentselection_seed140_pop100_mut.01_snapshot_5000.csv";
-        phylo_file = "nk_tournamentselection_seed140_pop100_mut.01_snapshot_5000.csv";                
-        max_update = 5000;
-    } else if (choice == "lexicase") {
-        reconstructed_file = "https://raw.githubusercontent.com/mmore500/hereditary-stratigraph-concept/9b2720368c2310ab6c718da31fee49a873758a06/binder/phylogenetic-inference/a=reconstructed_phylogenies+source=nk_lexicaseselection_seed110_pop165_mut.01_snapshot_500.csv";
-        phylo_file = "nk_lexicaseselection_seed110_pop165_mut.01_snapshot_500.csv";                
-        max_update = 500;
-    } else if (choice == "sharing") {
-        reconstructed_file = "https://raw.githubusercontent.com/mmore500/hereditary-stratigraph-concept/9b2720368c2310ab6c718da31fee49a873758a06/binder/phylogenetic-inference/a=reconstructed_phylogenies+source=nk_sharingselection_seed10_pop100_mut.01_snapshot_5000.csv";
-        phylo_file = "nk_sharingselection_seed10_pop100_mut.01_snapshot_5000.csv";                        
-        max_update = 5000;
-    } else if (choice == "ecoea") {
-        reconstructed_file = "https://raw.githubusercontent.com/mmore500/hereditary-stratigraph-concept/9b2720368c2310ab6c718da31fee49a873758a06/binder/phylogenetic-inference/a=reconstructed_phylogenies+source=nk_ecoeaselection_seed110_pop100_mut.01_snapshot_3000.csv";
-        phylo_file = "nk_ecoeaselection_seed110_pop100_mut.01_snapshot_3000.csv";                        
-        max_update = 3000;
-    }
-}
-
-$("#example_phylogeny_select").on("input", function() {
-    set_files();
     load_data();
 });
-
 
 function AssignSortLabels(curr) {
 
@@ -376,6 +341,7 @@ function Tree(data, { // data is either tabular (array of objects) or hierarchy 
     svg_id = ""
   } = {}) {
     svg = d3.select(svg_id);
+    svg.selectAll("*").remove();
     extant = {};
     var e = $('#exponent_slider').val();
     // If id and parentId options are specified, or the path option, use d3.stratify
