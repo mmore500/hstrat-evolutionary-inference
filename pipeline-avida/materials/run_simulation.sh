@@ -16,4 +16,4 @@ rm -rf *
 ln -s ../../configs-common configs-common
 ln -s ../../configs-treatment configs-treatment
 
-singularity run docker://ghcr.io/emilydolson/avida-empirical@sha256:9d4d03034e3e6a573e316d2fcbc338f3d656c4c54bda6cc9a51c412487a8918f -c configs-treatment/"${TREATMENT}.cfg" -s "${RNG_SEED}"
+singularity run docker://ghcr.io/emilydolson/avida-empirical@sha256:0b663e3531a1046329db0039369c65a72e8d2901ddd89ca951f933fd7464abd4 -c configs-treatment/"${TREATMENT}.cfg" -s "${RNG_SEED}"
