@@ -10,7 +10,7 @@
 # set the random seed for the simulation.
 random_seed = as.integer(Sys.getenv('RNG_SEED'))
 # set the starting time step or leave NA to use the earliest/highest time-step.
-start_time = 40
+start_time = 30
 # set the end time step or leave as NA to use the latest/lowest time-step (0).
 end_time = NA
 # maximum total number of species in the simulation before it is aborted.
