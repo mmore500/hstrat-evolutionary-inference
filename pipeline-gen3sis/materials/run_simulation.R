@@ -15,7 +15,7 @@ print(paste("GEN3SIS_TREATMENT", GEN3SIS_TREATMENT))
 
 sim <- run_simulation(
     config = file.path("configs", paste0(GEN3SIS_TREATMENT, ".R")),
-    landscape = file.path("Simulations", "landscape", "SouthAmerica"),
+    landscape = file.path("landscapes", GEN3SIS_TREATMENT),
     output_directory = paste0(
         "data/treatment=",
         as.character(GEN3SIS_TREATMENT),

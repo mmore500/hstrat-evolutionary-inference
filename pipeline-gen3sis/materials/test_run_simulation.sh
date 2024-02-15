@@ -2,16 +2,11 @@
 
 cd "$(dirname "$0")" || exit 1
 
-    # "ecology_rich" \
-    # "ecology_some" \
-    # "ecology_weak" \
-    # "selection_strong" \
-    # "selection_weak" \
-    # "spatial_ecology_rich" \
-    # "spatial_ecology_weak" \
-    # "spatial_plain" \
 for TREATMENT in \
+    "ecology" \
     "plain" \
+    "spatial_ecology" \
+    "spatial_plain" \
 ; do
 for RNG_SEED in 1; do
 export TREATMENT=${TREATMENT}

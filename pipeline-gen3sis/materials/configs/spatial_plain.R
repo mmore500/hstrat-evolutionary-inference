@@ -4,11 +4,8 @@ source("../modules/common.R", local = T)
 ### Dispersal
 source("../modules/structure_strong.R", local = T)
 
-### Speciation
-# source("../modules/ecology_none.R", local = T)
-
 ### Evolution
-# source("../modules/evolution.R", local = T)
+source("../modules/evolution.R", local = T)
 
 ### Ecology
 source("../modules/ecology_none.R", local = T)

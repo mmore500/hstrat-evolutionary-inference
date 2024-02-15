@@ -1,3 +1,4 @@
+# adapted from https://cran.r-project.org/web/packages/gen3sis/vignettes/create_config.html
 apply_ecology <- function(abundance, traits, landscape, config) {
  abundance_scale = 10
  abundance_threshold = 1
