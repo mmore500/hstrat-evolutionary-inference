@@ -21,5 +21,5 @@ cp -r ../../configs-treatment configs-treatment
 export SINGULARITYENV_RNG_SEED="${RNG_SEED}"
 export SINGULARITYENV_TREATMENT="${TREATMENT}"
 
-singularity exec --no-home --cleanenv "${IMAGE_URI}" find .
-singularity run --no-home --cleanenv "${IMAGE_URI}" -c "configs-treatment/${TREATMENT}.cfg" -s "${RNG_SEED}"
+singularity exec --cleanenv "${IMAGE_URI}" find .
+singularity run --cleanenv "${IMAGE_URI}" -c "configs-treatment/${TREATMENT}.cfg" -s "${RNG_SEED}"

@@ -20,9 +20,9 @@ echo "TREATMENT ${TREATMENT}"
 export SINGULARITYENV_RNG_SEED="${RNG_SEED}"
 export SINGULARITYENV_TREATMENT="${TREATMENT}"
 
-singularity run --no-home --cleanenv "${IMAGE_URI}" Rscript run_simulation.R
+singularity run --cleanenv "${IMAGE_URI}" Rscript run_simulation.R
 
-singularity run --no-home --cleanenv "${IMAGE_URI}" alifedata-phyloinformatics-convert toalifedata \
+singularity run --cleanenv "${IMAGE_URI}" alifedata-phyloinformatics-convert toalifedata \
     --input-file "data/treatment=${TREATMENT}+seed=${RNG_SEED}/${TREATMENT}/phy.nex" \
     --input-schema nexus \
     --output-file "data/treatment=${TREATMENT}+seed=${RNG_SEED}/${TREATMENT}/phy.csv"

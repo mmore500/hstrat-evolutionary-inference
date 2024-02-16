@@ -10,7 +10,8 @@ source ./IMAGE_URI.sh
 rm -rf landscapes
 mkdir -p landscapes
 
-singularity run --no-home --cleanenv "${IMAGE_URI}" Rscript make_landscapes.R
+export SINGULARITYENV_PWD="${PWD}"
+singularity run --cleanenv "${IMAGE_URI}" Rscript make_landscapes.R
 
 cd landscapes
 
