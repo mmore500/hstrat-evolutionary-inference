@@ -15,7 +15,11 @@ mkdir -p "${WORK_DIR}" || :
 
 cd "${WORK_DIR}"
 rm -rf *
-ln -s ../../configs-common configs-common
-ln -s ../../configs-treatment configs-treatment
+cp -r ../../configs-common configs-common
+cp -r ../../configs-treatment configs-treatment
 
-singularity run "${IMAGE_URI}" -c "configs-treatment/${TREATMENT}.cfg" -s "${RNG_SEED}"
+export SINGULARITYENV_RNG_SEED="${RNG_SEED}"
+export SINGULARITYENV_TREATMENT="${TREATMENT}"
+
+singularity exec --no-home --cleanenv "${IMAGE_URI}" find .
+singularity run --no-home --cleanenv "${IMAGE_URI}" -c "configs-treatment/${TREATMENT}.cfg" -s "${RNG_SEED}"
