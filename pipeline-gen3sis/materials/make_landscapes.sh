@@ -10,7 +10,7 @@ source ./IMAGE_URI.sh
 rm -rf landscapes
 mkdir -p landscapes
 
-singularity run "${IMAGE_URI}" Rscript make_landscapes.R
+singularity run --no-home "${IMAGE_URI}" Rscript make_landscapes.R
 
 cd landscapes
 

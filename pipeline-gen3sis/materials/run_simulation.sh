@@ -17,9 +17,9 @@ fi
 echo "RNG_SEED ${RNG_SEED}"
 echo "TREATMENT ${TREATMENT}"
 
-singularity run "${IMAGE_URI}" Rscript run_simulation.R
+singularity run --no-home "${IMAGE_URI}" Rscript run_simulation.R
 
-singularity run "${IMAGE_URI}" alifedata-phyloinformatics-convert toalifedata \
+singularity run --no-home "${IMAGE_URI}" alifedata-phyloinformatics-convert toalifedata \
     --input-file "data/treatment=${TREATMENT}+seed=${RNG_SEED}/${TREATMENT}/phy.nex" \
     --input-schema nexus \
     --output-file "data/treatment=${TREATMENT}+seed=${RNG_SEED}/${TREATMENT}/phy.csv"
