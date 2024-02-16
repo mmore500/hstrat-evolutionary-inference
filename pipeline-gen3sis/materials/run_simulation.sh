@@ -4,8 +4,12 @@ set -e
 
 cd "$(dirname "$0")"
 
-echo "be sure landscapes/ is available!"
-echo "hint: run ./make_landscapes.sh"
+if [ ! -d "landscapes" ]; then
+    echo "landscapes directory not found, creating it"
+    echo "this may take a minute!"
+   ./make_landscapes.sh
+fi
+
 
 echo "RNG_SEED ${RNG_SEED}"
 echo "TREATMENT ${TREATMENT}"
