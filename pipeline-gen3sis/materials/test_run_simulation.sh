@@ -13,8 +13,8 @@ for TREATMENT in \
     "spatial_plain" \
 ; do
 for RNG_SEED in 1; do
-export TREATMENT=${TREATMENT}
-export RNG_SEED=${RNG_SEED}
+export TREATMENT="${TREATMENT}"
+export RNG_SEED="${RNG_SEED}"
 
 # pull singularity image
 singularity exec "${IMAGE_URI}" true
