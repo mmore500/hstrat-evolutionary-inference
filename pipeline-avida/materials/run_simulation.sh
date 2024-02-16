@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 
 echo "Running Avida with treatment ${TREATMENT} and seed ${RNG_SEED}"
 
-WORK_DIR=data/treatment=${TREATMENT}+seed=${SEED}
+WORK_DIR=data/treatment=${TREATMENT}+seed=${RNG_SEED}
 echo "WORK_DIR ${WORK_DIR}"
 mkdir -p "${WORK_DIR}" || :
 
