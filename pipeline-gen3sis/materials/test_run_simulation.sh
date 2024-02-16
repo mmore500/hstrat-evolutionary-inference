@@ -4,6 +4,8 @@ set -u
 
 cd "$(dirname "$0")" || exit 1
 
+source ./IMAGE_URI.sh
+
 for TREATMENT in \
     "ecology" \
     "plain" \
@@ -15,7 +17,7 @@ export TREATMENT=${TREATMENT}
 export RNG_SEED=${RNG_SEED}
 
 # pull singularity image
-singularity exec docker://ghcr.io/mmore500/gen3sis@sha256:ec5c901d454e6cbee7e02f5675006ddd38c8c4c94a33027d963779216c9c7b80 true
+singularity exec "${IMAGE_URI}" true
 
 timeout 3s ./run_simulation.sh &> /dev/null
 status="$?"

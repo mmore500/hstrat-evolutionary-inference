@@ -4,9 +4,8 @@ set -e
 
 cd "$(dirname "$0")"
 
-
-git clone https://github.com/project-gen3sis/Simulations.git || :
-(cd Simulations; git checkout 8ce6b88a6cd388f4cb4d963bb807ef91633385c6)
+source ./IMAGE_URI.sh
+./ensure_assets.sh
 
 rm -rf landscapes
 mkdir -p landscapes

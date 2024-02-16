@@ -4,6 +4,8 @@ set -u
 
 cd "$(dirname "$0")" || exit 1
 
+source ./IMAGE_URI.sh
+
 for TREATMENT in \
     "ecology_rich" \
     "ecology_some" \
@@ -20,7 +22,7 @@ export TREATMENT=${TREATMENT}
 export RNG_SEED=${RNG_SEED}
 
 # pull singularity image
-singularity exec docker://ghcr.io/emilydolson/avida-empirical@sha256:0b663e3531a1046329db0039369c65a72e8d2901ddd89ca951f933fd7464abd4 true
+singularity exec "${IMAGE_URI}" true
 
 timeout 3s ./run_simulation.sh &> /dev/null
 status="$?"
