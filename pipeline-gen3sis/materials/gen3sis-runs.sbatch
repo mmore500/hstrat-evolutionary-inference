@@ -8,7 +8,7 @@
 #SBATCH --mem-per-cpu=4G 
 #SBATCH --array 1-120
 
-cd /mnt/scratch/dolsonem/hstrat-evolutionary-inference/pipline-gen3sis/materials
+cd /mnt/scratch/dolsonem/hstrat-evolutionary-inference/pipeline-gen3sis/materials
 
 CURR_TREAT=plain
 if [ ${SLURM_ARRAY_TASK_ID} -gt 30 ] && [ ${SLURM_ARRAY_TASK_ID} -lt 61 ];
