@@ -6,24 +6,30 @@
 #SBATCH --job-name=gen3sis_hstrat
 #SBATCH --time=0-3:59
 #SBATCH --mem-per-cpu=4G 
-#SBATCH --array 1-120
 
 cd /mnt/scratch/dolsonem/hstrat-evolutionary-inference/pipeline-gen3sis/materials
 
 CURR_TREAT=plain
-if [ ${SLURM_ARRAY_TASK_ID} -gt 30 ] && [ ${SLURM_ARRAY_TASK_ID} -lt 61 ];
-then
-    CURR_TREAT=ecology;
-fi
+for i in {1..30}
+do
+    RNG_SEED=${i} TREATMENT=${CURR_TREAT} ./run_simulation.sh
+done
 
-if [ ${SLURM_ARRAY_TASK_ID} -gt 60 ] && [ ${SLURM_ARRAY_TASK_ID} -lt 91 ];
-then
-    CURR_TREAT=spatial_ecology;
-fi
+CURR_TREAT=ecology;
+for i in {1..30}
+do
+    RNG_SEED=${i} TREATMENT=${CURR_TREAT} ./run_simulation.sh
+done
 
-if [ ${SLURM_ARRAY_TASK_ID} -gt 90 ] && [ ${SLURM_ARRAY_TASK_ID} -lt 121 ];
-then
-    CURR_TREAT=spatial_plain;
-fi
+CURR_TREAT=spatial_ecology;
+for i in {1..30}
+do
+    RNG_SEED=${i} TREATMENT=${CURR_TREAT} ./run_simulation.sh
+done
 
-RNG_SEED=${SLURM_ARRAY_TASK_ID} TREATMENT=${CURR_TREAT} ./run_simulation.sh
+CURR_TREAT=spatial_plain;
+for i in {1..30}
+do
+    RNG_SEED=${i} TREATMENT=${CURR_TREAT} ./run_simulation.sh
+done
+
