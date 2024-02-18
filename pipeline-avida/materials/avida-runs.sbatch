@@ -4,7 +4,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=dolsonem@msu.edu
 #SBATCH --job-name=avida_hstrat
-#SBATCH --time=0-3:59
+#SBATCH --time=0-12:00
 #SBATCH --mem-per-cpu=4G 
 #SBATCH --array 1-300
 
