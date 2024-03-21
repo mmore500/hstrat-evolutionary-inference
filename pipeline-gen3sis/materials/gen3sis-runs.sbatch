@@ -5,7 +5,7 @@
 #SBATCH --mail-user=dolsonem@msu.edu
 #SBATCH --job-name=gen3sis_hstrat
 #SBATCH --time=0-12:00
-#SBATCH --mem-per-cpu=4G 
+#SBATCH --mem-per-cpu=4G
 
 cd /mnt/scratch/dolsonem/hstrat-evolutionary-inference/pipeline-gen3sis/materials
 
@@ -32,4 +32,3 @@ for i in {91..120}
 do
     RNG_SEED=${i} TREATMENT=${CURR_TREAT} ./run_simulation.sh
 done
-
