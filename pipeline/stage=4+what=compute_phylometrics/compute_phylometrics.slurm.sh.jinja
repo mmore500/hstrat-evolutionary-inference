@@ -177,6 +177,9 @@ phylometrics["total_orgs"] = sys.get_total_orgs()
 logging.info("calculating 'tree_size'")
 phylometrics["tree_size"] = sys.get_tree_size()
 
+logging.info("calculating 'sum_distance'")
+phylometrics["sum_distance"] = sys.get_sum_distance()
+
 logging.info("calculating 'variance_pairwise_distance'")
 phylometrics["variance_pairwise_distance"] = (
   sys.get_variance_pairwise_distance(False)
