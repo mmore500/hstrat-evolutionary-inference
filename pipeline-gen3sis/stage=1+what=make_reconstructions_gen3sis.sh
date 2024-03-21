@@ -130,6 +130,7 @@ open_retry = retry(
 def reconstruct_one(
   template_path: str, recency_proportional_resolution: int
 ) -> None:
+  template_path = template_path.replace("//", "/")
   template_df = retry(
     tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
   )(
@@ -153,9 +154,10 @@ def reconstruct_one(
   )
   collapsed_df = hstrat_aux.alifestd_to_working_format(collapsed_df)
 
-  attrs = kn.unpack(kn.rejoin(template_path.replace(
-    "/", "+",
-  )))
+  attrs = kn.unpack(kn.rejoin(
+    # adapted from https://stackoverflow.com/a/59082116
+    "+".join(template_path.rsplit("/", 2)),
+  ))
   hstrat_aux.seed_random( random.Random(
     f"{ attrs['seed'] } "
     f"{ recency_proportional_resolution } "
@@ -205,7 +207,8 @@ def reconstruct_one(
   reconstruction_filenames = [*map(
     lambda postprocess: kn.pack({
       **kn.unpack(kn.rejoin(
-        template_path.replace("/", "+"),
+        # adapted from https://stackoverflow.com/a/59082116
+        "+".join(template_path.rsplit("/", 2)),
       )),
       **{
         "a" : "reconstructed-tree",
@@ -234,7 +237,8 @@ def reconstruct_one(
           attrs['seed']
         }+treatment={
           kn.unpack(kn.rejoin(
-            template_path.replace("/", "+"),
+            # adapted from https://stackoverflow.com/a/59082116
+            "+".join(template_path.rsplit("/", 2)),
           ))["treatment"]
         }/"""
         f"{reconstruction_filename}",
