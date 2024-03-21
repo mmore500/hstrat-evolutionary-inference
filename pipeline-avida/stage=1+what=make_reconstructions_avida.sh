@@ -195,7 +195,9 @@ def reconstruct_one(
 
   reconstruction_filenames = [*map(
     lambda postprocess: kn.pack({
-      **kn.unpack(kn.rejoin(template_path)),
+      **kn.unpack(kn.rejoin(
+        template_path.replace("/phylogeny", "+phylogeny"),
+      )),
       **{
         "a" : "reconstructed-tree",
         "trie-postprocess" : postprocess,
@@ -219,6 +221,8 @@ def reconstruct_one(
           recency_proportional_resolution
         }+subsampling_fraction={
           1
+        }+seed={
+          attrs['seed']
         }+treatment={
           kn.unpack(kn.rejoin(
             template_path.replace("/phylogeny", "+phylogeny"),
