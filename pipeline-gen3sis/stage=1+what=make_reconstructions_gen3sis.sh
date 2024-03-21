@@ -5,7 +5,7 @@ echo "SCRIPT_PATH ${SCRIPT_PATH}"
 
 cd "$(dirname "$0")"
 
-source snippets/setup_instrumentation.sh
+source ../pipeline/snippets/setup_instrumentation.sh
 
 RUNMODE="${1}"
 echo "RUNMODE ${RUNMODE}"
@@ -16,7 +16,7 @@ echo "REVISION ${REVISION}"
 BATCH="date=$(date +%Y-%m-%d)+time=$(date +%H-%M-%S)+revision=${REVISION}+uuid=$(uuidgen)"
 echo "BATCH ${BATCH}"
 
-source snippets/setup_production_dependencies.sh
+source ../pipeline/snippets/setup_production_dependencies.sh
 
 STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=1+what=make_reconstructions_gen3sis/"
 echo "STAGE_PATH ${STAGE_PATH}"
