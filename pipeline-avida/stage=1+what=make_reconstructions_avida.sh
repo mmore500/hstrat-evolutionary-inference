@@ -59,9 +59,35 @@ sleep "${SLEEP_DURATION}"
 done
 
 PYSCRIPT=$(cat << HEREDOC
+import multiprocessing.pool as mpp
+
+# https://stackoverflow.com/a/65854996
+def istarmap(self, func, iterable, chunksize=1):
+    """starmap-version of imap"""
+    self._check_running()
+    if chunksize < 1:
+        raise ValueError(
+            "Chunksize must be 1+, not {0:n}".format(
+                chunksize))
+
+    task_batches = mpp.Pool._get_tasks(func, iterable, chunksize)
+    result = mpp.IMapIterator(self)
+    self._taskqueue.put(
+        (
+            self._guarded_task_generation(result._job,
+                                          mpp.starmapstar,
+                                          task_batches),
+            result._set_length
+        ))
+    return (item for chunk in result for item in chunk)
+
+mpp.Pool.istarmap = istarmap
+
+
 import functools
 import gc
 import glob
+import itertools as it
 import logging
 import multiprocessing
 import os
@@ -99,31 +125,32 @@ open_retry = retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
 )(open)
 
-for template_path in tqdm(globbed_phylogeny_paths):
-  for recency_proportional_resolution in [3, 10, 33, 100]:
-    template_df = retry(
-      tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
-    )(
-      pd.read_csv
-    )(template_path)
-    template_df = hstrat_aux.alifestd_to_working_format(template_df)
-    assert hstrat_aux.alifestd_validate(template_df)
-    assert hstrat_aux.alifestd_has_contiguous_ids(template_df)
-    assert hstrat_aux.alifestd_is_topologically_sorted(template_df)
+def reconstruct_one(
+  template_path: str, recency_proportional_resolution: int
+) -> None:
+  template_df = retry(
+    tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
+  )(
+    pd.read_csv
+  )(template_path)
+  template_df = hstrat_aux.alifestd_to_working_format(template_df)
+  assert hstrat_aux.alifestd_validate(template_df)
+  assert hstrat_aux.alifestd_has_contiguous_ids(template_df)
+  assert hstrat_aux.alifestd_is_topologically_sorted(template_df)
 
-    collapsed_df = hstrat_aux.alifestd_collapse_unifurcations(
-      template_df,
-      mutate=True,
-    )
-    collapsed_df = hstrat_aux.alifestd_to_working_format(collapsed_df)
+  collapsed_df = hstrat_aux.alifestd_collapse_unifurcations(
+    template_df,
+    mutate=True,
+  )
+  collapsed_df = hstrat_aux.alifestd_to_working_format(collapsed_df)
 
-    attrs = kn.unpack(kn.rejoin(template_path.replace(
-      "/phylogeny", "+phylogeny",
-    )))
-    hstrat_aux.seed_random( random.Random(
-      f"{ attrs['seed'] } "
-      f"{ recency_proportional_resolution } "
-    ).randrange(2**32) )
+  attrs = kn.unpack(kn.rejoin(template_path.replace(
+    "/phylogeny", "+phylogeny",
+  )))
+  hstrat_aux.seed_random( random.Random(
+    f"{ attrs['seed'] } "
+    f"{ recency_proportional_resolution } "
+  ).randrange(2**32) )
 
   seed_column = hstrat.HereditaryStratigraphicColumn(
     hstrat.recency_proportional_resolution_algo.Policy(
@@ -241,6 +268,15 @@ for template_path in tqdm(globbed_phylogeny_paths):
   """,
         )
     do_save()
+
+cpu_count = multiprocessing.cpu_count()
+logging.info(f"cpu_count {cpu_count}")
+with multiprocessing.Pool(processes=cpu_count) as pool:
+    args = [*it.product(globbed_phylogeny_paths, [3, 10, 33, 100])]
+    [*tqdm(
+      pool.istarmap(reconstruct_one, args),
+      total=len(args),
+    )]
 
 logging.info("PYSCRIPT complete")
 
