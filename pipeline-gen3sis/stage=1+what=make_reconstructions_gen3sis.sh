@@ -223,6 +223,7 @@ def reconstruct_one(
     len(reconstruction_filenames)
   }""")
 
+  # rsplit/join adapted from https://stackoverflow.com/a/59082116
   def setup_reconstruction_paths():
     return [
       kn.chop(
@@ -237,7 +238,6 @@ def reconstruct_one(
           attrs['seed']
         }+treatment={
           kn.unpack(kn.rejoin(
-            # adapted from https://stackoverflow.com/a/59082116
             "+".join(template_path.rsplit("/", 2)),
           ))["treatment"]
         }/"""
