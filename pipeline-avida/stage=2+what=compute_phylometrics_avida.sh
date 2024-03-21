@@ -282,7 +282,7 @@ def analyze_one(a: str, phylogeny_path: str) -> pd.DataFrame:
       "epoch": 0,
       "mut_distn": "default",
       **kn.unpack(kn.rejoin(
-        phylogeny_path
+        phylogeny_path.replace("/phylogeny", "+phylogeny"),
       )),
       **phylometrics,
     }
