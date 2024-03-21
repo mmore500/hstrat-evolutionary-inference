@@ -18,7 +18,7 @@ echo "BATCH ${BATCH}"
 
 source ../pipeline/snippets/setup_production_dependencies.sh
 
-STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=1+what=make_reconstructions/"
+STAGE_PATH="${HOME}/scratch/data/hstrat-evolutionary-inference/runmode=${RUNMODE}/stage=1+what=make_reconstructions_avida/"
 echo "STAGE_PATH ${STAGE_PATH}"
 
 BATCH_PATH="${STAGE_PATH}/batches/${BATCH}/"
