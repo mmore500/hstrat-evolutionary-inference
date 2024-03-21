@@ -300,29 +300,4 @@ pwd
 
 python3 -c "${PYSCRIPT}"
 
-PROVLOG_PATH="${STAGE_PATH}/latest/a=collated-reconstruction-audits+ext=.csv.provlog.yaml"
-echo "PROVLOG_PATH ${PROVLOG_PATH}"
-
-cat << HEREDOC >> "${PROVLOG_PATH}"
--
-  a: ${PROVLOG_PATH}
-  batch: ${BATCH}
-  date: $(date --iso-8601=seconds)
-  hostname: $(hostname)
-  revision: ${REVISION}
-  runmode: ${RUNMODE}
-  user: $(whoami)
-  uuid: $(uuidgen)
-  slurm_job_id: ${SLURM_JOB_ID-none}
-  stage: 1
-  stage 1 batch path: $(readlink -f "${BATCH_PATH}")
-  script path: ${SCRIPT_PATH}
-HEREDOC
-
-echo "appended new entry to ${PROVLOG_PATH}"
-
-gzip "${PROVLOG_PATH}"
-
-echo "gzipped ${PROVLOG_PATH}"
-
 echo "fin ${0}"
