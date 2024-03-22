@@ -18,7 +18,7 @@ var axis_g_reconst;
 var scale_range;
 var reconstructed_file = "reconstruction_100.csv"
 var phylo_file = "reference.csv"
-          
+
 
 var max_update = 262145;
 var min_update = 262030;
@@ -64,7 +64,7 @@ function update_tree() {
 function update_reconst() {
 
     reconstruct_svg.selectAll("*").remove();
-    
+
     // console.log(pairwise_data);
     reconst_root = Tree(all_reconstructions, {
         // id: function(d){return d.id},
@@ -82,7 +82,7 @@ function update_reconst() {
         axis_space: 40,
         strokeWidth: strokeWidth,
         svg_id: "#reconstruct_canvas",
-        sort: function(a, b) {console.log(a.label_name, b.label_name, d3.descending(a.label_name, b.label_name)); return d3.descending(a.label_name, b.label_name);}                
+        sort: function(a, b) {console.log(a.label_name, b.label_name, d3.descending(a.label_name, b.label_name)); return d3.descending(a.label_name, b.label_name);}
     });
 }
 
@@ -108,8 +108,8 @@ $("#exponent_slider").on("input change", function() {
 });
 
 $(".policy_control").on("input change", function() {
-    phylo_svg.selectAll("*").remove();   
-    reconstruct_svg.selectAll("*").remove();  
+    phylo_svg.selectAll("*").remove();
+    reconstruct_svg.selectAll("*").remove();
     get_curr_policy();
     load_data();
 });
@@ -140,7 +140,7 @@ function handle_click(e, d) {
 function handle_mouseover(e, data) {
     var desc = data.target.links();
     // console.log(e);
-    
+
     domRect = document.getElementById("phylo_canvas").getBoundingClientRect();;
 
     var click_y = e.clientY - domRect.top;
@@ -163,7 +163,7 @@ function handle_mouseover(e, data) {
                         // data.target.unique_id == a.unique_id) {
                         if (d.target.children === undefined) {
                             ends.add(d.target);
-                        }    
+                        }
                         return .2;
                     }
                     return 1;
@@ -171,7 +171,7 @@ function handle_mouseover(e, data) {
             }
             if (d.target.children === undefined) {
                 ends.add(d.target);
-            }            
+            }
             return .2;
         })
       );
@@ -189,7 +189,7 @@ function handle_mouseover(e, data) {
     //                 return 1;
     //             }
     //         }
-            
+
     //         return .2;
     //     });
     // console.log(ends);
@@ -236,10 +236,10 @@ function CircleTree(data, { // data is either tabular (array of objects) or hier
     strokeOpacity = 0.4, // stroke opacity for links
     strokeLinejoin, // stroke line join for links
     strokeLinecap, // stroke line cap for links
-    halo = "#fff", // color of label halo 
+    halo = "#fff", // color of label halo
     haloWidth = 3, // padding around the labels
   } = {}) {
-    
+
     // If id and parentId options are specified, or the path option, use d3.stratify
     // to convert tabular data to a hierarchy; otherwise we assume that the data is
     // specified as an object {children} with nested objects (a.k.a. the “flare.json”
@@ -247,14 +247,14 @@ function CircleTree(data, { // data is either tabular (array of objects) or hier
     const root = path != null ? d3.stratify().path(path)(data)
         : id != null || parentId != null ? d3.stratify().id(id).parentId(parentId)(data)
         : d3.hierarchy(data, children);
-  
+
     // Sort the nodes.
     if (sort != null) root.sort(sort);
-  
+
     // Compute labels and titles.
     const descendants = root.descendants();
     const L = label == null ? null : descendants.map(d => label(d.data, d));
-  
+
     // Compute the layout.
     tree().size([2 * Math.PI, radius]).separation(separation)(root);
 
@@ -266,7 +266,7 @@ function CircleTree(data, { // data is either tabular (array of objects) or hier
         .attr("style", "max-width: 100%; height: auto; height: intrinsic;")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10);
-  
+
     svg.append("g")
         .attr("fill", "none")
         .attr("stroke", stroke)
@@ -280,7 +280,7 @@ function CircleTree(data, { // data is either tabular (array of objects) or hier
         .attr("d", d3.linkRadial()
             .angle(d => d.x)
             .radius(d => d.y));
-  
+
     const node = svg.append("g")
       .selectAll("a")
       .data(root.descendants())
@@ -288,14 +288,14 @@ function CircleTree(data, { // data is either tabular (array of objects) or hier
         .attr("xlink:href", link == null ? null : d => link(d.data, d))
         .attr("target", link == null ? null : linkTarget)
         .attr("transform", d => `rotate(${d.x * 180 / Math.PI - 90}) translate(${d.y},0)`);
-  
+
     node.append("circle")
         .attr("fill", d => d.children ? stroke : fill)
         .attr("r", r);
-  
+
     if (title != null) node.append("title")
         .text(d => title(d.data, d));
-  
+
     if (L) node.append("text")
         .attr("transform", d => `rotate(${d.x >= Math.PI ? 180 : 0})`)
         .attr("dy", "0.32em")
@@ -305,7 +305,7 @@ function CircleTree(data, { // data is either tabular (array of objects) or hier
         .attr("stroke", halo)
         .attr("stroke-width", haloWidth)
         .text((d, i) => L[i]);
-  
+
     return svg.node();
   }
 
@@ -466,15 +466,15 @@ function Tree(data, { // data is either tabular (array of objects) or hierarchy 
         axis_g_reconst = axis_g;
     } else {
         axis_phylo = axis;
-        axis_g_phylo = axis_g;        
+        axis_g_phylo = axis_g;
     }
 
     return root;
   }
 
 function load_data() {
-    phylo_svg.selectAll("*").remove();   
-    reconstruct_svg.selectAll("*").remove();   
+    phylo_svg.selectAll("*").remove();
+    reconstruct_svg.selectAll("*").remove();
 
     // set_files();
 
@@ -512,13 +512,13 @@ function load_data() {
                 axis_space: 40,
                 strokeWidth: strokeWidth,
                 svg_id: "#reconstruct_canvas",
-                // sort: function(a, b) {return d3.descending(a.data.label_name, b.data.label_name);}                
+                // sort: function(a, b) {return d3.descending(a.data.label_name, b.data.label_name);}
             });
 
         }
     ).then( function(orig_data) {
         // d3.csv("example.csv", function(data){
-        // 
+        //
         // d3.csv("https://files.osf.io/v1/resources/4sm72/providers/osfstorage/6218eef419ba8b044ae128ba",
         d3.csv(phylo_file,
         function(d) {

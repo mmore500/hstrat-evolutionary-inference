@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - run: |
-          python3 -m pip install -r requirements.txt      
+          python3 -m pip install -r requirements.txt
           ./tidy/test_tidy.sh
 
   py-unit:
@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - run: python3 -m pip install -r requirements.txt      
+      - run: python3 -m pip install -r requirements.txt
       - run: ./pylib/test/run_tests.sh
 
   binder:
@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - run: python3 -m pip install -r requirements.txt      
+      - run: python3 -m pip install -r requirements.txt
       # Adapted from https://askubuntu.com/a/524368
       - run: ./binder/execute_notebooks.sh
       # adapted from https://unix.stackexchange.com/a/545630

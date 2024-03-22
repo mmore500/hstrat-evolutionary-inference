@@ -5,7 +5,7 @@
 #SBATCH --mail-user=dolsonem@msu.edu
 #SBATCH --job-name=avida_hstrat
 #SBATCH --time=0-12:00
-#SBATCH --mem-per-cpu=4G 
+#SBATCH --mem-per-cpu=4G
 #SBATCH --array 1-300
 
 cd /mnt/scratch/dolsonem/hstrat-evolutionary-inference/pipline-avida/materials
