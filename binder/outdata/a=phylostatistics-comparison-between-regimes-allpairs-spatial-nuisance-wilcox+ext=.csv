@@ -1,145 +1,145 @@
 regime1,regime2,n,phylometric,statistic,p,epoch,mut_distn
 4 niche ecology,8 niche ecology,50,colless_like_index,1.0,8.031090907046913e-10,0,np.random.exponential
 4 niche ecology,8 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.exponential
-4 niche ecology,8 niche ecology,50,num_ancestors,0.0,7.551804758280675e-10,0,np.random.exponential
+4 niche ecology,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.exponential
 4 niche ecology,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 4 niche ecology,plain,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.exponential
 4 niche ecology,plain,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.exponential
-4 niche ecology,plain,50,num_ancestors,0.0,7.555220876380673e-10,0,np.random.exponential
+4 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.exponential
 4 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.exponential
-4 niche ecology,weak 4 niche ecology,50,num_ancestors,382.5,0.01382634004847664,0,np.random.exponential
+4 niche ecology,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 plain,8 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.exponential
 plain,8 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.exponential
-plain,8 niche ecology,50,num_ancestors,0.0,7.548390027588035e-10,0,np.random.exponential
+plain,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.exponential
 plain,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 weak 4 niche ecology,8 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.exponential
 weak 4 niche ecology,8 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.exponential
-weak 4 niche ecology,8 niche ecology,50,num_ancestors,0.0,7.551804758280675e-10,0,np.random.exponential
+weak 4 niche ecology,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.exponential
 weak 4 niche ecology,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 weak 4 niche ecology,plain,50,colless_like_index,189.0,1.4945133405887308e-05,0,np.random.exponential
 weak 4 niche ecology,plain,50,mean_pairwise_distance,606.0,0.7610682552125038,0,np.random.exponential
-weak 4 niche ecology,plain,50,num_ancestors,0.0,7.551804758280675e-10,0,np.random.exponential
+weak 4 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.exponential
 weak 4 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 8 niche ecology,4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 8 niche ecology,4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-8 niche ecology,4 niche ecology,50,num_ancestors,0.0,7.550097219539461e-10,0,np.random.standard_normal
+8 niche ecology,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 8 niche ecology,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 8 niche ecology,weak 4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 8 niche ecology,weak 4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-8 niche ecology,weak 4 niche ecology,50,num_ancestors,0.0,7.550097219539461e-10,0,np.random.standard_normal
+8 niche ecology,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 8 niche ecology,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-plain,4 niche ecology,50,num_ancestors,0.0,7.553512643873762e-10,0,np.random.standard_normal
+plain,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,8 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,8 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-plain,8 niche ecology,50,num_ancestors,0.0,7.551804758280675e-10,0,np.random.standard_normal
+plain,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,weak 4 niche ecology,50,colless_like_index,451.0,0.07180752515234809,0,np.random.standard_normal
 plain,weak 4 niche ecology,50,mean_pairwise_distance,381.0,0.013283902663624031,0,np.random.standard_normal
-plain,weak 4 niche ecology,50,num_ancestors,0.0,7.543270531852816e-10,0,np.random.standard_normal
+plain,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 weak 4 niche ecology,4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 weak 4 niche ecology,4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-weak 4 niche ecology,4 niche ecology,50,num_ancestors,481.0,0.13083724662909346,0,np.random.standard_normal
+weak 4 niche ecology,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 weak 4 niche ecology,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 4 niche ecology,weak 4 niche ecology,50,colless_like_index,2.0,8.53422673646545e-10,2,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.exponential
-4 niche ecology,weak 4 niche ecology,50,num_ancestors,520.5,0.25870664266225685,2,np.random.exponential
+4 niche ecology,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 8 niche ecology,4 niche ecology,50,colless_like_index,3.0,9.06805772149548e-10,2,np.random.exponential
 8 niche ecology,4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.exponential
-8 niche ecology,4 niche ecology,50,num_ancestors,0.0,7.543270531852816e-10,2,np.random.exponential
+8 niche ecology,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.exponential
 8 niche ecology,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 8 niche ecology,weak 4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,2,np.random.exponential
 8 niche ecology,weak 4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.exponential
-8 niche ecology,weak 4 niche ecology,50,num_ancestors,0.0,7.543270531852816e-10,2,np.random.exponential
+8 niche ecology,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.exponential
 8 niche ecology,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,4 niche ecology,50,colless_like_index,29.0,4.253518335686794e-09,2,np.random.exponential
 plain,4 niche ecology,50,mean_pairwise_distance,1.0,8.031090907046913e-10,2,np.random.exponential
-plain,4 niche ecology,50,num_ancestors,0.0,7.551804758280675e-10,2,np.random.exponential
+plain,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,8 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,8 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.exponential
-plain,8 niche ecology,50,num_ancestors,0.0,7.548390027588035e-10,2,np.random.exponential
+plain,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,weak 4 niche ecology,50,colless_like_index,122.0,6.482283621094172e-07,2,np.random.exponential
 plain,weak 4 niche ecology,50,mean_pairwise_distance,85.0,9.63712911922847e-08,2,np.random.exponential
-plain,weak 4 niche ecology,50,num_ancestors,0.0,7.553512643873762e-10,2,np.random.exponential
+plain,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 8 niche ecology,4 niche ecology,50,colless_like_index,2.0,8.53422673646545e-10,2,np.random.standard_normal
 8 niche ecology,4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-8 niche ecology,4 niche ecology,50,num_ancestors,0.0,7.548390027588035e-10,2,np.random.standard_normal
+8 niche ecology,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 8 niche ecology,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 8 niche ecology,plain,50,colless_like_index,0.0,7.556929455863566e-10,2,np.random.standard_normal
 8 niche ecology,plain,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-8 niche ecology,plain,50,num_ancestors,0.0,7.544976683806673e-10,2,np.random.standard_normal
+8 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 8 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 8 niche ecology,weak 4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,2,np.random.standard_normal
 8 niche ecology,weak 4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-8 niche ecology,weak 4 niche ecology,50,num_ancestors,0.0,7.550097219539461e-10,2,np.random.standard_normal
+8 niche ecology,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 8 niche ecology,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 plain,4 niche ecology,50,colless_like_index,2.0,8.53422673646545e-10,2,np.random.standard_normal
 plain,4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-plain,4 niche ecology,50,num_ancestors,0.0,7.539859267508618e-10,2,np.random.standard_normal
+plain,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 plain,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak 4 niche ecology,4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak 4 niche ecology,4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-weak 4 niche ecology,4 niche ecology,50,num_ancestors,596.0,0.6887013434656057,2,np.random.standard_normal
+weak 4 niche ecology,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak 4 niche ecology,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak 4 niche ecology,plain,50,colless_like_index,121.0,6.166815818239549e-07,2,np.random.standard_normal
 weak 4 niche ecology,plain,50,mean_pairwise_distance,115.0,4.5628539597638217e-07,2,np.random.standard_normal
-weak 4 niche ecology,plain,50,num_ancestors,0.0,7.553512643873762e-10,2,np.random.standard_normal
+weak 4 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak 4 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 4 niche ecology,plain,50,colless_like_index,458.0,0.08313770889364551,7,np.random.exponential
 4 niche ecology,plain,50,mean_pairwise_distance,456.0,0.0797617584041863,7,np.random.exponential
-4 niche ecology,plain,50,num_ancestors,0.0,7.551804758280675e-10,7,np.random.exponential
+4 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.exponential
 4 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,colless_like_index,178.0,9.178144213292979e-06,7,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,mean_pairwise_distance,25.0,3.366814035344517e-09,7,np.random.exponential
-4 niche ecology,weak 4 niche ecology,50,num_ancestors,592.5,0.6639814132513038,7,np.random.exponential
+4 niche ecology,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.exponential
 4 niche ecology,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 8 niche ecology,4 niche ecology,50,colless_like_index,103.0,2.473756574659273e-07,7,np.random.exponential
 8 niche ecology,4 niche ecology,50,mean_pairwise_distance,2.0,8.53422673646545e-10,7,np.random.exponential
-8 niche ecology,4 niche ecology,50,num_ancestors,0.0,7.548390027588035e-10,7,np.random.exponential
+8 niche ecology,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.exponential
 8 niche ecology,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 8 niche ecology,plain,50,colless_like_index,100.0,2.118385561420393e-07,7,np.random.exponential
 8 niche ecology,plain,50,mean_pairwise_distance,0.0,7.556929455863566e-10,7,np.random.exponential
-8 niche ecology,plain,50,num_ancestors,0.0,7.555220876380673e-10,7,np.random.exponential
+8 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.exponential
 8 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 8 niche ecology,weak 4 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,7,np.random.exponential
 8 niche ecology,weak 4 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,7,np.random.exponential
-8 niche ecology,weak 4 niche ecology,50,num_ancestors,0.0,7.551804758280675e-10,7,np.random.exponential
+8 niche ecology,weak 4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.exponential
 8 niche ecology,weak 4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 weak 4 niche ecology,plain,50,colless_like_index,43.0,9.530799618618074e-09,7,np.random.exponential
 weak 4 niche ecology,plain,50,mean_pairwise_distance,0.0,7.556929455863566e-10,7,np.random.exponential
-weak 4 niche ecology,plain,50,num_ancestors,0.0,7.543270531852816e-10,7,np.random.exponential
+weak 4 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.exponential
 weak 4 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
-4 niche ecology,8 niche ecology,49,colless_like_index,62.0,2.7687864179239132e-08,7,np.random.standard_normal
-4 niche ecology,8 niche ecology,49,mean_pairwise_distance,5.0,1.0235189212610724e-09,7,np.random.standard_normal
-4 niche ecology,8 niche ecology,49,num_ancestors,0.0,7.551804758280675e-10,7,np.random.standard_normal
-4 niche ecology,8 niche ecology,49,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
-4 niche ecology,plain,49,colless_like_index,600.0,0.7173535621498253,7,np.random.standard_normal
-4 niche ecology,plain,49,mean_pairwise_distance,216.0,4.7244338450388704e-05,7,np.random.standard_normal
-4 niche ecology,plain,49,num_ancestors,0.0,7.551804758280675e-10,7,np.random.standard_normal
-4 niche ecology,plain,49,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
-plain,8 niche ecology,49,colless_like_index,33.0,5.365943352795552e-09,7,np.random.standard_normal
-plain,8 niche ecology,49,mean_pairwise_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
-plain,8 niche ecology,49,num_ancestors,0.0,7.548390027588035e-10,7,np.random.standard_normal
-plain,8 niche ecology,49,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
-weak 4 niche ecology,4 niche ecology,49,colless_like_index,217.0,8.348988640746282e-05,7,np.random.standard_normal
-weak 4 niche ecology,4 niche ecology,49,mean_pairwise_distance,12.0,2.3242989444907054e-09,7,np.random.standard_normal
-weak 4 niche ecology,4 niche ecology,49,num_ancestors,508.0,0.2985399813733869,7,np.random.standard_normal
-weak 4 niche ecology,4 niche ecology,49,mean_evolutionary_distinctiveness,0.0,1.1100954635085601e-09,7,np.random.standard_normal
-weak 4 niche ecology,8 niche ecology,49,colless_like_index,8.0,1.8196420467945707e-09,7,np.random.standard_normal
-weak 4 niche ecology,8 niche ecology,49,mean_pairwise_distance,0.0,1.1100954635085601e-09,7,np.random.standard_normal
-weak 4 niche ecology,8 niche ecology,49,num_ancestors,0.0,1.1100954635085601e-09,7,np.random.standard_normal
-weak 4 niche ecology,8 niche ecology,49,mean_evolutionary_distinctiveness,0.0,1.1100954635085601e-09,7,np.random.standard_normal
-weak 4 niche ecology,plain,49,colless_like_index,81.0,1.2434740924380837e-07,7,np.random.standard_normal
-weak 4 niche ecology,plain,49,mean_pairwise_distance,35.0,9.215887201256198e-09,7,np.random.standard_normal
-weak 4 niche ecology,plain,49,num_ancestors,0.0,1.1100954635085601e-09,7,np.random.standard_normal
-weak 4 niche ecology,plain,49,mean_evolutionary_distinctiveness,0.0,1.1100954635085601e-09,7,np.random.standard_normal
+4 niche ecology,8 niche ecology,50,colless_like_index,62.0,2.7687864179239132e-08,7,np.random.standard_normal
+4 niche ecology,8 niche ecology,50,mean_pairwise_distance,5.0,1.0235189212610724e-09,7,np.random.standard_normal
+4 niche ecology,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+4 niche ecology,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
+4 niche ecology,plain,50,colless_like_index,600.0,0.7173535621498253,7,np.random.standard_normal
+4 niche ecology,plain,50,mean_pairwise_distance,216.0,4.7244338450388704e-05,7,np.random.standard_normal
+4 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+4 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
+plain,8 niche ecology,50,colless_like_index,33.0,5.365943352795552e-09,7,np.random.standard_normal
+plain,8 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+plain,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+plain,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,4 niche ecology,50,colless_like_index,193.0,1.7796456927994258e-05,7,np.random.standard_normal
+weak 4 niche ecology,4 niche ecology,50,mean_pairwise_distance,11.0,1.4685612927356851e-09,7,np.random.standard_normal
+weak 4 niche ecology,4 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,4 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,8 niche ecology,50,colless_like_index,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,8 niche ecology,50,mean_pairwise_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,8 niche ecology,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,8 niche ecology,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,plain,50,colless_like_index,139.0,1.4930817614885294e-06,7,np.random.standard_normal
+weak 4 niche ecology,plain,50,mean_pairwise_distance,40.0,8.02968346961793e-09,7,np.random.standard_normal
+weak 4 niche ecology,plain,50,sum_distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak 4 niche ecology,plain,50,mean_evolutionary_distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
