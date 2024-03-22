@@ -183,7 +183,6 @@ def analyze_one(a: str, phylogeny_path: str) -> pd.DataFrame:
       )
       path = f"/tmp/{uuid.uuid4()}.csv"
       phylogeny_df.to_csv(path, index=False)
-      return
 
     if path.endswith(".csv"):
       syst.load_from_file(
