@@ -13,6 +13,8 @@ jobs:
     name: Tidy
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - run: |
           python3 -m pip install -r requirements.txt      
           ./tidy/test_tidy.sh
@@ -20,11 +22,9 @@ jobs:
   py-unit:
     name: Pylib Unit Tests
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/mmore500/hstrat-evolutionary-inference:GITHUB_ACTION_${{ github.run_number }}
-      # github actions requires root to access mounted volumes
-      options: --user root --cap-add=SYS_ADMIN
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - run: python3 -m pip install -r requirements.txt      
       - run: /opt/hstrat-evolutionary-inference/pylib/test/run_tests.sh
 
@@ -32,6 +32,8 @@ jobs:
     name: Notebooks
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - run: python3 -m pip install -r requirements.txt      
       # Adapted from https://askubuntu.com/a/524368
       - run: ./binder/execute_notebooks.sh
