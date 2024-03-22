@@ -125,7 +125,7 @@ ipykernel==6.29.3
     #   qtconsole
 ipynbname==2023.2.0.0
     # via nbmetalog
-ipython==8.22.2
+ipython==8.13.0
     # via
     #   ipykernel
     #   ipywidgets
