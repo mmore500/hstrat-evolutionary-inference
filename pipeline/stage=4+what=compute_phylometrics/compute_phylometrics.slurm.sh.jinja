@@ -119,8 +119,9 @@ logging.info("deserialized systematics from source phylogeny")
 
 phylometrics = dict()
 
-logging.info("calculating 'diversity'")
-phylometrics["diversity"] = sys.calc_diversity()
+# num orgs wrong
+# logging.info("calculating 'diversity'")
+# phylometrics["diversity"] = sys.calc_diversity()
 
 logging.info("calculating 'colless_like_index'")
 phylometrics["colless_like_index"] = sys.colless_like_index()
