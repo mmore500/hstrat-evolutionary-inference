@@ -202,6 +202,7 @@ def reconstruct_one(
         "a" : "reconstructed-tree",
         "trie-postprocess" : postprocess,
         "subsampling-fraction" : 1,
+        "resolution" : recency_proportional_resolution,
         "ext" : ".csv.gz",
       },
     }),
