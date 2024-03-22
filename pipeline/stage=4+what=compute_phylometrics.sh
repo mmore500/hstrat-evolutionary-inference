@@ -38,13 +38,13 @@ all_phylogeny_files="$( \
 num_phylogeny_files="$(echo ${all_phylogeny_files} | wc -w)"
 echo "num_phylogeny_files ${num_phylogeny_files}"
 
-num_batches="$(((${num_phylogeny_files} + 24) / 25))"
+num_batches="$(((${num_phylogeny_files} + 249) / 250))"
 echo "num_batches ${num_batches}"
 
 # second sed strips leftover empty line at end
 echo ${all_phylogeny_files} \
 | tr '\n' ' ' \
-| sed -E 's/(\S+\s+){1,25}/&\n/g' \
+| sed -E 's/(\S+\s+){1,250}/&\n/g' \
 | sed '/^$/d'  \
 | while read target_phylogeny_files \
 ; do
