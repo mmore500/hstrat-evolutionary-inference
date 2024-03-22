@@ -1,0 +1,66 @@
+name: CI
+on:
+  push:
+    branches: [ master, dev, cut-cookie ]
+  pull_request:
+    branches:
+      - '**'
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+jobs:
+  tidy:
+    name: Tidy
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          python3 -m pip install -r requirements.txt      
+          ./tidy/test_tidy.sh
+
+  py-unit:
+    name: Pylib Unit Tests
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mmore500/hstrat-evolutionary-inference:GITHUB_ACTION_${{ github.run_number }}
+      # github actions requires root to access mounted volumes
+      options: --user root --cap-add=SYS_ADMIN
+    steps:
+      - run: python3 -m pip install -r requirements.txt      
+      - run: /opt/hstrat-evolutionary-inference/pylib/test/run_tests.sh
+
+  binder:
+    name: Notebooks
+    runs-on: ubuntu-latest
+    steps:
+      - run: python3 -m pip install -r requirements.txt      
+      # Adapted from https://askubuntu.com/a/524368
+      - run: ./binder/execute_notebooks.sh
+      # adapted from https://unix.stackexchange.com/a/545630
+      - run: find -type f -name "*.pdf" -exec bash -c 'gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dBATCH -dQUIET -sOutputFile="new.pdf" "{}"; rm "{}"; mv "new.pdf" "{}";' {} \;
+      - run: git init
+      - uses: fregante/setup-git-user@v1
+      - run: git commit --allow-empty -m "Initial commit"
+      - run: cp -r /opt/hstrat-evolutionary-inference/ deploy/
+      - uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: binder # The branch the action should deploy to.
+          folder: deploy # The folder the action should deploy.
+
+  latex:
+    name: Latex Build
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/mmore500/teximage:sha-77b8179
+      # github actions requires root to access mounted volumes
+      options: --user root
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+      - run: make -C tex/
+      - run: 'cat tex/*.log || :'
+      - name: Upload output as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: manuscript
+          path: tex/${{ github.event.repository.name }}-draft.pdf
