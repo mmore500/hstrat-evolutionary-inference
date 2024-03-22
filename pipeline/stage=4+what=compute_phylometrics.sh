@@ -44,8 +44,7 @@ echo "num_batches ${num_batches}"
 # second sed strips leftover empty line at end
 echo ${all_phylogeny_files} \
 | tr '\n' ' ' \
-| sed -E 's/(\S+\s+){1,250}/&\n/g' \
-| sed '/^$/d'  \
+| xargs -n 250  \
 | while read target_phylogeny_files \
 ; do
   SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
