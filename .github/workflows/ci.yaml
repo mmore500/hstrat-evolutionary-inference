@@ -39,14 +39,14 @@ jobs:
       - run: ./binder/execute_notebooks.sh
       # adapted from https://unix.stackexchange.com/a/545630
       - run: find -type f -name "*.pdf" -exec bash -c 'gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dBATCH -dQUIET -sOutputFile="new.pdf" "{}"; rm "{}"; mv "new.pdf" "{}";' {} \;
+      - run: rm -rf .git
       - run: git init
       - uses: fregante/setup-git-user@v1
       - run: git commit --allow-empty -m "Initial commit"
-      - run: cp -r /opt/hstrat-evolutionary-inference/ deploy/
       - uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: binder # The branch the action should deploy to.
-          folder: deploy # The folder the action should deploy.
+          folder: "${{ github.workspace }}" # The folder the action should deploy.
 
   latex:
     name: Latex Build
