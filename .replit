@@ -1,0 +1,7 @@
+run = "make -C tex fresh"
+
+[nix]
+channel = "stable-22_11"
+
+[env]
+GIT_EDITOR = "vim"
