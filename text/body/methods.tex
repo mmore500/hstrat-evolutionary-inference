@@ -54,6 +54,126 @@ Under this distribution, deleterious mutations are not possible and large-effect
 
 Across all experiments, each treatment comprised 50 replicates.
 
+\subsection{Avida}
+
+TODO \citep{ofria2004avida}
+
+% AVIDA NO ECOLOGY
+% RESOURCE  resECHO:inflow=400:outflow=0.01
+
+% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NOT  not   process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NAND nand  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  AND  and   process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+
+
+% AVIDA RICH ECOLOGY
+% RESOURCE  resECHO:inflow=100:outflow=0.01
+% RESOURCE  resNOT:inflow=100:outflow=0.01
+% RESOURCE resNAND:inflow=100:outflow=0.01
+% RESOURCE  resAND:inflow=100:outflow=0.01
+% RESOURCE resORN:inflow=100:outflow=0.01
+% RESOURCE  resOR:inflow=100:outflow=0.01
+% RESOURCE  resANDN:inflow=100:outflow=0.01
+% RESOURCE  resNOR:inflow=100:outflow=0.01
+% RESOURCE  resXOR:inflow=100:outflow=0.01
+% RESOURCE  resEQU:inflow=100:outflow=0.01
+% RESOURCE resLOG3BO:inflow=100:outflow=0.01
+% RESOURCE resLOG3CI:inflow=100:outflow=0.01
+% RESOURCE resLOG3BZ:inflow=100:outflow=0.01
+% RESOURCE resLOG3AG:inflow=100:outflow=0.01
+% RESOURCE resLOG3CP:inflow=100:outflow=0.01
+% RESOURCE resLOG3BY:inflow=100:outflow=0.01
+% RESOURCE resLOG3BS:inflow=100:outflow=0.01
+% RESOURCE resLOG3BA:inflow=100:outflow=0.01
+% RESOURCE resLOG3CJ:inflow=100:outflow=0.01
+% RESOURCE resLOG3AH:inflow=100:outflow=0.01
+% RESOURCE resLOG3AQ:inflow=100:outflow=0.01
+% RESOURCE resLOG3CN:inflow=100:outflow=0.01
+% RESOURCE resLOG3CB:inflow=100:outflow=0.01
+% RESOURCE resLOG3AX:inflow=100:outflow=0.01
+% RESOURCE resLOG3AR:inflow=100:outflow=0.01
+% RESOURCE resLOG3AO:inflow=100:outflow=0.01
+% RESOURCE resLOG3CH:inflow=100:outflow=0.01
+% RESOURCE resLOG3CC:inflow=100:outflow=0.01
+
+% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NOT  not   process:resource=resNOT:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NAND nand  process:resource=resNAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  AND  and   process:resource=resAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  ORN  orn   process:resource=resORN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  OR   or    process:resource=resOR:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  ANDN andn  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NOR nor  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  XOR xor  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  EQU equ  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3BO logic_3BO process:resource=resLOG3BO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3CI logic_3CI process:resource=resLOG3CI:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3BZ logic_3BZ process:resource=resLOG3BZ:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3AG logic_3AG process:resource=resLOG3AG:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3CP logic_3CP process:resource=resLOG3CP:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3BY logic_3BY process:resource=resLOG3BY:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3BS logic_3BS process:resource=resLOG3BS:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3BA logic_3BA process:resource=resLOG3BA:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3CJ logic_3CJ process:resource=resLOG3CJ:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3AH logic_3AH process:resource=resLOG3AH:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3AQ logic_3AQ process:resource=resLOG3AQ:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3CN logic_3CN process:resource=resLOG3CN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3CB logic_3CB process:resource=resLOG3CB:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3AX logic_3AX process:resource=resLOG3AX:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3AR logic_3AR process:resource=resLOG3AR:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3AO logic_3AO process:resource=resLOG3AO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3CH logic_3CH process:resource=resLOG3CH:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION LOG3CC logic_3CC process:resource=resLOG3CC:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+
+% AVIDA ECOLOGY
+% RESOURCE  resECHO:inflow=100:outflow=0.01
+% RESOURCE  resNOT:inflow=100:outflow=0.01
+% RESOURCE resNAND:inflow=100:outflow=0.01
+% RESOURCE  resAND:inflow=100:outflow=0.01
+
+% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NOT  not   process:resource=resNOT:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NAND nand  process:resource=resNAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  AND  and   process:resource=resAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+
+% AVIDA WEAK ECOLOGY
+% RESOURCE  resECHO:inflow=300:outflow=0.01
+% RESOURCE  resNOT:inflow=33:outflow=0.01
+% RESOURCE resNAND:inflow=33:outflow=0.01
+% RESOURCE  resAND:inflow=33:outflow=0.01
+
+
+% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NOT  not   process:resource=resNOT:value=0.2:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  NAND nand  process:resource=resNAND:value=0.2:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+% REACTION  AND  and   process:resource=resAND:value=0.2:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+
+
+% PLAIN
+% WORLD_GEOMETRY 3
+% DEATH_PROB_PARENT 0.2
+
+% SELECTION STRONG
+% WORLD_GEOMETRY 3
+% DEATH_METHOD 0
+% ALLOW_PARENT 0
+
+% SPATIAL
+
+% WORLD_GEOMETRY 2
+% DEATH_PROB_PARENT 0.2
+
+\subsection{Gen3sis}
+
+TODO \citep{hagen2021gen3sis}
+
+ECOLOGY \url{https://cran.r-project.org/web/packages/gen3sis/vignettes/create_config.html}
+
+SPATIAL STRUCTURE
+water ignored vs water as barrier
+
+
 \subsection{Hereditary Stratigraphic Annotations and Tree Reconstruction}
 
 Experiments testing the impact of phylogenetic inference error on phylometrics employ the recently-developed ``hereditary stratigraphy'' technique to facilitate phylogenetic inference \citep{moreno2022hstrat}.
@@ -113,7 +233,8 @@ Divergence metrics quantify how different the units of the phylogeny are from ea
 Regularity metrics quantify the variance of other properties (i.e. how consistent they are across the phylogeny).
 Here, we focus on four metrics spread across these categories:
 
-\textbf{Number of Internal Nodes:} This measurement simply counts the number of non-extant taxa in the phylogeny (i.e. the number of non-leaf nodes).
+\textbf{Sum Distance:} TODO
+This measurement simply counts the number of non-extant taxa in the phylogeny (i.e. the number of non-leaf nodes).
 Because the reconstructed trees do not contain any internal nodes not associated with a branching point (i.e. unifurcations), we strip such nodes out of the reference trees as well.
 It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}, the primary differences being that the number of internal nodes is unaffected by branch lengths and the number of leaf nodes.
 Consequently, we would expect it to be increased by the presence of ecology or spatial structure, as both these factors increase diversity.
@@ -140,6 +261,15 @@ Like mean pairwise distance, mean evolutionary distinctiveness is a metric of ev
 However, it is known to capture substantially different information than mean pairwise distance \citep{tuckerGuidePhylogeneticMetrics2017}.
 Unlike our other metrics, evolutionary distinctiveness is heavily influenced by branch length.
 We generally expect mean evolutionary distinctiveness to be increased by similar factors to mean pairwise distance.
+
+\subsection{Effect-size Analysis}
+
+TODO describe Cliff's delta
+\citep{meissel2024using}
+
+Note that we report negative values, which align with positive is larger intuition.
+
+TODO \citep{mann1947on}
 
 \subsection{Software and Data Availability}
 
