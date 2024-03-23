@@ -1,25 +1,25 @@
 regime1,regime2,n,phylometric,statistic,p,epoch,mut_distn
-ecology,"ecology, spatial",30,colless_like_index,0.0,1.7343976283205784e-06,0,default
-ecology,"ecology, spatial",30,mean_pairwise_distance,0.0,1.7343976283205784e-06,0,default
-ecology,"ecology, spatial",30,sum_distance,1.0,1.9209211049031396e-06,0,default
-ecology,"ecology, spatial",30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,0,default
-plain,ecology,30,colless_like_index,13.0,6.339135573122464e-06,0,default
-plain,ecology,30,mean_pairwise_distance,13.0,6.339135573122464e-06,0,default
-plain,ecology,30,sum_distance,86.0,0.002584559206552009,0,default
-plain,ecology,30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,0,default
-plain,"ecology, spatial",30,colless_like_index,0.0,1.7343976283205784e-06,0,default
-plain,"ecology, spatial",30,mean_pairwise_distance,0.0,1.7343976283205784e-06,0,default
-plain,"ecology, spatial",30,sum_distance,0.0,1.7343976283205784e-06,0,default
-plain,"ecology, spatial",30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,0,default
-plain,spatial structure,30,colless_like_index,0.0,1.7343976283205784e-06,0,default
-plain,spatial structure,30,mean_pairwise_distance,0.0,1.7343976283205784e-06,0,default
-plain,spatial structure,30,sum_distance,0.0,1.7343976283205784e-06,0,default
-plain,spatial structure,30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,0,default
-spatial structure,ecology,30,colless_like_index,176.0,0.24519030932096386,0,default
-spatial structure,ecology,30,mean_pairwise_distance,167.0,0.17790738330384115,0,default
-spatial structure,ecology,30,sum_distance,10.0,4.729202337447058e-06,0,default
-spatial structure,ecology,30,mean_evolutionary_distinctiveness,17.0,9.315658591105142e-06,0,default
-spatial structure,"ecology, spatial",30,colless_like_index,0.0,1.7343976283205784e-06,0,default
-spatial structure,"ecology, spatial",30,mean_pairwise_distance,0.0,1.7343976283205784e-06,0,default
-spatial structure,"ecology, spatial",30,sum_distance,12.0,5.751653269401829e-06,0,default
-spatial structure,"ecology, spatial",30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,0,default
+ecology,"ecology, spatial",30,colless-like index,0.0,1.7343976283205784e-06,0,default
+ecology,"ecology, spatial",30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+ecology,"ecology, spatial",30,sum distance,1.0,1.9209211049031396e-06,0,default
+ecology,"ecology, spatial",30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
+plain,ecology,30,colless-like index,13.0,6.339135573122464e-06,0,default
+plain,ecology,30,mean pairwise distance,13.0,6.339135573122464e-06,0,default
+plain,ecology,30,sum distance,86.0,0.002584559206552009,0,default
+plain,ecology,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
+plain,"ecology, spatial",30,colless-like index,0.0,1.7343976283205784e-06,0,default
+plain,"ecology, spatial",30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+plain,"ecology, spatial",30,sum distance,0.0,1.7343976283205784e-06,0,default
+plain,"ecology, spatial",30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
+plain,spatial structure,30,colless-like index,0.0,1.7343976283205784e-06,0,default
+plain,spatial structure,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+plain,spatial structure,30,sum distance,0.0,1.7343976283205784e-06,0,default
+plain,spatial structure,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
+spatial structure,ecology,30,colless-like index,176.0,0.24519030932096386,0,default
+spatial structure,ecology,30,mean pairwise distance,167.0,0.17790738330384115,0,default
+spatial structure,ecology,30,sum distance,10.0,4.729202337447058e-06,0,default
+spatial structure,ecology,30,mean evolutionary distinctiveness,17.0,9.315658591105142e-06,0,default
+spatial structure,"ecology, spatial",30,colless-like index,0.0,1.7343976283205784e-06,0,default
+spatial structure,"ecology, spatial",30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+spatial structure,"ecology, spatial",30,sum distance,12.0,5.751653269401829e-06,0,default
+spatial structure,"ecology, spatial",30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
