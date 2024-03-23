@@ -1,3 +1,4 @@
+from ._describe_effect import describe_effect
 from ._specify_experimental_treatments import (
     specify_experimental_treatments,
 )
