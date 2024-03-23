@@ -1,85 +1,85 @@
 n,N,phylometric,statistic,p,regime,epoch,mut_distn
-50,4,quartet_distance,157.59420895522396,6.0574876696256864e-34,4 niche ecology,0,np.random.exponential
-50,4,quartet_distance,159.37024477611953,2.5063089697324245e-34,8 niche ecology,0,np.random.exponential
+50,4,quartet_distance,157.59420895522396,6.0574876696256864e-34,ecology,0,np.random.exponential
 50,4,quartet_distance,148.94575522388072,4.448169282884224e-32,plain,0,np.random.exponential
+50,4,quartet_distance,159.37024477611953,2.5063089697324245e-34,rich ecology,0,np.random.exponential
 50,4,quartet_distance,119.44328358208952,1.0170278372302383e-25,spatial structure,0,np.random.exponential
 50,4,quartet_distance,128.51634626865666,1.129249600155447e-27,strong selection,0,np.random.exponential
-50,4,quartet_distance,141.11611940298508,2.171690322070411e-30,weak 4 niche ecology,0,np.random.exponential
+50,4,quartet_distance,141.11611940298508,2.171690322070411e-30,weak ecology,0,np.random.exponential
 50,4,quartet_distance,131.51036417910439,2.5560703732339783e-28,weak selection,0,np.random.exponential
-50,4,quartet_distance,164.675976119403,1.794464925237934e-35,4 niche ecology,0,np.random.standard_normal
-50,4,quartet_distance,127.67363582089547,1.7154395620953673e-27,8 niche ecology,0,np.random.standard_normal
+50,4,quartet_distance,164.675976119403,1.794464925237934e-35,ecology,0,np.random.standard_normal
 50,4,quartet_distance,158.3551880597015,4.150314891195873e-34,plain,0,np.random.standard_normal
+50,4,quartet_distance,127.67363582089547,1.7154395620953673e-27,rich ecology,0,np.random.standard_normal
 50,4,quartet_distance,103.03172537313424,3.463586894009112e-22,spatial structure,0,np.random.standard_normal
 50,4,quartet_distance,147.31100895522388,1.001837319410491e-31,strong selection,0,np.random.standard_normal
-50,4,quartet_distance,166.15134328358215,8.619396637671411e-36,weak 4 niche ecology,0,np.random.standard_normal
+50,4,quartet_distance,166.15134328358215,8.619396637671411e-36,weak ecology,0,np.random.standard_normal
 50,4,quartet_distance,118.02004776119406,2.0597967850456918e-25,weak selection,0,np.random.standard_normal
-50,4,quartet_distance,157.12259104477607,7.6570304442438404e-34,4 niche ecology,2,np.random.exponential
-50,4,quartet_distance,142.60543283582092,1.0366826614830815e-30,8 niche ecology,2,np.random.exponential
+50,4,quartet_distance,157.12259104477607,7.6570304442438404e-34,ecology,2,np.random.exponential
 50,4,quartet_distance,159.19157014925372,2.739004378156511e-34,plain,2,np.random.exponential
+50,4,quartet_distance,142.60543283582092,1.0366826614830815e-30,rich ecology,2,np.random.exponential
 50,4,quartet_distance,158.5428417910448,3.78082471573984e-34,spatial structure,2,np.random.exponential
 50,4,quartet_distance,128.93210746268664,9.187540229907655e-28,strong selection,2,np.random.exponential
-50,4,quartet_distance,131.25214328358197,2.905523060052889e-28,weak 4 niche ecology,2,np.random.exponential
+50,4,quartet_distance,131.25214328358197,2.905523060052889e-28,weak ecology,2,np.random.exponential
 50,4,quartet_distance,119.54937313432833,9.6490692410515e-26,weak selection,2,np.random.exponential
-50,4,quartet_distance,167.32167164179089,4.81780811986523e-36,4 niche ecology,2,np.random.standard_normal
-50,4,quartet_distance,151.14236417910445,1.493933342937063e-32,8 niche ecology,2,np.random.standard_normal
+50,4,quartet_distance,167.32167164179089,4.81780811986523e-36,ecology,2,np.random.standard_normal
 50,4,quartet_distance,159.96269850746273,1.8671566175398913e-34,plain,2,np.random.standard_normal
+50,4,quartet_distance,151.14236417910445,1.493933342937063e-32,rich ecology,2,np.random.standard_normal
 50,4,quartet_distance,149.13343283582094,4.052261612555958e-32,spatial structure,2,np.random.standard_normal
 50,4,quartet_distance,151.29153432835813,1.387237319182693e-32,strong selection,2,np.random.standard_normal
-50,4,quartet_distance,138.01727761194024,1.0114604713018828e-29,weak 4 niche ecology,2,np.random.standard_normal
+50,4,quartet_distance,138.01727761194024,1.0114604713018828e-29,weak ecology,2,np.random.standard_normal
 50,4,quartet_distance,130.6005850746269,4.014614923822426e-28,weak selection,2,np.random.standard_normal
-50,4,quartet_distance,164.35755223880597,2.1021541955249874e-35,4 niche ecology,7,np.random.exponential
-50,4,quartet_distance,141.44481194029856,1.844681586782929e-30,8 niche ecology,7,np.random.exponential
+50,4,quartet_distance,164.35755223880597,2.1021541955249874e-35,ecology,7,np.random.exponential
 50,4,quartet_distance,155.21479402985062,1.9756672960998725e-33,plain,7,np.random.exponential
+50,4,quartet_distance,141.44481194029856,1.844681586782929e-30,rich ecology,7,np.random.exponential
 50,4,quartet_distance,121.9610149253732,2.917902761677283e-26,spatial structure,7,np.random.exponential
 50,4,quartet_distance,129.15149850746275,8.239914105393665e-28,strong selection,7,np.random.exponential
-50,4,quartet_distance,136.83397014925367,1.8199427924754968e-29,weak 4 niche ecology,7,np.random.exponential
+50,4,quartet_distance,136.83397014925367,1.8199427924754968e-29,weak ecology,7,np.random.exponential
 50,4,quartet_distance,139.50888358208954,4.8233864509901185e-30,weak selection,7,np.random.exponential
-50,4,quartet_distance,152.8280716417911,6.466389658952402e-33,4 niche ecology,7,np.random.standard_normal
-50,4,quartet_distance,144.04705671641796,5.067053462084274e-31,8 niche ecology,7,np.random.standard_normal
+50,4,quartet_distance,152.8280716417911,6.466389658952402e-33,ecology,7,np.random.standard_normal
 50,4,quartet_distance,165.87327761194035,9.896887847019728e-36,plain,7,np.random.standard_normal
+50,4,quartet_distance,144.04705671641796,5.067053462084274e-31,rich ecology,7,np.random.standard_normal
 50,4,quartet_distance,147.2463641791046,1.0345240633683704e-31,spatial structure,7,np.random.standard_normal
 50,4,quartet_distance,147.61000597014925,8.635853611613597e-32,strong selection,7,np.random.standard_normal
-50,4,quartet_distance,154.6612656716419,2.601027928883277e-33,weak 4 niche ecology,7,np.random.standard_normal
+50,4,quartet_distance,154.6612656716419,2.601027928883277e-33,weak ecology,7,np.random.standard_normal
 50,4,quartet_distance,116.14027462686568,5.230985835224136e-25,weak selection,7,np.random.standard_normal
-50,4,triplet_distance,158.15284776119404,4.589279309153939e-34,4 niche ecology,0,np.random.exponential
-50,4,triplet_distance,159.00796417910442,3.000645940090509e-34,8 niche ecology,0,np.random.exponential
+50,4,triplet_distance,158.15284776119404,4.589279309153939e-34,ecology,0,np.random.exponential
 50,4,triplet_distance,141.99424477611933,1.404247992252263e-30,plain,0,np.random.exponential
+50,4,triplet_distance,159.00796417910442,3.000645940090509e-34,rich ecology,0,np.random.exponential
 50,4,triplet_distance,117.663223880597,2.458448194891575e-25,spatial structure,0,np.random.exponential
 50,4,triplet_distance,121.52734328358213,3.618097844103964e-26,strong selection,0,np.random.exponential
-50,4,triplet_distance,137.18217313432842,1.5310536507092998e-29,weak 4 niche ecology,0,np.random.exponential
+50,4,triplet_distance,137.18217313432842,1.5310536507092998e-29,weak ecology,0,np.random.exponential
 50,4,triplet_distance,116.75844776119402,3.8501919298874024e-25,weak selection,0,np.random.exponential
-50,4,triplet_distance,157.14539701492538,7.570755884510063e-34,4 niche ecology,0,np.random.standard_normal
-50,4,triplet_distance,118.7833432835821,1.4107617315585413e-25,8 niche ecology,0,np.random.standard_normal
+50,4,triplet_distance,157.14539701492538,7.570755884510063e-34,ecology,0,np.random.standard_normal
 50,4,triplet_distance,151.68709253731333,1.1397669204142987e-32,plain,0,np.random.standard_normal
+50,4,triplet_distance,118.7833432835821,1.4107617315585413e-25,rich ecology,0,np.random.standard_normal
 50,4,triplet_distance,101.24856119402978,8.375608253540304e-22,spatial structure,0,np.random.standard_normal
 50,4,triplet_distance,145.4597014925373,2.5124303554920072e-31,strong selection,0,np.random.standard_normal
-50,4,triplet_distance,164.7576119402985,1.7231152189043794e-35,weak 4 niche ecology,0,np.random.standard_normal
+50,4,triplet_distance,164.7576119402985,1.7231152189043794e-35,weak ecology,0,np.random.standard_normal
 50,4,triplet_distance,122.51954626865677,2.2118903890553837e-26,weak selection,0,np.random.standard_normal
-50,4,triplet_distance,157.0349014925373,7.998014921199757e-34,4 niche ecology,2,np.random.exponential
-50,4,triplet_distance,137.0171104477613,1.661787976127462e-29,8 niche ecology,2,np.random.exponential
+50,4,triplet_distance,157.0349014925373,7.998014921199757e-34,ecology,2,np.random.exponential
 50,4,triplet_distance,149.04416716417916,4.2359708683736253e-32,plain,2,np.random.exponential
+50,4,triplet_distance,137.0171104477613,1.661787976127462e-29,rich ecology,2,np.random.exponential
 50,4,triplet_distance,153.74838208955225,4.093605816724842e-33,spatial structure,2,np.random.exponential
 50,4,triplet_distance,132.52994626865666,1.5410812732030535e-28,strong selection,2,np.random.exponential
-50,4,triplet_distance,126.1195820895523,3.708647071792477e-27,weak 4 niche ecology,2,np.random.exponential
+50,4,triplet_distance,126.1195820895523,3.708647071792477e-27,weak ecology,2,np.random.exponential
 50,4,triplet_distance,115.13484179104489,8.61101425310164e-25,weak selection,2,np.random.exponential
-50,4,triplet_distance,166.78955223880598,6.276452107300717e-36,4 niche ecology,2,np.random.standard_normal
-50,4,triplet_distance,151.9403223880597,1.0050447817317768e-32,8 niche ecology,2,np.random.standard_normal
+50,4,triplet_distance,166.78955223880598,6.276452107300717e-36,ecology,2,np.random.standard_normal
 50,4,triplet_distance,146.79188059701482,1.2964868937117187e-31,plain,2,np.random.standard_normal
+50,4,triplet_distance,151.9403223880597,1.0050447817317768e-32,rich ecology,2,np.random.standard_normal
 50,4,triplet_distance,140.2913552238806,3.270679757340413e-30,spatial structure,2,np.random.standard_normal
 50,4,triplet_distance,145.33868656716413,2.6680489601506224e-31,strong selection,2,np.random.standard_normal
-50,4,triplet_distance,130.37295522388058,4.494692231234135e-28,weak 4 niche ecology,2,np.random.standard_normal
+50,4,triplet_distance,130.37295522388058,4.494692231234135e-28,weak ecology,2,np.random.standard_normal
 50,4,triplet_distance,128.90074029850746,9.331651541390125e-28,weak selection,2,np.random.standard_normal
-50,4,triplet_distance,160.9352835820896,1.15156046876798e-34,4 niche ecology,7,np.random.exponential
-50,4,triplet_distance,142.34337910447766,1.1807451541876186e-30,8 niche ecology,7,np.random.exponential
+50,4,triplet_distance,160.9352835820896,1.15156046876798e-34,ecology,7,np.random.exponential
 50,4,triplet_distance,143.78054925373135,5.784025470695082e-31,plain,7,np.random.exponential
+50,4,triplet_distance,142.34337910447766,1.1807451541876186e-30,rich ecology,7,np.random.exponential
 50,4,triplet_distance,122.8982208955224,1.833136881871484e-26,spatial structure,7,np.random.exponential
 50,4,triplet_distance,128.11715820895517,1.3765984800207162e-27,strong selection,7,np.random.exponential
-50,4,triplet_distance,121.30964776119401,4.030595523779953e-26,weak 4 niche ecology,7,np.random.exponential
+50,4,triplet_distance,121.30964776119401,4.030595523779953e-26,weak ecology,7,np.random.exponential
 50,4,triplet_distance,139.27674029850755,5.4125856059843884e-30,weak selection,7,np.random.exponential
-50,4,triplet_distance,140.299952238806,3.256749278036472e-30,4 niche ecology,7,np.random.standard_normal
-50,4,triplet_distance,144.6158447761194,3.82022423147428e-31,8 niche ecology,7,np.random.standard_normal
+50,4,triplet_distance,140.299952238806,3.256749278036472e-30,ecology,7,np.random.standard_normal
 50,4,triplet_distance,160.11278805970142,1.7329672944501506e-34,plain,7,np.random.standard_normal
+50,4,triplet_distance,144.6158447761194,3.82022423147428e-31,rich ecology,7,np.random.standard_normal
 50,4,triplet_distance,144.14121791044784,4.83558044383688e-31,spatial structure,7,np.random.standard_normal
 50,4,triplet_distance,141.42565970149258,1.8623069805183808e-30,strong selection,7,np.random.standard_normal
-50,4,triplet_distance,148.28660298507464,6.171120066413331e-32,weak 4 niche ecology,7,np.random.standard_normal
+50,4,triplet_distance,148.28660298507464,6.171120066413331e-32,weak ecology,7,np.random.standard_normal
 50,4,triplet_distance,117.50394029850747,2.660478631136631e-25,weak selection,7,np.random.standard_normal

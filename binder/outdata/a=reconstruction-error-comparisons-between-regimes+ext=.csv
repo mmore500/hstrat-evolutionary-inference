@@ -23,7 +23,7 @@ n,N,phylometric,statistic,p,quality,epoch,mut_distn
 50,7,quartet_distance,139.95126935286953,1.0262254227010028e-27,10% resolution,7,np.random.standard_normal
 50,7,quartet_distance,45.43054847374833,3.8430812080812616e-08,3% resolution,7,np.random.standard_normal
 50,7,quartet_distance,178.3534456654454,7.590207763912434e-36,33% resolution,7,np.random.standard_normal
-50,7,triplet_distance,65.05051037851035,4.212710048929843e-12,1% resolution,0,np.random.exponential
+50,7,triplet_distance,65.05051037851058,4.212710048929408e-12,1% resolution,0,np.random.exponential
 50,7,triplet_distance,125.22499438339423,1.2998707659411192e-24,10% resolution,0,np.random.exponential
 50,7,triplet_distance,60.08189499389505,4.3318429983592146e-11,3% resolution,0,np.random.exponential
 50,7,triplet_distance,77.06523272283266,1.4409743904455206e-14,33% resolution,0,np.random.exponential
@@ -33,7 +33,7 @@ n,N,phylometric,statistic,p,quality,epoch,mut_distn
 50,7,triplet_distance,57.02958730158707,1.8018981162602906e-10,33% resolution,0,np.random.standard_normal
 50,7,triplet_distance,107.76035164835162,5.9990450071640534e-21,1% resolution,2,np.random.exponential
 50,7,triplet_distance,122.68244395604393,4.4512105719062216e-24,10% resolution,2,np.random.exponential
-50,7,triplet_distance,63.883897435897325,7.28880836629943e-12,3% resolution,2,np.random.exponential
+50,7,triplet_distance,63.88389743589755,7.28880836629865e-12,3% resolution,2,np.random.exponential
 50,7,triplet_distance,122.46991550671555,4.933403805938994e-24,33% resolution,2,np.random.exponential
 50,7,triplet_distance,88.77935824175825,5.431281121975844e-17,1% resolution,2,np.random.standard_normal
 50,7,triplet_distance,112.39306862026842,6.426838894270088e-22,10% resolution,2,np.random.standard_normal
