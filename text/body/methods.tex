@@ -205,7 +205,7 @@ Previous work with hereditary stratigraphy used UPGMA distance-based reconstruct
 Large-scale reconstructions required for these experiments necessitated development of a more efficient technique that did not require all pairs (i.e., $O(n^2)$ distance comparison.
 To accomplish this, we devised an agglomerative tree building algorithm that works by successively adding leaf organism annotations and percolating them down from the tree root along the tree path of internal nodes consistent with their fingerprint sequence, then affixing them where common ancestry ends.
 This new tree-building approach reduced compute time from multiple hours to around 5 minutes in most cases.
-Implementation materials providing the full details of this approach are included in Listing \ref{lst:build_tree_trie}.
+Supplementary Listing \ref{lst:build_tree_trie} provides source code with full implementation details, see \citep{moreno2024analysis} for a more detailed discussion.
 
 \input{fig/plain-perfect-and-reconstruction-phylogenies}
 
