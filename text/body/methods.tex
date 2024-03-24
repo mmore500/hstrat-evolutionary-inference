@@ -1,7 +1,19 @@
 \section{Methods}
 \label{sec:methods}
 
-\subsection{Model System}
+\subsection{Model Systems}
+
+To better assess the generality of evolutionary dynamics' effects on phylogenetic structure, we replicated experiments across simulations differing in subject and modeling approach.
+We used three systems,
+\begin{enumerate}
+\item a simple agent-based model with explicitly ecoded fitness values;
+\item Avida, a self-replicating agent-based evolutionary model \citep{ofria2004avida}; and
+\item Gen3sis, a population-level macro-ecological/evolutionary model \citep{hagen2021gen3sis}.
+\end{enumerate}
+
+The following introduces each simulation model and details experiment-specific configurations.
+
+\textbf{Explicit-Fitness Model}
 
 Experiments testing the relationships between evolutionary dynamics, reconstruction error, and phylogenetic structure required a model system amenable to direct, interpretable tuning of ecology, spatial structure, and selection pressure.
 Additionally, in order to make findings relevant to large-scale phylogenetic analyses, computational efficiency was necessary to facilitate large population size and high generation counts.
