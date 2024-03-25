@@ -38,13 +38,13 @@ all_phylogeny_files="$( \
 num_phylogeny_files="$(echo ${all_phylogeny_files} | wc -w)"
 echo "num_phylogeny_files ${num_phylogeny_files}"
 
-num_batches="$(((${num_phylogeny_files} + 249) / 250))"
+num_batches="$(((${num_phylogeny_files} + 49) / 50))"
 echo "num_batches ${num_batches}"
 
 # second sed strips leftover empty line at end
 echo ${all_phylogeny_files} \
 | tr '\n' ' ' \
-| xargs -n 250  \
+| xargs -n 50  \
 | while read target_phylogeny_files \
 ; do
   SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
