@@ -102,15 +102,13 @@ logging.info(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
 )
 def do_load_from_file():
-  with \
-    gzip.open(phylogeny_path, "rb") as zipped_sourcefile, \
-    tempfile.NamedTemporaryFile("wb") as unzipped_tempfile \
-  :
-    logging.info(f"unzipping to tempfile {unzipped_tempfile.name}")
-    unzipped_tempfile.write(zipped_sourcefile.read())
-    logging.info(f"loading systematics from tempfile {unzipped_tempfile.name}")
-    sys.load_from_file(
-      unzipped_tempfile.name,
+    df = pd.read_csv(phylogeny_path)
+    df = hstrat_aux.alifestd_splay_polytomies(df, mutate=True)
+    df = hstrat_aux.alifestd_collapse_unifurcations(df, mutate=True)
+    deunifurcated_path = f"/tmp/{uuid.uuid4()}.csv"
+    df.to_csv(deunifurcated_path, index=False)
+    syst.load_from_file(
+      deunifurcated_path,
       "id",  # info_col
       True,  # assume_leaves_extant
     )
