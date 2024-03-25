@@ -153,7 +153,7 @@ def analyze_one(a: str, phylogeny_path: str) -> pd.DataFrame:
     df = pd.read_csv(phylogeny_path)
     df = hstrat_aux.alifestd_collapse_unifurcations(df, mutate=True)
     df["destruction_time"] = df["destruction_time"].fillna(max_origin_time)
-    deunifurcated_path = f"/tmp/uuid.uuid4()}.csv"
+    deunifurcated_path = f"/tmp/{uuid.uuid4()}.csv"
     df.to_csv(deunifurcated_path, index=False)
     syst.load_from_file(
       deunifurcated_path,
