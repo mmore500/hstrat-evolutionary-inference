@@ -86,7 +86,7 @@ __, phylogeny_path = sys.argv
 
 logging.info(f"phylogeny_path {phylogeny_path}")
 
-sys = systematics.Systematics(lambda x: x)  # arg: fun_taxon
+syst = systematics.Systematics(lambda x: x)  # arg: fun_taxon
 
 @retry(
   tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
@@ -120,100 +120,100 @@ phylometrics = dict()
 
 # num orgs wrong
 # logging.info("calculating 'diversity'")
-# phylometrics["diversity"] = sys.calc_diversity()
+# phylometrics["diversity"] = syst.calc_diversity()
 
 logging.info("calculating 'colless_like_index'")
-phylometrics["colless_like_index"] = sys.colless_like_index()
+phylometrics["colless_like_index"] = syst.colless_like_index()
 
 logging.info("calculating 'average_depth'")
-phylometrics["average_depth"] = sys.get_ave_depth()
+phylometrics["average_depth"] = syst.get_ave_depth()
 
 logging.info("calculating 'average_origin_time'")
-phylometrics["average_origin_time"] = sys.get_average_origin_time(False)
+phylometrics["average_origin_time"] = syst.get_average_origin_time(False)
 
 logging.info("calculating 'average_origin_time_normalized'")
 phylometrics["average_origin_time_normalized"] = (
-  sys.get_average_origin_time(True)
+  syst.get_average_origin_time(True)
 )
 
 logging.info("calculating 'max_depth'")
-phylometrics["max_depth"] = sys.get_max_depth()
+phylometrics["max_depth"] = syst.get_max_depth()
 
 logging.info("calculating 'mean_pairwise_distance'")
-phylometrics["mean_pairwise_distance"] = sys.get_mean_pairwise_distance(False)
+phylometrics["mean_pairwise_distance"] = syst.get_mean_pairwise_distance(False)
 
 logging.info("calculating 'mean_pairwise_distance_branch_only'")
 phylometrics["mean_pairwise_distance_branch_only"] = (
-  sys.get_mean_pairwise_distance(True)
+  syst.get_mean_pairwise_distance(True)
 )
 
 logging.info("calculating 'num_active'")
-phylometrics["num_active"] = sys.get_num_active()
+phylometrics["num_active"] = syst.get_num_active()
 
 logging.info("calculating 'num_ancestors'")
-phylometrics["num_ancestors"] = sys.get_num_ancestors()
+phylometrics["num_ancestors"] = syst.get_num_ancestors()
 
 logging.info("calculating 'num_outside'")
-phylometrics["num_outside"] = sys.get_num_outside()
+phylometrics["num_outside"] = syst.get_num_outside()
 
 logging.info("calculating 'num_roots'")
-phylometrics["num_roots"] = sys.get_num_roots()
+phylometrics["num_roots"] = syst.get_num_roots()
 
 logging.info("calculating 'num_taxa'")
-phylometrics["num_taxa"] = sys.get_num_taxa()
+phylometrics["num_taxa"] = syst.get_num_taxa()
 
 logging.info("calculating 'phylogenetic_diversity'")
-phylometrics["phylogenetic_diversity"] = sys.get_phylogenetic_diversity()
+phylometrics["phylogenetic_diversity"] = syst.get_phylogenetic_diversity()
 
 logging.info("calculating 'sum_pairwise_distance'")
-phylometrics["sum_pairwise_distance"] = sys.get_sum_pairwise_distance(False)
+phylometrics["sum_pairwise_distance"] = syst.get_sum_pairwise_distance(False)
 
 logging.info("calculating 'sum_pairwise_distance_branch_only'")
-phylometrics["sum_pairwise_distance_branch_only"] = sys.get_sum_pairwise_distance(True)
+phylometrics["sum_pairwise_distance_branch_only"] = syst.get_sum_pairwise_distance(True)
 
 logging.info("calculating 'total_orgs'")
-phylometrics["total_orgs"] = sys.get_total_orgs()
+phylometrics["total_orgs"] = syst.get_total_orgs()
 
 logging.info("calculating 'tree_size'")
-phylometrics["tree_size"] = sys.get_tree_size()
+phylometrics["tree_size"] = syst.get_tree_size()
 
 logging.info("calculating 'sum_distance'")
-phylometrics["sum_distance"] = sys.get_sum_distance()
+phylometrics["sum_distance"] = syst.get_sum_distance()
 
 logging.info("calculating 'variance_pairwise_distance'")
 phylometrics["variance_pairwise_distance"] = (
-  sys.get_variance_pairwise_distance(False)
+  syst.get_variance_pairwise_distance(False)
 )
 
 logging.info("calculating 'variance_pairwise_distance_branch_only'")
 phylometrics["variance_pairwise_distance_branch_only"] = (
-  sys.get_variance_pairwise_distance(True)
+  syst.get_variance_pairwise_distance(True)
 )
 
 logging.info("calculating 'mrca_depth'")
-phylometrics["mrca_depth"] = sys.mrca_depth()
+phylometrics["mrca_depth"] = syst.mrca_depth()
 
 logging.info("calculating 'sackin_index'")
-phylometrics["sackin_index"] = sys.sackin_index()
+phylometrics["sackin_index"] = syst.sackin_index()
 
 logging.info("calculating mean_evolutionary_distinctiveness")
 phylometrics[
   "mean_evolutionary_distinctiveness"
-] = sys.get_mean_evolutionary_distinctiveness(
+] = syst.get_mean_evolutionary_distinctiveness(
   max_origin_time,
 )
 
 logging.info("calculating sum_evolutionary_distinctiveness")
 phylometrics[
   "sum_evolutionary_distinctiveness"
-] = sys.get_sum_evolutionary_distinctiveness(
+] = syst.get_sum_evolutionary_distinctiveness(
   max_origin_time,
 )
 
 logging.info("calculating variance_evolutionary_distinctiveness")
 phylometrics[
   "variance_evolutionary_distinctiveness"
-] = sys.get_variance_evolutionary_distinctiveness(
+] = syst.get_variance_evolutionary_distinctiveness(
   max_origin_time,
 )
 
