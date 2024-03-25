@@ -1,181 +1,181 @@
 regime1,regime2,n,phylometric,statistic,p,epoch,mut_distn
-ecology,weak selection,30,colless-like index,226.0,0.8936443871266052,0,default
-ecology,weak selection,30,mean pairwise distance,57.0,0.00030649986921763576,0,default
+ecology,weak selection,30,colless-like index,228.0,0.9262550873076122,0,default
+ecology,weak selection,30,mean pairwise distance,110.0,0.011748106348302898,0,default
 ecology,weak selection,30,sum distance,145.0,0.07190333008390941,0,default
-ecology,weak selection,30,mean evolutionary distinctiveness,137.0,0.049498046027749744,0,default
-"ecology, spatial",ecology,30,colless-like index,220.0,0.7970983030067952,0,default
-"ecology, spatial",ecology,30,mean pairwise distance,32.0,3.7242647279456434e-05,0,default
+ecology,weak selection,30,mean evolutionary distinctiveness,128.0,0.03160338164205514,0,default
+"ecology, spatial",ecology,30,colless-like index,227.0,0.9099307681587345,0,default
+"ecology, spatial",ecology,30,mean pairwise distance,113.0,0.013974564120258317,0,default
 "ecology, spatial",ecology,30,sum distance,14.0,6.983783147477089e-06,0,default
-"ecology, spatial",ecology,30,mean evolutionary distinctiveness,5.0,2.878599219394298e-06,0,default
+"ecology, spatial",ecology,30,mean evolutionary distinctiveness,7.0,3.5152372790448263e-06,0,default
 "ecology, spatial",weak ecology,30,colless-like index,231.0,0.9753871641763363,0,default
-"ecology, spatial",weak ecology,30,mean pairwise distance,5.0,2.878599219394298e-06,0,default
+"ecology, spatial",weak ecology,30,mean pairwise distance,61.0,0.00041955098606127764,0,default
 "ecology, spatial",weak ecology,30,sum distance,28.0,2.5967125848447383e-05,0,default
-"ecology, spatial",weak ecology,30,mean evolutionary distinctiveness,19.0,1.126539849982107e-05,0,default
-"ecology, spatial","weak ecology, spatial",30,colless-like index,150.0,0.08971783776750893,0,default
-"ecology, spatial","weak ecology, spatial",30,mean pairwise distance,31.0,3.4052567232805375e-05,0,default
+"ecology, spatial",weak ecology,30,mean evolutionary distinctiveness,20.0,1.2380795614564472e-05,0,default
+"ecology, spatial","weak ecology, spatial",30,colless-like index,151.0,0.09367559653193051,0,default
+"ecology, spatial","weak ecology, spatial",30,mean pairwise distance,107.0,0.009842142401693147,0,default
 "ecology, spatial","weak ecology, spatial",30,sum distance,117.0,0.017518393579685057,0,default
 "ecology, spatial","weak ecology, spatial",30,mean evolutionary distinctiveness,113.0,0.013974564120258317,0,default
-"ecology, spatial",weak selection,30,colless-like index,217.0,0.7498711559507313,0,default
-"ecology, spatial",weak selection,30,mean pairwise distance,3.0,2.3534209951215346e-06,0,default
+"ecology, spatial",weak selection,30,colless-like index,216.0,0.7343252914391281,0,default
+"ecology, spatial",weak selection,30,mean pairwise distance,39.0,6.892290296834955e-05,0,default
 "ecology, spatial",weak selection,30,sum distance,6.0,3.181679410969855e-06,0,default
-"ecology, spatial",weak selection,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-plain,ecology,30,colless-like index,146.0,0.0752133122154768,0,default
-plain,ecology,30,mean pairwise distance,26.0,2.1630223983536902e-05,0,default
+"ecology, spatial",weak selection,30,mean evolutionary distinctiveness,1.0,1.9209211049031396e-06,0,default
+plain,ecology,30,colless-like index,145.0,0.07190333008390941,0,default
+plain,ecology,30,mean pairwise distance,94.0,0.004389618289039615,0,default
 plain,ecology,30,sum distance,73.0,0.0010356813035458734,0,default
-plain,ecology,30,mean evolutionary distinctiveness,81.0,0.001832579947170524,0,default
-plain,"ecology, spatial",30,colless-like index,158.0,0.12543823902980825,0,default
-plain,"ecology, spatial",30,mean pairwise distance,1.0,1.9209211049031396e-06,0,default
+plain,ecology,30,mean evolutionary distinctiveness,74.0,0.0011138009078172067,0,default
+plain,"ecology, spatial",30,colless-like index,152.0,0.0977721901049929,0,default
+plain,"ecology, spatial",30,mean pairwise distance,43.0,9.711048976071607e-05,0,default
 plain,"ecology, spatial",30,sum distance,8.0,3.882182386060857e-06,0,default
 plain,"ecology, spatial",30,mean evolutionary distinctiveness,3.0,2.3534209951215346e-06,0,default
 plain,weak ecology,30,colless-like index,177.0,0.25364409754600126,0,default
-plain,weak ecology,30,mean pairwise distance,168.0,0.18462187723062606,0,default
+plain,weak ecology,30,mean pairwise distance,220.0,0.7970983030067952,0,default
 plain,weak ecology,30,sum distance,174.0,0.2288804222849652,0,default
-plain,weak ecology,30,mean evolutionary distinctiveness,167.0,0.17790738330384115,0,default
-plain,"weak ecology, spatial",30,colless-like index,201.0,0.517047890994101,0,default
-plain,"weak ecology, spatial",30,mean pairwise distance,68.0,0.000715703384624892,0,default
+plain,weak ecology,30,mean evolutionary distinctiveness,165.0,0.1650265656246961,0,default
+plain,"weak ecology, spatial",30,colless-like index,209.0,0.6288430020541073,0,default
+plain,"weak ecology, spatial",30,mean pairwise distance,189.0,0.37093530784512463,0,default
 plain,"weak ecology, spatial",30,sum distance,95.0,0.004681835234144671,0,default
-plain,"weak ecology, spatial",30,mean evolutionary distinctiveness,48.0,0.0001477276174888222,0,default
-plain,weak selection,30,colless-like index,215.0,0.7188875621362669,0,default
-plain,weak selection,30,mean pairwise distance,217.0,0.7498711559507313,0,default
+plain,"weak ecology, spatial",30,mean evolutionary distinctiveness,52.0,0.0002051529226187778,0,default
+plain,weak selection,30,colless-like index,214.0,0.7035636998700077,0,default
+plain,weak selection,30,mean pairwise distance,223.0,0.8450804241615161,0,default
 plain,weak selection,30,sum distance,171.0,0.20588822305607402,0,default
-plain,weak selection,30,mean evolutionary distinctiveness,149.0,0.0858958258699641,0,default
-rich ecology,ecology,30,colless-like index,162.0,0.1470395786434527,0,default
-rich ecology,ecology,30,mean pairwise distance,52.0,0.0002051529226187778,0,default
+plain,weak selection,30,mean evolutionary distinctiveness,152.0,0.0977721901049929,0,default
+rich ecology,ecology,30,colless-like index,165.0,0.1650265656246961,0,default
+rich ecology,ecology,30,mean pairwise distance,197.0,0.46528258187908456,0,default
 rich ecology,ecology,30,sum distance,1.0,1.9209211049031396e-06,0,default
 rich ecology,ecology,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-rich ecology,"ecology, spatial",30,colless-like index,181.0,0.2894770717054542,0,default
-rich ecology,"ecology, spatial",30,mean pairwise distance,134.0,0.0427666880169531,0,default
+rich ecology,"ecology, spatial",30,colless-like index,177.0,0.25364409754600126,0,default
+rich ecology,"ecology, spatial",30,mean pairwise distance,96.0,0.004991554012370142,0,default
 rich ecology,"ecology, spatial",30,sum distance,224.0,0.8612125197358381,0,default
-rich ecology,"ecology, spatial",30,mean evolutionary distinctiveness,221.0,0.8130168513045055,0,default
+rich ecology,"ecology, spatial",30,mean evolutionary distinctiveness,206.0,0.5857115693468691,0,default
 rich ecology,plain,30,colless-like index,203.0,0.5440062075841892,0,default
-rich ecology,plain,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+rich ecology,plain,30,mean pairwise distance,74.0,0.0011138009078172067,0,default
 rich ecology,plain,30,sum distance,1.0,1.9209211049031396e-06,0,default
 rich ecology,plain,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-rich ecology,"rich ecology, spatial",30,colless-like index,232.0,0.9917945644340904,0,default
-rich ecology,"rich ecology, spatial",30,mean pairwise distance,16.0,8.466081690383873e-06,0,default
+rich ecology,"rich ecology, spatial",30,colless-like index,227.0,0.9099307681587345,0,default
+rich ecology,"rich ecology, spatial",30,mean pairwise distance,96.0,0.004991554012370142,0,default
 rich ecology,"rich ecology, spatial",30,sum distance,7.0,3.5152372790448263e-06,0,default
-rich ecology,"rich ecology, spatial",30,mean evolutionary distinctiveness,10.0,4.729202337447058e-06,0,default
-rich ecology,strong selection,30,colless-like index,142.0,0.06268281249957977,0,default
-rich ecology,strong selection,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+rich ecology,"rich ecology, spatial",30,mean evolutionary distinctiveness,9.0,4.285685869189864e-06,0,default
+rich ecology,strong selection,30,colless-like index,144.0,0.06871363079688197,0,default
+rich ecology,strong selection,30,mean pairwise distance,211.0,0.6583305240881341,0,default
 rich ecology,strong selection,30,sum distance,0.0,1.7343976283205784e-06,0,default
 rich ecology,strong selection,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-rich ecology,weak ecology,30,colless-like index,192.0,0.4048347221574208,0,default
-rich ecology,weak ecology,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+rich ecology,weak ecology,30,colless-like index,191.0,0.3933343721992797,0,default
+rich ecology,weak ecology,30,mean pairwise distance,93.0,0.0041140307793227126,0,default
 rich ecology,weak ecology,30,sum distance,9.0,4.285685869189864e-06,0,default
-rich ecology,weak ecology,30,mean evolutionary distinctiveness,1.0,1.9209211049031396e-06,0,default
-rich ecology,"weak ecology, spatial",30,colless-like index,170.0,0.198610209945546,0,default
-rich ecology,"weak ecology, spatial",30,mean pairwise distance,56.0,0.0002830789435165413,0,default
+rich ecology,weak ecology,30,mean evolutionary distinctiveness,2.0,2.1266360107314253e-06,0,default
+rich ecology,"weak ecology, spatial",30,colless-like index,176.0,0.24519030932096386,0,default
+rich ecology,"weak ecology, spatial",30,mean pairwise distance,182.0,0.29894375201959067,0,default
 rich ecology,"weak ecology, spatial",30,sum distance,104.0,0.008216736457590426,0,default
-rich ecology,"weak ecology, spatial",30,mean evolutionary distinctiveness,104.0,0.008216736457590426,0,default
-rich ecology,weak selection,30,colless-like index,214.0,0.7035636998700077,0,default
-rich ecology,weak selection,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+rich ecology,"weak ecology, spatial",30,mean evolutionary distinctiveness,106.0,0.0092710251720259,0,default
+rich ecology,weak selection,30,colless-like index,213.0,0.6883592982254604,0,default
+rich ecology,weak selection,30,mean pairwise distance,144.0,0.06871363079688197,0,default
 rich ecology,weak selection,30,sum distance,0.0,1.7343976283205784e-06,0,default
 rich ecology,weak selection,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-"rich ecology, spatial",ecology,30,colless-like index,173.0,0.22102157481330342,0,default
-"rich ecology, spatial",ecology,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+"rich ecology, spatial",ecology,30,colless-like index,182.0,0.29894375201959067,0,default
+"rich ecology, spatial",ecology,30,mean pairwise distance,157.0,0.12044472790832522,0,default
 "rich ecology, spatial",ecology,30,sum distance,0.0,1.7343976283205784e-06,0,default
 "rich ecology, spatial",ecology,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
 "rich ecology, spatial","ecology, spatial",30,colless-like index,212.0,0.6732798065233047,0,default
-"rich ecology, spatial","ecology, spatial",30,mean pairwise distance,85.0,0.0024147041360347552,0,default
+"rich ecology, spatial","ecology, spatial",30,mean pairwise distance,146.0,0.0752133122154768,0,default
 "rich ecology, spatial","ecology, spatial",30,sum distance,1.0,1.9209211049031396e-06,0,default
 "rich ecology, spatial","ecology, spatial",30,mean evolutionary distinctiveness,2.0,2.1266360107314253e-06,0,default
-"rich ecology, spatial",plain,30,colless-like index,196.0,0.4528065046691958,0,default
-"rich ecology, spatial",plain,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+"rich ecology, spatial",plain,30,colless-like index,191.0,0.3933343721992797,0,default
+"rich ecology, spatial",plain,30,mean pairwise distance,50.0,0.0001742281335965429,0,default
 "rich ecology, spatial",plain,30,sum distance,0.0,1.7343976283205784e-06,0,default
 "rich ecology, spatial",plain,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-"rich ecology, spatial",weak ecology,30,colless-like index,193.0,0.41653380739187873,0,default
-"rich ecology, spatial",weak ecology,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+"rich ecology, spatial",weak ecology,30,colless-like index,195.0,0.4405215911492053,0,default
+"rich ecology, spatial",weak ecology,30,mean pairwise distance,56.0,0.0002830789435165413,0,default
 "rich ecology, spatial",weak ecology,30,sum distance,0.0,1.7343976283205784e-06,0,default
 "rich ecology, spatial",weak ecology,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-"rich ecology, spatial","weak ecology, spatial",30,colless-like index,176.0,0.24519030932096386,0,default
-"rich ecology, spatial","weak ecology, spatial",30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+"rich ecology, spatial","weak ecology, spatial",30,colless-like index,177.0,0.25364409754600126,0,default
+"rich ecology, spatial","weak ecology, spatial",30,mean pairwise distance,149.0,0.0858958258699641,0,default
 "rich ecology, spatial","weak ecology, spatial",30,sum distance,10.0,4.729202337447058e-06,0,default
-"rich ecology, spatial","weak ecology, spatial",30,mean evolutionary distinctiveness,21.0,1.360110796799097e-05,0,default
-"rich ecology, spatial",weak selection,30,colless-like index,211.0,0.6583305240881341,0,default
-"rich ecology, spatial",weak selection,30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+"rich ecology, spatial","weak ecology, spatial",30,mean evolutionary distinctiveness,16.0,8.466081690383873e-06,0,default
+"rich ecology, spatial",weak selection,30,colless-like index,213.0,0.6883592982254604,0,default
+"rich ecology, spatial",weak selection,30,mean pairwise distance,100.0,0.006424211872163101,0,default
 "rich ecology, spatial",weak selection,30,sum distance,0.0,1.7343976283205784e-06,0,default
 "rich ecology, spatial",weak selection,30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-spatial structure,ecology,30,colless-like index,82.0,0.0019645813713265476,0,default
-spatial structure,ecology,30,mean pairwise distance,211.0,0.6583305240881341,0,default
+spatial structure,ecology,30,colless-like index,88.0,0.002957462130717483,0,default
+spatial structure,ecology,30,mean pairwise distance,114.0,0.014795424247745142,0,default
 spatial structure,ecology,30,sum distance,206.0,0.5857115693468691,0,default
-spatial structure,ecology,30,mean evolutionary distinctiveness,169.0,0.1915221065809437,0,default
-spatial structure,"ecology, spatial",30,colless-like index,113.0,0.013974564120258317,0,default
-spatial structure,"ecology, spatial",30,mean pairwise distance,15.0,7.690859302848515e-06,0,default
+spatial structure,ecology,30,mean evolutionary distinctiveness,190.0,0.38203416302245696,0,default
+spatial structure,"ecology, spatial",30,colless-like index,115.0,0.01565848334220057,0,default
+spatial structure,"ecology, spatial",30,mean pairwise distance,54.0,0.00024117961055875132,0,default
 spatial structure,"ecology, spatial",30,sum distance,46.0,0.00012505680433316804,0,default
-spatial structure,"ecology, spatial",30,mean evolutionary distinctiveness,42.0,8.918727424459682e-05,0,default
-spatial structure,plain,30,colless-like index,188.0,0.3600388294588497,0,default
-spatial structure,plain,30,mean pairwise distance,49.0,0.00016046383716795338,0,default
+spatial structure,"ecology, spatial",30,mean evolutionary distinctiveness,37.0,5.7924461897570095e-05,0,default
+spatial structure,plain,30,colless-like index,192.0,0.4048347221574208,0,default
+spatial structure,plain,30,mean pairwise distance,191.0,0.3933343721992797,0,default
 spatial structure,plain,30,sum distance,130.0,0.03500895681985013,0,default
-spatial structure,plain,30,mean evolutionary distinctiveness,56.0,0.0002830789435165413,0,default
-spatial structure,rich ecology,30,colless-like index,142.0,0.06268281249957977,0,default
-spatial structure,rich ecology,30,mean pairwise distance,24.0,1.798848069179905e-05,0,default
+spatial structure,plain,30,mean evolutionary distinctiveness,61.0,0.00041955098606127764,0,default
+spatial structure,rich ecology,30,colless-like index,148.0,0.08220646595099283,0,default
+spatial structure,rich ecology,30,mean pairwise distance,152.0,0.0977721901049929,0,default
 spatial structure,rich ecology,30,sum distance,69.0,0.0007712173652095513,0,default
 spatial structure,rich ecology,30,mean evolutionary distinctiveness,46.0,0.00012505680433316804,0,default
-spatial structure,"rich ecology, spatial",30,colless-like index,148.0,0.08220646595099283,0,default
-spatial structure,"rich ecology, spatial",30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+spatial structure,"rich ecology, spatial",30,colless-like index,155.0,0.11092566512553104,0,default
+spatial structure,"rich ecology, spatial",30,mean pairwise distance,92.0,0.003854236286879128,0,default
 spatial structure,"rich ecology, spatial",30,sum distance,0.0,1.7343976283205784e-06,0,default
 spatial structure,"rich ecology, spatial",30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-spatial structure,strong selection,30,colless-like index,85.0,0.0024147041360347552,0,default
-spatial structure,strong selection,30,mean pairwise distance,46.0,0.00012505680433316804,0,default
+spatial structure,strong selection,30,colless-like index,90.0,0.003378854437718857,0,default
+spatial structure,strong selection,30,mean pairwise distance,182.0,0.29894375201959067,0,default
 spatial structure,strong selection,30,sum distance,173.0,0.22102157481330342,0,default
-spatial structure,strong selection,30,mean evolutionary distinctiveness,28.0,2.5967125848447383e-05,0,default
-spatial structure,weak ecology,30,colless-like index,135.0,0.04491890376548032,0,default
-spatial structure,weak ecology,30,mean pairwise distance,56.0,0.0002830789435165413,0,default
+spatial structure,strong selection,30,mean evolutionary distinctiveness,48.0,0.0001477276174888222,0,default
+spatial structure,weak ecology,30,colless-like index,139.0,0.05446250397189108,0,default
+spatial structure,weak ecology,30,mean pairwise distance,184.0,0.3184906025782175,0,default
 spatial structure,weak ecology,30,sum distance,163.0,0.15286069407970188,0,default
-spatial structure,weak ecology,30,mean evolutionary distinctiveness,113.0,0.013974564120258317,0,default
+spatial structure,weak ecology,30,mean evolutionary distinctiveness,125.0,0.02702915661831454,0,default
 spatial structure,"weak ecology, spatial",30,colless-like index,227.0,0.9099307681587345,0,default
-spatial structure,"weak ecology, spatial",30,mean pairwise distance,174.0,0.2288804222849652,0,default
+spatial structure,"weak ecology, spatial",30,mean pairwise distance,207.0,0.5999359281677457,0,default
 spatial structure,"weak ecology, spatial",30,sum distance,181.0,0.2894770717054542,0,default
 spatial structure,"weak ecology, spatial",30,mean evolutionary distinctiveness,169.0,0.1915221065809437,0,default
-spatial structure,weak selection,30,colless-like index,146.0,0.0752133122154768,0,default
-spatial structure,weak selection,30,mean pairwise distance,54.0,0.00024117961055875132,0,default
+spatial structure,weak selection,30,colless-like index,153.0,0.1020106952499886,0,default
+spatial structure,weak selection,30,mean pairwise distance,210.0,0.6435165948165775,0,default
 spatial structure,weak selection,30,sum distance,202.0,0.5304400912497492,0,default
-spatial structure,weak selection,30,mean evolutionary distinctiveness,101.0,0.006835856425301226,0,default
+spatial structure,weak selection,30,mean evolutionary distinctiveness,116.0,0.016565526979430395,0,default
 strong selection,ecology,30,colless-like index,198.0,0.47794743855272326,0,default
-strong selection,ecology,30,mean pairwise distance,42.0,8.918727424459682e-05,0,default
+strong selection,ecology,30,mean pairwise distance,152.0,0.0977721901049929,0,default
 strong selection,ecology,30,sum distance,90.0,0.003378854437718857,0,default
-strong selection,ecology,30,mean evolutionary distinctiveness,57.0,0.00030649986921763576,0,default
-strong selection,"ecology, spatial",30,colless-like index,175.0,0.2369361866168309,0,default
-strong selection,"ecology, spatial",30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+strong selection,ecology,30,mean evolutionary distinctiveness,59.0,0.00035888445044696013,0,default
+strong selection,"ecology, spatial",30,colless-like index,177.0,0.25364409754600126,0,default
+strong selection,"ecology, spatial",30,mean pairwise distance,63.0,0.000489690070533264,0,default
 strong selection,"ecology, spatial",30,sum distance,0.0,1.7343976283205784e-06,0,default
 strong selection,"ecology, spatial",30,mean evolutionary distinctiveness,3.0,2.3534209951215346e-06,0,default
-strong selection,plain,30,colless-like index,111.0,0.012452560438554458,0,default
-strong selection,plain,30,mean pairwise distance,186.0,0.33885615524718515,0,default
+strong selection,plain,30,colless-like index,112.0,0.01319416986541395,0,default
+strong selection,plain,30,mean pairwise distance,135.0,0.04491890376548032,0,default
 strong selection,plain,30,sum distance,181.0,0.2894770717054542,0,default
-strong selection,plain,30,mean evolutionary distinctiveness,224.0,0.8612125197358381,0,default
-strong selection,"rich ecology, spatial",30,colless-like index,116.0,0.016565526979430395,0,default
-strong selection,"rich ecology, spatial",30,mean pairwise distance,0.0,1.7343976283205784e-06,0,default
+strong selection,plain,30,mean evolutionary distinctiveness,223.0,0.8450804241615161,0,default
+strong selection,"rich ecology, spatial",30,colless-like index,119.0,0.019569215233846395,0,default
+strong selection,"rich ecology, spatial",30,mean pairwise distance,143.0,0.06564114341025874,0,default
 strong selection,"rich ecology, spatial",30,sum distance,0.0,1.7343976283205784e-06,0,default
 strong selection,"rich ecology, spatial",30,mean evolutionary distinctiveness,0.0,1.7343976283205784e-06,0,default
-strong selection,weak ecology,30,colless-like index,213.0,0.6883592982254604,0,default
-strong selection,weak ecology,30,mean pairwise distance,202.0,0.5304400912497492,0,default
+strong selection,weak ecology,30,colless-like index,215.0,0.7188875621362669,0,default
+strong selection,weak ecology,30,mean pairwise distance,144.0,0.06871363079688197,0,default
 strong selection,weak ecology,30,sum distance,223.0,0.8450804241615161,0,default
-strong selection,weak ecology,30,mean evolutionary distinctiveness,121.0,0.02182672159602272,0,default
-strong selection,"weak ecology, spatial",30,colless-like index,116.0,0.016565526979430395,0,default
-strong selection,"weak ecology, spatial",30,mean pairwise distance,52.0,0.0002051529226187778,0,default
+strong selection,weak ecology,30,mean evolutionary distinctiveness,140.0,0.05709649524315731,0,default
+strong selection,"weak ecology, spatial",30,colless-like index,122.0,0.023038144695472357,0,default
+strong selection,"weak ecology, spatial",30,mean pairwise distance,213.0,0.6883592982254604,0,default
 strong selection,"weak ecology, spatial",30,sum distance,79.0,0.0015927015020870082,0,default
-strong selection,"weak ecology, spatial",30,mean evolutionary distinctiveness,15.0,7.690859302848515e-06,0,default
-strong selection,weak selection,30,colless-like index,175.0,0.2369361866168309,0,default
-strong selection,weak selection,30,mean pairwise distance,174.0,0.2288804222849652,0,default
+strong selection,"weak ecology, spatial",30,mean evolutionary distinctiveness,23.0,1.639446301677989e-05,0,default
+strong selection,weak selection,30,colless-like index,177.0,0.25364409754600126,0,default
+strong selection,weak selection,30,mean pairwise distance,126.0,0.028485956184747342,0,default
 strong selection,weak selection,30,sum distance,192.0,0.4048347221574208,0,default
-strong selection,weak selection,30,mean evolutionary distinctiveness,109.0,0.011079229099818106,0,default
-weak ecology,ecology,30,colless-like index,230.0,0.958990172136891,0,default
-weak ecology,ecology,30,mean pairwise distance,30.0,3.1123151153729114e-05,0,default
+strong selection,weak selection,30,mean evolutionary distinctiveness,124.0,0.025637124030657623,0,default
+weak ecology,ecology,30,colless-like index,232.0,0.9917945644340904,0,default
+weak ecology,ecology,30,mean pairwise distance,72.0,0.0009626589290659114,0,default
 weak ecology,ecology,30,sum distance,157.0,0.12044472790832522,0,default
-weak ecology,ecology,30,mean evolutionary distinctiveness,174.0,0.2288804222849652,0,default
-weak ecology,"weak ecology, spatial",30,colless-like index,154.0,0.10639417319061394,0,default
-weak ecology,"weak ecology, spatial",30,mean pairwise distance,54.0,0.00024117961055875132,0,default
+weak ecology,ecology,30,mean evolutionary distinctiveness,166.0,0.17137638877502248,0,default
+weak ecology,"weak ecology, spatial",30,colless-like index,155.0,0.11092566512553104,0,default
+weak ecology,"weak ecology, spatial",30,mean pairwise distance,165.0,0.1650265656246961,0,default
 weak ecology,"weak ecology, spatial",30,sum distance,106.0,0.0092710251720259,0,default
-weak ecology,"weak ecology, spatial",30,mean evolutionary distinctiveness,59.0,0.00035888445044696013,0,default
-weak ecology,weak selection,30,colless-like index,209.0,0.6288430020541073,0,default
-weak ecology,weak selection,30,mean pairwise distance,179.0,0.27115519770883223,0,default
+weak ecology,"weak ecology, spatial",30,mean evolutionary distinctiveness,63.0,0.000489690070533264,0,default
+weak ecology,weak selection,30,colless-like index,208.0,0.6143145637885868,0,default
+weak ecology,weak selection,30,mean pairwise distance,226.0,0.8936443871266052,0,default
 weak ecology,weak selection,30,sum distance,219.0,0.7812637101499429,0,default
 weak ecology,weak selection,30,mean evolutionary distinctiveness,221.0,0.8130168513045055,0,default
-"weak ecology, spatial",ecology,30,colless-like index,122.0,0.023038144695472357,0,default
-"weak ecology, spatial",ecology,30,mean pairwise distance,221.0,0.8130168513045055,0,default
+"weak ecology, spatial",ecology,30,colless-like index,123.0,0.024307541573260996,0,default
+"weak ecology, spatial",ecology,30,mean pairwise distance,180.0,0.2802144081140372,0,default
 "weak ecology, spatial",ecology,30,sum distance,155.0,0.11092566512553104,0,default
-"weak ecology, spatial",ecology,30,mean evolutionary distinctiveness,95.0,0.004681835234144671,0,default
-"weak ecology, spatial",weak selection,30,colless-like index,153.0,0.1020106952499886,0,default
-"weak ecology, spatial",weak selection,30,mean pairwise distance,43.0,9.711048976071607e-05,0,default
+"weak ecology, spatial",ecology,30,mean evolutionary distinctiveness,111.0,0.012452560438554458,0,default
+"weak ecology, spatial",weak selection,30,colless-like index,155.0,0.11092566512553104,0,default
+"weak ecology, spatial",weak selection,30,mean pairwise distance,190.0,0.38203416302245696,0,default
 "weak ecology, spatial",weak selection,30,sum distance,105.0,0.008729667753602288,0,default
-"weak ecology, spatial",weak selection,30,mean evolutionary distinctiveness,44.0,0.00010569503498431287,0,default
+"weak ecology, spatial",weak selection,30,mean evolutionary distinctiveness,47.0,0.00013594767036744938,0,default
