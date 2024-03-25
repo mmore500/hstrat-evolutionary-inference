@@ -108,15 +108,36 @@ In order to achieve the phylogenetic tracking necessary for our experiments, we 
 
 \subsection{Gen3sis}
 
-TODO \citep{hagen2021gen3sis}
+In contrast to Avida and the simple fitness-explicit model, which are agent-based, Gen3sis is a population-level model.
+Gen3sis abstracts evolution to interactions beetween spatially-dispersed, speciating subpopulations.
+Co-located subpopulations of different species compete for shares of site-specific carrying capacity.
+Interaction between subpopulation traits and environmental factors (e.g., aridity, temperature) mediates abundance determinations.
+Disjoined subpopulations of the same species accumulate genetic incompatibilities absent sufficient gene flow and, past a defined incompatibility threshold, speciate.
+Withhin this model, the taxonomic unit of phylogeny is species.
 
-ECOLOGY \url{https://cran.r-project.org/web/packages/gen3sis/vignettes/create_config.html}
+Gen3sis also stands out in its intended level of direct biological realism.
+The software can be configured to reflect the particular geological and climate histories of continental biomes.
+For our experiments, we used curated raster files depicting conditions over 30 million years in South America bundled with the package that had been synthesized from a number of sources \citep{straume2020global,westerhold2020astronomically,fick2017worldclim,hagen2019mountain,annan2013new,cramwinckel2018synchronous,evans2018eocene,hollis2019deepmip,hutchinson2018climate,keating2011warm,sijp2014role,zhang2019evolution}
 
-SPATIAL STRUCTURE
-water ignored vs water as barrier
+Among other features, Gen3sis allows differentiation of aquatic (e.g., lakes, ocean) zones from terrestrial regions with respect to suppression of inter-population migration rates.
+To enhance potential for manipulable spatial strucutre within the model, we converted 30 randomly-selected thin linear segments spanning the map to be aquatic rather than terrestrial (i.e., ``rivers'').
+Spatial structure was then induced by adjusting the water traversal cost function.
 
-Synthesized from a number of sources \citep{straume2020global,westerhold2020astronomically,fick2017worldclim,hagen2019mountain,annan2013new,cramwinckel2018synchronous,evans2018eocene,hollis2019deepmip,hutchinson2018climate,keating2011warm,sijp2014role,zhang2019evolution}.
+We assessed the following evolutionary regimes
+\begin{itemize}
+\item \textit{plain}: aquatic terrain imposed no additional migration penalties and population traits did not influence abundances,
+\item \textit{spatial structure}: aquatic terrain imposed a migration barrier $50\times$ that of terrestrial terrain.
+\item \textit{ecology}: species abundances were determined acccording to how close populations' trait value matches to site temperature,
+\item \textit{ecology + spatial structure}: the $50\times$ aquatic dispersal pennalty was applied and site temperature was used to determine species' abundances.
+\end{itemize}
 
+Gen3sis treatments comprised 20 replicates.
+Note that, unlike other surveyed models, Gen3sis does not operate with constant ``population size.''
+Rather, species count increased continuously over each of the 30 simulated 1 million year timestepsas as a consequence of ongoing speciation.
+Maximum species count per spatial site was configured as 2,500 and within the entire simulation as 25,000, although neither limit was ever reached.
+
+Full Gen3sis configuration files are linked in supplemental materials, described below
+For more on Gen3sis itself, see \citep{hagen2021gen3sis}.
 
 \subsection{Hereditary Stratigraphic Annotations and Tree Reconstruction}
 
