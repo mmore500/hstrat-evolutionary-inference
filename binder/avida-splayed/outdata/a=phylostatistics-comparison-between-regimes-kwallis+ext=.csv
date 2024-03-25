@@ -1,0 +1,5 @@
+n,N,phylometric,statistic,p,epoch,mut_distn
+30,10,colless-like index,129.70964790407936,1.3607074151055215e-23,0,default
+30,10,mean pairwise distance,117.89361683277968,3.6041317017124664e-21,0,default
+30,10,sum distance,154.2372624584716,1.167121832293932e-28,0,default
+30,10,mean evolutionary distinctiveness,169.78365448504996,6.845348324636763e-32,0,default

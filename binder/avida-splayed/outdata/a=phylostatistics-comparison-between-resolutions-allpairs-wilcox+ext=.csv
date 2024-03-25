@@ -1,0 +1,161 @@
+quality,n,phylometric,statistic,p,regime,epoch,mut_distn
+1% resolution,30,colless_like_index,33.0,4.0715116266282543e-05,ecology,0,default
+10% resolution,30,colless_like_index,40.0,7.513662254944795e-05,ecology,0,default
+3% resolution,30,colless_like_index,26.0,2.1630223983536902e-05,ecology,0,default
+33% resolution,30,colless_like_index,7.0,3.5152372790448263e-06,ecology,0,default
+1% resolution,30,mean_evolutionary_distinctiveness,7.0,3.5152372790448263e-06,ecology,0,default
+10% resolution,30,mean_evolutionary_distinctiveness,7.0,3.5152372790448263e-06,ecology,0,default
+3% resolution,30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,ecology,0,default
+33% resolution,30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,ecology,0,default
+1% resolution,30,mean_pairwise_distance,1.0,1.9209211049031396e-06,ecology,0,default
+10% resolution,30,mean_pairwise_distance,1.0,1.9209211049031396e-06,ecology,0,default
+3% resolution,30,mean_pairwise_distance,2.0,2.1266360107314253e-06,ecology,0,default
+33% resolution,30,mean_pairwise_distance,3.0,2.3534209951215346e-06,ecology,0,default
+1% resolution,30,sum_distance,226.0,0.8936443871266052,ecology,0,default
+10% resolution,30,sum_distance,227.0,0.9099307681587345,ecology,0,default
+3% resolution,30,sum_distance,231.0,0.9753871641763363,ecology,0,default
+33% resolution,30,sum_distance,202.0,0.5304400912497492,ecology,0,default
+10% resolution,30,colless_like_index,71.0,0.0008944300647461546,"ecology, spatial",0,default
+33% resolution,30,colless_like_index,42.0,8.918727424459682e-05,"ecology, spatial",0,default
+3% resolution,30,colless_like_index,90.0,0.003378854437718857,"ecology, spatial",0,default
+1% resolution,30,colless_like_index,92.0,0.003854236286879128,"ecology, spatial",0,default
+10% resolution,30,mean_evolutionary_distinctiveness,24.0,1.798848069179905e-05,"ecology, spatial",0,default
+33% resolution,30,mean_evolutionary_distinctiveness,32.0,3.7242647279456434e-05,"ecology, spatial",0,default
+3% resolution,30,mean_evolutionary_distinctiveness,23.0,1.639446301677989e-05,"ecology, spatial",0,default
+1% resolution,30,mean_evolutionary_distinctiveness,31.0,3.4052567232805375e-05,"ecology, spatial",0,default
+10% resolution,30,mean_pairwise_distance,38.0,6.319756764397932e-05,"ecology, spatial",0,default
+33% resolution,30,mean_pairwise_distance,2.0,2.1266360107314253e-06,"ecology, spatial",0,default
+3% resolution,30,mean_pairwise_distance,22.0,1.493563929839868e-05,"ecology, spatial",0,default
+1% resolution,30,mean_pairwise_distance,48.0,0.0001477276174888222,"ecology, spatial",0,default
+10% resolution,30,sum_distance,221.0,0.8130168513045055,"ecology, spatial",0,default
+33% resolution,30,sum_distance,221.0,0.8130168513045055,"ecology, spatial",0,default
+3% resolution,30,sum_distance,219.0,0.7812637101499429,"ecology, spatial",0,default
+1% resolution,30,sum_distance,232.0,0.9917945644340904,"ecology, spatial",0,default
+3% resolution,30,colless_like_index,24.0,1.798848069179905e-05,plain,0,default
+1% resolution,30,colless_like_index,29.0,2.8434237746031825e-05,plain,0,default
+33% resolution,30,colless_like_index,13.0,6.339135573122464e-06,plain,0,default
+10% resolution,30,colless_like_index,26.0,2.1630223983536902e-05,plain,0,default
+3% resolution,30,mean_evolutionary_distinctiveness,13.0,6.339135573122464e-06,plain,0,default
+1% resolution,30,mean_evolutionary_distinctiveness,35.0,4.8602606066772885e-05,plain,0,default
+33% resolution,30,mean_evolutionary_distinctiveness,25.0,1.9729484515803686e-05,plain,0,default
+10% resolution,30,mean_evolutionary_distinctiveness,26.0,2.1630223983536902e-05,plain,0,default
+3% resolution,30,mean_pairwise_distance,30.0,3.1123151153729114e-05,plain,0,default
+1% resolution,30,mean_pairwise_distance,19.0,1.126539849982107e-05,plain,0,default
+33% resolution,30,mean_pairwise_distance,26.0,2.1630223983536902e-05,plain,0,default
+10% resolution,30,mean_pairwise_distance,12.0,5.751653269401829e-06,plain,0,default
+3% resolution,30,sum_distance,225.0,0.8774027283940786,plain,0,default
+1% resolution,30,sum_distance,229.0,0.9426105124576512,plain,0,default
+33% resolution,30,sum_distance,225.0,0.8774027283940786,plain,0,default
+10% resolution,30,sum_distance,224.0,0.8612125197358381,plain,0,default
+1% resolution,30,colless_like_index,17.0,9.315658591105142e-06,rich ecology,0,default
+3% resolution,30,colless_like_index,19.0,1.126539849982107e-05,rich ecology,0,default
+33% resolution,30,colless_like_index,0.0,1.7343976283205784e-06,rich ecology,0,default
+10% resolution,30,colless_like_index,16.0,8.466081690383873e-06,rich ecology,0,default
+1% resolution,30,mean_evolutionary_distinctiveness,2.0,2.1266360107314253e-06,rich ecology,0,default
+3% resolution,30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,rich ecology,0,default
+33% resolution,30,mean_evolutionary_distinctiveness,1.0,1.9209211049031396e-06,rich ecology,0,default
+10% resolution,30,mean_evolutionary_distinctiveness,1.0,1.9209211049031396e-06,rich ecology,0,default
+1% resolution,30,mean_pairwise_distance,1.0,1.9209211049031396e-06,rich ecology,0,default
+3% resolution,30,mean_pairwise_distance,2.0,2.1266360107314253e-06,rich ecology,0,default
+33% resolution,30,mean_pairwise_distance,0.0,1.7343976283205784e-06,rich ecology,0,default
+10% resolution,30,mean_pairwise_distance,6.0,3.181679410969855e-06,rich ecology,0,default
+1% resolution,30,sum_distance,227.0,0.9099307681587345,rich ecology,0,default
+3% resolution,30,sum_distance,232.0,0.9917945644340904,rich ecology,0,default
+33% resolution,30,sum_distance,220.0,0.7970983030067952,rich ecology,0,default
+10% resolution,30,sum_distance,227.0,0.9099307681587345,rich ecology,0,default
+33% resolution,30,colless_like_index,7.0,3.5152372790448263e-06,"rich ecology, spatial",0,default
+1% resolution,30,colless_like_index,68.0,0.000715703384624892,"rich ecology, spatial",0,default
+3% resolution,30,colless_like_index,43.0,9.711048976071607e-05,"rich ecology, spatial",0,default
+10% resolution,30,colless_like_index,42.0,8.918727424459682e-05,"rich ecology, spatial",0,default
+33% resolution,30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,"rich ecology, spatial",0,default
+1% resolution,30,mean_evolutionary_distinctiveness,2.0,2.1266360107314253e-06,"rich ecology, spatial",0,default
+3% resolution,30,mean_evolutionary_distinctiveness,2.0,2.1266360107314253e-06,"rich ecology, spatial",0,default
+10% resolution,30,mean_evolutionary_distinctiveness,0.0,1.7343976283205784e-06,"rich ecology, spatial",0,default
+33% resolution,30,mean_pairwise_distance,0.0,1.7343976283205784e-06,"rich ecology, spatial",0,default
+1% resolution,30,mean_pairwise_distance,4.0,2.603328389538926e-06,"rich ecology, spatial",0,default
+3% resolution,30,mean_pairwise_distance,7.0,3.5152372790448263e-06,"rich ecology, spatial",0,default
+10% resolution,30,mean_pairwise_distance,5.0,2.878599219394298e-06,"rich ecology, spatial",0,default
+33% resolution,30,sum_distance,232.0,0.9917945644340904,"rich ecology, spatial",0,default
+1% resolution,30,sum_distance,220.0,0.7970983030067952,"rich ecology, spatial",0,default
+3% resolution,30,sum_distance,221.0,0.8130168513045055,"rich ecology, spatial",0,default
+10% resolution,30,sum_distance,228.0,0.9262550873076122,"rich ecology, spatial",0,default
+10% resolution,30,colless_like_index,9.0,4.283187254624714e-06,spatial structure,0,default
+1% resolution,30,colless_like_index,43.0,9.711048976071607e-05,spatial structure,0,default
+33% resolution,30,colless_like_index,12.0,5.751653269401829e-06,spatial structure,0,default
+3% resolution,30,colless_like_index,36.0,5.306991938091102e-05,spatial structure,0,default
+10% resolution,30,mean_evolutionary_distinctiveness,41.0,8.187753439649276e-05,spatial structure,0,default
+1% resolution,30,mean_evolutionary_distinctiveness,35.0,4.8602606066772885e-05,spatial structure,0,default
+33% resolution,30,mean_evolutionary_distinctiveness,32.0,3.7242647279456434e-05,spatial structure,0,default
+3% resolution,30,mean_evolutionary_distinctiveness,32.0,3.7242647279456434e-05,spatial structure,0,default
+10% resolution,30,mean_pairwise_distance,21.0,1.360110796799097e-05,spatial structure,0,default
+1% resolution,30,mean_pairwise_distance,20.0,1.2380795614564472e-05,spatial structure,0,default
+33% resolution,30,mean_pairwise_distance,10.0,4.729202337447058e-06,spatial structure,0,default
+3% resolution,30,mean_pairwise_distance,14.0,6.983783147477089e-06,spatial structure,0,default
+10% resolution,30,sum_distance,228.0,0.9262550873076122,spatial structure,0,default
+1% resolution,30,sum_distance,228.0,0.9262550873076122,spatial structure,0,default
+33% resolution,30,sum_distance,222.0,0.8290130316946699,spatial structure,0,default
+3% resolution,30,sum_distance,226.0,0.8936443871266052,spatial structure,0,default
+1% resolution,30,colless_like_index,44.0,0.00010569503498431287,strong selection,0,default
+10% resolution,30,colless_like_index,36.0,5.306991938091102e-05,strong selection,0,default
+33% resolution,30,colless_like_index,21.0,1.360110796799097e-05,strong selection,0,default
+3% resolution,30,colless_like_index,73.0,0.0010356813035458734,strong selection,0,default
+1% resolution,30,mean_evolutionary_distinctiveness,7.0,3.5152372790448263e-06,strong selection,0,default
+10% resolution,30,mean_evolutionary_distinctiveness,2.0,2.1266360107314253e-06,strong selection,0,default
+33% resolution,30,mean_evolutionary_distinctiveness,11.0,5.216493447033368e-06,strong selection,0,default
+3% resolution,30,mean_evolutionary_distinctiveness,4.0,2.603328389538926e-06,strong selection,0,default
+1% resolution,30,mean_pairwise_distance,39.0,6.892290296834955e-05,strong selection,0,default
+10% resolution,30,mean_pairwise_distance,34.0,4.449337283453103e-05,strong selection,0,default
+33% resolution,30,mean_pairwise_distance,30.0,3.1123151153729114e-05,strong selection,0,default
+3% resolution,30,mean_pairwise_distance,33.0,4.0715116266282543e-05,strong selection,0,default
+1% resolution,30,sum_distance,221.0,0.8130168513045055,strong selection,0,default
+10% resolution,30,sum_distance,215.0,0.7188875621362669,strong selection,0,default
+33% resolution,30,sum_distance,205.0,0.5716457836721114,strong selection,0,default
+3% resolution,30,sum_distance,230.0,0.958990172136891,strong selection,0,default
+3% resolution,30,colless_like_index,36.0,5.306991938091102e-05,weak ecology,0,default
+1% resolution,30,colless_like_index,68.0,0.000715703384624892,weak ecology,0,default
+33% resolution,30,colless_like_index,9.0,4.285685869189864e-06,weak ecology,0,default
+10% resolution,30,colless_like_index,14.0,6.983783147477089e-06,weak ecology,0,default
+3% resolution,30,mean_evolutionary_distinctiveness,43.0,9.711048976071607e-05,weak ecology,0,default
+1% resolution,30,mean_evolutionary_distinctiveness,26.0,2.1630223983536902e-05,weak ecology,0,default
+33% resolution,30,mean_evolutionary_distinctiveness,15.0,7.690859302848515e-06,weak ecology,0,default
+10% resolution,30,mean_evolutionary_distinctiveness,13.0,6.339135573122464e-06,weak ecology,0,default
+3% resolution,30,mean_pairwise_distance,35.0,4.8602606066772885e-05,weak ecology,0,default
+1% resolution,30,mean_pairwise_distance,49.0,0.00016046383716795338,weak ecology,0,default
+33% resolution,30,mean_pairwise_distance,36.0,5.306991938091102e-05,weak ecology,0,default
+10% resolution,30,mean_pairwise_distance,49.0,0.00016046383716795338,weak ecology,0,default
+3% resolution,30,sum_distance,232.0,0.9917945644340904,weak ecology,0,default
+1% resolution,30,sum_distance,209.0,0.6288430020541073,weak ecology,0,default
+33% resolution,30,sum_distance,224.0,0.8612125197358381,weak ecology,0,default
+10% resolution,30,sum_distance,231.0,0.9753871641763363,weak ecology,0,default
+1% resolution,30,colless_like_index,87.0,0.0027652741969916386,"weak ecology, spatial",0,default
+33% resolution,30,colless_like_index,42.0,8.918727424459682e-05,"weak ecology, spatial",0,default
+3% resolution,30,colless_like_index,67.0,0.0006639212842644785,"weak ecology, spatial",0,default
+10% resolution,30,colless_like_index,74.0,0.0011138009078172067,"weak ecology, spatial",0,default
+1% resolution,30,mean_evolutionary_distinctiveness,56.0,0.0002830789435165413,"weak ecology, spatial",0,default
+33% resolution,30,mean_evolutionary_distinctiveness,72.0,0.0009626589290659114,"weak ecology, spatial",0,default
+3% resolution,30,mean_evolutionary_distinctiveness,83.0,0.002105260340900366,"weak ecology, spatial",0,default
+10% resolution,30,mean_evolutionary_distinctiveness,52.0,0.0002051529226187778,"weak ecology, spatial",0,default
+1% resolution,30,mean_pairwise_distance,65.0,0.0005706436710454648,"weak ecology, spatial",0,default
+33% resolution,30,mean_pairwise_distance,51.0,0.00018909720229770685,"weak ecology, spatial",0,default
+3% resolution,30,mean_pairwise_distance,78.0,0.0014839276312951777,"weak ecology, spatial",0,default
+10% resolution,30,mean_pairwise_distance,55.0,0.00026134309226671514,"weak ecology, spatial",0,default
+1% resolution,30,sum_distance,232.0,0.9917945644340904,"weak ecology, spatial",0,default
+33% resolution,30,sum_distance,228.0,0.9262550873076122,"weak ecology, spatial",0,default
+3% resolution,30,sum_distance,228.0,0.9262550873076122,"weak ecology, spatial",0,default
+10% resolution,30,sum_distance,229.0,0.9426105124576512,"weak ecology, spatial",0,default
+10% resolution,30,colless_like_index,26.0,2.1630223983536902e-05,weak selection,0,default
+33% resolution,30,colless_like_index,4.0,2.603328389538926e-06,weak selection,0,default
+1% resolution,30,colless_like_index,0.0,1.7343976283205784e-06,weak selection,0,default
+3% resolution,30,colless_like_index,18.0,1.0246327832617613e-05,weak selection,0,default
+10% resolution,30,mean_evolutionary_distinctiveness,8.0,3.882182386060857e-06,weak selection,0,default
+33% resolution,30,mean_evolutionary_distinctiveness,7.0,3.5152372790448263e-06,weak selection,0,default
+1% resolution,30,mean_evolutionary_distinctiveness,17.0,9.315658591105142e-06,weak selection,0,default
+3% resolution,30,mean_evolutionary_distinctiveness,11.0,5.216493447033368e-06,weak selection,0,default
+10% resolution,30,mean_pairwise_distance,51.0,0.00018909720229770685,weak selection,0,default
+33% resolution,30,mean_pairwise_distance,56.0,0.0002830789435165413,weak selection,0,default
+1% resolution,30,mean_pairwise_distance,53.0,0.00022248266458074938,weak selection,0,default
+3% resolution,30,mean_pairwise_distance,47.0,0.00013594767036744938,weak selection,0,default
+10% resolution,30,sum_distance,221.0,0.8130168513045055,weak selection,0,default
+33% resolution,30,sum_distance,226.0,0.8936443871266052,weak selection,0,default
+1% resolution,30,sum_distance,231.0,0.9753871641763363,weak selection,0,default
+3% resolution,30,sum_distance,215.0,0.7188875621362669,weak selection,0,default
