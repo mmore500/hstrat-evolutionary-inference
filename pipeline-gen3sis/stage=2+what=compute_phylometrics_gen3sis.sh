@@ -185,6 +185,7 @@ def analyze_one(a: str, phylogeny_path: str) -> pd.DataFrame:
       phylogeny_df.to_csv(path, index=False)
 
     df = pd.read_csv(path)
+    df = hstrat_aux.alifestd_splay_polytomies(df, mutate=True)
     df = hstrat_aux.alifestd_collapse_unifurcations(df, mutate=True)
     deunifurcated_path = f"/tmp/{uuid.uuid4()}.csv"
     df.to_csv(deunifurcated_path, index=False)
