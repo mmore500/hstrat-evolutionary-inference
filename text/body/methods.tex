@@ -198,11 +198,10 @@ Divergence metrics quantify how different the units of the phylogeny are from ea
 Regularity metrics quantify the variance of other properties (i.e. how consistent they are across the phylogeny).
 Here, we focus on four metrics spread across these categories:
 
-\textbf{Sum Distance:} TODO
-This measurement simply counts the number of non-extant taxa in the phylogeny (i.e. the number of non-leaf nodes).
-Because the reconstructed trees do not contain any internal nodes not associated with a branching point (i.e. unifurcations), we strip such nodes out of the reference trees as well.
-It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}, the primary differences being that the number of internal nodes is unaffected by branch lengths and the number of leaf nodes.
+\textbf{Sum Distance:} This measurement simply counts the total chronological length of lineages within the tree.
+It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}.
 Consequently, we would expect it to be increased by the presence of ecology or spatial structure, as both these factors increase diversity.
+% TODO do we want to say more here?
 
 \textbf{Colless-like Index:}
 The original Colless Index \citep{collessReviewPhylogeneticsTheory1982}, also often referred to as $I_c$ \citep{shaoTreeBalance1990}, is a measure of tree imbalance (i.e. it gets higher as the tree gets less balanced).
