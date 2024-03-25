@@ -84,6 +84,7 @@ import random
 import shutil
 import sys
 import tempfile
+import uuid
 
 from hstrat import _auxiliary_lib as hstrat_aux
 from hstrat import hstrat
@@ -149,25 +150,17 @@ def analyze_one(a: str, phylogeny_path: str) -> pd.DataFrame:
     tries=10, delay=1, max_delay=10, backoff=2, jitter=(0, 4), logger=logging,
   )
   def do_load_from_file():
-    if not phylogeny_path.endswith(".gz"):
-      syst.load_from_file(
-        phylogeny_path,
-        "id",  # info_col
-        True,  # assume_leaves_extant
-      )
-      return
-    with \
-      gzip.open(phylogeny_path, "rb") as zipped_sourcefile, \
-      tempfile.NamedTemporaryFile("wb") as unzipped_tempfile \
-    :
-      logging.info(f"unzipping to tempfile {unzipped_tempfile.name}")
-      unzipped_tempfile.write(zipped_sourcefile.read())
-      logging.info(f"loading systematics from tempfile {unzipped_tempfile.name}")
-      syst.load_from_file(
-        unzipped_tempfile.name,
-        "id",  # info_col
-        True,  # assume_leaves_extant
-      )
+    df = pd.read_csv(phylogeny_path)
+    df = hstrat_aux.alifestd_collapse_unifurcations(df, mutate=True)
+    df.drop(columns=["destruction_time"], inplace=True)
+    deunifurcated_path = f"/tmp/{uuid.uuid4()}.csv"
+    df.to_csv(deunifurcated_path, index=False)
+    syst.load_from_file(
+      deunifurcated_path,
+      "id",  # info_col
+      True,  # assume_leaves_extant
+    )
+
   do_load_from_file()
   logging.info("deserialized systematics from source phylogeny")
 
