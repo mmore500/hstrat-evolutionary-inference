@@ -18,9 +18,9 @@ The following introduces each simulation model and details experiment-specific c
 Experiments testing the relationships between evolutionary dynamics, reconstruction error, and phylogenetic structure required a model system amenable to direct, interpretable tuning of ecology, spatial structure, and selection pressure.
 Additionally, in order to make findings relevant to large-scale phylogenetic analyses, computational efficiency was necessary to facilitate large population size and high generation counts.
 Finally, a parsimonious and generic model system was desired so that findings would better generalize across digital evolution systems.
+The core of this work relies on a simple agent-based model  devised to fulfill these objectives.
 
-A parsimonious model system was devised to fulfill these objectives.
-Genomes in this system comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
+Genomes in the explicit fitness model comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
 Population size 32,768 ($2^{15}$) was used for all experiments.
 Selection was performed using tournament selection with synchronous generations.
 Treatments' selection pressure was controlled via tournament size.
@@ -45,17 +45,17 @@ For our main experiments, we defined the following ``regimes'' of evolutionary c
   \item \textit{weak selection}: tournament size 1 with no niching and no islands,
   \item \textit{strong selection}: tournament size 4 with no niching and no islands,
   \item \textit{spatial structure}: tournament size 2 with no niching and 1,024 islands,
-  \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
-  \item \textit{4 niche ecology}: tournament size 2 with 4 niches, and
-  \item \textit{8 niche ecology}: tournament size 8 with 4 niches.
+  \item \textit{weak ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$,
+  \item \textit{ecology}: tournament size 2 with 4 niches, and
+  \item \textit{rich ecology}: tournament size 2 with 8 niches.
 \end{itemize}
 
 In follow-up experiments testing ecological dynamics with a spatial background, we defined the following additional evolutionary ``regimes:''
 \begin{itemize}
   \item \textit{plain}: tournament size 2 with no niching over 1,024 islands,
-  \item \textit{weak 4 niche ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$ over 1,024 islands,
-  \item \textit{4 niche ecology}: tournament size 2 with 4 niches over 1,024 islands, and
-  \item \textit{8 niche ecology}: tournament size 8 with 4 niches over 1,024 islands.
+  \item \textit{weak ecology}: tournament size 2 with 4 niches and niche swap probability increased 100$\times$ over 1,024 islands,
+  \item \textit{ecology}: tournament size 2 with 4 niches over 1,024 islands, and
+  \item \textit{rich ecology}: tournament size 2 with 8 niches over 1,024 islands.
 \end{itemize}
 
 Finally, to foster generalizability of findings, all experiments were performed with two alternate ``sensitivity'' variables: evolutionary length in generations and mutation operator.
