@@ -66,115 +66,45 @@ Under this distribution, deleterious mutations are not possible and large-effect
 
 Across all experiments, each treatment comprised 50 replicates.
 
-\subsection{Avida}
+\textbf{Avida}
 
-TODO \citep{ofria2004avida}
+Avida is an agent-based simulation platform used for sophisticated \textit{in silico} evolution experiments \citep{ofria2004avida}.
+Notably, unlike the simple model described above, fitness within Avida arises implicitly from agents' self-replication activity, in relation to other agents' self-replication and the availability of shared exogenous resources.
+WithinAvida digital organisms' genomes comprise a sequence of virtual CPU instructions.
+The simulation system conducts open-ended evaluation of each agent's genetic program, affording the opportunity of copying itself into output memory and thereby creating an offspring agent.
+Simulation imposes an intrinsic baseline level of copy errors (i.e., mutations), ensuring an ongoing supply of genetic variation.
+Because self-replicators compete for a limited quantity of population slots, Darwinian evolution ensues.
+This scheme induces a complex fitness landscape, which is thought to better reflect the character of biological evolution \citep{adami2006digital}.
 
-% AVIDA NO ECOLOGY
-% RESOURCE  resECHO:inflow=400:outflow=0.01
+Under baseline conditions, Avidians compete on the basis of self-replication efficiency.
+However, Avida may be configured to additionally favafor completion of boolean logic tasks by agents.
+The simulation corresponds each each task to a finite-valued resource, with benefit of task performance contingent on availability of its corresponding resource and depleting the availability of that resource.
+Under this scheme, potential for ecological dynamics arises from configuration of available tasks and what resources they draw from.
+In conjunction with configuration of a simulation-enforced cap that an Avidian may harvest at most two tasks, attaching tasks to independent resoources allows for stable coexistence between task-specialized clades while attaching tasks to a common resource pool does not.
 
-% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NOT  not   process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NAND nand  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  AND  and   process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
+Our baseline ``\textit{plain}'' treatment rewarded four boolean logic tasks (echo, not, nand, and), all drawing from a single resource with inflow rate 400 units per update.
+Population structure was well-mixed and, to somewhat weaken the fecundity of high-fitness Avidians, replication destroyed the parent organism with probability 0.2.
 
+We surveyed the following additional ``regimes'' of evolutionary conditions:
+\begin{itemize}
+  \item \textit{weak selection}: the probability of parent death was increased to 0.5;
+  \item \textit{strong selection}: parent death probability was set to 0.0 and offspring were protected from replacement by their own offspring;
+  \item \textit{spatial structure}: population was arranged as a two-dimensional toroidal grid, with Avidians replicating exclusively between neighboring population sites;
+  \item \textit{weak ecology}: tasks were assigned independent resource pools, but three resources were only supplied at an inflow rate of 33 units while the fourth was supplied at 300 units per update,
+  \item \textit{ecology}: each task drew from an independent resource pool with inflow rate of 100 units, and
+  \item \textit{rich ecology}: 28 tasks were rewarded, each drawing from an independent resource pool with an inflow rate of 100 units.
+\end{itemize}
 
-% AVIDA RICH ECOLOGY
-% RESOURCE  resECHO:inflow=100:outflow=0.01
-% RESOURCE  resNOT:inflow=100:outflow=0.01
-% RESOURCE resNAND:inflow=100:outflow=0.01
-% RESOURCE  resAND:inflow=100:outflow=0.01
-% RESOURCE resORN:inflow=100:outflow=0.01
-% RESOURCE  resOR:inflow=100:outflow=0.01
-% RESOURCE  resANDN:inflow=100:outflow=0.01
-% RESOURCE  resNOR:inflow=100:outflow=0.01
-% RESOURCE  resXOR:inflow=100:outflow=0.01
-% RESOURCE  resEQU:inflow=100:outflow=0.01
-% RESOURCE resLOG3BO:inflow=100:outflow=0.01
-% RESOURCE resLOG3CI:inflow=100:outflow=0.01
-% RESOURCE resLOG3BZ:inflow=100:outflow=0.01
-% RESOURCE resLOG3AG:inflow=100:outflow=0.01
-% RESOURCE resLOG3CP:inflow=100:outflow=0.01
-% RESOURCE resLOG3BY:inflow=100:outflow=0.01
-% RESOURCE resLOG3BS:inflow=100:outflow=0.01
-% RESOURCE resLOG3BA:inflow=100:outflow=0.01
-% RESOURCE resLOG3CJ:inflow=100:outflow=0.01
-% RESOURCE resLOG3AH:inflow=100:outflow=0.01
-% RESOURCE resLOG3AQ:inflow=100:outflow=0.01
-% RESOURCE resLOG3CN:inflow=100:outflow=0.01
-% RESOURCE resLOG3CB:inflow=100:outflow=0.01
-% RESOURCE resLOG3AX:inflow=100:outflow=0.01
-% RESOURCE resLOG3AR:inflow=100:outflow=0.01
-% RESOURCE resLOG3AO:inflow=100:outflow=0.01
-% RESOURCE resLOG3CH:inflow=100:outflow=0.01
-% RESOURCE resLOG3CC:inflow=100:outflow=0.01
+In follow-up experiments, we defined the following additional evolutionary ``regimes'' with two-dimensional toroidal spatial struture,
+\begin{itemize}
+  \item \textit{plain}: four boolean logic tasks drawing from a single resource with inflow rate 400 units per update,
+  \item \textit{weak ecology}: tasks were assigned independent resource pools, but three resources were only supplied at an inflow rate of 33 units while the fourth was supplied at 300 units per update,
+  \item \textit{ecology}: each task drew from an independent resource pool with inflow rate of 100 units, and
+  \item \textit{rich ecology}: 28 tasks were rewarded, each drawing from an independent resource pool with an inflow rate of 100 units.
+\end{itemize}
 
-% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NOT  not   process:resource=resNOT:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NAND nand  process:resource=resNAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  AND  and   process:resource=resAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  ORN  orn   process:resource=resORN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  OR   or    process:resource=resOR:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  ANDN andn  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NOR nor  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  XOR xor  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  EQU equ  process:resource=resANDN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3BO logic_3BO process:resource=resLOG3BO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3CI logic_3CI process:resource=resLOG3CI:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3BZ logic_3BZ process:resource=resLOG3BZ:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3AG logic_3AG process:resource=resLOG3AG:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3CP logic_3CP process:resource=resLOG3CP:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3BY logic_3BY process:resource=resLOG3BY:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3BS logic_3BS process:resource=resLOG3BS:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3BA logic_3BA process:resource=resLOG3BA:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3CJ logic_3CJ process:resource=resLOG3CJ:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3AH logic_3AH process:resource=resLOG3AH:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3AQ logic_3AQ process:resource=resLOG3AQ:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3CN logic_3CN process:resource=resLOG3CN:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3CB logic_3CB process:resource=resLOG3CB:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3AX logic_3AX process:resource=resLOG3AX:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3AR logic_3AR process:resource=resLOG3AR:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3AO logic_3AO process:resource=resLOG3AO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3CH logic_3CH process:resource=resLOG3CH:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION LOG3CC logic_3CC process:resource=resLOG3CC:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-
-% AVIDA ECOLOGY
-% RESOURCE  resECHO:inflow=100:outflow=0.01
-% RESOURCE  resNOT:inflow=100:outflow=0.01
-% RESOURCE resNAND:inflow=100:outflow=0.01
-% RESOURCE  resAND:inflow=100:outflow=0.01
-
-% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NOT  not   process:resource=resNOT:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NAND nand  process:resource=resNAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  AND  and   process:resource=resAND:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-
-% AVIDA WEAK ECOLOGY
-% RESOURCE  resECHO:inflow=300:outflow=0.01
-% RESOURCE  resNOT:inflow=33:outflow=0.01
-% RESOURCE resNAND:inflow=33:outflow=0.01
-% RESOURCE  resAND:inflow=33:outflow=0.01
-
-
-% REACTION  ECHO echo  process:resource=resECHO:value=1.0:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NOT  not   process:resource=resNOT:value=0.2:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  NAND nand  process:resource=resNAND:value=0.2:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-% REACTION  AND  and   process:resource=resAND:value=0.2:frac=0.0025:type=pow:max=10.0 requisite:max_tot_count=2
-
-
-% PLAIN
-% WORLD_GEOMETRY 3
-% DEATH_PROB_PARENT 0.2
-
-% SELECTION STRONG
-% WORLD_GEOMETRY 3
-% DEATH_METHOD 0
-% ALLOW_PARENT 0
-
-% SPATIAL
-
-% WORLD_GEOMETRY 2
-% DEATH_PROB_PARENT 0.2
+Experimental treatments using Avida comprised 20 replicates, conducted with population size 3,600 for durations of 100,000 updates.
+In order to achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avvida originally developed for research on MODES \citep{dolsonMODESToolboxMeasurements2019}, linked in supplemental materials described below.
 
 \subsection{Gen3sis}
 
