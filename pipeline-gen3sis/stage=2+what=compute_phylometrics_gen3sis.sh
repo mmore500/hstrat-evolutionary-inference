@@ -184,25 +184,16 @@ def analyze_one(a: str, phylogeny_path: str) -> pd.DataFrame:
       path = f"/tmp/{uuid.uuid4()}.csv"
       phylogeny_df.to_csv(path, index=False)
 
-    if path.endswith(".csv"):
-      syst.load_from_file(
-        path,
-        "id",  # info_col
-        True,  # assume_leaves_extant
-      )
-      return
-    with \
-      gzip.open(path, "rb") as zipped_sourcefile, \
-      tempfile.NamedTemporaryFile("wb") as unzipped_tempfile \
-    :
-      logging.info(f"unzipping to tempfile {unzipped_tempfile.name}")
-      unzipped_tempfile.write(zipped_sourcefile.read())
-      logging.info(f"loading systematics from tempfile {unzipped_tempfile.name}")
-      syst.load_from_file(
-        unzipped_tempfile.name,
-        "id",  # info_col
-        True,  # assume_leaves_extant
-      )
+    df = pd.read_csv(path)
+    df = hstrat_aux.alifestd_collapse_unifurcations(df, mutate=True)
+    deunifurcated_path = f"/tmp/{uuid.uuid4()}.csv"
+    df.to_csv(deunifurcated_path, index=False)
+    syst.load_from_file(
+      deunifurcated_path,
+      "id",  # info_col
+      True,  # assume_leaves_extant
+    )
+
   do_load_from_file()
   logging.info("deserialized systematics from source phylogeny")
 
