@@ -1,0 +1,25 @@
+n,N,phylometric,statistic,p,epoch,mut_distn
+50,7,colless-like index,304.1877294261294,1.0360433572794872e-62,0,np.random.exponential
+50,7,mean pairwise distance,250.9181421245421,2.6104469277967114e-51,0,np.random.exponential
+50,7,sum distance,339.976537240537,2.187511968608002e-70,0,np.random.exponential
+50,7,mean evolutionary distinctiveness,340.1784185592187,1.9798170393294457e-70,0,np.random.exponential
+50,7,colless-like index,310.1326612942614,5.510037374768301e-64,0,np.random.standard_normal
+50,7,mean pairwise distance,263.9548757020757,4.260666004738274e-54,0,np.random.standard_normal
+50,7,sum distance,334.96747055357065,2.599197187933233e-69,0,np.random.standard_normal
+50,7,mean evolutionary distinctiveness,335.20224664224656,2.314532004690998e-69,0,np.random.standard_normal
+50,7,colless-like index,307.15486788766793,2.395787309355818e-63,2,np.random.exponential
+50,7,mean pairwise distance,247.85163174603167,1.1803321079915756e-50,2,np.random.exponential
+50,7,sum distance,335.0634432234433,2.478827864341954e-69,2,np.random.exponential
+50,7,mean evolutionary distinctiveness,336.19878290598285,1.4145918841159894e-69,2,np.random.exponential
+50,7,colless-like index,299.3732727716729,1.114444411555884e-61,2,np.random.standard_normal
+50,7,mean pairwise distance,259.10673504273495,4.637234035554503e-53,2,np.random.standard_normal
+50,7,sum distance,339.0042183813818,3.536826551998292e-70,2,np.random.standard_normal
+50,7,mean evolutionary distinctiveness,339.39189841269854,2.9202295921897736e-70,2,np.random.standard_normal
+50,7,colless-like index,302.88182857142874,1.9735056485006273e-62,7,np.random.exponential
+50,7,mean pairwise distance,258.1572297924299,7.400776636355046e-53,7,np.random.exponential
+50,7,sum distance,337.6976374903542,6.745278149728936e-70,7,np.random.exponential
+50,7,mean evolutionary distinctiveness,338.9171340659341,3.692343047605072e-70,7,np.random.exponential
+50,7,colless-like index,307.31788034188025,2.210591057001012e-63,7,np.random.standard_normal
+50,7,mean pairwise distance,259.15087863247845,4.537537023296289e-53,7,np.random.standard_normal
+50,7,sum distance,340.5841035409037,1.6201709195815552e-70,7,np.random.standard_normal
+50,7,mean evolutionary distinctiveness,340.35205470085475,1.817025747699854e-70,7,np.random.standard_normal
