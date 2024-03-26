@@ -41,6 +41,11 @@ echo "num_phylogeny_files ${num_phylogeny_files}"
 num_batches="$(((${num_phylogeny_files} + 49) / 50))"
 echo "num_batches ${num_batches}"
 
+# adapted from https://stackoverflow.com/a/30396199
+waitforjobs() {
+    while test $(jobs -p | wc -w) -ge "$1"; do sleep 1; done
+}
+
 # second sed strips leftover empty line at end
 echo ${all_phylogeny_files} \
 | tr '\n' ' ' \
@@ -49,7 +54,7 @@ echo ${all_phylogeny_files} \
 ; do
   SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
   echo "SBATCH_SCRIPT_PATH ${SBATCH_SCRIPT_PATH}"
-  j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=4+what=compute_phylometrics/compute_phylometrics.slurm.sh.jinja" << J2_HEREDOC_EOF
+  j2 --format=yaml -o "${SBATCH_SCRIPT_PATH}" "stage=4+what=compute_phylometrics/compute_phylometrics.slurm.sh.jinja" << J2_HEREDOC_EOF &
 batch: ${BATCH}
 revision: ${REVISION}
 runmode: ${RUNMODE}
@@ -59,11 +64,13 @@ setup_production_dependencies: |
 ${SETUP_PRODUCTION_DEPENDENCIES_SNIPPET}
 target_phylogeny_files: ${target_phylogeny_files}
 J2_HEREDOC_EOF
-chmod +x "${SBATCH_SCRIPT_PATH}"
+waitforjobs 100
 done \
   | tqdm \
     --desc "instantiate slurm scripts" \
     --total "${num_batches}"
+
+wait
 
 echo "$(ls -1 "${SBATCH_SCRIPT_DIRECTORY_PATH}" | wc -l) slurm scripts created"
 find "${SBATCH_SCRIPT_DIRECTORY_PATH}" -type f | python3 -m qspool
