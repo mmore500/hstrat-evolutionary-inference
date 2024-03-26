@@ -46,6 +46,7 @@ waitforjobs() {
 
 # second sed strips leftover empty line at end
 echo ${all_phylogeny_files} \
+| tr ' ' '\n' \
 | shuf \
 | tr '\n' ' ' \
 | shuf \
