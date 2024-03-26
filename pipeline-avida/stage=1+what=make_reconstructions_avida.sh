@@ -43,7 +43,7 @@ for try in {0..9}; do
 done
 
 for try in {0..9}; do
-wget "https://osf.io/6a8pg/download" -O "${BATCH_PATH}/data.tar.gz" && break
+wget "https://osf.io/x5a2d/download" -O "${BATCH_PATH}/data.tar.gz" && break
 echo "wget failed (try ${try})"
 SLEEP_DURATION="$((RANDOM % 10 + 1))"
 echo "sleeping ${SLEEP_DURATION} then retrying"
