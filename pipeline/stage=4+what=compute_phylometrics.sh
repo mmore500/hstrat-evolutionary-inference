@@ -36,7 +36,7 @@ all_phylogeny_files="$( \
 num_phylogeny_files="$(echo ${all_phylogeny_files} | wc -w)"
 echo "num_phylogeny_files ${num_phylogeny_files}"
 
-num_batches="$(((${num_phylogeny_files} + 49) / 50))"
+num_batches="$(((${num_phylogeny_files} + 119) / 120))"
 echo "num_batches ${num_batches}"
 
 # adapted from https://stackoverflow.com/a/30396199
@@ -46,8 +46,10 @@ waitforjobs() {
 
 # second sed strips leftover empty line at end
 echo ${all_phylogeny_files} \
+| shuf \
 | tr '\n' ' ' \
-| xargs -n 50  \
+| shuf \
+| xargs -n 120  \
 | while read target_phylogeny_files \
 ; do
   SBATCH_SCRIPT_PATH="${SBATCH_SCRIPT_DIRECTORY_PATH}/$(uuidgen).slurm.sh"
@@ -71,4 +73,12 @@ done \
 wait
 
 echo "$(ls -1 "${SBATCH_SCRIPT_DIRECTORY_PATH}" | wc -l) slurm scripts created"
-find "${SBATCH_SCRIPT_DIRECTORY_PATH}" -type f | python3 -m qspool
+
+for slurm_script in "${SBATCH_SCRIPT_DIRECTORY_PATH}"/*; do
+  sbatch "${slurm_script}" &
+  waitforjobs 100
+done
+
+wait
+
+echo "$(ls -1 "${SBATCH_SCRIPT_DIRECTORY_PATH}" | wc -l) slurm scripts created"
