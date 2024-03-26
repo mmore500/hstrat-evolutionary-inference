@@ -1,4 +1,4 @@
 #!/bin/bash
 
-export IMAGE_URI="docker://ghcr.io/emilydolson/avida-empirical@sha256:c42ebf8c5bb004180ffd7eeff003cc4c5b9764524d148952ab21b06f987f16fc"
+export IMAGE_URI="docker://ghcr.io/emilydolson/avida-empirical@sha256:52d97c7e1a8be3425c6a0f8d432e6183cf35fe293f79ed049269fc31b23fecf5"
 echo "IMAGE_URI=${IMAGE_URI}"
