@@ -294,7 +294,7 @@ quality,n,phylometric,statistic,p,regime,epoch,mut_distn
 10% resolution,50,mean_evolutionary_distinctiveness,372.0,0.010378834253614008,strong selection,2,np.random.exponential
 3% resolution,50,mean_evolutionary_distinctiveness,400.0,0.021867950968859056,strong selection,2,np.random.exponential
 33% resolution,50,mean_evolutionary_distinctiveness,439.0,0.055342720444479465,strong selection,2,np.random.exponential
-1% resolution,50,mean_evolutionary_distinctiveness,406.0,0.025434816214666804,strong selection,2,np.random.exponential
+1% resolution,50,mean_evolutionary_distinctiveness,405.0,0.024807493454958803,strong selection,2,np.random.exponential
 10% resolution,50,mean_pairwise_distance,8.0,1.2265120486349766e-09,strong selection,2,np.random.exponential
 3% resolution,50,mean_pairwise_distance,8.0,1.2265120486349766e-09,strong selection,2,np.random.exponential
 33% resolution,50,mean_pairwise_distance,42.0,9.002403196420849e-09,strong selection,2,np.random.exponential
