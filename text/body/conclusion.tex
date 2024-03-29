@@ -1,42 +1,72 @@
-TODO \citep{nozoe2017inferring} incorporate trait data
-TODO \citep{volz2013viral} time-sampled phylogenies
-TODO normalize for subsampling, population size, and time
-TODO graphML / large suites of phylodynamics (note: in alife, we're well-positioned to generate large training sets)
-
 \section{Conclusion}
 \label{sec:conclusion}
 
-Traditional phylogenetic analysis revolves around accurately and precisely resolving the sequences of evolutionary events that comprise natural history.
-Ongoing work within the field seeks to augment this oeuvre by developing methods to extract information about evolutionary dynamics such as ecology, selection pressure, and spatial structure from these inferred records.
-This work contributes to the project of expanding the scope of traditional phylogenetic analysis, seeking in particular to develop the methodological and theoretical foundations that will be needed to apply phylogenetic analyses to observe evolutionary dynamics in complex, distributed artificial life systems.
+The utility of a model system for experimental evolution hinges on sufficient ability to observe and interpret underlying evolutionary dynamics.
+Benchtop and field-based biological models continue to benefit from ongoing methodological advances that have profoundly increased visibility into genetic, phenotypic, and phylogenetic state \citep{woodworth2017building,blomberg2011measuring,schneider2019past}.
+Simulation systems, in contrast, have traditionally enjoyed perfect, complete observability \citep{hindre2012new}.
+However, ongoing advances in parallel and distributed computing hardware have begun to strain analytical omnipotence, as increasingly vast throughput introduces challenges centralizing, storing, and analyzing data \citep{klasky2021data}.
+These trends, although unfolding opposite one another, exhibit intruiging convergence: computational and biological domains will provide data that is multimodal and high-resolution but also incomplete and imperfect.
+Such convergence establishes great potential for productive interdisciplinary exchange.
 
-First, we characterized the effects of selection pressure, ecology, and spatial population structure on phylogeny structure.
-Each evolutionary dynamic expressed a distinct signature across phylometrics.
-However, compared to spatial structure and selection pressure, ecology exerted relatively muted effects on phylogenetic metrics.
-Ecology had no detectable effect on ancestor count and mean pairwise distance.
-Ecological influence on mean evolutionary distinctiveness was significant, but small in magnitude compared to effects from the introduction of spatial structure and increased selection pressure.
+Because phylogenies are an abstraction that generalizes across all evolutionary processes, phylogenetic analysis can be applied across a breadth of biological and artificial life systems.
+Consequently, a broad, cross-disciplinary base of use cases exist for inferring the processes that shaped a phylogeny by quantifying its topology.
+Indeed, extraction of information about evolutionary dynamics from phylogenetic history has been a longstanding and productive theme in evolutionary biology \citep{pagel1997inferring}.
+This work seeks to contribute in that vein, by establishing foundations necessary to assess three fundamental evolutionary drivers  --- spatial structure, ecology, and selection pressure ---  in complex, distributed evolving populations.
 
-Surprisingly, follow-up experiments revealed that background spatial population structure can accentuate the phylometric signature of ecology.
-Under these conditions, ecology induced sharp increases in ancestor count.
-However, the impact of ecology on Colless-like index attenuated with the addition of spatial structure.
+First, we investigated the strength and character of impressions on phylogenetic histories left selection pressure, ecology, and spatial population structure .
+These drivers induced readily detectable effects across our suite of four surveyed phylometrics/
+These effects were generally consistent across our two surveyed individual-level models and sensitivity analyses, but differed notably under genotype-level and species-level tracking.
+Although the sign of phylometric effects were generally consistent across treatments expected to increase phylogenetic richness (i.e., weak selection, ecologies, spatial structure), effect significance/size for particular phylometrics differed among some treatments.
+Compared to results from the simple explicit-fitness model, which was amenable to strong treatment manipulations, the more sophisticated Avida model system expressed sparser phylometric effects between treatments.
+
+Compared to spatial structure and selection pressure, ecology exerted relatively muted, sparse effects on phylogenetic metrics.
+However, follow-up experiments with both our individual-level models revealed that phylometric signatures can remain detectable under background conditions of spatial population structure.
+Interactions, though, are sometimes surprising, like Avida's significant depression of mean pairwise distance in the presence of spatial structure under both weak and rich ecology treatments but not the baseline ecology treatment.
 These results highlight the complexity of how interacting evolutionary dynamics impact phylogenetic structure.
 Even a single dynamic in isolation can influence phylometrics in opposite directions.
-For instance, we found that both increasing and decreasing selection pressure can significantly reduce trees' Colless-like index and mean pairwise distance.
+For instance, we found that both increasing and decreasing selection pressure significantly reduced trees' Colless-like index under the simple fitness-explicit model.
 
-Comparing phylometrics of reference trees against corresponding reconstructions, we found that most phylometric statistics were somewhat sensitive to reconstruction error.
-Ancestor count was the most sensitive, with reconstructions exhibiting significant bias compared to corresponding references at even 1\% reconstruction resolution.
-On the other hand, mean evolutionary distinctiveness was particularly robust to reconstruction error.
-No bias was detected for calculations of this metric on reconstructed trees, even when reconstructed with only 33\% resolution.
-Most phylometrics reached statistical indistinguishability between reference and reconstruction at or above 3\% reconstruction resolution, suggesting a reasonable ballpark parameterization for applications of hereditary stratigraphy involving phylogenetic analysis.
-Additionally, phylometric bias of reconstruction error was generally consistent across different evolutionary regimes, which offers a promising simplification of future experimental considerations.
+Comparison of phylometrics from perfect-fidelity trees against corresponding reconstructions revealed some phylometric statistics were sensitive to reconstruction error introduced by hereditary stratigraphy-based tracking.
+Colless-like index and mean pairwise distance were more sensitive, exibiting detectable bias at reconstruction resolutions above 3\%.
+In some conditions under Avida, some reconstructions exhibited significant phylometric bias at even 1\% reconstruction resolution.
+On the other hand, mean evolutionary distinctiveness and sum distance were particularly robust to reconstruction error.
+No bias was detected for calculations of these metrics on reconstructed trees, even when reconstructed with only 33\% resolution.
+These results suggest 3\% reconstruction resolution as a reasonable ballpark parameterization for applications of hereditary stratigraphy with downstream phylogenetic analysis.
+Additionally, phylometric bias of reconstruction error was consistent across different evolutionary regimes, which can simplify considerations to account for it in experiments.
 
-These findings contribute foundations for development of more rigorous phylogenetic assays that might eventually be capable of identifying the evolutionary conditions that produced a phylogeny.
-In particular, the potentially confounding impact of spatial structure and reconstruction error, which before had been poorly characterized, will be relevant to distributed digital evolution systems at scale.
-It is especially promising that reconstruction error can be reduced to effectively zero.
+Our findings identify key next steps necessary for development of rigorous phylogenetic assays capable of detecting, or even identifying, evolutionary drivers influencing phylogenies.
+We did not observe suffuse opposite-sign effects between treatments, which be necessary to facilitate straightforward, qualitative disambiguation of drivers' signatures.
+Future work should survey comprehensive panels of phylometrics, which could provide a stronger foothold to this end \citep{tuckerGuidePhylogeneticMetrics2017}.
+Alternately, more sophisticated quantitative approaches leveraging differential effect size ratios may be fruitful.
+Possibilities include application of machine learning techniques over broad phylometric panels \citep{voznica2022deep} or even inference directly over phylogenetic structure itself via graph neral networks and related methods \citep{lajaaiti2023comparison}.
+The capability of artificial life approaches to generate high-quality data sets with high replicate accounts will be a significant asset to such work.
+More information could be brought in by incorporating trait data \citep{nozoe2017inferring} or by using time-sampled phylogenies \citep{volz2013viral}, which would include information about ``ghost'' lineages that have extincted at earlier time points.
 
-Finally, this work introduced, validated, and demonstrated a new phylogenetic reconstruction technique for large-scale populations annotated using hereditary stratigraphy.
-This new capability clears an important hurdle to applying hereditary stratigraphy in practice.
-Ultimately, the findings presented here represented a multi-pronged attack on the problem of drawing scalable evolutionary inferences from artificial life software.
+Robust normalization methods will also be crucial to ensure meaningful comparability between phylogenies from populations differing in (1) population size, (2) population subsampling level, (3) depth of evolutionary history, and (4) demographic characteristics of population life histories.
+Despite some substantial work on this front \citep{shao1990tree,mir2018sound}, significant challenges remain.
+It is worth noting that most of analysis reported here normalizes to phylometric values sampled from ``plain'' evolutionary regimes, thereby thus implicilty depend on the availability of such data.
+However, stripped-down baseline condition experiments may not always be possible, especially in biological model systems.
+Extensive, likely sophisticated, considerations would likely be necessary to establish \textit{a priori} phylometric value predictions that could be compared against instead.
+Finally, as evidenced in our experiments, reconstruction error can systematically bias phylometric values.
+Where reconstruction error is inexorable, normalizations may be necessary.
+However, it is promising that some phylometrics appear thoroughly robust to reconstruction error and, in other cases, sufficient reconstruction might be achieved to obviate error bias.
+
+The overriding objective of work presented here is to equip biologists and computational researchers with capability to investigate fundamental evolutionary drivers within large-scale evoluting populations.
+To this end, methodology must advance hand-in-hand with the software infrastructure required to put it into practice.
+Artificial life experiments, specifically, generally require particular instrumentation to collect phylogenetic histories, and we have been active in making general-use plug-and-play solutions available freely through the Python Packaging Index \citep{moreno2022hstrat,dolson2024phylotrackpy}.
+As each field develops, aritficial life will benefit greatly from domain-specific software and methods developed within traditional evolutionary bioinformatics and, we hope, vice versa.
+
+% Together, our findings support development of more rigorous phylogenetic assays that might eventually be capable of identifying the evolutionary conditions that produced a phylogeny.
+% look forward to continuing to push forward the
+
+% Ultimately, the goal is to develop methodology that can be put into practice to increase the power of digital evolution and artificial life systems as experimental model systems.
+% In addition to , this objective hinges on software availability.
+
+% Production-ready software implementation available via the Python Packaging Index.
+% C++ bindings for hereditary stratigraph genome annotation are under active development and will be released imminently.
+% We are eager to collaborate to , and to contribute to developing large-scale (parallel and distributed) artificial life systems as an experimental tool
+
+
 
 % Much future work
 

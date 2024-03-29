@@ -1,58 +1,83 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Artificial life systems are a powerful technique for studying evolution and have yielded many important insights \citep{wilkeEvolutionDigitalOrganisms2001,zamanCoevolutionDrivesEmergence2014,goldsbyEvolutionaryOriginSomatic2014}.
-Much of this power derives from the fact that these systems provide the ability to perfectly observe evolutionary dynamics.
-In particular, research advances have often been made possible by analyzing phylogenetic data on the evolutionary trajectories that lead to a given outcome \citep{lenskiEvolutionaryOriginComplex2003,lalejiniEvolutionaryOriginsPhenotypic2016,johnsonEndosymbiosisBustInfluence2022a}.
+Within evolutionary biology, the stucture of ancestry relationships among organisms within an evolving system is described as their ``phylogeny.''
+Phylogenies detail the sequence of historical lineage-branching events that gave rise to contemporary populations.
+Most obviously, the phylogenetic record can reveal the ordering and timing of particular contingencies (e.g., trait originations, population separations) that gave rise to current populations \citep{pagel1999inferring,arbogast2002estimating}.
+For instance, phylogenies reconstructed from fungal gene sequences suggest frequent switching of nutritional sources and that spore-dispersal mechanisms have multiple independent origins \citep{james2006reconstructing}.
 
-While these analyses are powerful, phylogenetic data can quickly become large and unwieldy.
-Thus, as artificial life systems and the questions we pose become more complex, better tools are needed.
-These come in two forms: 1) evolutionary summary statistics that can be used to draw abstract insights from lineages and phylogenies \citep{dolsonInterpretingTapeLife2020}, and 2) algorithmic techniques for efficiently collecting phylogenetic data at scale \citep{morenoHereditaryStratigraphyGenome2022}.
-Given that phylogenies are an abstraction that generalizes across all evolutionary contexts, they facilitate drawing conclusions that scale across different artificial life systems and biology.
+However, phylogenetic analyses can also test more general hypotheses about underlying evolutionary dynamics.
+Rather than seeking to detect specific events, researchers using phylogenies for this purpose instead measure structural patterns that may be indicative of different evolutionary regimes.
+For instance, analysis of the count of coexisting lineages over time has been used to detect density-dependent changes in speciation rate \citep{rabosky2008density}, which can be interpreted as an indication of transition away from niche expansion due to lessening availability of ecological opportunity.
 
-%The utility of artificial life systems as an experimental platform to study evolution hinges on the ability to observe and interpret underlying evolutionary dynamics.
-%As systems get more complex this problem gets more difficult.
+Indeed, methods to infer underlying evolutionary dynamics from phylogenetic structure are increasingly harnessed for tangible, impactful applications.
+In evolutionary oncology, for example, phylogenetic analysis has been used to quantify patterns of tumor evolution \citep{scottInferringTumorProliferative2020,lewinsohnStatedependentEvolutionaryModels2023}.
+Likewise, pathogen phylogenies have been studied to identify dynamics of epidemiological spread of Ebola and HIV \citep{giardina2017inference,saulnier2017inferring,voznica2022deep}.
+Phylogenetic information also has a long history of helping identify policy priorities for ecological conservation \citep{forestPreservingEvolutionaryPotential2007}.
 
-%Phylogenetic analyses help with this problem by providing a window that generalizes across systems.
-%These tools are commonly used to interpret evolutionary trajectories and stepping stones (Avida flame graphs, lalejini plasticity).
-%This is important for understanding how evolutionary processes navigate the genetic search %space.
-%Although less common, phylogenetic analyses have great potential to be used to characterize evolutionary dynamics such as selection pressure (i.e., ongoing adaptation) and ecological dynamics.
-%These are of core interest to artificial life, particularly with respect to OEE.
-Indeed, phylogeny-based metrics have already been used for varied purposes such as identifying hallmarks of open-ended evolution \citep{dolsonMODESToolboxMeasurements2019}, predicting which runs of evolutionary computation will be successful \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a}, quantifying patterns of tumor evolution \citep{scottInferringTumorProliferative2020,lewinsohnStatedependentEvolutionaryModels2023}, and identifying priorities for conservation \citep{forestPreservingEvolutionaryPotential2007}.
-Much of the early work on quantifying phylogenetic properties has its origins in conservation biology and paleontology literature, as researchers in these fields attempted to draw inferences about the past from limited data.
-More recently, medical researchers have embraced measuring phylogenies in real time in an effort to understand the evolution of pathogens and cancer.
-% TODO: cite?
 
-Consequently, researchers across many fields have an interest in inferring the processes that shaped a phylogeny by quantifying its topology.
-Currently, most research on this topic is either very abstract (e.g., the presence of negative-frequency dependent selection increases phylogenetic diversity) or very specific (e.g., phylogenetic structure can be used to infer cell division rates in solid tumors \citep{lewinsohnStatedependentEvolutionaryModels2023}).
-Here, we lay the groundwork for identifying the fingerprints left on phylogenetic structure by a larger range of evolutionary dynamics in a scalable and robust manner.
+In computational evolutionary systems, phylogenetic structure metrics are a powerful tool for summarizing evolutionary history \citep{dolson2020interpreting}.
+These analyses can help digital systems further our knowledge of biology, but they are also directly valuable for learning about digital systems themselves.
+Notably, within the realm of artificial life research, phylogeny-based metrics have been proposed to identify hallmarks of open-ended evolution \citep{dolsonMODESToolboxMeasurements2019}.
+They have also been used to understand evolutionary trajectories that lead to outcomes of interest \citep{lenskiEvolutionaryOriginComplex2003,lalejiniEvolutionaryOriginsPhenotypic2016,johnsonEndosymbiosisBustInfluence2022a}.
+For evolution-inspired optimization algorithms, phylogeny-based metrics have been used to predict which runs of evolutionary computation will be successful \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a} and even proactively guide artificial selection algorithms \citep{lalejini2024phylogeny,burke2003increased}.
+% @ELD: Maybe cite Austin's ALife paper here too, once it's citable
+
+Here, we assess the potential of phylogenetic analyis as a means to study fundamental, universal evolutionary dynamics --- ecology, selection pressure, and spatial structure.
+Specifically, we consider the following questions,
+\begin{enumerate}
+  \item Do these dynamics leave a detectable signatures in phylogenetic structure?
+  \item If so, to what extent are these dynamics' signatures discernable from one another?
+  \item To what extent do the structure of these dynamics' signatures generalize across evolutionary systems?
+\end{enumerate}
+
+We use \textit{in silico} experiments to investigate these questions, and test across two levels of taxonomic abstraction.
+To quantify phylogenetic structure at organism-level abstraction --- meaning that phylogeny is represented at the granularity of individual parent-child relationships --- we use both a minimalistic, forward-time simulation and a rich artificial life system \citep{ofria2004avida}.
+In contrast, at species-level abstraction (i.e. species trees), we used a population-level simulation designed to study origins of biodiversity \citep{hagen2021gen3sis}.
+
+A major strength of simulation experiments for this purpose is that they provide exact ground-truth phylogenies due to their perfectly observable evolutionary history.
+However, for \textit{in vivo} systems perfect phylogeny tracking is not typically possible. Although new techniques are making increasingly high-fidelity lineage tracking possible in some experiments \citep{nozoe2017inferring,woodworth2017building}, phylogenies are still usually estimated from naturally-ocurring biosequence data.
+Moreover, as digital evolution systems scale, issues of data loss and centralization overhead make perfect tracking at best inefficient and at worst untenable.
+Thus, some systems will likely need to adopt a decentralized, reconstruction-based approach similar to biological data \citep{moreno2024analysis}, which can be achieved through the recently-developed ``hereditary stratigraphy'' methodology \citep{moreno2022hstrat}.
+
+Effective use of phylogenetic metrics in scenarios where exact phylogenies are not available requires understanding of potential confounding effects from inaccuracies introduced by reconstruction.
+However, it is in precisely such scenarios where the new capabilities to characterize evolutionary dynamics could have the largest impact; large-scale systems can produce an intractable quantity of data, making phylometrics valuable as summary statistics of the evolutionary process \citep{dolsonInferring2020}.
+In particular, methods are needed to handle large-scale artificial life systems where complete, perfect visibiltiy is not feasable and evolution operates according to implicit, contextually-dependent fitness dynamics \citep{moreno2022exploring,kojima2023implementation}.
+Thus, an additional goal of this paper is to quantify the magnitude and character of bias that reconstruction error introduces.
+In particular, we calculate phylometric metrics across range of reconstruction accuracy levels, and report the level of accuracy necessary to attain metric readings statistically indistinguishable from ground truth.
+
+% These come in two forms: 1) that can be used to draw abstract insights from lineages and phylogenies \citep{dolsonInterpretingTapeLife2020}, and 2) algorithmic techniques for efficiently collecting phylogenetic data at scale \citep{morenoHereditaryStratigraphyGenome2022}.
+
+% Currently, most research on this topic is either very abstract (e.g., the presence of negative-frequency dependent selection increases phylogenetic diversity) or very specific (e.g., phylogenetic structure can be used to infer cell division rates in solid tumors \citep{lewinsohnStatedependentEvolutionaryModels2023}).
+% Here, we lay the groundwork for identifying the fingerprints left on phylogenetic structure by a larger range of evolutionary dynamics in a scalable and robust manner.
 
 %Some groundwork has been done in the fields of conservation biology and cancer biology, as well as in artificial life (cite ``tape of life''?) to understand how evolutionary dynamics affect phylogenetic structure (and the fingerprints of evolutionary dynamics on phylogenetic structure) but this is still a rapidly emerging field (be sure to hedge here).
 %In particular, existing work has shown x, y and z.
 
-%One major difference between digital study systems and biological study systems is the availability of perfect data.
-%In biology, we rely on reconstructions to estimate phylogenetic history; the effect of estimation error on phylometrics is poorly understood.
-Historically, digital evolution systems have had the advantage of providing perfectly accurate phylogenetic data, in contrast to the reconstructed phylogenies relied upon in traditional biology.
-However, as digital evolution systems scale, issues of data loss and decentralization will make perfect tracking at best inefficient and at worst untenable.
-Thus, some systems will likely need to adopt a decentralized, reconstruction-based approach similar to biological data.
-%Decentralization will also likely introduce an aspect of spatial structure (i.e., populations will no longer be ``well-mixed'') which will further complicate phylogenetic analyses.
-Consequently, if our goal is to use phylogenetic metrics to increase the scalability of our data analysis, we must also understand how robust they are to inaccuracies introduced by reconstruction.
-% (maybe briefly cite/mention effect of spatial structure on phylogenies)
-Phylogenetic reconstructions in artificial life can be achieved through the recently-developed ``hereditary stratigraphy'' approach, a lightweight annotation scheme that can give tunably-precise information about the phylogenetic history between any two extant organisms.
-%In order to put hereditary stratigraphy into practice to better observe digital evolution systems will require an understanding of how ecology and selection pressure manifest in phylogenetic structure and also how potentially confounding factors of estimation uncertainty and spatial structure manifest.
-%Indeed, as artificial life systems scale they are becoming more reminsicent of biological systems and these findings will be applicable to phylogenetics work in biology outside of artificial life.
+% %One major difference between digital study systems and biological study systems is the availability of perfect data.
+% %In biology, we rely on reconstructions to estimate phylogenetic history; the effect of estimation error on phylometrics is poorly understood.
+% Historically, digital evolution systems have had the advantage of providing perfectly accurate phylogenetic data, in contrast to the reconstructed phylogenies relied upon in traditional biology.
+% However, as digital evolution systems scale, issues of data loss and decentralization will make perfect tracking at best inefficient and at worst untenable.
+% Thus, some systems will likely need to adopt a decentralized, reconstruction-based approach similar to biological data.
+% %Decentralization will also likely introduce an aspect of spatial structure (i.e., populations will no longer be ``well-mixed'') which will further complicate phylogenetic analyses.
+% Consequently, if our goal is to use phylogenetic metrics to increase the scalability of our data analysis, we must also understand how robust they are to inaccuracies introduced by reconstruction.
+% % (maybe briefly cite/mention effect of spatial structure on phylogenies)
 
-In this paper, we build the following methodological and theoretical foundations that will be needed to use phylogenetic analyses to observe evolutionary dynamics in complex, distributed artificial life systems:
-\begin{enumerate}
-  \item the ability to perform fast, accurate tree reconstructions for very large distributed populations,
-  \item understanding of the relationship between evolutionary dynamics and phylogenetic metrics,
-  \item quantification of the effects of reconstruction-induced estimation error on phylogenetic structure, both in terms of the amount of precision required for accuracy and the amount of bias introduced by inadequate precision, and
-  \item quantification of the phylogenetic effects of spatial structure, as distributed computation does not support well-mixed populations.
-\end{enumerate}
+% In this paper, we build the following methodological and theoretical foundations that will be needed to use phylogenetic analyses to observe evolutionary dynamics in complex, decentralized systems with imperfect observability:
+% \begin{enumerate}
+%   \item understanding of the relationship between evolutionary dynamics and phylogenetic metrics,
+%   \item quantification of the effects of reconstruction-induced estimation error on phylogenetic structure, both in terms of the amount of precision required for accuracy and the amount of bias introduced by inadequate precision, and
+%   \item quantification of the phylogenetic effects of spatial structure, as distributed computation does not support well-mixed populations.
+% \end{enumerate}
 
 % \begin{enumerate}
 % \item how much precision is required for accurate phylogenetic metrics?
 % \item if bias is introduced, what type of bias (so could still detect "conservatively")
 % \end{enumerate}
 
-Inferring phylodynamics \citep{giardina2017inference,saulnier2017inferring,voznica2022deep}
+% In evolutionary biology, phylogenetic history is a valuable tool to triangulating the context of notable evolutionary events, as well as characterizing the underlying mode and tempo of evolution.
+% The same holds true in evolutionary simulation.
+% % https://github.com/mmore500/phylotrack-algorithm-analysis/blob/fe16d2b2d7df99faade09c01b72f681160749f51/tex/text/body/introduction.tex
+% In addition to addressing questions of natural history, access to the phylogenetic record of biological life has proven informative to conservation biology, epidemiology, medicine, and biochemistry among other domains \citep{faithConservationEvaluationPhylogenetic1992, STAMATAKIS2005phylogenetics, frenchHostPhylogenyShapes2023,kim2006discovery}.
+% Nonetheless, existing analyses of phylogenetic structure within digital systems have already proven valuable, enabling diagnosis of underlying evolutionary dynamics \citep{moreno2023toward,hernandez2022can,shahbandegan2022untangling, lewinsohnStatedependentEvolutionaryModels2023a} and even serving as mechanism to guide evolution in application-oriented domains \citep{lalejini2024phylogeny,lalejini2024runtime,murphy2008simple,burke2003increased}.
+% Further, comparison of observed phylogenies against simulation phylogenies can be used to evaluate hypotheses for underlying dynamics within real-life evolutionary/epidemiological systems \citep{giardina2017inference,voznica2022deep}.

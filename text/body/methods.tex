@@ -3,22 +3,25 @@
 
 \subsection{Model Systems}
 
-To better assess the generality of evolutionary dynamics' effects on phylogenetic structure, we replicated experiments across simulations differing in subject and modeling approach.
+To assess the generality of evolutionary dynamics' effects on phylogenetic structure, we replicated experiments across models differing in subject and approach.
 We used three systems,
 \begin{enumerate}
-\item a simple agent-based model with explicitly ecoded fitness values;
-\item Avida, a self-replicating agent-based evolutionary model \citep{ofria2004avida}; and
+\item a simple agent-based model with explicitly encoded fitness values;
+\item Avida, a self-replicating agent-based evolutionary platform \citep{ofria2004avida}; and
 \item Gen3sis, a population-level macro-ecological/evolutionary model \citep{hagen2021gen3sis}.
 \end{enumerate}
 
-The following introduces each simulation model and details experiment-specific configurations.
+The following introduces each model and details experiment-specific configurations.
 
-\textbf{Explicit-Fitness Model}
+\textbf{Simple Explicit-Fitness Model}
+
 
 Experiments testing the relationships between evolutionary dynamics, reconstruction error, and phylogenetic structure required a model system amenable to direct, interpretable tuning of ecology, spatial structure, and selection pressure.
-Additionally, in order to make findings relevant to large-scale phylogenetic analyses, computational efficiency was necessary to facilitate large population size and high generation counts.
+% @ELD: Maybe rename this section? I got through the first paragraph without realizing it was specifically about the simple modelAdditionally, in order to make findings relevant to large-scale phylogenetic analyses, computational efficiency was necessary to facilitate large population size and high generation counts.
 Finally, a parsimonious and generic model system was desired so that findings would better generalize across digital evolution systems.
-The core of this work relies on a simple agent-based model  devised to fulfill these objectives.
+The core of this work relies on a simple agent-based model devised to fulfill these objectives.
+% @ELD: Do we still want to say this is the core of the work now that we've got the other systems?
+% @MAM: Depends how much of results the other parts end up taking up, I kind of imagine they might appear in a single section if they end up being similar to the simple model
 
 Genomes in the explicit fitness model comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
 Population size 32,768 ($2^{15}$) was used for all experiments.
@@ -34,7 +37,7 @@ Islands were arranged in a one-dimensional closed ring and 1\% of population mem
 
 Treatments incorporating ecology used a simple niche model.
 Population slots were split evenly between niches.
-Organisms were arbitrarily assigned to a niche at genesis and were only allowed to occupy population slots assigned to that niche.
+Organisms were arbitrarily assigned to a niche at simulation startup and were only allowed to occupy population slots assigned to that niche.
 Therefore, individuals exclusively participated in selection tournaments with members of their own niche.
 In treatments also incorporating spatial structure, an even allotment of population slots was provided for every niche on every island.
 Every generation, individuals swapped niches with probability $3.0517578125 \times 10^{-8}$ (chosen so one niche swap would be expected every 1,000 generations).
@@ -59,28 +62,30 @@ In follow-up experiments testing ecological dynamics with a spatial background, 
 \end{itemize}
 
 Finally, to foster generalizability of findings, all experiments were performed with two alternate ``sensitivity'' variables: evolutionary length in generations and mutation operator.
-Shorter runs of 32,768 and 98,304 generations were tested in addition to the full-length runs.
-We refer to full-length runs as completing ``epoch 7'' and the shorter runs as completing ``epoch 0'' and ``epoch 2'' respectively.
+We saved phylogenetic snapshots at 32,768 generation epochs.
+This allowed us to test shorter runs of 32,768 and 98,304 generations (through epochs 0 and 2) in addition to the full-length runs (through epoch 7).
 One additional mutation operator was tested to contrast the unit Gaussian distribution: the unit exponential distribution.
 Under this distribution, deleterious mutations are not possible and large-effect mutations are more likely.
 
 Across all experiments, each treatment comprised 50 replicates.
 
-\textbf{Avida}
+\textbf{Avida Model}
 
-Avida is an agent-based simulation platform used for sophisticated \textit{in silico} evolution experiments \citep{ofria2004avida}.
+Avida is a virtual agent-based model system used for sophisticated \textit{in silico} evolution experiments \citep{ofria2004avida}.
 Notably, unlike the simple model described above, fitness within Avida arises implicitly from agents' self-replication activity, in relation to other agents' self-replication and the availability of shared exogenous resources.
-WithinAvida digital organisms' genomes comprise a sequence of virtual CPU instructions.
-The simulation system conducts open-ended evaluation of each agent's genetic program, affording the opportunity of copying itself into output memory and thereby creating an offspring agent.
-Simulation imposes an intrinsic baseline level of copy errors (i.e., mutations), ensuring an ongoing supply of genetic variation.
+Within Avida, digital organisms' genomes comprise a sequence of virtual CPU instructions.
+Avida conducts open-ended evaluation of each agent's genetic program, affording the opportunity of copying itself into output memory and thereby creating an offspring agent.
+Replication imposes an intrinsic baseline level of copy errors (i.e., mutations), ensuring an ongoing supply of genetic variation.
 Because self-replicators compete for a limited quantity of population slots, Darwinian evolution ensues.
 This scheme induces a complex fitness landscape, which is thought to better reflect the character of biological evolution \citep{adami2006digital}.
 
 Under baseline conditions, Avidians compete on the basis of self-replication efficiency.
-However, Avida may be configured to additionally favafor completion of boolean logic tasks by agents.
-The simulation corresponds each each task to a finite-valued resource, with benefit of task performance contingent on availability of its corresponding resource and depleting the availability of that resource.
-Under this scheme, potential for ecological dynamics arises from configuration of available tasks and what resources they draw from.
-In conjunction with configuration of a simulation-enforced cap that an Avidian may harvest at most two tasks, attaching tasks to independent resoources allows for stable coexistence between task-specialized clades while attaching tasks to a common resource pool does not.
+However, Avida may be configured to award extra CPU cycles to agents that complete boolean logic tasks.
+To create the potential for multiple niches, we associated each task with a depletable resource.
+Avidians only recieve CPU cycles for completeing a task if the corresponding resource is available, and completing a task depletes the associated resource.
+Importantly, tasks can each be associated with different resources, or they can all be associated with the same resource.
+Association of each task to an independent resource creates potential for stable ecological coexistence between task-specialized clades.
+We added the constraint that Avidians may harvest at most two tasks with the intention of preventing generalists from disrupting task specialization.
 
 Our baseline ``\textit{plain}'' treatment rewarded four boolean logic tasks (echo, not, nand, and), all drawing from a single resource with inflow rate 400 units per update.
 Population structure was well-mixed and, to somewhat weaken the fecundity of high-fitness Avidians, replication destroyed the parent organism with probability 0.2.
@@ -103,10 +108,17 @@ In follow-up experiments, we defined the following additional evolutionary ``reg
   \item \textit{rich ecology}: 28 tasks were rewarded, each drawing from an independent resource pool with an inflow rate of 100 units.
 \end{itemize}
 
-Experimental treatments using Avida comprised 20 replicates, conducted with population size 3,600 for durations of 100,000 updates.
-In order to achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avvida originally developed for research on MODES \citep{dolsonMODESToolboxMeasurements2019}, linked in supplemental materials described below.
+% @ELD: Maybe say time steps instead of updates so we don't have to explain what an update is?
+% @MAM: agreed, we should probably report summary statistics for generations elapsed
+Experimental treatments using Avida comprised 30 replicates, conducted with population size 3,600 for durations of 100,000 time steps (c. 20k generations; range 9k-40k).
+In order to achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avida originally developed for research on MODES \citep{dolsonMODESToolboxMeasurements2019}, linked in supplemental materials described below.
+This tracking system allowed two configurations: (1) tracking on the level of individual agents, where each Avidian constituted a taxonomic unit, or (2) tracking on the level of genotypes, where clonal sets of Avidians with identical genotypes constituted a taxonomic unit.
+Surprisingly, we noticed several sign-change differences between individual-level and genotype-level tracking with respect to treatments' effects on phylometrics (Figures \ref{fig:perfect-tree-phylometrics-avida-heatmap} and \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}).
+Much, but not all, of the difference related to effects of spatial structure.
+These differences may be in part related to occurences of polytomies within genotype-level tracked phylogenies, as arbitrarily resolving polytomies into sets of bifurcating nodes gave somewhat more similar results to individual-level tracking.
+Here, we report results from individual-level tracking, which corresponds to how phylogenies were tracked in the simple explicit-fitness model.
 
-\subsection{Gen3sis}
+\textbf{Gen3sis Model}
 
 In contrast to Avida and the simple fitness-explicit model, which are agent-based, Gen3sis is a population-level model.
 Gen3sis abstracts evolution to interactions beetween spatially-dispersed, speciating subpopulations.
@@ -117,10 +129,10 @@ Withhin this model, the taxonomic unit of phylogeny is species.
 
 Gen3sis also stands out in its intended level of direct biological realism.
 The software can be configured to reflect the particular geological and climate histories of continental biomes.
-For our experiments, we used curated raster files depicting conditions over 30 million years in South America bundled with the package that had been synthesized from a number of sources \citep{straume2020global,westerhold2020astronomically,fick2017worldclim,hagen2019mountain,annan2013new,cramwinckel2018synchronous,evans2018eocene,hollis2019deepmip,hutchinson2018climate,keating2011warm,sijp2014role,zhang2019evolution}
+For our experiments, we used curated raster files depicting conditions over 30 million years in South America bundled with the package that had been synthesized from a number of sources \citep{straume2020global,westerhold2020astronomically,fick2017worldclim,hagen2019mountain,annan2013new,cramwinckel2018synchronous,evans2018eocene,hollis2019deepmip,hutchinson2018climate,keating2011warm,sijp2014role,zhang2019evolution}.
 
 Among other features, Gen3sis allows differentiation of aquatic (e.g., lakes, ocean) zones from terrestrial regions with respect to suppression of inter-population migration rates.
-To enhance potential for manipulable spatial strucutre within the model, we converted 30 randomly-selected thin linear segments spanning the map to be aquatic rather than terrestrial (i.e., ``rivers'').
+To enhance potential for manipulable spatial structure within the model, we converted 30 randomly-selected thin linear segments spanning the map to be aquatic rather than terrestrial (i.e., ``rivers'').
 Spatial structure was then induced by adjusting the water traversal cost function.
 
 We assessed the following evolutionary regimes
@@ -128,15 +140,15 @@ We assessed the following evolutionary regimes
 \item \textit{plain}: aquatic terrain imposed no additional migration penalties and population traits did not influence abundances,
 \item \textit{spatial structure}: aquatic terrain imposed a migration barrier $50\times$ that of terrestrial terrain.
 \item \textit{ecology}: species abundances were determined acccording to how close populations' trait value matches to site temperature,
-\item \textit{ecology + spatial structure}: the $50\times$ aquatic dispersal pennalty was applied and site temperature was used to determine species' abundances.
+\item \textit{ecology + spatial structure}: the $50\times$ aquatic dispersal penalty was applied and site temperature was used to determine species' abundances.
 \end{itemize}
 
-Gen3sis treatments comprised 20 replicates.
+Gen3sis treatments comprised 30 replicates.
 Note that, unlike other surveyed models, Gen3sis does not operate with constant ``population size.''
-Rather, species count increased continuously over each of the 30 simulated 1 million year timestepsas as a consequence of ongoing speciation.
+Rather, species count increased continuously over each of the 30 simulated 1 million year time steps as a consequence of ongoing speciation.
 Maximum species count per spatial site was configured as 2,500 and within the entire simulation as 25,000, although neither limit was ever reached.
 
-Full Gen3sis configuration files are linked in supplemental materials, described below
+Full Gen3sis configuration files are linked in supplemental materials, described below.
 For more on Gen3sis itself, see \citep{hagen2021gen3sis}.
 
 \subsection{Hereditary Stratigraphic Annotations and Tree Reconstruction}
@@ -204,9 +216,8 @@ Consequently, we would expect it to be increased by the presence of ecology or s
 % TODO do we want to say more here?
 
 \textbf{Colless-like Index:}
-The original Colless Index \citep{collessReviewPhylogeneticsTheory1982}, also often referred to as $I_c$ \citep{shaoTreeBalance1990}, is a measure of tree imbalance (i.e. it gets higher as the tree gets less balanced).
-In the context of Tucker et.
-al's framework, it is a regularity metric.
+The original Colless Index \citep{collessReviewPhylogeneticsTheory1982}, also often referred to as $I_c$ \citep{shaoTreeBalance1990}, is a measure of tree imbalance (i.e., it gets higher as the tree gets less balanced).
+In the context of Tucker et. al's framework, it is a regularity metric.
 However, the traditional Colless Index only works for strictly bifurcating trees.
 As our trees have multifurcations, we instead use the Colless-like Index, which is an extension of the Colless Index to multifurcating trees \citep{mirSoundCollesslikeBalance2018}.
 Tree imbalance is thought to be associated with varying ecological pressures \citep{chamberlainPhylogeneticTreeShape2014, burressEcologicalOpportunityAlters} and has also been observed to increase in the presence of spatial structure \citep{scottInferringTumorProliferative2020}.
@@ -233,13 +244,13 @@ As such, we wish to report the capability of reported phylometrics to discern be
 
 Cliff's delta provides useful nonparametric means for such effect size analysis.
 This statistic reports the proportion of distributional non-overlap between two distributions, ranging from -1/1 if two distributions share no overlap to 0 if they overlap entirely \citep{meissel2024using,cliff1993dominance}.
-When reporting effect size, we use conventional thresholds of 0.147, 0.33, and 0.474 to distinguish between negligible, small, medium, and large effect sizes \citep{hess2004robust}
+When reporting effect size, we use conventional thresholds of 0.147, 0.33, and 0.474 to distinguish between negligible, small, medium, and large effect sizes \citep{hess2004robust}.
 
 Note that the Cliff's delta statistic tops/bottoms out entirely once two distributions become completely separable.
 Although this property suits most analyses performed, it is occasionally useful to distinguish the extent of divergence between phylometricc distributions past the point of complete seperability.
 For these purposes, we perform a simple procedure to normalize phylometrics relative baseline conditions by subtracting out the baseline mean and dividingg by the baseline standardd deviation.
 
-We typically pair effect-size analysis with Mann-Whitney U testing in order to assess the extent to which differences between phylometric readings under different conditions are, or are not, evidenced by ailable data  \citep{mann1947on}
+We typically pair effect-size analysis with Mann-Whitney U testing in order to assess the extent to which differences between phylometric readings under different conditions are, or are not, evidenced by ailable data \citep{mann1947on}.
 As a final detail, note that we typically reort negated Cliff's delta values where necessary to ensure positive values correspond to larger phylometric vlaues and vice versa.
 
 \subsection{Software and Data Availability}
@@ -251,6 +262,4 @@ Note that materials for earlier versions of this work are also contained in thes
 All hereditary stratigraph annotation, reference phylogeny generation, and phylogenetic reconstruction tools used in this work are published in the \texttt{hstrat} Python package \citep{moreno2022hstrat}.
 This project can be visited at \url{https://github.com/mmore500/hstrat}.
 
-This project uses data formats and tools associated with the ALife Data Standards project \citep{lalejini2019data} and benefited from many pieces of open-source scientific software \citep{ofria2020empirical,sand2014tqdist,2020SciPy-NMeth,harris2020array,reback2020pandas,mckinney-proc-scipy-2010,sukumaran2010dendropy,cock2009biopython,torchiano2016effsize,waskom2021seaborn,hunter2007matplotlib,moreno2024apc,moreno2024qspool,moreno2023teeplot,hagen2021gen3sis,ofria2004avida,torchiano2016effsize}.
-
-TODO: cite phylotrackpy?
+This project uses data formats and tools associated with the ALife Data Standards project \citep{lalejini2019data} and benefited from many pieces of open-source scientific software \citep{ofria2020empirical,sand2014tqdist,2020SciPy-NMeth,harris2020array,reback2020pandas,mckinney-proc-scipy-2010,sukumaran2010dendropy,cock2009biopython,dolson2024phylotrackpy,torchiano2016effsize,waskom2021seaborn,hunter2007matplotlib,moreno2024apc,moreno2024qspool,moreno2023teeplot,hagen2021gen3sis,ofria2004avida,torchiano2016effsize}.

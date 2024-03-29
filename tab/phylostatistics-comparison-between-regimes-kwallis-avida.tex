@@ -1,8 +1,8 @@
 \providecommand{\thecaption}{
-  Kruskal-Wallis one-way analysis of variance tests for nonequivalence of distributions for each phylometric among surveyed evolutionary regimes for Avida experiments.
+  Kruskal-Wallis one-way analysis of variance tests for nonequivalence of distributions for each phylometric among surveyed evolutionary regimes.
   Phylometrics were calculated on perfect-fidelity reference trees.
   Kruskal-Wallis test results within each sensitivity analysis condition are provided.
-  Sample size $n=50$ for each population, with $N=7$ populations (i.e., evolutionary regimes) compared within each sensitivity analysis condition.
+  Sample size $n=30$ for each population, with $N=7$ populations (i.e., evolutionary regimes) compared within each sensitivity analysis condition.
 }
 
 \csvstyle{myTableStyle}{
@@ -16,9 +16,9 @@
     \thecaption
   }\endlastfoot,
   after reading=
-  \label{tab:phylostatistics-comparison-between-regimes-kwallis-avida},
+  \label{tab:phylostatistics-comparison-between-regimes-kwallis},
   head to column names,
   respect all,
 }
 
-\csvreader[myTableStyle]{binder/binder/outdata/a=phylostatistics-comparison-between-regimes-kwallis+ext=.csv}{}{\csvlinetotablerow}
+\csvreader[myTableStyle]{binder/binder/avida-individual/outdata/a=phylostatistics-comparison-between-regimes-kwallis+ext=.csv}{}{\csvlinetotablerow}
