@@ -1,145 +1,145 @@
 regime1,regime2,n,phylometric,statistic,p,epoch,mut_distn
 ecology,plain,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,plain,50,mean pairwise distance,36.0,6.3812412695451034e-09,0,np.random.exponential
-ecology,plain,50,sum distance,0.0,7.556929455863566e-10,0,np.random.exponential
+ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,rich ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,rich ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
-ecology,rich ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.exponential
+ecology,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,weak ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,weak ecology,50,mean pairwise distance,74.0,5.339357587716575e-08,0,np.random.exponential
-ecology,weak ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.exponential
+ecology,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
 ecology,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 plain,rich ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.exponential
 plain,rich ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
-plain,rich ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.exponential
+plain,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
 plain,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 weak ecology,plain,50,colless-like index,25.0,3.366814035344517e-09,0,np.random.exponential
 weak ecology,plain,50,mean pairwise distance,536.0,0.32718100833729613,0,np.random.exponential
-weak ecology,plain,50,sum distance,0.0,7.556929455863566e-10,0,np.random.exponential
+weak ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
 weak ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 weak ecology,rich ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.exponential
 weak ecology,rich ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
-weak ecology,rich ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.exponential
+weak ecology,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.exponential
 weak ecology,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.exponential
 plain,ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,ecology,50,mean pairwise distance,32.0,5.063849902320951e-09,0,np.random.standard_normal
-plain,ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
+plain,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,rich ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,rich ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-plain,rich ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
+plain,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,weak ecology,50,colless-like index,34.0,5.685542255423414e-09,0,np.random.standard_normal
 plain,weak ecology,50,mean pairwise distance,486.0,0.14361198867269973,0,np.random.standard_normal
-plain,weak ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
+plain,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 plain,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 rich ecology,ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 rich ecology,ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-rich ecology,ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
+rich ecology,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 rich ecology,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 rich ecology,weak ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 rich ecology,weak ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-rich ecology,weak ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
+rich ecology,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 rich ecology,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 weak ecology,ecology,50,colless-like index,0.0,7.556929455863566e-10,0,np.random.standard_normal
 weak ecology,ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
-weak ecology,ecology,50,sum distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
+weak ecology,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,0,np.random.standard_normal
 weak ecology,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,0,np.random.standard_normal
 ecology,weak ecology,50,colless-like index,390.0,0.01688572946162479,2,np.random.exponential
 ecology,weak ecology,50,mean pairwise distance,3.0,9.06805772149548e-10,2,np.random.exponential
-ecology,weak ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.exponential
+ecology,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.exponential
 ecology,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,ecology,50,colless-like index,299.0,0.0010845019501392556,2,np.random.exponential
 plain,ecology,50,mean pairwise distance,3.0,9.06805772149548e-10,2,np.random.exponential
-plain,ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.exponential
+plain,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,rich ecology,50,colless-like index,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,rich ecology,50,mean pairwise distance,91.0,1.323824855158427e-07,2,np.random.exponential
-plain,rich ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.exponential
+plain,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,weak ecology,50,colless-like index,521.0,0.2607556207263785,2,np.random.exponential
 plain,weak ecology,50,mean pairwise distance,566.0,0.49006249702346216,2,np.random.exponential
-plain,weak ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.exponential
+plain,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 rich ecology,ecology,50,colless-like index,0.0,7.556929455863566e-10,2,np.random.exponential
 rich ecology,ecology,50,mean pairwise distance,1.0,8.031090907046913e-10,2,np.random.exponential
-rich ecology,ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.exponential
+rich ecology,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.exponential
 rich ecology,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 rich ecology,weak ecology,50,colless-like index,0.0,7.556929455863566e-10,2,np.random.exponential
 rich ecology,weak ecology,50,mean pairwise distance,112.0,3.920086785268383e-07,2,np.random.exponential
-rich ecology,weak ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.exponential
+rich ecology,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.exponential
 rich ecology,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.exponential
 plain,ecology,50,colless-like index,135.0,1.2298152190805743e-06,2,np.random.standard_normal
 plain,ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-plain,ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
+plain,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 plain,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,ecology,50,colless-like index,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-rich ecology,ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
+rich ecology,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,plain,50,colless-like index,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,plain,50,mean pairwise distance,9.0,1.3025210640480111e-09,2,np.random.standard_normal
-rich ecology,plain,50,sum distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
+rich ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,weak ecology,50,colless-like index,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,weak ecology,50,mean pairwise distance,49.0,1.3394511022385218e-08,2,np.random.standard_normal
-rich ecology,weak ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
+rich ecology,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 rich ecology,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak ecology,ecology,50,colless-like index,301.0,0.0011608525691443336,2,np.random.standard_normal
 weak ecology,ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
-weak ecology,ecology,50,sum distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
+weak ecology,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak ecology,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak ecology,plain,50,colless-like index,367.0,0.009022197592201872,2,np.random.standard_normal
 weak ecology,plain,50,mean pairwise distance,561.0,0.46022535633648,2,np.random.standard_normal
-weak ecology,plain,50,sum distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
+weak ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,2,np.random.standard_normal
 weak ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,2,np.random.standard_normal
 ecology,plain,50,colless-like index,531.0,0.30391493569853856,7,np.random.exponential
 ecology,plain,50,mean pairwise distance,32.0,5.063849902320951e-09,7,np.random.exponential
-ecology,plain,50,sum distance,0.0,7.556929455863566e-10,7,np.random.exponential
+ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.exponential
 ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 ecology,weak ecology,50,colless-like index,326.0,0.002638429681386069,7,np.random.exponential
 ecology,weak ecology,50,mean pairwise distance,56.0,1.98410437411317e-08,7,np.random.exponential
-ecology,weak ecology,50,sum distance,0.0,7.556929455863566e-10,7,np.random.exponential
+ecology,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.exponential
 ecology,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 rich ecology,ecology,50,colless-like index,339.0,0.003957826074949813,7,np.random.exponential
 rich ecology,ecology,50,mean pairwise distance,524.0,0.27323322826893637,7,np.random.exponential
-rich ecology,ecology,50,sum distance,0.0,7.556929455863566e-10,7,np.random.exponential
+rich ecology,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.exponential
 rich ecology,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 rich ecology,plain,50,colless-like index,370.0,0.009815786879758204,7,np.random.exponential
 rich ecology,plain,50,mean pairwise distance,0.0,7.556929455863566e-10,7,np.random.exponential
-rich ecology,plain,50,sum distance,0.0,7.556929455863566e-10,7,np.random.exponential
+rich ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.exponential
 rich ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 rich ecology,weak ecology,50,colless-like index,619.0,0.8582630586832802,7,np.random.exponential
 rich ecology,weak ecology,50,mean pairwise distance,9.0,1.3025210640480111e-09,7,np.random.exponential
-rich ecology,weak ecology,50,sum distance,0.0,7.556929455863566e-10,7,np.random.exponential
+rich ecology,weak ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.exponential
 rich ecology,weak ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 weak ecology,plain,50,colless-like index,415.0,0.03172531549900326,7,np.random.exponential
 weak ecology,plain,50,mean pairwise distance,566.0,0.49006249702346216,7,np.random.exponential
-weak ecology,plain,50,sum distance,0.0,7.556929455863566e-10,7,np.random.exponential
+weak ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.exponential
 weak ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.exponential
 ecology,plain,50,colless-like index,428.0,0.04313897993310964,7,np.random.standard_normal
 ecology,plain,50,mean pairwise distance,9.0,1.3025210640480111e-09,7,np.random.standard_normal
-ecology,plain,50,sum distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
 ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
 ecology,rich ecology,50,colless-like index,237.0,0.00011057233752408534,7,np.random.standard_normal
 ecology,rich ecology,50,mean pairwise distance,394.0,0.018744512446766518,7,np.random.standard_normal
-ecology,rich ecology,50,sum distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+ecology,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
 ecology,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
 plain,rich ecology,50,colless-like index,279.0,0.0005387720472882845,7,np.random.standard_normal
 plain,rich ecology,50,mean pairwise distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
-plain,rich ecology,50,sum distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+plain,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
 plain,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
 weak ecology,ecology,50,colless-like index,378.0,0.012244245598763703,7,np.random.standard_normal
 weak ecology,ecology,50,mean pairwise distance,43.0,9.530799618618074e-09,7,np.random.standard_normal
-weak ecology,ecology,50,sum distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak ecology,ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
 weak ecology,ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
 weak ecology,plain,50,colless-like index,519.0,0.25265950227055756,7,np.random.standard_normal
 weak ecology,plain,50,mean pairwise distance,468.0,0.10179130615153696,7,np.random.standard_normal
-weak ecology,plain,50,sum distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak ecology,plain,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
 weak ecology,plain,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
 weak ecology,rich ecology,50,colless-like index,441.0,0.05784519551519503,7,np.random.standard_normal
 weak ecology,rich ecology,50,mean pairwise distance,35.0,6.023629494981426e-09,7,np.random.standard_normal
-weak ecology,rich ecology,50,sum distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
+weak ecology,rich ecology,50,sum pairwise distance,0.0,7.556929455863566e-10,7,np.random.standard_normal
 weak ecology,rich ecology,50,mean evolutionary distinctiveness,0.0,7.556929455863566e-10,7,np.random.standard_normal
