@@ -24,7 +24,7 @@ The core of this work relies on a simple agent-based model devised to fulfill th
 % @ELD: Do we still want to say this is the core of the work now that we've got the other systems?
 % @MAM: Depends how much of results the other parts end up taking up, I kind of imagine they might appear in a single section if they end up being similar to the simple model
 
-Genomes in the explicit fitness model comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
+Genomes in the simple explicit-fitness model comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
 Population size 32,768 ($2^{15}$) was used for all experiments.
 Selection was performed using tournament selection with synchronous generations.
 Treatments' selection pressure was controlled via tournament size.
@@ -124,10 +124,9 @@ This tracking system allowed two configurations: (1) tracking on the level of in
 Figure \ref{fig:perfect-tree-phylogenies-log-avida} compares example phylogenies from Avida under the ``plain'' treatment, tracked at organism and genome level.
 Surprisingly, we noticed several sign-change differences between individual-level and genotype-level tracking with respect to treatments' effects on phylometrics (Figures \ref{fig:perfect-tree-phylometrics-avida-heatmap} and \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}).
 Much, but not all, of the difference related to effects of spatial structure.
-These differences may be in part related to increased number of polytomies within genotype-level phylogenies relative to individual-level phylogenies.
-In a preliminary analysis we observed that arbitrarily resolving polytomies into sets of bifurcating nodes increases the similarity of some genotype-level phylometrics to those measured in individual-level phylogenies.
-However, we still observed substantial differences, suggesting that the discrepancy is not purely the result of polytomies.
-Here, we primarily report results from individual-level tracking, as phylogenies in the simple explicit-fitness model were all tracked at individual resolution.
+These differences may be in part related to occurrences of polytomies within genotype-level tracked phylogenies, as arbitrarily resolving polytomies into sets of bifurcating nodes gave somewhat more similar results to individual-level tracking.
+Here, we report results from individual-level tracking, which corresponds to how phylogenies were tracked in the simple model.
+
 
 \noindent
 \textbf{Gen3sis Model}
@@ -273,7 +272,7 @@ As a final detail, note that we typically report negated Cliff's delta values wh
 
 \subsection{Software and Data Availability}
 
-Software, configuration files, and executable notebooks for this work are available at \url{https://github.com/mmore500/hstrat-evolutionary-inference}.
+Software, configuration files, and executable notebooks for this work are available at \href{https://doi.org/10.5281/zenodo.10896667}{doi.org/10.5281/zenodo.10896667}.
 Data and supplemental materials are available via the Open Science Framework \url{https://osf.io/vtxwd/} \citep{foster2017open}.
 Note that materials for earlier versions of this work are also contained in these repositories \citep{moreno2023toward}.
 
