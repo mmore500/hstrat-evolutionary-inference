@@ -108,11 +108,12 @@ In follow-up experiments, we defined the following additional evolutionary ``reg
   \item \textit{rich ecology}: 28 tasks were rewarded, each drawing from an independent resource pool with an inflow rate of 100 units.
 \end{itemize}
 
-% @ELD: Maybe say time steps instead of updates so we don't have to explain what an update is?
-% @MAM: agreed, we should probably report summary statistics for generations elapsed
+\input{fig/perfect-tree-phylogenies-log-avida}
+
 Experimental treatments using Avida comprised 30 replicates, conducted with population size 3,600 for durations of 100,000 time steps (c. 20k generations; range 9k-40k).
 In order to achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avida originally developed for research on MODES \citep{dolsonMODESToolboxMeasurements2019}, linked in supplemental materials described below.
 This tracking system allowed two configurations: (1) tracking on the level of individual agents, where each Avidian constituted a taxonomic unit, or (2) tracking on the level of genotypes, where clonal sets of Avidians with identical genotypes constituted a taxonomic unit.
+Figure \ref{fig:perfect-tree-phylogenies-log-avida} compares example phylogenies from Avida under the ``plain'' treatment, tracked at organism and genome level.
 Surprisingly, we noticed several sign-change differences between individual-level and genotype-level tracking with respect to treatments' effects on phylometrics (Figures \ref{fig:perfect-tree-phylometrics-avida-heatmap} and \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}).
 Much, but not all, of the difference related to effects of spatial structure.
 These differences may be in part related to occurences of polytomies within genotype-level tracked phylogenies, as arbitrarily resolving polytomies into sets of bifurcating nodes gave somewhat more similar results to individual-level tracking.
@@ -142,6 +143,7 @@ We assessed the following evolutionary regimes
 \item \textit{ecology}: species abundances were determined acccording to how close populations' trait value matches to site temperature,
 \item \textit{ecology + spatial structure}: the $50\times$ aquatic dispersal penalty was applied and site temperature was used to determine species' abundances.
 \end{itemize}
+Figure \ref{fig:perfect-tree-phylogeny-gen3sis} shows an example Gen3sis phylogeny from the ``plain'' regime.
 
 Gen3sis treatments comprised 30 replicates.
 Note that, unlike other surveyed models, Gen3sis does not operate with constant ``population size.''
