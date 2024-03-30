@@ -121,12 +121,14 @@ This tracking system allowed two configurations: (1) tracking on the level of in
 Figure \ref{fig:perfect-tree-phylogenies-log-avida} compares example phylogenies from Avida under the ``plain'' treatment, tracked at organism and genome level.
 Surprisingly, we noticed several sign-change differences between individual-level and genotype-level tracking with respect to treatments' effects on phylometrics (Figures \ref{fig:perfect-tree-phylometrics-avida-heatmap} and \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}).
 Much, but not all, of the difference related to effects of spatial structure.
-These differences may be in part related to occurrences of polytomies within genotype-level tracked phylogenies, as arbitrarily resolving polytomies into sets of bifurcating nodes gave somewhat more similar results to individual-level tracking.
-Here, we report results from individual-level tracking, which corresponds to how phylogenies were tracked in the simple explicit-fitness model.
+These differences may be in part related to increased number of polytomies within genotype-level phylogenies relative to individual-level phylogenies.
+In a preliminary analysis we observed that arbitrarily resolving polytomies into sets of bifurcating nodes increases the similarity of some genotype-level phylometrics to those measured in individual-level phylogenies.
+However, we still observed substantial differences, suggesting that the discrepancy is not purely the result of polytomies.
+Here, we primarily report results from individual-level tracking, as phylogenies in the simple explicit-fitness model were all tracked at individual resolution.
 
 \textbf{Gen3sis Model}
 
-In contrast to Avida and the simple fitness-explicit model, which are agent-based, Gen3sis is a population-level model.
+In contrast to Avida and the simple explicit-fitness model, which are agent-based, Gen3sis is a population-level model.
 Gen3sis abstracts evolution to interactions between spatially-dispersed, speciating subpopulations.
 Co-located subpopulations of different species compete for shares of site-specific carrying capacity.
 Interaction between subpopulation traits and environmental factors (e.g., aridity, temperature) mediates abundance determinations.
@@ -219,8 +221,9 @@ Divergence metrics quantify how different the units of the phylogeny are from ea
 Regularity metrics quantify the variance of other properties (i.e. how consistent they are across the phylogeny).
 Here, we focus on four metrics spread across these categories:
 
-\textbf{Sum Pairwise Distance:} This measurement sums each tip pair's nodal distance to their MRCA.
-It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}.
+\textbf{Sum Pairwise Distance:} This measurement sums the nodeal distance between each pair of leaf nodes.
+It is a metric of phylogenetic richness \citep{tuckerGuidePhylogeneticMetrics2017}, also referred to as \textit{F}  \citep{izsakLinkEcologicalDiversity2000}.
+%It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}.
 Consequently, we would expect it to be increased by the presence of ecology or spatial structure, as both these factors increase diversity.
 % TODO do we want to say more here?
 

@@ -61,7 +61,7 @@ The ecology and rich ecology treatments agreed in sign with the simple model and
 However, unlike the simple model, Avida's sole phylometric outcome under weak ecology was a strong, significant decrease in mean pairwise distance.
 In contrast, the simple model exhibited no effect on this metric under the weak ecology treatment.
 
-We additionally performed a sensitivity analysis for results from the simple fitness-explicit model over an alternate exponential mutation operator and earlier phylogeny sampling time points.
+We additionally performed a sensitivity analysis for results from the simple model over an alternate exponential mutation operator and earlier phylogeny sampling time points.
 The effects of evolutionary conditions on phylometrics were generally consistent with Figure \ref{fig:perfect-tree-phylometrics-simple-heatmap} across surveyed conditions (Supplementary Figures \labelcref{fig:perfect-tree-phylometrics-sensitivity-analysis,fig:perfect-tree-phylometrics-heatmap-sensitivity-analysis}).
 
 \subsection{Phylometric Signatures of Ecological Dynamics in Spatially Structured Populations}
@@ -98,9 +98,9 @@ We found the effects of evolutionary conditions on phylometrics to be generally 
 
 %Figure \ref{fig:perfect-tree-phylometrics-gen3sis} shows phylometric effects of spatial structure and of ecology, both with and without a spatial structure background.
 Significant, large-effect changes were detected across all four phylometrics in each treatment in Gen3sis (see Figure \ref{fig:perfect-tree-phylometrics-gen3sis}).
-However, with the exception of sum pariwise distance, effect signs of treatments were opposite to those for individual-level phylogenies from Avida and the fitness-explicit model across all phylometrics.
+However, with the exception of sum pariwise distance, effect signs of treatments were opposite to those for individual-level phylogenies from Avida and the simple model across all phylometrics.
 Tip count effects seem likely to play a role in this discrepancy.
-Unlike Avida and the simple fitness-explicit model, which held population size constant, species richness grew freely under the Gen3sis model.
+Unlike Avida and the simple model, which held population size constant, species richness grew freely under the Gen3sis model.
 It is also possible that phylometric outcomes may be sensitive to granularity level of the taxonomic unit of the phylogeny.
 As noted in Section \ref{sec:methods} and shown in Figure \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}, in Avida experiments, phylogenies using genome-level tracking (as opposed to individual-level tracking) were notably different than those using individual-level tracking.
 These differences also included changes in the sign of some treatment effects, lending credence to the idea that differences between Gen3sis and the individual-level phylogenies could be partially the result of Gen3sis having a more abstract taxonomic unit.
@@ -111,7 +111,7 @@ These differences also included changes in the sign of some treatment effects, l
 Shifting from perfect phylogenetic tracking to approximate phylogenetic reconstruction will facilitate efficiency and robust digital evolution simulations at scale, but introduces a complicating factor into phylogenetic analyses: tree reconstruction error.
 A clear understanding of the impact of these errors on the computed phylometrics will be necessary for informative future phylogenetic analyses.
 
-To explore this question, we compared phylometrics computed on reconstructed trees to corresponding true reference trees under the simple fitness-explicit model (Wilcoxon tests; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox}).
+To explore this question, we compared phylometrics computed on reconstructed trees to corresponding true reference trees under the simple model (Wilcoxon tests; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox}).
 To err towards conservatism in detecting phylometric biases, we did not correct for multiple comparisons.
 Reconstructions were performed across a range of precisions, ranging from 1\% relative resolution for MRCA estimates (most precise) to 33\% relative resolution for MRCA estimates (least precise).
 Precision was manipulated by adjusting the information content of underlying hereditary stratigraphic genome annotations used to perform phylogenetic reconstruction \citep{moreno2022hereditary}.
@@ -143,5 +143,5 @@ So, future work should explore whether working with single bit differentia could
 Our last objective was to assess how reconstruction error might affect detection of phylometric signatures induced by treatment conditions.
 That is, we sought to perform a sort of ``integration test'' for detection of treatment conditions when working with imperfect reconstructions rather than perfect phylogenies.
 To this end, we compared the phylometric outcomes of strong/weak selection, spatial structure, ecology, and weak/rich ecology relative to plain conditions for phylogenies reconstructed at 1\%, 3\%, 10\%, and 33\% resolution levels.
-Supplemental Figures \labelcref{fig:reconstructed-tree-phylometrics-progressive-heatmap,fig:reconstructed-tree-phylometrics-progressive-heatmap-avida} show heatmaps with sign, effect size, and significance of phylometric effects across gradations of reconstruction precision for the simple fitness-explicit model and Avida, respectively.
+Supplemental Figures \labelcref{fig:reconstructed-tree-phylometrics-progressive-heatmap,fig:reconstructed-tree-phylometrics-progressive-heatmap-avida} show heatmaps with sign, effect size, and significance of phylometric effects across gradations of reconstruction precision for the simple model and Avida, respectively.
 In most cases, 3\% resolution sufficed to fully recover phylometric effects of treatments observed with perfectly-tracked phylogenies.
