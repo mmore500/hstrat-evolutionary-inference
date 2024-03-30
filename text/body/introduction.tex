@@ -1,7 +1,7 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Within evolutionary biology, the stucture of ancestry relationships among organisms within an evolving system is described as their ``phylogeny.''
+Within evolutionary biology, the structure of ancestry relationships among organisms within an evolving system is described as their ``phylogeny.''
 Phylogenies detail the sequence of historical lineage-branching events that gave rise to contemporary populations.
 Most obviously, the phylogenetic record can reveal the ordering and timing of particular contingencies (e.g., trait originations, population separations) that gave rise to current populations \citep{pagel1999inferring,arbogast2002estimating}.
 For instance, phylogenies reconstructed from fungal gene sequences suggest frequent switching of nutritional sources and that spore-dispersal mechanisms have multiple independent origins \citep{james2006reconstructing}.
@@ -17,15 +17,15 @@ Phylogenetic information also has a long history of helping identify policy prio
 
 In computational evolutionary systems, phylogenetic structure metrics are a powerful tool for summarizing evolutionary history \citep{dolson2020interpreting}.
 These analyses can help digital systems further our knowledge of biology, but they are also directly valuable for learning about digital systems themselves.
-Notably, within the realm of artificial life research, phylogeny-based metrics have been proposed to identify hallmarks of open-ended evolution \citep{dolsonMODESToolboxMeasurements2019}.
+Notably, within the realm of artificial life research, phylogeny-based metrics have been proposed to identify hallmarks of open-ended evolution \citep{dolson2019modes}.
 They have also been used to understand evolutionary trajectories that lead to outcomes of interest \citep{lenskiEvolutionaryOriginComplex2003,lalejiniEvolutionaryOriginsPhenotypic2016,johnsonEndosymbiosisBustInfluence2022a}.
 For evolution-inspired optimization algorithms, phylogeny-based metrics have been used to predict which runs of evolutionary computation will be successful \citep{hernandezWhatCanPhylogenetic2022a,shahbandeganUntanglingPhylogeneticDiversity2022a,ferguson2023potentiating} and even proactively guide artificial selection algorithms \citep{lalejini2024phylogeny,burke2003increased}.
 % @ELD: Maybe cite Austin's ALife paper here too, once it's citable
 
-Here, we assess the potential of phylogenetic analyis as a means to study fundamental, universal evolutionary dynamics --- ecology, selection pressure, and spatial structure.
+Here, we assess the potential of phylogenetic analysis as a means to study fundamental, universal evolutionary dynamics --- ecology, selection pressure, and spatial structure.
 Specifically, we consider the following questions,
 \begin{enumerate}
-  \item Do these dynamics leave a detectable signatures in phylogenetic structure?
+  \item Do these dynamics leave detectable signatures in phylogenetic structure?
   \item If so, to what extent are these dynamics' signatures discernable from one another?
   \item To what extent do the structure of these dynamics' signatures generalize across evolutionary systems?
 \end{enumerate}
@@ -35,13 +35,13 @@ To quantify phylogenetic structure at organism-level abstraction --- meaning tha
 In contrast, at species-level abstraction (i.e. species trees), we used a population-level simulation designed to study origins of biodiversity \citep{hagen2021gen3sis}.
 
 A major strength of simulation experiments for this purpose is that they provide exact ground-truth phylogenies due to their perfectly observable evolutionary history.
-However, for \textit{in vivo} systems perfect phylogeny tracking is not typically possible. Although new techniques are making increasingly high-fidelity lineage tracking possible in some experiments \citep{nozoe2017inferring,woodworth2017building}, phylogenies are still usually estimated from naturally-ocurring biosequence data.
+However, for \textit{in vivo} systems perfect phylogeny tracking is not typically possible. Although new techniques are making increasingly high-fidelity lineage tracking possible in some experiments \citep{nozoe2017inferring,woodworth2017building}, phylogenies are still usually estimated from naturally-occuring biosequence data.
 Moreover, as digital evolution systems scale, issues of data loss and centralization overhead make perfect tracking at best inefficient and at worst untenable.
 Thus, some systems will likely need to adopt a decentralized, reconstruction-based approach similar to biological data \citep{moreno2024analysis}, which can be achieved through the recently-developed ``hereditary stratigraphy'' methodology \citep{moreno2022hstrat}.
 
 Effective use of phylogenetic metrics in scenarios where exact phylogenies are not available requires understanding of potential confounding effects from inaccuracies introduced by reconstruction.
 However, it is in precisely such scenarios where the new capabilities to characterize evolutionary dynamics could have the largest impact; large-scale systems can produce an intractable quantity of data, making phylometrics valuable as summary statistics of the evolutionary process \citep{dolson2020interpreting}.
-In particular, methods are needed to handle large-scale artificial life systems where complete, perfect visibiltiy is not feasable and evolution operates according to implicit, contextually-dependent fitness dynamics \citep{moreno2022exploring,kojima2023implementation}.
+In particular, methods are needed to handle large-scale artificial life systems where complete, perfect visibility is not feasible and evolution operates according to implicit, contextually-dependent fitness dynamics \citep{moreno2022exploring,kojima2023implementation}.
 Thus, an additional goal of this paper is to quantify the magnitude and character of bias that reconstruction error introduces.
 In particular, we calculate phylometric metrics across range of reconstruction accuracy levels, and report the level of accuracy necessary to attain metric readings statistically indistinguishable from ground truth.
 
@@ -49,7 +49,7 @@ The utility of a model system for experimental evolution hinges on sufficient ab
 Benchtop and field-based biological models continue to benefit from ongoing methodological advances that have profoundly increased visibility into genetic, phenotypic, and phylogenetic state \citep{woodworth2017building,blomberg2011measuring,schneider2019past}.
 Simulation systems, in contrast, have traditionally enjoyed perfect, complete observability \citep{hindre2012new}.
 However, ongoing advances in parallel and distributed computing hardware have begun to strain analytical omnipotence, as increasingly vast throughput introduces challenges centralizing, storing, and analyzing data \citep{klasky2021data}.
-These trends, although unfolding opposite one another, exhibit intruiging convergence: computational and biological domains will provide data that is multimodal and high-resolution but also incomplete and imperfect.
+These trends, although unfolding opposite one another, exhibit intriguing convergence: computational and biological domains will provide data that is multimodal and high-resolution but also incomplete and imperfect.
 Such convergence establishes great potential for productive interdisciplinary exchange.
 
 % These come in two forms: 1) that can be used to draw abstract insights from lineages and phylogenies \citep{dolsonInterpretingTapeLife2020}, and 2) algorithmic techniques for efficiently collecting phylogenetic data at scale \citep{morenoHereditaryStratigraphyGenome2022}.

@@ -90,7 +90,11 @@ We added the constraint that Avidians may harvest at most two tasks with the int
 Our baseline ``\textit{plain}'' treatment rewarded four boolean logic tasks (echo, not, nand, and), all drawing from a single resource with inflow rate 400 units per update.
 Population structure was well-mixed and, to somewhat weaken the fecundity of high-fitness Avidians, replication destroyed the parent organism with probability 0.2.
 
-We surveyed the following additional ``regimes'' of evolutionary conditions:
+We surveyed six additional ``regimes'' of evolutionary conditions, defined accoring to pre-existing Avida configuration options.
+Notably, compared to the simple model above, these manipulations are somewhat more indirect and, therefore, potentially weaker in nature.
+We anticipate they might better reflect the character of variations in evolutionary drivers that might be encountered in practice.
+
+Regimes were configured as follows,
 \begin{itemize}
   \item \textit{weak selection}: the probability of parent death was increased to 0.5;
   \item \textit{strong selection}: parent death probability was set to 0.0 and offspring were protected from replacement by their own offspring;
@@ -100,7 +104,7 @@ We surveyed the following additional ``regimes'' of evolutionary conditions:
   \item \textit{rich ecology}: 28 tasks were rewarded, each drawing from an independent resource pool with an inflow rate of 100 units.
 \end{itemize}
 
-In follow-up experiments, we defined the following additional evolutionary ``regimes'' with two-dimensional toroidal spatial struture,
+In follow-up experiments, we defined the following additional evolutionary ``regimes'' with two-dimensional toroidal spatial structure,
 \begin{itemize}
   \item \textit{plain}: four boolean logic tasks drawing from a single resource with inflow rate 400 units per update,
   \item \textit{weak ecology}: tasks were assigned independent resource pools, but three resources were only supplied at an inflow rate of 33 units while the fourth was supplied at 300 units per update,
@@ -111,22 +115,23 @@ In follow-up experiments, we defined the following additional evolutionary ``reg
 \input{fig/perfect-tree-phylogenies-log-avida}
 
 Experimental treatments using Avida comprised 30 replicates, conducted with population size 3,600 for durations of 100,000 time steps (c. 20k generations; range 9k-40k).
-In order to achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avida originally developed for research on MODES \citep{dolsonMODESToolboxMeasurements2019}, linked in supplemental materials described below.
+
+In order to achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avida originally developed for research on MODES \citep{dolson2019modes}, linked in supplemental materials described below.
 This tracking system allowed two configurations: (1) tracking on the level of individual agents, where each Avidian constituted a taxonomic unit, or (2) tracking on the level of genotypes, where clonal sets of Avidians with identical genotypes constituted a taxonomic unit.
 Figure \ref{fig:perfect-tree-phylogenies-log-avida} compares example phylogenies from Avida under the ``plain'' treatment, tracked at organism and genome level.
 Surprisingly, we noticed several sign-change differences between individual-level and genotype-level tracking with respect to treatments' effects on phylometrics (Figures \ref{fig:perfect-tree-phylometrics-avida-heatmap} and \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}).
 Much, but not all, of the difference related to effects of spatial structure.
-These differences may be in part related to occurences of polytomies within genotype-level tracked phylogenies, as arbitrarily resolving polytomies into sets of bifurcating nodes gave somewhat more similar results to individual-level tracking.
+These differences may be in part related to occurrences of polytomies within genotype-level tracked phylogenies, as arbitrarily resolving polytomies into sets of bifurcating nodes gave somewhat more similar results to individual-level tracking.
 Here, we report results from individual-level tracking, which corresponds to how phylogenies were tracked in the simple explicit-fitness model.
 
 \textbf{Gen3sis Model}
 
 In contrast to Avida and the simple fitness-explicit model, which are agent-based, Gen3sis is a population-level model.
-Gen3sis abstracts evolution to interactions beetween spatially-dispersed, speciating subpopulations.
+Gen3sis abstracts evolution to interactions between spatially-dispersed, speciating subpopulations.
 Co-located subpopulations of different species compete for shares of site-specific carrying capacity.
 Interaction between subpopulation traits and environmental factors (e.g., aridity, temperature) mediates abundance determinations.
 Disjoined subpopulations of the same species accumulate genetic incompatibilities absent sufficient gene flow and, past a defined incompatibility threshold, speciate.
-Withhin this model, the taxonomic unit of phylogeny is species.
+Within this model, the taxonomic unit of phylogeny is species.
 
 Gen3sis also stands out in its intended level of direct biological realism.
 The software can be configured to reflect the particular geological and climate histories of continental biomes.
@@ -136,12 +141,14 @@ Among other features, Gen3sis allows differentiation of aquatic (e.g., lakes, oc
 To enhance potential for manipulable spatial structure within the model, we converted 30 randomly-selected thin linear segments spanning the map to be aquatic rather than terrestrial (i.e., ``rivers'').
 Spatial structure was then induced by adjusting the water traversal cost function.
 
-We assessed the following evolutionary regimes
+\input{fig/perfect-tree-phylogeny-gen3sis}
+
+We assessed the following evolutionary regimes,
 \begin{itemize}
-\item \textit{plain}: aquatic terrain imposed no additional migration penalties and population traits did not influence abundances,
-\item \textit{spatial structure}: aquatic terrain imposed a migration barrier $50\times$ that of terrestrial terrain.
-\item \textit{ecology}: species abundances were determined acccording to how close populations' trait value matches to site temperature,
-\item \textit{ecology + spatial structure}: the $50\times$ aquatic dispersal penalty was applied and site temperature was used to determine species' abundances.
+\item \textit{plain}: aquatic terrain imposed no additional migration penalties and population traits did not influence abundances;
+\item \textit{spatial structure}: aquatic terrain imposed a migration barrier $50\times$ that of terrestrial terrain;
+\item \textit{ecology}: species abundances were determined according to how close populations' trait value matches to site temperature; and
+\item \textit{ecology + spatial structure}: the $50\times$ aquatic dispersal penalty was applied, and site temperature was used to determine species' abundances.
 \end{itemize}
 Figure \ref{fig:perfect-tree-phylogeny-gen3sis} shows an example Gen3sis phylogeny from the ``plain'' regime.
 
@@ -206,20 +213,20 @@ Figure \ref{fig:plain-perfect-and-reconstruction-phylogenies} shows a reference 
 \subsection{Phylometrics}
 
 A wide range of metrics exists for quantifying the topology of a phylogeny.
-Tucker et. al showed that these metrics can be classified into the following three dimensions: richness, divergence, and regularity \citep{tuckerGuidePhylogeneticMetrics2017}.
+Tucker et al. showed that these metrics can be classified into the following three dimensions: richness, divergence, and regularity \citep{tuckerGuidePhylogeneticMetrics2017}.
 Richness metrics quantify the amount of phylogenetic diversity/evolutionary history represented by a phylogeny.
 Divergence metrics quantify how different the units of the phylogeny are from each other.
 Regularity metrics quantify the variance of other properties (i.e. how consistent they are across the phylogeny).
 Here, we focus on four metrics spread across these categories:
 
-\textbf{Sum Pairwise Distance:} This measurement simply counts the total chronological length of lineages within the tree.
+\textbf{Sum Pairwise Distance:} This measurement sums each tip pair's nodal distance to their MRCA.
 It is a metric of phylogenetic richness and is closely related to Faith's classic phylogenetic diversity metric \citep{faithConservationEvaluationPhylogenetic1992}.
 Consequently, we would expect it to be increased by the presence of ecology or spatial structure, as both these factors increase diversity.
 % TODO do we want to say more here?
 
 \textbf{Colless-like Index:}
 The original Colless Index \citep{collessReviewPhylogeneticsTheory1982}, also often referred to as $I_c$ \citep{shaoTreeBalance1990}, is a measure of tree imbalance (i.e., it gets higher as the tree gets less balanced).
-In the context of Tucker et. al's framework, it is a regularity metric.
+In the context of Tucker et al.'s framework, it is a regularity metric.
 However, the traditional Colless Index only works for strictly bifurcating trees.
 As our trees have multifurcations, we instead use the Colless-like Index, which is an extension of the Colless Index to multifurcating trees \citep{mirSoundCollesslikeBalance2018}.
 Tree imbalance is thought to be associated with varying ecological pressures \citep{chamberlainPhylogeneticTreeShape2014, burressEcologicalOpportunityAlters} and has also been observed to increase in the presence of spatial structure \citep{scottInferringTumorProliferative2020}.
@@ -242,18 +249,18 @@ We generally expect mean evolutionary distinctiveness to be increased by similar
 \subsection{Effect-size Analysis}
 
 We expect statistical tests for between treatments we respect to evolutionary dynamics of interest to serve as an important use case for phylometric analyses in digital evolution.
-As such, we wish to report the capability of reported phylometrics to discern betweensurveyed evolutionary conditions.
+As such, we wish to report the capability of reported phylometrics to discern between surveyed evolutionary conditions.
 
 Cliff's delta provides useful nonparametric means for such effect size analysis.
 This statistic reports the proportion of distributional non-overlap between two distributions, ranging from -1/1 if two distributions share no overlap to 0 if they overlap entirely \citep{meissel2024using,cliff1993dominance}.
 When reporting effect size, we use conventional thresholds of 0.147, 0.33, and 0.474 to distinguish between negligible, small, medium, and large effect sizes \citep{hess2004robust}.
 
 Note that the Cliff's delta statistic tops/bottoms out entirely once two distributions become completely separable.
-Although this property suits most analyses performed, it is occasionally useful to distinguish the extent of divergence between phylometricc distributions past the point of complete seperability.
-For these purposes, we perform a simple procedure to normalize phylometrics relative baseline conditions by subtracting out the baseline mean and dividingg by the baseline standardd deviation.
+Although this property suits most analyses performed, it is occasionally useful to distinguish the extent of divergence between phylometric distributions past the point of complete separability.
+For these purposes, we perform a simple procedure to normalize phylometrics relative baseline conditions by subtracting out the baseline mean and dividing by the baseline standard deviation.
 
-We typically pair effect-size analysis with Mann-Whitney U testing in order to assess the extent to which differences between phylometric readings under different conditions are, or are not, evidenced by ailable data \citep{mann1947on}.
-As a final detail, note that we typically reort negated Cliff's delta values where necessary to ensure positive values correspond to larger phylometric vlaues and vice versa.
+We typically pair effect-size analysis with Mann-Whitney U testing in order to assess the extent to which differences between phylometric readings under different conditions are, or are not, evidenced by available data \citep{mann1947on}.
+As a final detail, note that we typically report negated Cliff's delta values where necessary to ensure positive values correspond to larger phylometric values and vice versa.
 
 \subsection{Software and Data Availability}
 

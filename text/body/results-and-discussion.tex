@@ -23,89 +23,92 @@ Figure \ref{fig:perfect-tree-phylometrics-simple-heatmap} shows nonparametric si
 Relative to the plain regime, all evolutionary regimes in the simple model depress the Colless-like index.
 Reduction in this statistic indicates that all deviations from baseline conditions increased regularity in generated phylogenies.
 This observation runs somewhat counter to prior results on similar tree balance metrics, in which the presence of spatial structure increased imbalance \citep{scottInferringTumorProliferative2020}.
-One possible contributing factor is that taxa in our phylogenies were individuals, whereas Scott et. al used genotype-level abstraction (i.e., their trees were gene trees).
+One possible contributing factor is that taxa in our phylogenies were individuals, whereas Scott et al. used genotype-level abstraction (i.e., their trees were gene trees).
 %Application of the metric to trees comprised individual-level taxa, instead of species-level taxa as is the case in most traditional phylogenetics work, may account for this result.
 This possible effect of taxonomic unit is consistent with our results from the species-level phylogenies in the  Gen3sis system (Figure \ref{fig:perfect-tree-phylometrics-gen3sis}), in which ecological and spatial conditions elevated Colless imbalance.
 Avida individual-level phylogenies were more consistent with the simple model than with Gen3sis; Colless index was significantly depressed under ecological regimes, and weakly but insignificantly depressed under spatial structure.
 However, other modes of evolution did not meaningfully affect Colless-like index of Avida phylogenies.
 
-Mean evolutionary distinctiveness was significantly higher under weak selection and with spatial structure than in the plan regime.
+Colless-like index is sensitive to changes in evolutionary conditions.
+However, it appears to be the least useful metric in distinguishing different drivers of evolutionary dynamics, decreasing significantly under all non-plain evolutionary conditions.
+
+Mean evolutionary distinctiveness was significantly higher under weak selection and with spatial structure than in the plain regime.
 This metric significantly decreased under strong selection and under ecological regimes, but the numerical magnitudes of these effects were relatively smaller (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
 We observed similar results in Avida, except no significant effect of strong selection and weak ecology was detected on the phylometric outcome.
 
 Mean pairwise distance was significantly depressed under all regimes except ecology and weak ecology, although again the numerical magnitude of effects on ecological regimes were relatively smaller (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
-Within the Avida model, weak but insignificant depressing effects were observed under weak selection and spatial structure regimes.
-Interestingly, the strongest depressing effects were observed under the weak ecology and strong ecology regimes.
+Within Avida, weak but insignificant depressing effects were observed under weak selection and spatial structure regimes.
+In contrast to results from the simple model, the strongest depressing effects were observed under the weak ecology and strong ecology regimes.
 
 Finally, sum pairwise distance was significantly increased under all regimes compared to baseline, except for the strong selection regime where it was significantly depressed.
 Effect size was again strongest under spatial structure and weak selection (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
-The Avida model gave similar results, except that no significant effect was detected from the weak ecology and strong selection treatments, with a weak but insignificant increase effect detected under strong selection.
+Avida gave similar results, except that no significant effect was detected from the weak ecology and strong selection treatments, with a weak but insignificant increase effect detected under strong selection.
 
-Figure \ref{fig:perfect-tree-phylometrics-simple-heatmap} provides a high-level overview of the magnitude and direction of each regime's effects on evolutionary metrics compared to the plain regime within the simple fitness-explicit model, annotated with significance and effect size information.
-Notably, strong and weak selection both significantly decrease Colless-like index and mean pairwise distance but have opposite-sign effects on sum pairwise distance and mean evolutionary distinctiveness.
-Colless-like index appears to be the least useful metric in distinguishing evolutionary dynamics, decreasing significantly under all non-plain evolutionary conditions.
+\textbf{Discussion of Phylometric Effects}
 
 Ecological dynamics have significant influence on the surveyed phylometrics.
-However, the numerical magnitudes of these effects are generally weakcomparedto spatial structure. and selection effects (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric})
+However, the numerical magnitudes of these effects are generally weak compared to spatial structure and selection effects (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
 So, it appears careful accounting for other evolutionary dynamics (i.e., selection pressure and spatial structure) will be essential to accurate detection of ecology through phylogenetic analysis.
-Mean pairwise distance may play a role in identifying ecological dynamics, as ecological dynamics --- in contrast to other factors such as spatial structure and changes in selection pressure --- have weaker effects on this phylometrics.
+Mean pairwise distance may play a role in identifying ecological dynamics, as ecological dynamics --- in contrast to other factors such as spatial structure and changes in selection pressure --- have weaker effects on this phylometric.
+Other phylogenetic metrics may also be better suited to detecting ecological dynamics (e.g. the ecology metric in \citep{dolson2019modes}).
 
 Phylometric outcomes within Avida generally mirror the simple fitness model, although in many cases phylometric effects are weaker or not significant.
+These less pronounced effects are not unexpected --- whereas the simple model was explicitly designed for direct manipulation of evolutionary drivers, we use more subtle configurations to impose evolutionary drivers on the Avida model (particularly, with respect to selection pressure).
 Notably, the strong selection treatment resulted in no significant effects on phylometric values.
 Weak selection significantly increased mean evolutionary distinctiveness and sum pairwise distance, as with the simple model, but the effect size was small.
 However, spatial structure's effect size on these metrics was large and agreed with the simple model.
 The ecology and rich ecology treatments agreed in sign with the simple model and generally had large effect size.
-However, unlike the simple model, Avida's weak ecology sole phylometric outcome was a strong, significant decrease in mean pairwise distance.
+However, unlike the simple model, Avida's sole phylometric outcome under weak ecology was a strong, significant decrease in mean pairwise distance.
 In contrast, the simple model exhibited no effect on this metric under the weak ecology treatment.
 
-We additionally performed a sensitivity analysis for results from the simple fitness-explicit model over an alternate exponential mutation operator and earlier phylogeny sampling timepoints.
-We found the effects of evolutionary conditions on phylometrics to be generally consistent with Figure \ref{fig:perfect-tree-phylometrics-simple-heatmap} across surveyed conditions (Supplementary Figures \labelcref{fig:perfect-tree-phylometrics-sensitivity-analysis,fig:perfect-tree-phylometrics-heatmap-sensitivity-analysis}).
+We additionally performed a sensitivity analysis for results from the simple fitness-explicit model over an alternate exponential mutation operator and earlier phylogeny sampling time points.
+The effects of evolutionary conditions on phylometrics were generally consistent with Figure \ref{fig:perfect-tree-phylometrics-simple-heatmap} across surveyed conditions (Supplementary Figures \labelcref{fig:perfect-tree-phylometrics-sensitivity-analysis,fig:perfect-tree-phylometrics-heatmap-sensitivity-analysis}).
 
 \subsection{Phylometric Signatures of Ecological Dynamics in Spatially Structured Populations}
 
 \input{fig/perfect-tree-phylometrics-heatmap-parametric}
 
-Evolution within very large populations typically entail elements of spatial structure.
-Even within \textit{in silico} contexts, populations will almost inevitably integrate spatial structure that reflects practical limitations of distributed computing hardware \citep{ackley2014indefinitely,moreno2021conduit}.
+The effects of spatial structure are of particular interest, as evolution within very large populations typically entail elements of spatial structure owing to dispersal across geographic terrain.
+Even within \textit{in silico} contexts, populations too large for a single processor will almost inevitably integrate spatial structure that reflects practical limitations of distributed computing hardware \citep{ackley2014indefinitely,moreno2021conduit}.
 Therefore, understanding the background effects of spatial structure on the phylogenetic signatures of other evolutionary dynamics will be essential to applications of phylogenetic inference in such applications.
 For this analysis, we chose to focus on ecological dynamics due to interest in how their relatively weak phylometric signatures would respond to the relatively strong influence of spatial structure (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
+
+\textbf{Summary of Phylometric Effects with Background Spatial Structure}
 
 \input{fig/perfect-tree-phylometrics-with-spatial-nuisance}
 
 Figure \ref{fig:perfect-tree-phylometrics-with-spatial-nuisance} summarizes the distribution of surveyed phylometrics under the three surveyed ecological regimes and the control non-ecological regime, all with spatial population structure.
-Annotations indicate results of nonparametric significance and effect size tests against the plain spatial structure treatment, described above for experiments with non-spatial baseline.
-Statistical tests confirmed that for the simple model each phylometric exhibited significant variation among these evolutionary regimes (Kruskal-Wallis tests; all $p < 1\times10^{-8}$; $n=50$ per condition for simple model, $n=30$ Avida; Supplementary Tables \labelcref{tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis,tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis-avida}).
+Statistical tests confirmed that each phylometric exhibited significant variation among these evolutionary regimes, indicating the presence of detectable structural signatures in phylogenetic structure (Kruskal-Wallis tests; all $p < 1\times10^{-8}$; $n=50$ per condition for simple model, $n=30$ Avida; Supplementary Tables \labelcref{tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis,tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis-avida}).
 
-\textbf{Summary of Phylometric Effects}
-
-Like under the spatially unstructured background, all ecology treatments drove significant increases in mean evolutionary distinctiveness and sum pairwise distance.
-Also consistent with spatially unstructured results, rich ecology drove significant, large-effect depression of both colless index and mean pairwise distance and ecology.
-However, the ecology treatment depressed only meanwise pair distance with spatial structure.
+As in prior experiments, all ecology treatments drove significant increases in mean evolutionary distinctiveness and sum pairwise distance.
+Also consistent with spatially unstructured results, rich ecology drove significant, large-effect depression of both Colless-like index and mean pairwise distance and ecology.
+However, in the presence of spatial structure, the ecology treatment depressed only mean pairwise distance.
 Without spatial structure, the ecology treatment depressed Colless-like index instead.
 Results under weak ecology differed notably from non-spatial baseline, with all phylometrics seeing significant, large-effect increases.
 Spatial-background rich ecology results from Avida agreed with the simple model.
 However, significant phylometric effects were not detected from the ecology and weak ecology treatments under spatial structure conditions.
 
-For these experiments, we again performed a sensitivity analysis over an alternate exponential mutation operator and earlier phylogeny sampling timepoints.
+For these experiments, we again performed a sensitivity analysis over an alternate exponential mutation operator and earlier phylogeny sampling time points.
 We found the effects of evolutionary conditions on phylometrics to be generally consistent across surveyed conditions (Supplementary Figure \ref{fig:perfect-tree-phylometrics-with-spatial-nuisance-sensitivity-analysis} and Supplementary Tables \labelcref{tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis,tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox-spatial-nuisance}).
 
-\subsection{Species-level Phylogenies}
+\subsection{Species-level Phylogenies from Gen3sis Model}
 
 \input{fig/perfect-tree-phylometrics-gen3sis}
 \input{fig/perfect-tree-phylometrics-heatmap-avida-genome}
 
-Figure \ref{fig:perfect-tree-phylometrics-gen3sis} shows phylometric effects of spatial structure and of ecology, both with and without a spatial structure background.
-Significant, large-effect changes were detected across all four phylometrics in each treatment.
-However, with the exception of sum pariwsie distance, effect signs of treatments were opposite to those for individual-level phylogenies across all phylometrics.
+%Figure \ref{fig:perfect-tree-phylometrics-gen3sis} shows phylometric effects of spatial structure and of ecology, both with and without a spatial structure background.
+Significant, large-effect changes were detected across all four phylometrics in each treatment in Gen3sis (see Figure \ref{fig:perfect-tree-phylometrics-gen3sis}).
+However, with the exception of sum pariwise distance, effect signs of treatments were opposite to those for individual-level phylogenies from Avida and the fitness-explicit model across all phylometrics.
 Tip count effects seem likely to play a role in this discrepancy.
-Unlike Avida and the simple fitness-explicit model, which held population size constant, species richess grew freely under the Gen3sis model.
-It is also possible that manifested phylometric outcomes may be sensitive to granularity level for the taxonomic unit of phylogeny.
-As noted in Section \ref{sec:methods} and shown in Figure \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}, in Avida experiments application of genome-level tracking (as opposed to individual-level tracking) induced notable phylometric changes, and even flipped signs of some treatment effects.
+Unlike Avida and the simple fitness-explicit model, which held population size constant, species richness grew freely under the Gen3sis model.
+It is also possible that phylometric outcomes may be sensitive to granularity level of the taxonomic unit of the phylogeny.
+As noted in Section \ref{sec:methods} and shown in Figure \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}, in Avida experiments, phylogenies using genome-level tracking (as opposed to individual-level tracking) were notably different than those using individual-level tracking.
+These differences also included changes in the sign of some treatment effects, lending credence to the idea that differences between Gen3sis and the individual-level phylogenies could be partially the result of Gen3sis having a more abstract taxonomic unit.
 
 \subsection{Phylometric Bias of Reconstruction Error}
 \label{sec:phylometric-bias-reconstruction-error}
 
-Shifting from perfect phylogenetic tracking to approximate phylogentic reconstruction will facilitate efficiency and robust digital evolution simulations at scale, but introduces a complicating factor into phylogenetic analyses: tree reconstruction error.
+Shifting from perfect phylogenetic tracking to approximate phylogenetic reconstruction will facilitate efficiency and robust digital evolution simulations at scale, but introduces a complicating factor into phylogenetic analyses: tree reconstruction error.
 A clear understanding of the impact of these errors on the computed phylometrics will be necessary for informative future phylogenetic analyses.
 
 To explore this question, we compared phylometrics computed on reconstructed trees to corresponding true reference trees under the simple fitness-explicit model (Wilcoxon tests; $n=50$ per condition; Supplementary Table \ref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox}).
@@ -127,18 +130,16 @@ Figure \ref{fig:reconstructed-tree-phylometrics-error} summarizes these results.
 
 Where detectable, estimation uncertainty bias decreased all surveyed phylometrics' numerical value.
 So, when testing for expected increases in phylometric values, the potential for systematic false positives due to reconstruction error can be discounted.
-Supplementary Figure \ref{fig:reconstructed-tree-phylometrics} provides a full comparison the distribution of phylometric estimates on reference trees with the distributions of phylometric estimates for reconstructed trees across reconstruction resolutions.
+Supplementary Figure \ref{fig:reconstructed-tree-phylometrics} provides a full comparison of the distribution of phylometric estimates on reference trees with the distributions of phylometric estimates for reconstructed trees across reconstruction resolutions.
 
-We performed additional analyses with additional spatially structured ecological evolutionary regimes, over an alternate exponential mutation operator, at earlier phylogeny sampling timepoints, and with the Avida model.
-These yielded generally similar findings for the relationship between reconstruction error and phylometric bias (Supplementary Figures \labelcref{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis,fig:reconstructed-tree-phylometrics-error-spatial-nuisance,fig:reconstructed-tree-phylometrics-with-spatial-nuisance,fig:reconstructed-tree-phylometrics-avida,fig:reconstructed-tree-phylometrics-error-avida}; Supplementary Table \labelcref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox,tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox-spatial-nuisance}).
-
-Notably, however, in some instances in sensitivty analysis and with Avida reconstruction bias persisted at even 1\% relative resolution.
-Forthcoming work has found that the byte-differentia  hereditary stratigraphy configuration used for this experiment tends to lump closely contemporaneous lineage splitting events into a polytomy rather than a double-branching event --- i.e., indicating uncertainty rather than introducing error.
-In contrast, reconstructions on single-bit differentia contain erroneously- sequenced branching rather than artefactual polytomies.
-Indeed, exploratory work resolving polytomies.
+%We performed additional analyses with additional spatially structured ecological evolutionary regimes, over an alternate exponential mutation operator, at earlier phylogeny sampling time points, and with Avida.
+The relationship between reconstruction error and phylometric bias was similar under spatially structured regimes, the alternate exponential mutation operator, at earlier phylogeny sampling time points, and in Avida (Supplementary Figures \labelcref{fig:reconstructed-tree-phylometrics-error-sensitivity-analysis,fig:reconstructed-tree-phylometrics-error-spatial-nuisance,fig:reconstructed-tree-phylometrics-with-spatial-nuisance,fig:reconstructed-tree-phylometrics-avida,fig:reconstructed-tree-phylometrics-error-avida}; Supplementary Table \labelcref{tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox,tab:phylostatistics-comparison-between-resolutions-allpairs-wilcox-spatial-nuisance}).
+Notably, however, reconstruction bias persisted at even 1\% relative resolution in some conditions of the sensitivity analysis and Avida experiments.
+Forthcoming work has found that the byte-differentia hereditary stratigraphy configuration used for this experiment tends to lump closely contemporaneous lineage splitting events into a polytomy rather than a double-branching event --- i.e., indicating uncertainty rather than introducing error.
+In contrast, reconstructions on single-bit differentia contain erroneously- sequenced branching rather than artifactual polytomies.
 So, future work should explore whether working with single bit differentia could lessen phylometric bias.
 
-\textbf{Detection of Phylometric Effects with Reconstruction Error}
+\textbf{Detection of Evolutionary Drivers' Signatures in Reconstructed Phylogenies}
 
 Our last objective was to assess how reconstruction error might affect detection of phylometric signatures induced by treatment conditions.
 That is, we sought to perform a sort of ``integration test'' for detection of treatment conditions when working with imperfect reconstructions rather than perfect phylogenies.
