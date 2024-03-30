@@ -18,8 +18,10 @@ We used a measure of distributional overlap --- Cliff's delta --- to assess effe
 Significance at $\alpha = 0.05$ (*) was assessed through Mann-Whitney tests.
 Figure \ref{fig:perfect-tree-phylometrics-simple-heatmap} shows nonparametric significance and effect size test results.
 
+\noindent
 \textbf{Summary of Phylometric Effects}
 
+\noindent
 Relative to the plain regime, all evolutionary regimes in the simple model depress the Colless-like index.
 Reduction in this statistic indicates that all deviations from baseline conditions increased regularity in generated phylogenies.
 This observation runs somewhat counter to prior results on similar tree balance metrics, in which the presence of spatial structure increased imbalance \citep{scottInferringTumorProliferative2020}.
@@ -44,8 +46,10 @@ Finally, sum pairwise distance was significantly increased under all regimes com
 Effect size was again strongest under spatial structure and weak selection (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
 Avida gave similar results, except that no significant effect was detected from the weak ecology and strong selection treatments, with a weak but insignificant increase effect detected under strong selection.
 
+\noindent
 \textbf{Discussion of Phylometric Effects}
 
+\noindent
 Ecological dynamics have significant influence on the surveyed phylometrics.
 However, the numerical magnitudes of these effects are generally weak compared to spatial structure and selection effects (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
 So, it appears careful accounting for other evolutionary dynamics (i.e., selection pressure and spatial structure) will be essential to accurate detection of ecology through phylogenetic analysis.
@@ -73,10 +77,12 @@ Even within \textit{in silico} contexts, populations too large for a single proc
 Therefore, understanding the background effects of spatial structure on the phylogenetic signatures of other evolutionary dynamics will be essential to applications of phylogenetic inference in such applications.
 For this analysis, we chose to focus on ecological dynamics due to interest in how their relatively weak phylometric signatures would respond to the relatively strong influence of spatial structure (Figure \ref{fig:perfect-tree-phylometrics-heatmap-parametric}).
 
+\noindent
 \textbf{Summary of Phylometric Effects with Background Spatial Structure}
 
 \input{fig/perfect-tree-phylometrics-with-spatial-nuisance}
 
+\noindent
 Figure \ref{fig:perfect-tree-phylometrics-with-spatial-nuisance} summarizes the distribution of surveyed phylometrics under the three surveyed ecological regimes and the control non-ecological regime, all with spatial population structure.
 Statistical tests confirmed that each phylometric exhibited significant variation among these evolutionary regimes, indicating the presence of detectable structural signatures in phylogenetic structure (Kruskal-Wallis tests; all $p < 1\times10^{-8}$; $n=50$ per condition for simple model, $n=30$ Avida; Supplementary Tables \labelcref{tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis,tab:phylostatistics-comparison-between-regimes-spatial-nuisance-kwallis-avida}).
 
@@ -117,10 +123,12 @@ Reconstructions were performed across a range of precisions, ranging from 1\% re
 Precision was manipulated by adjusting the information content of underlying hereditary stratigraphic genome annotations used to perform phylogenetic reconstruction \citep{moreno2022hereditary}.
 Note that important differences exist the between nature of reconstruction error under hereditary stratigraphy versus traditional biosequence-based methods, discussed further below.
 
-\textbf{Phylometric Sensitivites to Reconstruction Error}
-
 \input{fig/reconstructed-tree-phylometrics-error}
 
+\noindent
+\textbf{Phylometric Sensitivites to Reconstruction Error}
+
+\noindent
 For each phylometric, we sought to determine the minimum resolution required to achieve statistical non-detection (i.e., $p > 0.05$) of bias between reconstructions and their corresponding references.
 For nearly all cases, 3\% reconstruction resolution was sufficient to achieve statistical indistinguishability between reference and reconstruction.
 Mean evolutionary distinctiveness and sum pairwise distance were particularly robust to reconstruction error, showing no detectable bias even at only 33\% reconstruction resolution.
@@ -138,8 +146,10 @@ Forthcoming work has found that the byte-differentia hereditary stratigraphy con
 In contrast, reconstructions on single-bit differentia contain erroneously- sequenced branching rather than artifactual polytomies.
 So, future work should explore whether working with single bit differentia could lessen phylometric bias.
 
+\noindent
 \textbf{Detection of Evolutionary Drivers' Signatures in Reconstructed Phylogenies}
 
+\noindent
 Our last objective was to assess how reconstruction error might affect detection of phylometric signatures induced by treatment conditions.
 That is, we sought to perform a sort of ``integration test'' for detection of treatment conditions when working with imperfect reconstructions rather than perfect phylogenies.
 To this end, we compared the phylometric outcomes of strong/weak selection, spatial structure, ecology, and weak/rich ecology relative to plain conditions for phylogenies reconstructed at 1\%, 3\%, 10\%, and 33\% resolution levels.
