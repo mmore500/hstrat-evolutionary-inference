@@ -1,0 +1,28 @@
+\documentclass{article}
+
+\input{lib/dependencies.tex}
+\input{lib/pragmaonce.tex}
+
+\ifdefined\mydraft
+  \mydraft
+\fi
+
+\defaultbibliography{bibl}
+\defaultbibliographystyle{apalike-ejor}
+
+\begin{document}
+
+\input{text/frontmatter.tex}
+
+\begin{bibunit}
+
+  \input{text/body.tex}
+
+  \input{text/acknowledgement.tex}
+
+  \input{text/references.tex}
+
+\end{bibunit}
+
+
+\end{document}
