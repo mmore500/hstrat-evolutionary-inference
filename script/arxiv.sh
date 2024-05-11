@@ -10,14 +10,17 @@ done
 
 find hstrat -type f -name '*.png' -exec rm -f {} +
 find . -type f -name '*.jpg' -exec rm -f {} +
+find . -type f -name '__init__.py' -exec rm -f {} +
 find . -type d -name dishtiny -exec rm -rf {} +
 find . -type d -name conduit -exec rm -rf {} +
 find . -type d -name docs -exec rm -rf {} +
 find . -type d -empty -delete
 find . -type l -delete
+find -type f -name ".*" -delete; rm -f *~
 
 rm -f img/**/*nonlog*.pdf
 rm -f img/**/*.csv
+
 
 rm -f arxiv.tar.gz
 git checkout bibl.bib
