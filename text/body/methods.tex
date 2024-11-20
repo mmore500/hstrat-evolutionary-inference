@@ -68,7 +68,8 @@ This allowed us to test shorter runs of 32,768 and 98,304 generations (through e
 One additional mutation operator was tested to contrast the unit Gaussian distribution: the unit exponential distribution.
 Under this distribution, deleterious mutations are not possible and large-effect mutations are more likely.
 
-Across all experiments, each treatment comprised 50 replicates.
+Across all experiments, each treatment comprised 50 independent replicates.
+Testing over repeat simulations allowed us to characterize the influence of evolutionary dynamics on phylogenetic structure relative to background stochasticity, including the amount of distributional overlap in phylogeny metrics between treatments (i.e., Cliff's delta statistic, discussed in Section \ref{sec:effect-size-analysis}).
 
 \noindent
 \textbf{Avida Model}
@@ -255,6 +256,7 @@ Unlike our other metrics, evolutionary distinctiveness is heavily influenced by 
 We generally expect mean evolutionary distinctiveness to be increased by similar factors to mean pairwise distance.
 
 \subsection{Effect-size Analysis}
+\label{sec:effect-size-analysis}
 
 We expect statistical tests for between treatments we respect to evolutionary dynamics of interest to serve as an important use case for phylometric analyses in digital evolution.
 As such, we wish to report the capability of reported phylometrics to discern between surveyed evolutionary conditions.
