@@ -24,8 +24,7 @@ rm -f img/**/*.csv
 
 rm -f arxiv.tar.gz
 git checkout bibl.bib
-git checkout arxiv.tex draft.tex
-mv arxiv.tex main.tex
+git checkout draft.tex
 make cleaner
 make
 make clean
