@@ -33,4 +33,5 @@ mv bibl.bib main.bib
 cp bu1.bbl main.bbl
 cp bu1.blg main.blg
 rm -f draft.tex
+rm -rf **/paper.bib
 tar -czvf arxiv.tar.gz *
