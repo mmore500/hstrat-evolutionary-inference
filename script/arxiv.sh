@@ -24,7 +24,7 @@ rm -f img/**/*.csv
 
 rm -f arxiv.tar.gz
 git checkout bibl.bib
-git checkout arxiv.tex
+git checkout arxiv.tex draft.tex
 mv arxiv.tex main.tex
 make cleaner
 make
@@ -32,4 +32,5 @@ make clean
 mv bibl.bib main.bib
 cp bu1.bbl main.bbl
 cp bu1.blg main.blg
+rm -f draft.tex
 tar -czvf arxiv.tar.gz *
