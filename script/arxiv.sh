@@ -18,7 +18,6 @@ find . -type d -empty -delete
 find . -type l -delete
 find -type f -name ".*" -delete; rm -f *~
 
-rm -f img/**/*nonlog*.pdf
 rm -f img/**/*.csv
 
 
