@@ -1,4 +1,4 @@
-\ProvidesClass{artificial-life}[2022/01/12 v1.1 Artificial Life Journal Class]
+\ProvidesClass{artificial-lifex}[2022/01/12 v1.1 Artificial Life Journal Class]
 \LoadClass[10.5pt,letterpaper]{article} % Font size and paper type
 \usepackage[english]{babel}
 

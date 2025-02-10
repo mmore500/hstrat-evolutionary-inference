@@ -80,7 +80,8 @@ clean:
 	rm -f ${BUILD_DIR}-supplement-draft.pdf
 	rm -f moreno.pdf
 	rm -f moreno.tex
-	rm -rf moreno.bib
+	rm -f moreno.bib
+	rm -f artificial-lifex.cls
 
 sview:
 	xdg-open ${BUILD_DIR}-draft.pdf 2>/dev/null
@@ -89,6 +90,6 @@ cleaner: clean
 	latexmk -CA
 	# remove auxillary files, excepting .tex and .bib files
 	find . -type f -name ${BUILD_DIR}"*" ! -name '*.tex' ! -name '*.bib' -delete
-	rm -rf *.bbl *.blg *.aux
+	rm -rf *.bbl *.blg *.aux *.log *.fls *.fdb_latexmk *.out
 
 .PHONY: draft release clean sview cleaner fresh
