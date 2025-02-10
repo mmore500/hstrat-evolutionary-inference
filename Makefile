@@ -12,7 +12,7 @@ all: ${BUILD_DIR}-draft.pdf
 
 draft: ${BUILD_DIR}-draft.pdf ${BUILD_DIR}-manuscript-draft.pdf ${BUILD_DIR}-supplement-draft.pdf ${BUILD_DIR}-draft.tex
 
-release: ${BUILD_DIR}.pdf ${BUILD_DIR}.tex moreno.tex moreno.pdf figures.pdf
+release: ${BUILD_DIR}.pdf ${BUILD_DIR}.tex moreno.tex moreno.pdf figures.pdf moreno.bib
 
 ${BUILD_DIR}.pdf: main.tex
 	latexmk -pdf -silent \
@@ -58,6 +58,9 @@ ${BUILD_DIR}-draft.tex: main.tex
 moreno.tex: main.tex
 	./script/latexpand.pl finalsub.tex > moreno.tex
 
+moreno.bib: bibl.bib
+	cp bibl.bib moreno.bib
+
 ${BUILD_DIR}-manuscript-draft.pdf: ${BUILD_DIR}-draft.pdf
 	pdftk ${BUILD_DIR}-draft.pdf cat 1-$$(( $(DRAFT_SUPPLEMENT_PAGE) - 1 )) output ${BUILD_DIR}-manuscript-draft.pdf
 
@@ -77,6 +80,7 @@ clean:
 	rm -f ${BUILD_DIR}-supplement-draft.pdf
 	rm -f moreno.pdf
 	rm -f moreno.tex
+	rm -rf moreno.bib
 
 sview:
 	xdg-open ${BUILD_DIR}-draft.pdf 2>/dev/null
