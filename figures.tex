@@ -1,0 +1,13 @@
+\makeatletter
+\def\mydraft{
+  % adapted from https://tex.stackexchange.com/a/140865/316176
+  \renewcommand{\textfraction}{1.1} % that is 110% (too much)
+
+  % adapted from https://tex.stackexchange.com/a/22197/316176
+  \renewcommand{\floatpagefraction}{1}
+  \makeatletter
+  \@fpsep\textheight
+  \makeatother
+}
+\makeatother
+\input{finalsub.tex}

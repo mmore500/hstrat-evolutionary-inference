@@ -37,6 +37,12 @@ moreno.pdf: main.tex
     -jobname=moreno \
     -pdflatex="pdflatex -interaction=nonstopmode" finalsub.tex
 
+figures.pdf: figures.tex
+	latexmk -pdf -silent \
+    --shell-escape \
+    -jobname=figures \
+    -pdflatex="pdflatex -interaction=nonstopmode" figures.tex
+
 ${BUILD_DIR}-draft.pdf: main.tex
 	latexmk -pdf -silent \
     --shell-escape \
