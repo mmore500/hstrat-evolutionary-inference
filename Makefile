@@ -12,7 +12,7 @@ all: ${BUILD_DIR}-draft.pdf
 
 draft: ${BUILD_DIR}-draft.pdf ${BUILD_DIR}-manuscript-draft.pdf ${BUILD_DIR}-supplement-draft.pdf ${BUILD_DIR}-draft.tex
 
-release: ${BUILD_DIR}.pdf ${BUILD_DIR}-manuscript.pdf ${BUILD_DIR}-supplement.pdf ${BUILD_DIR}.tex
+release: ${BUILD_DIR}.pdf ${BUILD_DIR}.tex moreno.tex moreno.pdf figures.pdf
 
 ${BUILD_DIR}.pdf: main.tex
 	latexmk -pdf -silent \
@@ -31,7 +31,7 @@ ${BUILD_DIR}-manuscript.pdf: ${BUILD_DIR}.pdf
 ${BUILD_DIR}-supplement.pdf: ${BUILD_DIR}.pdf
 	pdftk ${BUILD_DIR}.pdf cat $(RELEASE_SUPPLEMENT_PAGE)-end output ${BUILD_DIR}-supplement.pdf
 
-moreno.pdf: main.tex
+moreno.pdf: finalsub.tex
 	latexmk -pdf -silent \
     --shell-escape \
     -jobname=moreno \
