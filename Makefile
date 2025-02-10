@@ -31,13 +31,13 @@ ${BUILD_DIR}-manuscript.pdf: ${BUILD_DIR}.pdf
 ${BUILD_DIR}-supplement.pdf: ${BUILD_DIR}.pdf
 	pdftk ${BUILD_DIR}.pdf cat $(RELEASE_SUPPLEMENT_PAGE)-end output ${BUILD_DIR}-supplement.pdf
 
-moreno.pdf: finalsub.tex
+moreno.pdf: finalsub.tex moreno.bib
 	latexmk -pdf -silent \
     --shell-escape \
     -jobname=moreno \
     -pdflatex="pdflatex -interaction=nonstopmode" finalsub.tex
 
-figures.pdf: figures.tex
+figures.pdf: figures.tex moreno.bib
 	latexmk -pdf -silent \
     --shell-escape \
     -jobname=figures \
