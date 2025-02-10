@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\input{lib/dependencies.tex}
+\input{lib/pragmaonce.tex}
+
+\ifdefined\mydraft
+  \mydraft
+\fi
+
+\defaultbibliography{bibl}
+\defaultbibliographystyle{apalike-ejor}
+
+\begin{document}
+
+\input{text/cover.tex}
+
+\clearpage
+\newpage
+
+\begin{bibunit}
+
+  \input{text/body.tex}
+
+  \input{text/acknowledgement.tex}
+
+  \input{text/references.tex}
+
+\end{bibunit}
+
+\clearpage
+\newpage
+
+\setcounter{secnumdepth}{2}
+\makeatletter
+\renewcommand \thesection{S\@arabic\c@section}
+% \renewcommand\thetable{S\@arabic\c@table}
+% \renewcommand \thefigure{S\@arabic\c@figure}
+\makeatother
+
+\begin{bibunit}
+
+  \input{text/supplement.tex}
+
+  % \input{text/references.tex}
+
+\end{bibunit}
+
+\end{document}

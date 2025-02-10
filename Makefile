@@ -31,6 +31,12 @@ ${BUILD_DIR}-manuscript.pdf: ${BUILD_DIR}.pdf
 ${BUILD_DIR}-supplement.pdf: ${BUILD_DIR}.pdf
 	pdftk ${BUILD_DIR}.pdf cat $(RELEASE_SUPPLEMENT_PAGE)-end output ${BUILD_DIR}-supplement.pdf
 
+moreno.pdf: main.tex
+	latexmk -pdf -silent \
+    --shell-escape \
+    -jobname=moreno \
+    -pdflatex="pdflatex -interaction=nonstopmode" finalsub.tex
+
 ${BUILD_DIR}-draft.pdf: main.tex
 	latexmk -pdf -silent \
     --shell-escape \
@@ -42,6 +48,9 @@ ${BUILD_DIR}-draft-distilled.pdf: ${BUILD_DIR}-draft.pdf
 
 ${BUILD_DIR}-draft.tex: main.tex
 	./script/latexpand.pl draft.tex > ${BUILD_DIR}-draft.tex
+
+moreno.tex: main.tex
+	./script/latexpand.pl finalsub.tex > moreno.tex
 
 ${BUILD_DIR}-manuscript-draft.pdf: ${BUILD_DIR}-draft.pdf
 	pdftk ${BUILD_DIR}-draft.pdf cat 1-$$(( $(DRAFT_SUPPLEMENT_PAGE) - 1 )) output ${BUILD_DIR}-manuscript-draft.pdf
@@ -60,6 +69,8 @@ clean:
 	rm -f ${BUILD_DIR}-manuscript-draft.pdf
 	rm -f ${BUILD_DIR}-supplement.pdf
 	rm -f ${BUILD_DIR}-supplement-draft.pdf
+	rm -f moreno.pdf
+	rm -f moreno.tex
 
 sview:
 	xdg-open ${BUILD_DIR}-draft.pdf 2>/dev/null
