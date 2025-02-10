@@ -1,5 +1,7 @@
 \documentclass{artificial-life}
 
+\usepackage{refcount}
+
 \input{lib/dependencies.tex}
 \input{lib/pragmaonce.tex}
 
@@ -27,7 +29,25 @@
 
 \end{bibunit}
 
+\newcommand{\maybeDiscardLaterPages}{%
+  \IfRefUndefinedExpandable{lst:build_tree_from_artifacts}%
+    {%
+      % The reference is undefined: not the final run.
+      % Do nothing so that pages continue to ship out.
+    }%
+    {%
+      % The reference is defined: we assume this is the final run.
+      % Insert a hook that discards all subsequent pages.
+      \AddToHook{shipout/before}{\DiscardShipoutBox}%
+    }%
+}
+
 \clearpage
+\let\oriwrite=\write
+\def\write{\immediate\oriwrite}
+\maybeDiscardLaterPages
+\def\write{\immediate\oriwrite}
+
 \newpage
 
 \setcounter{secnumdepth}{2}
