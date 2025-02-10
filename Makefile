@@ -12,7 +12,7 @@ all: ${BUILD_DIR}-draft.pdf
 
 draft: ${BUILD_DIR}-draft.pdf ${BUILD_DIR}-manuscript-draft.pdf ${BUILD_DIR}-supplement-draft.pdf ${BUILD_DIR}-draft.tex
 
-release: ${BUILD_DIR}.pdf ${BUILD_DIR}.tex moreno.tex moreno.pdf figures.pdf moreno.bib
+release: ${BUILD_DIR}.pdf ${BUILD_DIR}-draft.pdf ${BUILD_DIR}.tex moreno.tex moreno.pdf figures.pdf moreno.bib
 
 ${BUILD_DIR}.pdf: main.tex
 	latexmk -pdf -silent \
