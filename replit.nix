@@ -1,5 +1,6 @@
 { pkgs }: {
     deps = [
+      pkgs.bump2version
       pkgs.vim
       pkgs.pandoc
       pkgs.texlive.combined.scheme-full
