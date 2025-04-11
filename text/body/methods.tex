@@ -24,7 +24,7 @@ The core of this work relies on a simple agent-based model devised to fulfill th
 % @ELD: Do we still want to say this is the core of the work now that we've got the other systems?
 % @MAM: Depends how much of results the other parts end up taking up, I kind of imagine they might appear in a single section if they end up being similar to the simple model
 
-Genomes in the simple explicit-fitness model comprised a single floating-point value, with higher magnitude corresponding to higher fitness.
+Genomes in the simple explicit-fitness model were a single floating-point value, with higher magnitude corresponding to higher fitness.
 Population size 32,768 ($2^{15}$) was used for all experiments.
 Selection was performed using tournament selection with synchronous generations.
 Treatments' selection pressure was controlled via tournament size.
@@ -77,7 +77,7 @@ Testing over repeat simulations allowed us to characterize the influence of evol
 \noindent
 Avida is a virtual agent-based model system used for sophisticated \textit{in silico} evolution experiments \citep{ofria2004avida}.
 Notably, unlike the simple model described above, fitness within Avida arises implicitly from agents' self-replication activity, in relation to other agents' self-replication and the availability of shared exogenous resources.
-Within Avida, digital organisms' genomes comprise a sequence of virtual CPU instructions.
+Within Avida, digital organisms' genomes comprise sequences of virtual CPU instructions.
 Avida conducts open-ended evaluation of each agent's genetic program, affording the opportunity of copying itself into output memory and thereby creating an offspring agent.
 Replication imposes an intrinsic baseline level of copy errors (i.e., mutations), ensuring an ongoing supply of genetic variation.
 Because self-replicators compete for a limited quantity of population slots, Darwinian evolution ensues.
@@ -120,7 +120,7 @@ In follow-up experiments, we defined the following additional evolutionary ``reg
 
 Experimental treatments using Avida comprised 30 replicates, conducted with population size 3,600 for durations of 100,000 time steps (c. 20k generations; range 9k-40k).
 
-In order to achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avida originally developed for research on MODES \citep{dolson2019modes}, linked in supplemental materials described below.
+To achieve the phylogenetic tracking necessary for our experiments, we used a fork of Avida originally developed for research on MODES \citep{dolson2019modes}, linked in supplemental material.
 This tracking system allowed two configurations: (1) tracking on the level of individual agents, where each Avidian constituted a taxonomic unit, or (2) tracking on the level of genotypes, where clonal sets of Avidians with identical genotypes constituted a taxonomic unit.
 Figure \ref{fig:perfect-tree-phylogenies-log-avida} compares example phylogenies from Avida under the ``plain'' treatment, tracked at organism and genome level.
 Surprisingly, we noticed several sign-change differences between individual-level and genotype-level tracking with respect to treatments' effects on phylometrics (Figures \ref{fig:perfect-tree-phylometrics-avida-heatmap} and \ref{fig:perfect-tree-phylometrics-heatmap-avida-genome}).
@@ -258,8 +258,8 @@ We generally expect mean evolutionary distinctiveness to be increased by similar
 \subsection{Effect-size Analysis}
 \label{sec:effect-size-analysis}
 
-We expect statistical tests for between treatments we respect to evolutionary dynamics of interest to serve as an important use case for phylometric analyses in digital evolution.
-As such, we wish to report the capability of reported phylometrics to discern between surveyed evolutionary conditions.
+A key use case for phylometric analysis in digital evolution is statistical tests to detect differences in evolutionary dynamics between treatments.
+For this reason, we investigated the sensitivity of chosen phylometrics to discern between surveyed evolutionary conditions.
 
 Cliff's delta provides useful nonparametric means for such effect size analysis.
 This statistic reports the proportion of distributional non-overlap between two distributions, ranging from -1/1 if two distributions share no overlap to 0 if they overlap entirely \citep{meissel2024using,cliff1993dominance}.
